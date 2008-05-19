@@ -1,0 +1,5 @@
+size: 2
+computed: <%= 1 + 2 + 3 %>
+section:
+  size: 3
+  servers: [ {name: yahoo.com}, {name: amazon.com} ]

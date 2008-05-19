@@ -1,0 +1,56 @@
+== Summary
+Application level configuration.
+
+== Author
+Christopher J. Bottaro
+
+=== Accessing the AppConfig object
+After installing this plugin, the AppConfig object will be global available.  Entries are accessed via object member notation:
+ AppConfig.my_config_entry
+Nested entries are supported:
+ AppConfig.my_section.some_entry
+
+=== Common config file
+Config entries defined in
+ RAILS_ROOT/config/app_config.yml
+will be available to all environments.
+
+=== Environment specific config files
+You can have environment specific config files.  Environment specific config entries take precedence over common config entries.
+
+Example development environment config file:
+ RAILS_ROOT/config/environments/development.yml
+ 
+Example production environment config file:
+ RAILS_ROOT/config/environments/production.yml
+
+=== Embedded Ruby (ERB)
+ Embedded Ruby is allowed in the configuration files.  See examples below.
+
+=== Examples
+Consider the two following config files.
+
+RAILS_ROOT/config/app_config.yml:
+ size: 1
+ server: google.com
+
+RAILS_ROOT/config/environments/development.yml:
+ size: 2
+ computed: <%= 1 + 2 + 3 %>
+ section:
+   size: 3
+   servers: [ {name: yahoo.com}, {name: amazon.com} ]
+
+Notice that the environment specific config entries overwrite the common entries.
+ AppConfig.size -> 2
+ AppConfig.server -> google.com
+
+Notice the embedded Ruby.
+ AppConfig.computed -> 6
+
+Notice that object member notation is maintained even in nested entries.
+ AppConfig.section.size -> 3
+
+Notice array notation and object member notation is maintained.
+ AppConfig.section.servers[0].name -> yahoo.com
+ AppConfig.section.servers[1].name -> amazon.com
