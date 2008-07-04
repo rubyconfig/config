@@ -6,13 +6,13 @@ Gem::Specification.new do |s|
   s.summary = "Application level configuration"
   s.description = "Allow application wide configuration settings via YML files"
   
-  s.authors = ['Jacques Crocker', 'Christopher J. Bottaro']
+  s.authors = ['RailsJedi', 'Christopher J. Bottaro']
   s.email = 'railsjedi@gmail.com'
   s.homepage = 'http://github.com/jcnetdev/app_config'
   
-  s.has_rdoc = false
-  # s.rdoc_options = ["--main", "README"]
-  #s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
+  s.has_rdoc = true
+  s.rdoc_options = ["--main", "README"]
+  s.extra_rdoc_files = ["README"]
 
   s.add_dependency 'rails', ['>= 2.1']
   
