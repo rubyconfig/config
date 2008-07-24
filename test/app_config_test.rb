@@ -1,5 +1,7 @@
+require 'rubygems'
 require 'test/unit'
-require 'app_config'
+require 'active_support'
+require 'lib/app_config'
 
 class AppConfigTest < Test::Unit::TestCase
   

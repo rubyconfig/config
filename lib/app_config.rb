@@ -4,21 +4,27 @@ require 'erb'
 
 # == Summary
 # This is API documentation, NOT documentation on how to use this plugin.  For that, see the README.
-module ApplicationConfig
+class ApplicationConfig
+  
+  cattr_accessor :conf_paths
   
   # Create a config object (OpenStruct) from a yaml file.  If a second yaml file is given, then the sections of that file will overwrite the sections
   # if the first file if they exist in the first file.
-  def self.load_files(conf_path_1, conf_path_2 = nil)
+  def self.load_files(*conf_load_paths)
+    self.conf_paths = []
+    self.conf_paths += conf_load_paths
+    self.conf_paths.uniq!
+    
+    reload!
+  end
   
-    conf1 = YAML.load(ERB.new(IO.read(conf_path_1)).result) if conf_path_1 and File.exists?(conf_path_1)
-    conf1 = {} if !conf1 or conf1.empty?
-    
-    conf2 = YAML.load(ERB.new(IO.read(conf_path_2)).result) if conf_path_2 and File.exists?(conf_path_2)
-    conf2 = {} if !conf2 or conf2.empty?
-    
-    conf = conf1.merge(conf2)
-    (!conf or conf.empty?) ? OpenStruct.new : convert(conf)
-    
+  def self.reload!
+    conf = {}
+    conf_paths.each do |path|
+      new_conf = YAML.load(ERB.new(IO.read(path)).result) if path and File.exists?(path)
+      conf.merge!(new_conf) if new_conf
+    end
+    return convert(conf)
   end
   
   # Recursively converts Hashes to OpenStructs (including Hashes inside Arrays)

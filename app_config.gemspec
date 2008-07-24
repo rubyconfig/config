@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'app_config'
-  s.version = '1.0'
-  s.date = '2008-07-04'
+  s.version = '1.1'
+  s.date = '2008-07-24'
   
   s.summary = "Application level configuration"
   s.description = "Allow application wide configuration settings via YML files"
