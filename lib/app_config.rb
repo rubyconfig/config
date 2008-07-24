@@ -15,10 +15,10 @@ class ApplicationConfig
     self.conf_paths += conf_load_paths
     self.conf_paths.uniq!
     
-    reload!
+    reload
   end
   
-  def self.reload!
+  def self.reload
     conf = {}
     conf_paths.each do |path|
       new_conf = YAML.load(ERB.new(IO.read(path)).result) if path and File.exists?(path)
