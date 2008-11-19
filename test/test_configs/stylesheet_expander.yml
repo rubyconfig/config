@@ -1,0 +1,5 @@
+stylesheets: 
+  - base: 
+    - local.css
+    - global.css
+    - lib/*

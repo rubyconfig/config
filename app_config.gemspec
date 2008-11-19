@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'app_config'
-  s.version = '1.2'
-  s.date = '2008-07-24'
+  s.version = '1.5'
+  s.date = '2008-11-18'
   
   s.summary = "Application level configuration"
   s.description = "Allow application wide configuration settings via YML files"
@@ -13,14 +13,14 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
   s.rdoc_options = ["--main", "README"]
   s.extra_rdoc_files = ["README"]
-
-  s.add_dependency 'rails', ['>= 2.1']
   
   s.files = ["README",
              "README.rdoc",
              "app_config.gemspec",
              "init.rb",
              "lib/app_config.rb",
+             "lib/application_config/config_builder.rb",
+             "lib/application_config/view_helpers.rb",
              "rails/init.rb"]
   
   s.test_files = ["test/app_config.yml",
