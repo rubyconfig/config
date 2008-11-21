@@ -2,7 +2,8 @@
 Application level configuration.
 
 == Author
-Christopher J. Bottaro
+Jacques Crocker
+Modified from Original Project (AppConfig by Christopher J. Bottaro)
 
 === Accessing the AppConfig object
 After installing this plugin, the AppConfig object will be global available.  Entries are accessed via object member notation:
@@ -11,10 +12,20 @@ Nested entries are supported:
  AppConfig.my_section.some_entry
 
 === Common config file
-Config entries defined in
- RAILS_ROOT/config/app_config.yml
-will be available to all environments.
-
+Config entries are compiled from
+ config/app_config.yml
+ config/app_config/settings.yml
+ config/app_config/#{environment}.yml
+ config/environments/#{environment}.yml
+ config/app_config/assets.yml
+ config/app_config/stylesheets.yml
+ config/app_config/javascripts.yml
+  
+settings defined in files that are lower in the list override settings higher
+ 
+=== Reloading config files
+You can reload the AppConfig from file at any time by running AppConfig.reload!
+  
 === Environment specific config files
 You can have environment specific config files.  Environment specific config entries take precedence over common config entries.
 
@@ -27,7 +38,7 @@ Example production environment config file:
 === Embedded Ruby (ERB)
  Embedded Ruby is allowed in the configuration files.  See examples below.
 
-=== Examples
+=== Accessing Configuration Settings
 Consider the two following config files.
 
 RAILS_ROOT/config/app_config.yml:
@@ -54,3 +65,24 @@ Notice that object member notation is maintained even in nested entries.
 Notice array notation and object member notation is maintained.
  AppConfig.section.servers[0].name -> yahoo.com
  AppConfig.section.servers[1].name -> amazon.com
+ 
+ 
+==== Managing Asset Files with AppConfig
+Defining stylesheets: and/or javascripts: keys will allow you to easily manage lists of assets via config
+
+javascripts:
+  - application.js
+  - prototype_scriptaculous:
+    - prototype.js
+    - scriptaculous/effects.js
+  - base:
+    - libraries/*.js
+  
+  
+All * file paths will be expanded out into a full list of files. 
+
+To add these javascripts to your layout just run
+
+<%= javascripts_from_config %>
+
+This will group the assets by key in order to use the built in Bundling

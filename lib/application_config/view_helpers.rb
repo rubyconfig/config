@@ -11,6 +11,7 @@ module ApplicationConfig
           if javascript.is_a? Hash
             javascript.each do |key, val|
               args = [val].flatten
+              args = args.map{|s| s.gsub("javascripts/", AppConfig.javascript_path)} if AppConfig.javascript_path
               if defined?(Merb)
                 args << options.merge(:bundle => key.to_sym)
                 html << js_include_tag(*args)
@@ -22,6 +23,7 @@ module ApplicationConfig
             end
           else
             args = [javascript].flatten
+            args = args.map{|s| s.gsub("javascripts/", AppConfig.javascript_path)} if AppConfig.javascript_path
             args << options
             if defined?(Merb)
               html << js_include_tag(*args)
@@ -45,6 +47,7 @@ module ApplicationConfig
           if stylesheet.is_a? Hash
             stylesheet.each do |key, val|
               args = [val].flatten
+              args = args.map{|s| s.gsub("stylesheets/", AppConfig.stylesheet_path)} if AppConfig.stylesheet_path
               if defined?(Merb)
                 args << options.merge(:bundle => key.to_sym)
                 html << css_include_tag(*args)
@@ -55,6 +58,7 @@ module ApplicationConfig
             end
           else
             args = [stylesheet].flatten
+            args = args.map{|s| s.gsub("stylesheets/", AppConfig.stylesheet_path)} if AppConfig.stylesheet_path
             args << options
             html << stylesheet_link_tag(*args)
           end
