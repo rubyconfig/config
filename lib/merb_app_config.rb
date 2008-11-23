@@ -6,31 +6,30 @@ if defined?(Merb::Plugins)
   # Merb gives you a Merb::Plugins.config hash...feel free to put your stuff in your piece of it
   Merb::Plugins.config[:app_config] = {
     :auto_reload => false,
-    :include_viewhelpers => true
+    :view_helpers => true,
+    :paths => [
+      "#{Merb.root}/config/app_config.yml",
+      "#{Merb.root}/config/app_config/settings.yml",
+      "#{Merb.root}/config/app_config/#{Merb.env}.yml",
+      "#{Merb.root}/config/environments/#{Merb.env}.yml",
+      "#{Merb.root}/config/assets.yml",
+      "#{Merb.root}/config/javascripts.yml",
+      "#{Merb.root}/config/stylesheets.yml"
+    ]
   }
   
   Merb::BootLoader.before_app_loads do
     if defined?(::AppConfig)
       AppConfig.reload!
     else
-      
       ::AppConfig = ApplicationConfig::ConfigBuilder.load_files(
-        :paths => [
-          "#{Merb.root}/config/app_config.yml",
-          "#{Merb.root}/config/app_config/settings.yml",
-          "#{Merb.root}/config/app_config/#{Merb.env}.yml",
-          "#{Merb.root}/config/environments/#{Merb.env}.yml",
-          "#{Merb.root}/config/assets.yml",
-          "#{Merb.root}/config/javascripts.yml",
-          "#{Merb.root}/config/stylesheets.yml"
-        ],
+        :paths =>  Merb::Plugins.config[:app_config][:paths].to_a,
         :expand_keys => [:javascripts, :stylesheets],
         :root_path => Merb.root
       )
-      
     end
 
-    if Merb::Plugins.config[:app_config][:include_viewhelpers]
+    if Merb::Plugins.config[:app_config][:view_helpers]
       Merb::Controller.send(:include, ApplicationConfig::ViewHelpers)
     end
   end
@@ -39,9 +38,8 @@ if defined?(Merb::Plugins)
     if Merb::Plugins.config[:app_config][:auto_reload]
       Merb.logger.info "[AppConfig] Auto reloading AppConfig on *every request*."
       Merb.logger.info "[AppConfig] Set via Merb::Plugins.config[:app_config][:auto_reload]"
-      Merb::Controller.before do 
-        AppConfig.reload!
-      end
+
+      Merb::Controller.before Proc.new{ AppConfig.reload! }
     end
   end
   
