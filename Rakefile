@@ -5,7 +5,7 @@ require 'merb-core'
 require 'merb-core/tasks/merb'
 
 GEM_NAME = "merb_app_config"
-GEM_VERSION = "1.0"
+GEM_VERSION = "1.0.1"
 AUTHOR = "Jacques Crocker"
 EMAIL = "merbjedi@gmail.com"
 HOMEPAGE = "http://www.merbjedi.com/"
@@ -23,8 +23,11 @@ spec = Gem::Specification.new do |s|
   s.author = AUTHOR
   s.email = EMAIL
   s.homepage = HOMEPAGE
-  s.add_dependency('merb', '>= 1.0')
-  s.add_dependency('merb-assets', '>= 1.0')
+  
+  # these dependencies should be there, but they seem to break some stuff
+  # s.add_dependency('merb', '>= 1.0')
+  # s.add_dependency('merb-assets', '>= 1.0')
+
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile) + Dir.glob("{lib,spec}/**/*")
 end
