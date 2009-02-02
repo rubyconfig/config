@@ -2,6 +2,7 @@ module ApplicationConfig
   module ViewHelpers
     def javascripts_from_config(options = {})
       html = ""
+      only = [options.delete(:only)].flatten.compact
       if defined?(AppConfig) and AppConfig.javascripts
         AppConfig.javascripts.each do |javascript|
           if javascript.is_a?(OpenStruct)
@@ -10,6 +11,8 @@ module ApplicationConfig
           
           if javascript.is_a? Hash
             javascript.each do |key, val|
+              next unless only.empty? || only.include?(key)
+
               args = [val].flatten
               args = args.map{|s| s.gsub("javascripts/", AppConfig.javascript_path)} if AppConfig.javascript_path
               if defined?(Merb)
@@ -38,6 +41,7 @@ module ApplicationConfig
     
     def stylesheets_from_config(options = {})
       html = ""
+      only = [options.delete(:only)].flatten.compact
       if defined?(AppConfig) and AppConfig.stylesheets
         AppConfig.stylesheets.each do |stylesheet|
           if stylesheet.is_a?(OpenStruct)
@@ -46,6 +50,8 @@ module ApplicationConfig
           
           if stylesheet.is_a? Hash
             stylesheet.each do |key, val|
+              next unless only.empty? || only.include?(key)
+              
               args = [val].flatten
               args = args.map{|s| s.gsub("stylesheets/", AppConfig.stylesheet_path)} if AppConfig.stylesheet_path
               if defined?(Merb)
