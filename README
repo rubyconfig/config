@@ -8,6 +8,17 @@ Modified from Original Project (AppConfig by Christopher J. Bottaro)
 === Compatibility
 Rails 2.1/2.2 and Merb 1.0
 
+=== Installing on Merb
+add this to your config: dependencies.rb and run thor merb:gem:install
+
+    dependency "merb_app_config"
+
+
+=== Installing on Rails
+
+script/plugin install git://github.com/merbjedi/app_config.git 
+
+
 === Accessing the AppConfig object
 After installing this plugin, the AppConfig object will be global available.  Entries are accessed via object member notation:
  AppConfig.my_config_entry
