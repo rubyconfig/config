@@ -5,7 +5,7 @@ require 'application_config/view_helpers'
 if defined?(Merb::Plugins)
   # Merb gives you a Merb::Plugins.config hash...feel free to put your stuff in your piece of it
   Merb::Plugins.config[:app_config] = {
-    :auto_reload => false,
+    :auto_reload => Merb.env?(:development),
     :view_helpers => true,
     :paths => [
       "#{Merb.root}/config/app_config.yml",
@@ -32,15 +32,19 @@ if defined?(Merb::Plugins)
     if Merb::Plugins.config[:app_config][:view_helpers]
       Merb::Controller.send(:include, ApplicationConfig::ViewHelpers)
     end
+    
+    if Merb::Plugins.config[:app_config][:auto_reload]
+      Merb.logger.info "[AppConfig] Auto reloading AppConfig on every request."
+      Merb.logger.info "[AppConfig] Set via Merb::Plugins.config[:app_config][:auto_reload]"
+      
+      # add before filter
+      ::Merb::Controller.before do
+        AppConfig.reload!
+      end
+    end
   end
   
   Merb::BootLoader.after_app_loads do
-    if Merb::Plugins.config[:app_config][:auto_reload]
-      Merb.logger.info "[AppConfig] Auto reloading AppConfig on *every request*."
-      Merb.logger.info "[AppConfig] Set via Merb::Plugins.config[:app_config][:auto_reload]"
-
-      Merb::Controller.before Proc.new{ AppConfig.reload! }
-    end
   end
   
   Merb::Plugins.add_rakefiles "merbtasks"

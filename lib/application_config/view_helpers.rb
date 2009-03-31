@@ -66,7 +66,11 @@ module ApplicationConfig
             args = [stylesheet].flatten
             args = args.map{|s| s.gsub("stylesheets/", AppConfig.stylesheet_path)} if AppConfig.stylesheet_path
             args << options
-            html << stylesheet_link_tag(*args)
+            if defined?(Merb)
+              html << css_include_tag(*args)
+            elsif defined?(Rails)
+              html << stylesheet_link_tag(*args)
+            end
           end
           html << "\n"
         end
