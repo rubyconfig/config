@@ -17,10 +17,10 @@ module ApplicationConfig
               args = args.map{|s| s.gsub("javascripts/", AppConfig.javascript_path)} if AppConfig.javascript_path
               if defined?(Merb)
                 args << options.merge(:bundle => key.to_sym)
-                html << js_include_tag(*args)
+                html << js_include_tag(*args).to_s
               elsif defined?(Rails)
                 args << options.merge(:cache => key.to_s)
-                html << javascript_include_tag(*args)
+                html << javascript_include_tag(*args).to_s
               end
               html << "\n"
             end
@@ -29,9 +29,9 @@ module ApplicationConfig
             args = args.map{|s| s.gsub("javascripts/", AppConfig.javascript_path)} if AppConfig.javascript_path
             args << options
             if defined?(Merb)
-              html << js_include_tag(*args)
+              html << js_include_tag(*args).to_s
             elsif defined?(Rails)
-              html << javascript_include_tag(*args)
+              html << javascript_include_tag(*args).to_s
             end
           end
         end
@@ -56,10 +56,10 @@ module ApplicationConfig
               args = args.map{|s| s.gsub("stylesheets/", AppConfig.stylesheet_path)} if AppConfig.stylesheet_path
               if defined?(Merb)
                 args << options.merge(:bundle => key.to_sym)
-                html << css_include_tag(*args)
+                html << css_include_tag(*args).to_s
               elsif defined?(Rails)
                 args << options.merge(:cache => key.to_s)
-                html << stylesheet_link_tag(*args)
+                html << stylesheet_link_tag(*args).to_s
               end
             end
           else
@@ -67,9 +67,9 @@ module ApplicationConfig
             args = args.map{|s| s.gsub("stylesheets/", AppConfig.stylesheet_path)} if AppConfig.stylesheet_path
             args << options
             if defined?(Merb)
-              html << css_include_tag(*args)
+              html << css_include_tag(*args).to_s
             elsif defined?(Rails)
-              html << stylesheet_link_tag(*args)
+              html << stylesheet_link_tag(*args).to_s
             end
           end
           html << "\n"
