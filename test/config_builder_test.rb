@@ -72,4 +72,18 @@ class ConfigBuilderTest < Test::Unit::TestCase
     assert_equal 5, config.stylesheets.first.base.size
   end
   
+  def test_merge_hashes_from_multiple_configs
+    config = ApplicationConfig::ConfigBuilder.load_files(:paths => ["#{@settings_path}/deep_merge/config1.yml", "#{@settings_path}/deep_merge/config2.yml"])
+
+    assert_equal 3, config.inner.marshal_dump.keys.size
+    assert_equal 3, config.inner2.inner2_inner.marshal_dump.keys.size
+  end
+
+
+  def test_merge_arrays_from_multiple_configs
+    config = ApplicationConfig::ConfigBuilder.load_files(:paths => ["#{@settings_path}/deep_merge/config1.yml", "#{@settings_path}/deep_merge/config2.yml"])
+    assert_equal 6, config.arraylist1.size
+    assert_equal 6, config.arraylist2.inner.size
+  end
+  
 end

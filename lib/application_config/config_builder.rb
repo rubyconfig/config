@@ -1,6 +1,7 @@
 require 'ostruct'
 require 'yaml'
 require 'erb'
+require 'deep_merge'
 
 module ApplicationConfig
   # == Summary
@@ -24,7 +25,7 @@ module ApplicationConfig
         conf = {}
         ConfigBuilder.load_paths.to_a.each do |path|
           file_conf = YAML.load(ERB.new(IO.read(path)).result) if path and File.exists?(path)
-          conf.merge!(file_conf) if file_conf
+          DeepMerge.deep_merge!(file_conf, conf) if file_conf
         end
         
         # expand the javascripts config to handle *.* paths
