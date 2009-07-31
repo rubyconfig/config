@@ -86,4 +86,12 @@ class ConfigBuilderTest < Test::Unit::TestCase
     assert_equal 6, config.arraylist2.inner.size
   end
   
+  def test_merge_assets
+    config = ApplicationConfig::ConfigBuilder.load_files(:paths => ["#{@settings_path}/deep_merge/config1.yml", "#{@settings_path}/deep_merge/config2.yml"])
+    merged = ApplicationConfig::ConfigBuilder.merge_assets(config.hash_array)
+    
+    assert_equal 3, merged.size
+    assert_equal 6, merged.select{|i| i.is_a?(Hash)}.first[:inner].size
+  end
+  
 end

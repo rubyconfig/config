@@ -4,11 +4,8 @@ module ApplicationConfig
       html = ""
       only = [options.delete(:only)].flatten.compact.map{|i| i.to_s}
       if defined?(AppConfig) and AppConfig.javascripts
-        AppConfig.javascripts.each do |javascript|
-          if javascript.is_a?(OpenStruct)
-            javascript = javascript.marshal_dump
-          end
-          
+        
+        ConfigBuilder.merge_assets(AppConfig.javascripts).each do |javascript|
           if javascript.is_a? Hash
             javascript.each do |key, val|
               next unless only.empty? || only.include?(key.to_s)
@@ -43,11 +40,7 @@ module ApplicationConfig
       html = ""
       only = [options.delete(:only)].flatten.compact.map{|i| i.to_s}
       if defined?(AppConfig) and AppConfig.stylesheets
-        AppConfig.stylesheets.each do |stylesheet|
-          if stylesheet.is_a?(OpenStruct)
-            stylesheet = stylesheet.marshal_dump
-          end
-          
+        ConfigBuilder.merge_assets(AppConfig.stylesheets).each do |stylesheet|
           if stylesheet.is_a? Hash
             stylesheet.each do |key, val|
               next unless only.empty? || only.include?(key.to_s)

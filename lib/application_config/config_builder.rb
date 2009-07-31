@@ -129,5 +129,34 @@ module ApplicationConfig
       return new_config.uniq
     end
     
+    # Cycles through the array of single element hashes
+    # and deep merges any duplicates it finds
+    # 
+    # This is needed so you can define stylesheet keys
+    # in multiple config files
+    def self.merge_assets(list)
+      assets = Array(list).map do |i|
+        if i.is_a?(OpenStruct)
+          i.marshal_dump
+        else
+          i
+        end
+      end
+      
+      # filter out the duplicate single hash keys
+      hash_keys = assets.select{|i| i.is_a?(Hash) and i.keys.size == 1}.group_by{|i| i.keys[0]}
+      hash_keys.each do |key, value|
+        if Array(value).size > 1
+          merged = value.inject({}){|merged, v| DeepMerge.deep_merge!(v,merged)}
+          value[0].replace(merged)
+          value[1..-1].each do |v|
+            v.clear
+          end
+        end
+      end
+      
+      assets.select{|i| !i.blank? }
+    end
+    
   end
 end
