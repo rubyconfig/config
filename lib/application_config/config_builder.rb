@@ -1,7 +1,6 @@
 require 'ostruct'
 require 'yaml'
 require 'erb'
-require 'deep_merge'
 
 module ApplicationConfig
   # == Summary
@@ -22,6 +21,7 @@ module ApplicationConfig
       
       # add singleton method to our AppConfig that reloads its settings from the load_paths options
       def config.reload!
+        
         conf = {}
         ConfigBuilder.load_paths.to_a.each do |path|
           file_conf = YAML.load(ERB.new(IO.read(path)).result) if path and File.exists?(path)
@@ -35,7 +35,7 @@ module ApplicationConfig
             conf[expand_path] = ApplicationConfig::ConfigBuilder.expand(conf[expand_path], "#{ConfigBuilder.root_path}/public/#{expand_path}")
           end
         end
-
+        
         # load all the new values into the openstruct
         marshal_load(ApplicationConfig::ConfigBuilder.convert(conf).marshal_dump)
         
