@@ -2,6 +2,7 @@ require 'rubygems'
 require 'test/unit'
 require 'active_support'
 require File.dirname(__FILE__)+'/../lib/application_config/config_builder'
+require File.dirname(__FILE__)+'/../lib/application_config/deep_merge'
 
 class ConfigBuilderTest < Test::Unit::TestCase
   def setup
@@ -92,6 +93,13 @@ class ConfigBuilderTest < Test::Unit::TestCase
     
     assert_equal 3, merged.size
     assert_equal 6, merged.select{|i| i.is_a?(Hash)}.first[:inner].size
+  end
+  
+  def test_merge_assets2
+    config = ApplicationConfig::ConfigBuilder.load_files(:paths => ["#{@settings_path}/deep_merge2/config1.yml", "#{@settings_path}/deep_merge2/config2.yml"])
+    
+    assert_equal 500, config.tvrage.cache
+    assert_equal "http://url2", config.tvrage.service_url
   end
   
 end
