@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'test/unit'
-require 'active_support'
+require 'extlib'
 require File.dirname(__FILE__)+'/../lib/application_config/config_builder'
 require File.dirname(__FILE__)+'/../lib/application_config/deep_merge'
 
