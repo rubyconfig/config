@@ -25,7 +25,13 @@ module ApplicationConfig
         conf = {}
         ConfigBuilder.load_paths.to_a.each do |path|
           file_conf = YAML.load(ERB.new(IO.read(path)).result) if path and File.exists?(path)
-          DeepMerge.deep_merge!(file_conf, conf) if file_conf
+          next unless file_conf
+
+          if conf.size > 0
+            DeepMerge.deep_merge!(file_conf, conf, :preserve_unmergeables => false)
+          else
+            conf = file_conf
+          end
         end
         
         # expand the javascripts config to handle *.* paths

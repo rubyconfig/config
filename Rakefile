@@ -5,7 +5,7 @@ require 'merb-core'
 require 'merb-core/tasks/merb'
 
 GEM_NAME = "merb_app_config"
-GEM_VERSION = "1.1"
+GEM_VERSION = "1.2"
 AUTHOR = "Jacques Crocker"
 EMAIL = "merbjedi@gmail.com"
 HOMEPAGE = "http://www.merbjedi.com/"

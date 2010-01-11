@@ -102,4 +102,11 @@ class ConfigBuilderTest < Test::Unit::TestCase
     assert_equal "http://url2", config.tvrage.service_url
   end
   
+  def test_boolean_overrides
+    config = ApplicationConfig::ConfigBuilder.load_files(:paths => ["#{@settings_path}/bool_override/config1.yml", "#{@settings_path}/bool_override/config2.yml"])    
+    assert_equal false, config.override_bool
+    assert_equal true, config.override_bool_opposite
+  end
+
+  
 end

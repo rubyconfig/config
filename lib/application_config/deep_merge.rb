@@ -70,9 +70,9 @@ module DeepMerge
     sort_merged_arrays = options[:sort_merged_arrays] || false
     di = options[:debug_indent] || ''
     # do nothing if source is nil
-    if !source || (source.respond_to?(:blank?) && source.blank?); return dest; end
+    if source.nil? || (!source.is_a?(FalseClass) && source.respond_to?(:blank?) && source.blank?); return dest; end
     # if dest doesn't exist, then simply copy source to it
-    if !(dest) && overwrite_unmergeable; dest = source; return dest; end
+    if dest.nil? && overwrite_unmergeable; dest = source; return dest; end
 
     puts "#{di}Source class: #{source.class.inspect} :: Dest class: #{dest.class.inspect}" if merge_debug
     if source.kind_of?(Hash)
@@ -80,7 +80,7 @@ module DeepMerge
       source.each do |src_key, src_value|
         if dest.kind_of?(Hash)
           puts "#{di} looping: #{src_key.inspect} => #{src_value.inspect} :: #{dest.inspect}" if merge_debug
-          if dest[src_key]
+          if !dest[src_key].nil?
             puts "#{di} ==>merging: #{src_key.inspect} => #{src_value.inspect} :: #{dest[src_key].inspect}" if merge_debug
             dest[src_key] = deep_merge!(src_value, dest[src_key], options.merge(:debug_indent => di + '  '))
           else # dest[src_key] doesn't exist so we want to create and overwrite it (but we do this via deep_merge!)
