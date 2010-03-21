@@ -1,5 +1,0 @@
-javascripts: 
-  - base: 
-    # include controls
-    - application.js
-    - controls/*.js
