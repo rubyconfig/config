@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails_app_config}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacques Crocker"]
@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
      "test/test_configs/empty1.yml",
      "test/test_configs/empty2.yml"
   ]
-  s.homepage = %q{http://github.com/railsjedi/rails_app_config}
+  s.homepage = %q{http://github.com/railsjedi/app_config}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}

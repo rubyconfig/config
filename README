@@ -36,10 +36,10 @@ You can reload the AppConfig from file at any time by running AppConfig.reload!
 You can have environment specific config files.  Environment specific config entries take precedence over common config entries.
 
 Example development environment config file:
- RAILS_ROOT/config/environments/development.yml
+ #{Rails.root}/config/environments/development.yml
  
 Example production environment config file:
- RAILS_ROOT/config/environments/production.yml
+ #{Rails.root}/config/environments/production.yml
 
 === Embedded Ruby (ERB)
  Embedded Ruby is allowed in the configuration files.  See examples below.
@@ -47,11 +47,11 @@ Example production environment config file:
 === Accessing Configuration Settings
 Consider the two following config files.
 
-RAILS_ROOT/config/app_config.yml:
+#{Rails.root}/config/app_config.yml:
  size: 1
  server: google.com
 
-RAILS_ROOT/config/environments/development.yml:
+#{Rails.root}/config/environments/development.yml:
  size: 2
  computed: <%= 1 + 2 + 3 %>
  section:
