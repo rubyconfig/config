@@ -6,7 +6,7 @@ begin
     s.name = "rails_app_config"
     s.summary = "provides an AppConfig for rails3 that reads config/app_config.yml"
     s.email = "railsjedi@gmail.com"
-    s.homepage = "http://github.com/railsjedi/rails_app_config"
+    s.homepage = "http://github.com/railsjedi/app_config"
     s.description = "Provides an easy to use Application Configuration object"
     s.authors = ["Jacques Crocker"]
     s.files =  FileList["[A-Z]*", "{bin,generators,lib,test}/**/*"]
