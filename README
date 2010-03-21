@@ -6,18 +6,13 @@ Jacques Crocker
 Modified from Original Project (AppConfig by Christopher J. Bottaro)
 
 === Compatibility
-Rails 2.1/2.2 and Merb 1.0
+Rails 3.0
 
-=== Installing on Merb
-add this to your config: dependencies.rb and run thor merb:gem:install
+=== Installing on Rails 3
 
-    dependency "merb_app_config"
+add this to your Gemfile
 
-
-=== Installing on Rails
-
-script/plugin install git://github.com/merbjedi/app_config.git 
-
+    gem "rails_app_config"
 
 === Accessing the AppConfig object
 After installing this plugin, the AppConfig object will be global available.  Entries are accessed via object member notation:
@@ -31,9 +26,6 @@ Config entries are compiled from
  config/app_config/settings.yml
  config/app_config/#{environment}.yml
  config/environments/#{environment}.yml
- config/app_config/assets.yml
- config/app_config/stylesheets.yml
- config/app_config/javascripts.yml
   
 settings defined in files that are lower in the list override settings higher
  
@@ -79,23 +71,3 @@ Notice that object member notation is maintained even in nested entries.
 Notice array notation and object member notation is maintained.
  AppConfig.section.servers[0].name -> yahoo.com
  AppConfig.section.servers[1].name -> amazon.com
- 
- 
-==== Managing Asset Files with AppConfig
-Defining stylesheets: and/or javascripts: keys will allow you to easily manage lists of assets via config
-
-javascripts:
-  - application.js
-  - prototype_scriptaculous:
-    - prototype.js
-    - scriptaculous/effects.js
-  - base:
-    - libraries/*.js
-  
-All * file paths will be expanded out into a full list of files. 
-
-To add these javascripts to your layout just run
-
-<%= javascripts_from_config %>
-
-This will group the assets by key in order to use the built in Bundling
