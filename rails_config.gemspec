@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails_config}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacques Crocker"]
@@ -21,11 +21,10 @@ Gem::Specification.new do |s|
      "README",
      "Rakefile",
      "VERSION",
-     "lib/application_config/config_builder.rb",
-     "lib/application_config/deep_merge.rb",
      "lib/rails_config.rb",
      "lib/rails_config/railtie.rb",
-     "lib/tasks/app_config.rake",
+     "lib/rails_config/settings/builder.rb",
+     "lib/rails_config/settings/deep_merge.rb",
      "test/config_builder_test.rb",
      "test/test_configs/app_config.yml",
      "test/test_configs/bool_override/config1.yml",
@@ -42,7 +41,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{provides an AppConfig for rails3 that reads config/app_config.yml}
+  s.summary = %q{provides an Settings for rails3 that reads config/settings.yml}
   s.test_files = [
     "test/config_builder_test.rb"
   ]

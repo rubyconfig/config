@@ -4,7 +4,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "rails_config"
-    s.summary = "provides an AppConfig for rails3 that reads config/app_config.yml"
+    s.summary = "provides an Settings for rails3 that reads config/settings.yml"
     s.email = "railsjedi@gmail.com"
     s.homepage = "http://github.com/railsjedi/rails_config"
     s.description = "Provides an easy to use Application Configuration object"
@@ -13,5 +13,5 @@ begin
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
-  # puts "Jeweler, or one of its dependencies, is not available. Install it with: gem install jeweler"
+  puts "Jeweler, or one of its dependencies, is not available. Install it with: gem install jeweler"
 end

@@ -20,7 +20,7 @@ module RailsConfig
         @@expand_keys = [options[:expand_keys]].flatten.compact.uniq
         @@root_path = options[:root_path]
 
-        # add singleton method to our AppConfig that reloads its settings from the load_paths options
+        # add singleton method to our Settings that reloads its settings from the load_paths options
         def config.reload!
 
           conf = {}

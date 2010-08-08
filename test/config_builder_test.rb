@@ -24,13 +24,13 @@ module RailsConfig
       end
 
       def test_common
-        config = RailsConfig::Settings::Builder.load_files(:paths => "#{@settings_path}/app_config.yml")
+        config = RailsConfig::Settings::Builder.load_files(:paths => "#{@settings_path}/settings.yml")
         assert_equal 1, config.size
         assert_equal 'google.com', config.server
       end
 
       def test_environment_override
-        config = RailsConfig::Settings::Builder.load_files(:paths => ["#{@settings_path}/app_config.yml", "#{@settings_path}/development.yml"])
+        config = RailsConfig::Settings::Builder.load_files(:paths => ["#{@settings_path}/settings.yml", "#{@settings_path}/development.yml"])
         assert_equal 2, config.size
         assert_equal 'google.com', config.server
       end
