@@ -3,11 +3,9 @@ if defined?(Rails::Railtie)
     class Railtie < Rails::Railtie
       initializer :setup_rails_config do
         ::Settings = RailsConfig::SettingBuilder.load_files(
-          :paths => [
-            Rails.root.join("config", "settings.yml").to_s,
-            Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
-            Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
-          ]
+          Rails.root.join("config", "settings.yml").to_s,
+          Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
+          Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
         )
       end
     end

@@ -9,6 +9,13 @@ module RailsConfig
       config.server.should == "google.com"
     end
 
+    it "should load 2 basic config files" do
+      config = SettingBuilder.load_files(setting_path("settings.yml"), setting_path("settings2.yml"))
+      config.size.should == 1
+      config.server.should == "google.com"
+      config.another.should == "something"
+    end
+
     it "should load empty config for a missing file path" do
       config = SettingBuilder.load_files(setting_path("some_file_that_doesnt_exist.yml"))
       config.should == OpenStruct.new
