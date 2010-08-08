@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{rails_app_config}
-  s.version = "0.0.2"
+  s.name = %q{rails_config}
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacques Crocker"]
-  s.date = %q{2010-03-21}
+  s.date = %q{2010-08-7}
   s.description = %q{Provides an easy to use Application Configuration object}
   s.email = %q{railsjedi@gmail.com}
   s.extra_rdoc_files = [
@@ -24,8 +24,8 @@ Gem::Specification.new do |s|
      "lib/application_config/config_builder.rb",
      "lib/application_config/deep_merge.rb",
      "lib/application_config/view_helpers.rb",
-     "lib/rails_app_config.rb",
-     "lib/rails_app_config/railtie.rb",
+     "lib/rails_config.rb",
+     "lib/rails_config/railtie.rb",
      "lib/tasks/app_config.rake",
      "test/config_builder_test.rb",
      "test/test_configs/app_config.yml",
