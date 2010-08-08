@@ -1,8 +1,8 @@
 if defined?(Rails::Railtie)
-  module RailsAppConfig
+  module RailsConfig
     class Railtie < Rails::Railtie
       initializer :setup_app_config do
-        ::AppConfig = ApplicationConfig::ConfigBuilder.load_files(
+        ::AppConfig = RailsConfig::Settings::Builder.load_files(
           :paths => [
             Rails.root.join("config", "app_config.yml").to_s,
             Rails.root.join("config", "app_config", "settings.yml").to_s,
