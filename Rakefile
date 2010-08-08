@@ -9,7 +9,10 @@ begin
     s.homepage = "http://github.com/railsjedi/rails_config"
     s.description = "Provides an easy to use Application Configuration object"
     s.authors = ["Jacques Crocker"]
-    s.files =  FileList["[A-Z]*", "{bin,generators,lib,test}/**/*"]
+    s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec}/**/*"]
+
+    s.add_development_dependency 'rspec', ">=2.0.0.beta.19"
+
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

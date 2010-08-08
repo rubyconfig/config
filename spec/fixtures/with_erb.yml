@@ -1,0 +1,4 @@
+computed: <%= 1 + 2 + 3 %>
+section:
+  computed1: <%= "1" %>
+  computed2: <%= "2" %>
