@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails_config}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacques Crocker"]
@@ -25,19 +25,22 @@ Gem::Specification.new do |s|
      "VERSION",
      "lib/rails_config.rb",
      "lib/rails_config/railtie.rb",
-     "lib/rails_config/settings/builder.rb",
-     "lib/rails_config/settings/deep_merge.rb",
-     "test/config_builder_test.rb",
-     "test/test_configs/app_config.yml",
-     "test/test_configs/bool_override/config1.yml",
-     "test/test_configs/bool_override/config2.yml",
-     "test/test_configs/deep_merge/config1.yml",
-     "test/test_configs/deep_merge/config2.yml",
-     "test/test_configs/deep_merge2/config1.yml",
-     "test/test_configs/deep_merge2/config2.yml",
-     "test/test_configs/development.yml",
-     "test/test_configs/empty1.yml",
-     "test/test_configs/empty2.yml"
+     "lib/rails_config/setting_builder.rb",
+     "lib/rails_config/vendor/deep_merge.rb",
+     "spec/fixtures/bool_override/config1.yml",
+     "spec/fixtures/bool_override/config2.yml",
+     "spec/fixtures/deep_merge/config1.yml",
+     "spec/fixtures/deep_merge/config2.yml",
+     "spec/fixtures/deep_merge2/config1.yml",
+     "spec/fixtures/deep_merge2/config2.yml",
+     "spec/fixtures/development.yml",
+     "spec/fixtures/empty1.yml",
+     "spec/fixtures/empty2.yml",
+     "spec/fixtures/settings.yml",
+     "spec/fixtures/settings2.yml",
+     "spec/fixtures/with_erb.yml",
+     "spec/rails_config/setting_builder_spec.rb",
+     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/railsjedi/rails_config}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -45,8 +48,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{provides an Settings for rails3 that reads config/settings.yml}
   s.test_files = [
-    "spec/spec_helper.rb",
-     "test/config_builder_test.rb"
+    "spec/rails_config/setting_builder_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
