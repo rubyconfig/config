@@ -1,0 +1,9 @@
+- Allow user to customize the name of the global setting object (Settings)
+- Add generators to create the default setting files
+  - config/settings.yml
+  - config/settings/development.yml
+  - config/settings/test.yml
+  - config/settings/production.yml
+
+- Remove OStruct and create a custom implementation (return proxy obj)
+
