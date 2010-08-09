@@ -1,5 +1,6 @@
+- Add a Rails before_filter that triggers Settings.reload! for each development request
 - Allow user to customize the name of the global setting object (Settings)
-- Add generators to create the default setting files
+- Add generator `rails_config:install` to create the default setting files
   - config/settings.yml
   - config/settings/development.yml
   - config/settings/test.yml
