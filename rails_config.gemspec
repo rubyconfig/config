@@ -5,16 +5,17 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails_config}
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacques Crocker"]
-  s.date = %q{2010-08-08}
+  s.date = %q{2010-08-10}
   s.description = %q{Provides an easy to use Application Configuration object}
   s.email = %q{railsjedi@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README"
+     "README",
+     "TODO"
   ]
   s.files = [
     "Gemfile",
@@ -22,10 +23,10 @@ Gem::Specification.new do |s|
      "LICENSE",
      "README",
      "Rakefile",
+     "TODO",
      "VERSION",
      "lib/rails_config.rb",
      "lib/rails_config/railtie.rb",
-     "lib/rails_config/setting_builder.rb",
      "lib/rails_config/vendor/deep_merge.rb",
      "spec/fixtures/bool_override/config1.yml",
      "spec/fixtures/bool_override/config2.yml",
@@ -39,7 +40,7 @@ Gem::Specification.new do |s|
      "spec/fixtures/settings.yml",
      "spec/fixtures/settings2.yml",
      "spec/fixtures/with_erb.yml",
-     "spec/rails_config/setting_builder_spec.rb",
+     "spec/rails_config_spec.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/railsjedi/rails_config}
@@ -48,7 +49,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{provides an Settings for rails3 that reads config/settings.yml}
   s.test_files = [
-    "spec/rails_config/setting_builder_spec.rb",
+    "spec/rails_config_spec.rb",
      "spec/spec_helper.rb"
   ]
 
