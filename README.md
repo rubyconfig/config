@@ -25,9 +25,14 @@ Add this to your `Gemfile`:
 
 You may customize the behavior of RailsConfig by generating an initializer file:
 
-    rails g rails_config
+    rails g rails_config:install
 
-This will generate `config/initializers/rails_config.rb` with a set of default settings.
+This will generate `config/initializers/rails_config.rb` with a set of default settings as well as to generate a set of default settings files:
+
+    config/settings.yml
+    config/settings/development.yml
+    config/settings/production.yml
+    config/settings/test.yml
 
 ## Accessing the Settings object
 
@@ -75,11 +80,13 @@ Embedded Ruby is allowed in the configuration files.  See examples below.
 
 Consider the two following config files.
 
-    # #{Rails.root}/config/settings.yml:
+ #{Rails.root}/config/settings.yml:
+
     size: 1
     server: google.com
 
-    # #{Rails.root}/config/environments/development.yml:
+ #{Rails.root}/config/environments/development.yml:
+
     size: 2
     computed: <%= 1 + 2 + 3 %>
     section:
