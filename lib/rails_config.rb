@@ -1,6 +1,6 @@
 require 'active_support/core_ext/module/attribute_accessors'
 require 'pathname'
-require 'ostruct'
+require 'rails_config/options'
 require 'yaml'
 require 'erb'
 
@@ -9,10 +9,10 @@ require 'rails_config/vendor/deep_merge' unless defined?(DeepMerge)
 module RailsConfig
   # ensures the setup only gets run once
   @@_ran_once = false
-  
+
   mattr_accessor :const_name
   @@const_name = "Settings"
-  
+
   def self.setup
     yield self if @@_ran_once == false
     @@_ran_once = true
@@ -23,10 +23,10 @@ module RailsConfig
     @@load_paths
   end
 
-  # Create a config object (OpenStruct) from a yaml file.  If a second yaml file is given, then the sections of that file will overwrite the sections
+  # Create a populated Options instance from a yaml file.  If a second yaml file is given, then the sections of that file will overwrite the sections
   # if the first file if they exist in the first file.
   def self.load_files(*files)
-    config = OpenStruct.new
+    config = Options.new
 
     @@load_paths = [files].flatten.compact.uniq
     # add singleton method to our Settings that reloads its settings from the load_paths
@@ -44,7 +44,7 @@ module RailsConfig
         end
       end
 
-      # load all the new values into the openstruct
+      # load all the new values into the Options
       marshal_load(RailsConfig.convert(conf).marshal_dump)
 
       return self
@@ -54,9 +54,9 @@ module RailsConfig
     return config
   end
 
-  # Recursively converts Hashes to OpenStructs (including Hashes inside Arrays)
+  # Recursively converts Hashes to Options (including Hashes inside Arrays)
   def self.convert(h) #:nodoc:
-    s = OpenStruct.new
+    s = Options.new
     h.each do |k, v|
       s.new_ostruct_member(k)
       if v.is_a?(Hash)
