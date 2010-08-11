@@ -1,3 +1,5 @@
+# RailsConfig
+
 ## Summary
 
 RailsConfig helps you easily manage environment specific Rails settings in an easy and usable manner
