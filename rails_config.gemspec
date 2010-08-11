@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails_config}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacques Crocker", "Fred Wu"]
-  s.date = %q{2010-08-10}
+  s.date = %q{2010-08-11}
   s.description = %q{Provides an easy to use Application Configuration object}
-  s.email = %q{railsjedi@gmail.com}
+  s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README",
