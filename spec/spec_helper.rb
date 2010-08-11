@@ -1,4 +1,5 @@
 require 'rails_config'
+require 'pathname'
 require "bundler"
 Bundler.setup
 

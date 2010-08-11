@@ -1,10 +1,5 @@
 require 'active_support/core_ext/module/attribute_accessors'
-require 'pathname'
 require 'rails_config/options'
-
-# TODO: remove
-require 'yaml'
-require 'erb'
 
 require "rails_config/sources/yaml_source"
 
