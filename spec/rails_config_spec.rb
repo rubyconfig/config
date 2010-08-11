@@ -17,24 +17,24 @@ describe RailsConfig do
 
   it "should load empty config for a missing file path" do
     config = RailsConfig.load_files(setting_path("some_file_that_doesnt_exist.yml"))
-    config.should == OpenStruct.new
+    config.should be_empty
   end
 
   it "should load an empty config for multiple missing file paths" do
     files = [setting_path("doesnt_exist1.yml"), setting_path("doesnt_exist2.yml")]
     config = RailsConfig.load_files(files)
-    config.should == OpenStruct.new
+    config.should be_empty
   end
 
   it "should load empty config for an empty setting file" do
     config = RailsConfig.load_files(setting_path("empty1.yml"))
-    config.should == OpenStruct.new
+    config.should be_empty
   end
 
   it "should load an empty config for multiple missing file paths" do
     files = [setting_path("empty1.yml"), setting_path("empty2.yml")]
     config = RailsConfig.load_files(files)
-    config.should == OpenStruct.new
+    config.should be_empty
   end
 
   it "should allow overrides" do
@@ -107,7 +107,7 @@ describe RailsConfig do
     it "should have the default settings constant as 'Settings'" do
       RailsConfig.const_name.should == "Settings"
     end
-    
+
     it "should be able to assign a different settings constant" do
       RailsConfig.setup{ |config| config.const_name = "Settings2" }
       RailsConfig.const_name.should == "Settings2"
