@@ -5,10 +5,10 @@ begin
   Jeweler::Tasks.new do |s|
     s.name = "rails_config"
     s.summary = "provides an Settings for rails3 that reads config/settings.yml"
-    s.email = "railsjedi@gmail.com"
     s.homepage = "http://github.com/railsjedi/rails_config"
     s.description = "Provides an easy to use Application Configuration object"
     s.authors = ["Jacques Crocker", "Fred Wu"]
+    s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
     s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec}/**/*"]
 
     s.add_dependency 'active_support', ">=3.0.0.rc"
