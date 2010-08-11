@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (3.0.0.rc)
     autotest (4.3.2)
     columnize (0.3.1)
     diff-lcs (1.1.2)
@@ -24,6 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport (>= 3.0.0.rc)
   autotest
   growl-glue
   rspec (>= 2.0.0.beta.19)
