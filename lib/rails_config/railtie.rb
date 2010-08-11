@@ -12,7 +12,7 @@ if defined?(Rails::Railtie)
         )
 
         # setup the constant
-        Kernel.const_set(app.config.rails_config.constant || "Settings", settings)
+        Kernel.const_set(config.rails_config.constant || "Settings", settings)
       end
 
       # Rails Dev environment should reload the Settings on every request
