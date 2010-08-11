@@ -1,8 +1,12 @@
 require 'active_support/core_ext/module/attribute_accessors'
 require 'pathname'
 require 'rails_config/options'
+
+# TODO: remove
 require 'yaml'
 require 'erb'
+
+require "rails_config/sources/yaml_source"
 
 require 'rails_config/vendor/deep_merge' unless defined?(DeepMerge)
 
@@ -28,28 +32,11 @@ module RailsConfig
   def self.load_files(*files)
     config = Options.new
 
-    @@load_paths = [files].flatten.compact.uniq
-    # add singleton method to our Settings that reloads its settings from the load_paths
-    def config.reload!
-
-      conf = {}
-      RailsConfig.load_paths.to_a.each do |path|
-        file_conf = YAML.load(ERB.new(IO.read(path.to_s)).result) if path and File.exists?(path.to_s)
-        next unless file_conf
-
-        if conf.size > 0
-          DeepMerge.deep_merge!(file_conf, conf, :preserve_unmergeables => false)
-        else
-          conf = file_conf
-        end
-      end
-
-      # load all the new values into the Options
-      replace_contents!(conf)
-      return self
+    # add yaml sources
+    [files].flatten.compact.uniq.each do |file|
+      config.add_source!(Sources::YAMLSource.new(file))
     end
-
-    config.reload!
+    config.load!
     return config
   end
 
