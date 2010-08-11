@@ -1,5 +1,3 @@
-- Remove OStruct and use ActiveSupport::OrderedOptions instead (adds dependency to active_support 3.0)
-
 - Add generator `rails_config:install` to create the default setting files
   - config/settings.yml
   - config/settings/development.yml
@@ -8,7 +6,9 @@
 
 - Add generator `rails_config:override` that creates an config/rails_config.rb initializer and disables the default initialzer
 
-
 DONE:
 - Add a Rails before_filter that triggers Settings.reload! for each development request
 - Allow user to customize the name of the global setting object (Settings)
+- Abstract OpenStruct to RailsConfig::Options
+- Add ability to define multiple sources (Start with YAMLSource)
+
