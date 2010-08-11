@@ -45,8 +45,7 @@ module RailsConfig
       end
 
       # load all the new values into the Options
-      marshal_load(RailsConfig.convert(conf).marshal_dump)
-
+      replace_contents!(conf)
       return self
     end
 
@@ -54,22 +53,6 @@ module RailsConfig
     return config
   end
 
-  # Recursively converts Hashes to Options (including Hashes inside Arrays)
-  def self.convert(h) #:nodoc:
-    s = Options.new
-    h.each do |k, v|
-      s.new_ostruct_member(k)
-      if v.is_a?(Hash)
-        s.send( (k+'=').to_sym, convert(v))
-      elsif v.is_a?(Array)
-        converted_array = v.collect { |e| e.instance_of?(Hash) ? convert(e) : e }
-        s.send("#{k}=".to_sym, converted_array)
-      else
-        s.send("#{k}=".to_sym, v)
-      end
-    end
-    s
-  end
 end
 
 # add railtie
