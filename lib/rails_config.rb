@@ -1,3 +1,4 @@
+require 'active_support/core_ext/module/attribute_accessors'
 require 'pathname'
 require 'ostruct'
 require 'yaml'
