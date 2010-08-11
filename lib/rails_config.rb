@@ -6,6 +6,16 @@ require 'erb'
 require 'rails_config/vendor/deep_merge' unless defined?(DeepMerge)
 
 module RailsConfig
+  # ensures the setup only gets run once
+  @@_ran_once = false
+  
+  mattr_accessor :const_name
+  @@const_name = "Settings"
+  
+  def self.setup
+    yield self if @@_ran_once == false
+    @@_ran_once = true
+  end
 
   @@load_paths = []
   def self.load_paths

@@ -103,5 +103,15 @@ describe RailsConfig do
     end
   end
 
+  context "Custom Configuration" do
+    it "should have the default settings constant as 'Settings'" do
+      RailsConfig.const_name.should == "Settings"
+    end
+    
+    it "should be able to assign a different settings constant" do
+      RailsConfig.setup{ |config| config.const_name = "Settings2" }
+      RailsConfig.const_name.should == "Settings2"
+    end
+  end
 
 end

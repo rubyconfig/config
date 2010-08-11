@@ -1,4 +1,3 @@
-- Allow user to customize the name of the global setting object (Settings)
 - Remove OStruct and use ActiveSupport::OrderedOptions instead (adds dependency to active_support 3.0)
 
 - Add generator `rails_config:install` to create the default setting files
@@ -12,3 +11,4 @@
 
 DONE:
 - Add a Rails before_filter that triggers Settings.reload! for each development request
+- Allow user to customize the name of the global setting object (Settings)

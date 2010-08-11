@@ -1,3 +1,4 @@
+require 'active_support/core_ext/module/attribute_accessors'
 require 'rails_config'
 require "bundler"
 Bundler.setup

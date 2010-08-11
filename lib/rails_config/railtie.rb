@@ -1,7 +1,11 @@
 if defined?(Rails::Railtie)
   module RailsConfig
     class Railtie < Rails::Railtie
-      config.rails_config = ActiveSupport::OrderedOptions.new
+
+      # manually load the custom initializer before everything else
+      initializer :load_custom_rails_config, :before => :bootstrap_hook do
+        require Rails.root.join("config", "initializers", "rails_config")
+      end
 
       # Parse the settings before any of the initializers
       ActiveSupport.on_load :before_initialize, :yield => true do
@@ -10,9 +14,8 @@ if defined?(Rails::Railtie)
           Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
           Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
         )
-
-        # setup the constant
-        Kernel.const_set(config.rails_config.constant || "Settings", settings)
+        
+        Kernel.const_set(RailsConfig.const_name, settings)
       end
 
       # Rails Dev environment should reload the Settings on every request
