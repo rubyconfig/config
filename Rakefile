@@ -3,7 +3,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name = "rockrep-rails_config"
+    s.name = "rails_config"
     s.summary = "provides an Settings for rails3 that reads config/settings.yml"
     s.homepage = "http://github.com/railsjedi/rails_config"
     s.description = "Provides an easy to use Application Configuration object"
