@@ -11,7 +11,7 @@ begin
     s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
     s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec}/**/*"]
 
-    s.add_dependency 'activesupport', ">=3.0.0.rc"
+    s.add_dependency 'activesupport', "~>3.0"
     s.add_development_dependency 'rspec', ">=2.0.0.beta.19"
 
   end
