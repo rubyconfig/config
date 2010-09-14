@@ -1,0 +1,7 @@
+prices:
+  type: hash
+  contents:
+    1: 2.99
+    5: 9.99
+    15: 19.99
+    30: 29.99
