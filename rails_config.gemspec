@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails_config}
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacques Crocker", "Fred Wu"]
-  s.date = %q{2010-09-07}
+  s.date = %q{2010-09-13}
   s.description = %q{Provides an easy to use Application Configuration object}
   s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
   s.extra_rdoc_files = [
@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
      "lib/rails_config/vendor/deep_merge.rb",
      "spec/fixtures/bool_override/config1.yml",
      "spec/fixtures/bool_override/config2.yml",
+     "spec/fixtures/custom_types/hash.yml",
      "spec/fixtures/deep_merge/config1.yml",
      "spec/fixtures/deep_merge/config2.yml",
      "spec/fixtures/deep_merge2/config1.yml",
