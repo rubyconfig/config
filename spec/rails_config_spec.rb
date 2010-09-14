@@ -114,4 +114,22 @@ describe RailsConfig do
     end
   end
 
+  context "Settings with a type value of 'hash'" do
+    let(:config) do
+      files = [setting_path("custom_types/hash.yml")]
+      RailsConfig.load_files(files)
+    end
+
+    it "should turn that setting into a Real Hash" do
+      config.prices.should be_a(Hash)
+    end
+
+    it "should map the hash values correctly" do
+      config.prices[1].should == 2.99
+      config.prices[5].should == 9.99
+      config.prices[15].should == 19.99
+      config.prices[30].should == 29.99
+    end
+  end
+
 end
