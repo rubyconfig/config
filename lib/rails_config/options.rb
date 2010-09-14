@@ -41,9 +41,7 @@ module RailsConfig
     # Recursively converts Hashes to Options (including Hashes inside Arrays)
     def __convert(h) #:nodoc:
       s = self.class.new
-      unless h.is_a?(Hash)
-        require 'ruby-debug';debugger
-      end
+
       h.each do |k, v|
         s.new_ostruct_member(k)
         if v.is_a?(Hash)
