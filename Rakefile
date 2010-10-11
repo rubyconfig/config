@@ -11,9 +11,11 @@ begin
     s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
     s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec}/**/*"]
 
-    s.add_dependency 'activesupport', "~>3.0"
-    s.add_development_dependency 'rspec', ">=2.0.0.beta.19"
-
+    s.add_dependency 'activesupport', "~> 3.0"
+    s.add_development_dependency 'rspec', "~> 2.0"
+    s.add_development_dependency 'autotest'
+    s.add_development_dependency 'growl-glue'
+    s.add_development_dependency 'ruby-debug' if RUBY_VERSION < "1.9"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
