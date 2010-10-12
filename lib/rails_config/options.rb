@@ -11,10 +11,6 @@ module RailsConfig
       @config_sources << source
     end
 
-    def load!
-      reload!
-    end
-
     # look through all our sources and rebuild the configuration
     def reload!
       conf = {}
