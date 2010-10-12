@@ -44,6 +44,18 @@ describe RailsConfig do
     config.size.should == 2
   end
 
+  it "should allow full reload of the settings files" do
+    files = [setting_path("settings.yml")]
+    RailsConfig.load_and_set_settings(files)
+    Settings.server.should == "google.com"
+    Settings.size.should == 1
+
+    files = [setting_path("settings.yml"), setting_path("development.yml")]
+    Settings.reload_from_files(files)
+    Settings.server.should == "google.com"
+    Settings.size.should == 2
+  end
+
   context "Nested Settings" do
     let(:config) do
       RailsConfig.load_files(setting_path("development.yml"))

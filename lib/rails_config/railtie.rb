@@ -10,13 +10,11 @@ if defined?(Rails::Railtie)
 
       # Parse the settings before any of the initializers
       ActiveSupport.on_load :before_initialize, :yield => true do
-        settings = RailsConfig.load_files(
+        RailsConfig.load_and_set_settings(
           Rails.root.join("config", "settings.yml").to_s,
           Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
           Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
         )
-        
-        Kernel.const_set(RailsConfig.const_name, settings)
       end
 
       # Rails Dev environment should reload the Settings on every request

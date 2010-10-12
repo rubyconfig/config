@@ -58,9 +58,22 @@ Config entries are compiled from
 
 settings defined in files that are lower in the list override settings higher
 
-### Reloading config files
+### Reloading settings
 
-You can reload the Settings from file at any time by running Settings.reload!
+You can reload the Settings object at any time by running Settings.reload!
+
+### Reloading settings and config files
+
+You can also reload the Settings object from different config files at runtime.
+
+For example, in your tests if you want to test the production settings, you can:
+
+    Rails.env = "production"
+    Settings.reload_from_files(
+      Rails.root.join("config", "settings.yml").to_s,
+      Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
+      Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
+    )
 
 ### Environment specific config files
 

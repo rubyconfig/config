@@ -32,6 +32,11 @@ module RailsConfig
 
     alias :load! :reload!
 
+    def reload_from_files(*files)
+      RailsConfig.load_and_set_settings(files)
+      reload!
+    end
+
     protected
 
     # Recursively converts Hashes to Options (including Hashes inside Arrays)

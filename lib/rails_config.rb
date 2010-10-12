@@ -30,6 +30,11 @@ module RailsConfig
     config
   end
 
+  # Loads and sets the settings constant!
+  def self.load_and_set_settings(*files)
+    Kernel.send(:remove_const, RailsConfig.const_name) if Kernel.const_defined?(RailsConfig.const_name)
+    Kernel.const_set(RailsConfig.const_name, RailsConfig.load_files(files))
+  end
 end
 
 # add railtie
