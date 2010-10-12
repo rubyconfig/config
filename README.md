@@ -38,7 +38,7 @@ This will generate `config/initializers/rails_config.rb` with a set of default s
 
 ## Accessing the Settings object
 
-After installing this plugin, the Settings object will be global available. Entries are accessed via object member notation:
+After installing this plugin, the `Settings` object will be available globally. Entries are accessed via object member notation:
 
     Settings.my_config_entry
 
@@ -50,21 +50,21 @@ If you have set a different constant name for the object in the initializer file
 
 ## Common config file
 
-Config entries are compiled from
+Config entries are compiled from:
 
     config/settings.yml
     config/settings/#{environment}.yml
     config/environments/#{environment}.yml
 
-settings defined in files that are lower in the list override settings higher
+Settings defined in files that are lower in the list override settings higher.
 
 ### Reloading settings
 
-You can reload the Settings object at any time by running Settings.reload!
+You can reload the Settings object at any time by running `Settings.reload!`.
 
 ### Reloading settings and config files
 
-You can also reload the Settings object from different config files at runtime.
+You can also reload the `Settings` object from different config files at runtime.
 
 For example, in your tests if you want to test the production settings, you can:
 
@@ -77,7 +77,7 @@ For example, in your tests if you want to test the production settings, you can:
 
 ### Environment specific config files
 
-You can have environment specific config files.  Environment specific config entries take precedence over common config entries.
+You can have environment specific config files. Environment specific config entries take precedence over common config entries.
 
 Example development environment config file:
 
@@ -89,7 +89,7 @@ Example production environment config file:
 
 ## Embedded Ruby (ERB)
 
-Embedded Ruby is allowed in the configuration files.  See examples below.
+Embedded Ruby is allowed in the configuration files. See examples below.
 
 ## Accessing Configuration Settings
 
