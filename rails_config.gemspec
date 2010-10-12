@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails_config}
-  s.version = "0.1.5"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacques Crocker", "Fred Wu"]
-  s.date = %q{2010-09-13}
+  s.date = %q{2010-10-12}
   s.description = %q{Provides an easy to use Application Configuration object}
   s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
   s.extra_rdoc_files = [
@@ -70,14 +70,20 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activesupport>, ["~> 3.0"])
-      s.add_development_dependency(%q<rspec>, [">= 2.0.0.beta.19"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.0"])
+      s.add_development_dependency(%q<autotest>, [">= 0"])
+      s.add_development_dependency(%q<growl-glue>, [">= 0"])
     else
       s.add_dependency(%q<activesupport>, ["~> 3.0"])
-      s.add_dependency(%q<rspec>, [">= 2.0.0.beta.19"])
+      s.add_dependency(%q<rspec>, ["~> 2.0"])
+      s.add_dependency(%q<autotest>, [">= 0"])
+      s.add_dependency(%q<growl-glue>, [">= 0"])
     end
   else
     s.add_dependency(%q<activesupport>, ["~> 3.0"])
-    s.add_dependency(%q<rspec>, [">= 2.0.0.beta.19"])
+    s.add_dependency(%q<rspec>, ["~> 2.0"])
+    s.add_dependency(%q<autotest>, [">= 0"])
+    s.add_dependency(%q<growl-glue>, [">= 0"])
   end
 end
 
