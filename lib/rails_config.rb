@@ -27,7 +27,7 @@ module RailsConfig
       config.add_source!(Sources::YAMLSource.new(file))
     end
     config.load!
-    return config
+    config
   end
 
 end
