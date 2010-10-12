@@ -1,14 +1,16 @@
 PATH
   remote: .
   specs:
-    rails_config (0.1.5)
+    rails_config (0.1.6)
       activesupport (~> 3.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
     activesupport (3.0.0)
+    autotest (4.3.2)
     diff-lcs (1.1.2)
+    growl-glue (1.0.7)
     rspec (2.0.0)
       rspec-core (= 2.0.0)
       rspec-expectations (= 2.0.0)
@@ -25,5 +27,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 3.0)
+  autotest
+  growl-glue
   rails_config!
-  rspec (>= 2.0.0.beta.19)
+  rspec (~> 2.0)

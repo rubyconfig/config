@@ -1,7 +1,6 @@
 require 'rails_config'
 require 'pathname'
-require "bundler"
-Bundler.setup
+require 'bundler/setup'
 
 def in_editor?
   ENV.has_key?('TM_MODE') || ENV.has_key?('EMACS') || ENV.has_key?('VIM')
