@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "rails_config"
-  s.version = "0.1.7"
+  s.version = "0.1.8"
 
   s.authors = ["Jacques Crocker", "Fred Wu"]
   s.summary = "Provides a Settings helper for rails3 that reads from config/settings.yml"
