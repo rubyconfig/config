@@ -87,6 +87,20 @@ Example production environment config file:
 
     #{Rails.root}/config/environments/production.yml
 
+### Adding sources at Runtime
+
+You can add new YAML config files at runtime. Just use:
+
+    Settings.add_source!("/path/to/source.yml")
+    Settings.reload!
+
+This will use the given source.yml file and use its settings to overwrite any previous ones.
+
+One thing I like to do for my Rails projects is provide a local.yml config file that is .gitignored (so its independent per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
+
+    Settings.add_source!("#{Rails.root}/config/settings/local.yml")
+    Settings.reload!
+
 ## Embedded Ruby (ERB)
 
 Embedded Ruby is allowed in the configuration files. See examples below.

@@ -7,6 +7,9 @@ module RailsConfig
     end
 
     def add_source!(source)
+      # handle yaml file paths
+      source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
+
       @config_sources ||= []
       @config_sources << source
     end

@@ -24,8 +24,9 @@ module RailsConfig
 
     # add yaml sources
     [files].flatten.compact.uniq.each do |file|
-      config.add_source!(Sources::YAMLSource.new(file))
+      config.add_source!(file.to_s)
     end
+
     config.load!
     config
   end
