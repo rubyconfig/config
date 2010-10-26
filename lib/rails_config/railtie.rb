@@ -9,7 +9,7 @@ if defined?(Rails::Railtie)
       end
 
       # Parse the settings before any of the initializers
-      ActiveSupport.on_load :before_initialize, :yield => true do
+      ActiveSupport.on_load :before_configuration, :yield => true do
         RailsConfig.load_and_set_settings(
           Rails.root.join("config", "settings.yml").to_s,
           Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
