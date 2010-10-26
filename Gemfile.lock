@@ -1,16 +1,21 @@
 PATH
   remote: .
   specs:
-    rails_config (0.1.6)
+    rails_config (0.1.7)
       activesupport (~> 3.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
     activesupport (3.0.0)
+    archive-tar-minitar (0.5.2)
     autotest (4.3.2)
+    columnize (0.3.1)
     diff-lcs (1.1.2)
     growl-glue (1.0.7)
+    linecache (0.43)
+    linecache19 (0.5.11)
+      ruby_core_source (>= 0.1.4)
     rspec (2.0.0)
       rspec-core (= 2.0.0)
       rspec-expectations (= 2.0.0)
@@ -21,6 +26,21 @@ GEM
     rspec-mocks (2.0.0)
       rspec-core (= 2.0.0)
       rspec-expectations (= 2.0.0)
+    ruby-debug (0.10.3)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.3.0)
+    ruby-debug-base (0.10.3)
+      linecache (>= 0.3)
+    ruby-debug-base19 (0.11.24)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
+    ruby_core_source (0.1.4)
+      archive-tar-minitar (>= 0.5.2)
 
 PLATFORMS
   ruby
@@ -31,3 +51,5 @@ DEPENDENCIES
   growl-glue
   rails_config!
   rspec (~> 2.0)
+  ruby-debug
+  ruby-debug19

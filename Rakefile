@@ -1,23 +1,43 @@
+require "bundler"
+Bundler.setup
+
 require 'rake'
+require 'rake/gempackagetask'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |s|
-    s.name = "rails_config"
-    s.summary = "provides an Settings for rails3 that reads config/settings.yml"
-    s.homepage = "http://github.com/railsjedi/rails_config"
-    s.description = "Provides an easy to use Application Configuration object"
-    s.authors = ["Jacques Crocker", "Fred Wu"]
-    s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
-    s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec}/**/*"]
-
-    s.add_dependency 'activesupport', "~> 3.0"
-    s.add_development_dependency 'rspec', "~> 2.0"
-    s.add_development_dependency 'autotest'
-    s.add_development_dependency 'growl-glue'
-    s.add_development_dependency 'ruby-debug' if RUBY_VERSION < "1.9"
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler, or one of its dependencies, is not available. Install it with: gem install jeweler"
+gemspec = eval(File.read('rails_config.gemspec'))
+Rake::GemPackageTask.new(gemspec) do |pkg|
+  pkg.gem_spec = gemspec
 end
+
+desc "build the gem and release it to rubygems.org"
+task :release => :gem do
+  puts "Tagging #{gemspec.version}..."
+  system "git tag -a #{gemspec.version} -m 'Tagging #{gemspec.version}'"
+  puts "Pushing to Github..."
+  system "git push --tags"
+  puts "Pushing to rubygems.org..."
+  system "gem push pkg/#{gemspec.name}-#{gemspec.version}.gem"
+end
+
+require "rspec"
+require "rspec/core/rake_task"
+
+Rspec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = "spec/**/*_spec.rb"
+end
+
+Rspec::Core::RakeTask.new('spec:progress') do |spec|
+  spec.rspec_opts = %w(--format progress)
+  spec.pattern = "spec/**/*_spec.rb"
+end
+
+require "rake/rdoctask"
+Rake::RDocTask.new do |rdoc|
+  rdoc.rdoc_dir = "rdoc"
+  rdoc.title = "Rails Config #{gemspec.version}"
+  rdoc.rdoc_files.include("README*")
+  rdoc.rdoc_files.include("lib/**/*.rb")
+end
+
+
+task :default => :spec
