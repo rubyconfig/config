@@ -1,34 +1,24 @@
+require File.dirname(__FILE__) + "/lib/rails_config/version"
+
 Gem::Specification.new do |s|
-  s.name = "rails_config"
-  s.version = "0.1.7"
-
-  s.authors = ["Jacques Crocker", "Fred Wu"]
-  s.summary = "Provides a Settings helper for rails3 that reads from config/settings.yml"
-  s.description = "Easy to use Settings helper that loads its data in from config/settings.yml. Handles adding multiple sources, and easy reloading."
-  s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
-  s.homepage = "http://github.com/railsjedi/rails_config"
-
-  s.require_paths = ["lib"]
-  s.files = Dir['lib/**/*',
-                'spec/**/*',
-                'rails_config.gemspec',
-                'Gemfile',
-                'Gemfile.lock',
-                'LICENSE',
-                'Rakefile',
-                'README.md',
-                'TODO']
-
-  s.test_files = Dir['spec/**/*']
-  s.rdoc_options = ["--charset=UTF-8"]
-  s.extra_rdoc_files = [
-    "LICENSE",
-     "README.md",
-     "TODO"
-  ]
+  s.name             = "rails_config"
+  s.version          = RailsConfig::VERSION
+  s.date             = Date.today.to_s
+  s.authors          = ["Jacques Crocker", "Fred Wu"]
+  s.email            = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
+  s.summary          = "Provides a Settings helper for rails3 that reads from config/settings.yml"
+  s.description      = "Easy to use Settings helper that loads its data in from config/settings.yml. Handles adding multiple sources, and easy reloading."
+  s.homepage         = "http://github.com/railsjedi/rails_config"
+  s.extra_rdoc_files = ["README.md"]
+  s.rdoc_options     = ["--charset=UTF-8"]
+  s.require_paths    = ["lib"]
+  s.files            = `git ls-files`.split("\n")
+  s.test_files       = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables      = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
   s.add_runtime_dependency "activesupport", "~> 3.0"
   s.add_development_dependency "rspec", "~> 2.0"
-
+  s.add_development_dependency "autotest", ">= 0"
+  s.add_development_dependency "growl-glue", ">= 0"
 end
 
