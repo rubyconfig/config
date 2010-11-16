@@ -21,7 +21,7 @@ if defined?(Rails::Railtie)
       if Rails.env.development?
         initializer :rails_config_reload_on_development do
           ActionController::Base.class_eval do
-            prepend_before_filter { ::Settings.reload! }
+            prepend_before_filter { ::RailsConfig.const_name.constantize.reload! }
           end
         end
       end
