@@ -48,19 +48,14 @@ module RailsConfig
 
       h.each do |k, v|
         s.new_ostruct_member(k)
+
         if v.is_a?(Hash)
-          if(v["type"] == "hash")
-            val = v["contents"]
-          else
-            val = __convert(v)
-          end
-          s.send( (k+'=').to_sym, val)
+          v = v["type"] == "hash" ? v["contents"] : __convert(v)
         elsif v.is_a?(Array)
-          converted_array = v.collect { |e| e.instance_of?(Hash) ? __convert(e) : e }
-          s.send("#{k}=".to_sym, converted_array)
-        else
-          s.send("#{k}=".to_sym, v)
+          v = v.collect { |e| e.instance_of?(Hash) ? __convert(e) : e }
         end
+
+        s.send("#{k}=".to_sym, v)
       end
       s
     end
