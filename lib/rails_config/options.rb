@@ -37,12 +37,7 @@ module RailsConfig
     def to_hash
       result = {}
       @table.each do |k, v|
-        key = k
-        if v.instance_of?(RailsConfig::Options)
-          result[key] = v.to_hash
-        else
-          result[key] = v
-        end
+        result[k] = v.instance_of?(RailsConfig::Options) ? v.to_hash : v
       end
       result
     end
