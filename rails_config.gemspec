@@ -5,8 +5,10 @@ Gem::Specification.new do |s|
   s.authors = ["Jacques Crocker", "Fred Wu"]
   s.summary = "Provides a Settings helper for rails3 that reads from config/settings.yml"
   s.description = "Easy to use Settings helper that loads its data in from config/settings.yml. Handles adding multiple sources, and easy reloading."
+
   s.email = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
   s.homepage = "http://github.com/railsjedi/rails_config"
+  s.rubyforge_project = "none"
 
   s.require_paths = ["lib"]
   s.files = Dir['lib/**/*',

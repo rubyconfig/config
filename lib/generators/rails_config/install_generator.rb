@@ -1,6 +1,6 @@
 module RailsConfig
   module Generators
-    class InstallGenerator < Rails::Generators::Base
+    class InstallGenerator < ::Rails::Generators::Base
       desc "Generates a custom Rails Config initializer file."
 
       def self.source_root
