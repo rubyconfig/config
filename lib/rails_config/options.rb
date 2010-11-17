@@ -32,7 +32,7 @@ module RailsConfig
 
       return self
     end
-    
+
     # Dump openstruct to a hash
     def to_hash
       result = {}
@@ -45,6 +45,10 @@ module RailsConfig
         end
       end
       result
+    end
+
+    def to_json
+      to_hash.to_json
     end
 
     alias :load! :reload!
