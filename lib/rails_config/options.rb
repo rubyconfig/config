@@ -32,6 +32,20 @@ module RailsConfig
 
       return self
     end
+    
+    # Dump openstruct to a hash
+    def to_hash
+      result = {}
+      @table.each do |k, v|
+        key = k.to_sym
+        if v.instance_of?(RailsConfig::Options)
+          result[key] = v.to_hash
+        else
+          result[key] = v
+        end
+      end
+      result
+    end
 
     alias :load! :reload!
 
