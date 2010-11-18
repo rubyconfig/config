@@ -35,7 +35,11 @@ module RailsConfig
 
     alias :load! :reload!
 
-    # Dump openstruct to a hash
+    def reload_from_files(*files)
+      RailsConfig.load_and_set_settings(files)
+      reload!
+    end
+
     def to_hash
       result = {}
       @table.each do |k, v|
@@ -44,13 +48,9 @@ module RailsConfig
       result
     end
 
-    def to_json
-      to_hash.to_json
-    end
-
-    def reload_from_files(*files)
-      RailsConfig.load_and_set_settings(files)
-      reload!
+    def to_json(*args)
+      require "json" unless defined?(JSON)
+      to_hash.to_json(*args)
     end
 
     protected

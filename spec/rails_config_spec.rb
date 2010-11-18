@@ -30,10 +30,15 @@ describe RailsConfig do
     config = RailsConfig.load_files(setting_path("empty1.yml"))
     config.should be_empty
   end
-  
+
   it "should convert to a hash" do
-    config = RailsConfig.load_files(setting_path("development.yml"))
-    config.to_hash[:section][:servers].should be_a_kind_of(Array)
+    config = RailsConfig.load_files(setting_path("development.yml")).to_hash
+    config[:section][:servers].should be_a_kind_of(Array)
+  end
+
+  it "should convert to a json" do
+    config = RailsConfig.load_files(setting_path("development.yml")).to_json
+    JSON.parse(config)["section"]["servers"].should be_a_kind_of(Array)
   end
 
   it "should load an empty config for multiple missing file paths" do
