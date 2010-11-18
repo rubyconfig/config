@@ -33,6 +33,8 @@ module RailsConfig
       return self
     end
 
+    alias :load! :reload!
+
     # Dump openstruct to a hash
     def to_hash
       result = {}
@@ -45,8 +47,6 @@ module RailsConfig
     def to_json
       to_hash.to_json
     end
-
-    alias :load! :reload!
 
     def reload_from_files(*files)
       RailsConfig.load_and_set_settings(files)
