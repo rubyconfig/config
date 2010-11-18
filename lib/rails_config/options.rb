@@ -42,7 +42,7 @@ module RailsConfig
 
     def to_hash
       result = {}
-      @table.each do |k, v|
+      marshal_dump.each do |k, v|
         result[k] = v.instance_of?(RailsConfig::Options) ? v.to_hash : v
       end
       result
