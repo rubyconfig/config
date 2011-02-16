@@ -18,7 +18,16 @@ module RailsConfig
     def reload!
       conf = {}
       @config_sources.each do |source|
-        source_conf = source.load
+
+        source_hash = source.load
+
+        if (defined?(Rails))
+          source_conf = source_hash['common'] ? source_hash['common'] : source_hash
+          DeepMerge.deep_merge!(source_hash[Rails.env], source_conf, :preserve_unmergeables => false) if source_hash.include?(Rails.env)
+        else
+          source_conf = source_hash
+        end
+
 
         if conf.empty?
           conf = source_conf
