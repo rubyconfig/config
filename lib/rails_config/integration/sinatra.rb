@@ -1,3 +1,5 @@
+require "rails_config/rack/reloader"
+
 module RailsConfig
   # provide helper to register within your Sinatra app
   #
@@ -22,7 +24,7 @@ module RailsConfig
         File.join(root.to_s, "config", "environments", "#{env}.yml").to_s
       )
 
-      inner_app.use(Rack::Reloader) if inner_app.development?
+      inner_app.use(::RailsConfig::Rack::Reloader) if inner_app.development?
     end
   end
 
