@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_config (0.2.2)
+    rails_config (0.2.3)
       activesupport (~> 3.0)
 
 GEM
