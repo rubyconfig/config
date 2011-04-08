@@ -36,7 +36,14 @@ module RailsConfig
     Kernel.send(:remove_const, RailsConfig.const_name) if Kernel.const_defined?(RailsConfig.const_name)
     Kernel.const_set(RailsConfig.const_name, RailsConfig.load_files(files))
   end
+
+  def self.reload!
+    Kernel.const_get(RailsConfig.const_name).reload!
+  end
 end
 
-# add railtie
-require 'rails_config/railtie'
+# add rails integration
+require('rails_config/integration/rails') if defined?(::Rails)
+
+# add sinatra integration
+require('rails_config/integration/sinatra') if defined?(::Sinatra)
