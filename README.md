@@ -14,6 +14,8 @@ RailsConfig helps you easily manage environment specific Rails settings in an ea
 ## Compatibility
 
 * Rails 3.0
+* Padrino
+* Sinatra
 
 For older versions of Rails and other Ruby apps, use [AppConfig](http://github.com/fredwu/app_config).
 
@@ -22,6 +24,34 @@ For older versions of Rails and other Ruby apps, use [AppConfig](http://github.c
 Add this to your `Gemfile`:
 
     gem "rails_config"
+
+
+## Installing on Padrino
+
+Add this to your `Gemfile`:
+
+    gem "rails_config"
+
+in your app.rb, you'll also need to register RailsConfig
+
+    register RailsConfig
+
+
+## Installing on Sinatra
+
+Add this to your `Gemfile`:
+
+    gem "rails_config"
+
+in your app, you'll need to register RailsConfig. You'll also need to give it a root so it can find the config files.
+
+    set :root, File.dirname(__FILE__)
+    register RailsConfig
+
+It's also possible to initialize it manually within your configure block if you want to just give it some yml paths to load from.
+
+    RailsConfig.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
+
 
 ## Customizing RailsConfig
 
