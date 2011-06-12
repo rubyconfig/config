@@ -13,7 +13,17 @@ module RailsConfig
 
       def copy_settings
         template "settings.yml", "config/settings.yml"
+        template "settings.local.yml", "config/settings.local.yml"
         directory "settings", "config/settings"
+      end
+
+      def modify_gitignore
+        append_to_file '.gitignore' do
+          "\n"                                +
+          "config/settings.local.yml\n"       +
+          "config/settings/*.local.yml\n"     +
+          "config/environments/*.local.yml\n"
+        end
       end
     end
   end
