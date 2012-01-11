@@ -6,7 +6,7 @@ module RailsConfig
 
           # manually load the custom initializer before everything else
           initializer :load_custom_rails_config, :before => :bootstrap_hook do
-            initializer = Rails.root.join("config", "initializers", "rails_config")
+            initializer = Rails.root.join("config", "initializers", "rails_config.rb")
             require initializer if File.exist?(initializer)
           end
 
