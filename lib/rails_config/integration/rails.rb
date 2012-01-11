@@ -11,7 +11,7 @@ module RailsConfig
           end
 
           # Parse the settings before any of the initializers
-          ActiveSupport.on_load :before_configuration, :yield => true do
+          initializer :load_rails_config_settings, :after => :load_custom_rails_config do
             RailsConfig.load_and_set_settings(
               Rails.root.join("config", "settings.yml").to_s,
               Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
