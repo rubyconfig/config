@@ -13,7 +13,7 @@ RailsConfig helps you easily manage environment specific Rails settings in an ea
 
 ## Compatibility
 
-* Rails 3.0
+* Rails 3.x
 * Padrino
 * Sinatra
 
@@ -23,35 +23,44 @@ For older versions of Rails and other Ruby apps, use [AppConfig](http://github.c
 
 Add this to your `Gemfile`:
 
-    gem "rails_config"
-
+```ruby
+gem "rails_config"
+```
 
 ## Installing on Padrino
 
 Add this to your `Gemfile`:
 
-    gem "rails_config"
+```ruby
+gem "rails_config"
+```
 
 in your app.rb, you'll also need to register RailsConfig
 
-    register RailsConfig
-
+```ruby
+register RailsConfig
+```
 
 ## Installing on Sinatra
 
 Add this to your `Gemfile`:
 
-    gem "rails_config"
+```ruby
+gem "rails_config"
+```
 
 in your app, you'll need to register RailsConfig. You'll also need to give it a root so it can find the config files.
 
-    set :root, File.dirname(__FILE__)
-    register RailsConfig
+```ruby
+set :root, File.dirname(__FILE__)
+register RailsConfig
+```
 
 It's also possible to initialize it manually within your configure block if you want to just give it some yml paths to load from.
 
-    RailsConfig.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
-
+```ruby
+RailsConfig.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
+```
 
 ## Customizing RailsConfig
 
@@ -70,11 +79,15 @@ This will generate `config/initializers/rails_config.rb` with a set of default s
 
 After installing this plugin, the `Settings` object will be available globally. Entries are accessed via object member notation:
 
-    Settings.my_config_entry
+```ruby
+Settings.my_config_entry
+```
 
 Nested entries are supported:
 
-    Settings.my_section.some_entry
+```ruby
+Settings.my_section.some_entry
+```
 
 If you have set a different constant name for the object in the initializer file, use that instead.
 
@@ -98,12 +111,14 @@ You can also reload the `Settings` object from different config files at runtime
 
 For example, in your tests if you want to test the production settings, you can:
 
-    Rails.env = "production"
-    Settings.reload_from_files(
-      Rails.root.join("config", "settings.yml").to_s,
-      Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
-      Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
-    )
+```ruby
+Rails.env = "production"
+Settings.reload_from_files(
+  Rails.root.join("config", "settings.yml").to_s,
+  Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
+  Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
+)
+```
 
 ### Environment specific config files
 
@@ -111,25 +126,33 @@ You can have environment specific config files. Environment specific config entr
 
 Example development environment config file:
 
-    #{Rails.root}/config/environments/development.yml
+```ruby
+#{Rails.root}/config/environments/development.yml
+```
 
 Example production environment config file:
 
-    #{Rails.root}/config/environments/production.yml
+```ruby
+#{Rails.root}/config/environments/production.yml
+```
 
 ### Adding sources at Runtime
 
 You can add new YAML config files at runtime. Just use:
 
-    Settings.add_source!("/path/to/source.yml")
-    Settings.reload!
+```ruby
+Settings.add_source!("/path/to/source.yml")
+Settings.reload!
+```
 
 This will use the given source.yml file and use its settings to overwrite any previous ones.
 
 One thing I like to do for my Rails projects is provide a local.yml config file that is .gitignored (so its independent per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
 
-    Settings.add_source!("#{Rails.root}/config/settings/local.yml")
-    Settings.reload!
+```ruby
+Settings.add_source!("#{Rails.root}/config/settings/local.yml")
+Settings.reload!
+```
 
 ## Embedded Ruby (ERB)
 
@@ -141,34 +164,46 @@ Consider the two following config files.
 
  #{Rails.root}/config/settings.yml:
 
-    size: 1
-    server: google.com
+```yaml
+size: 1
+server: google.com
+```
 
  #{Rails.root}/config/environments/development.yml:
 
-    size: 2
-    computed: <%= 1 + 2 + 3 %>
-    section:
-      size: 3
-      servers: [ {name: yahoo.com}, {name: amazon.com} ]
+```yaml
+size: 2
+computed: <%= 1 + 2 + 3 %>
+section:
+  size: 3
+  servers: [ {name: yahoo.com}, {name: amazon.com} ]
+```
 
 Notice that the environment specific config entries overwrite the common entries.
 
-    Settings.size   # => 2
-    Settings.server # => google.com
+```ruby
+Settings.size   # => 2
+Settings.server # => google.com
+```
 
 Notice the embedded Ruby.
 
-    Settings.computed # => 6
+```ruby
+Settings.computed # => 6
+```
 
 Notice that object member notation is maintained even in nested entries.
 
-    Settings.section.size # => 3
+```ruby
+Settings.section.size # => 3
+```
 
 Notice array notation and object member notation is maintained.
 
-    Settings.section.servers[0].name # => yahoo.com
-    Settings.section.servers[1].name # => amazon.com
+```ruby
+Settings.section.servers[0].name # => yahoo.com
+Settings.section.servers[1].name # => amazon.com
+```
 
 ## Authors
 
