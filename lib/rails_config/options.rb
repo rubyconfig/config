@@ -53,6 +53,13 @@ module RailsConfig
       to_hash.to_json(*args)
     end
 
+    def merge!(hash)
+      current = to_hash
+      DeepMerge.deep_merge!(current, hash.dup)
+      marshal_load(__convert(hash).marshal_dump)
+      self
+    end
+    
     protected
 
     # Recursively converts Hashes to Options (including Hashes inside Arrays)

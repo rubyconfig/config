@@ -154,4 +154,21 @@ describe RailsConfig do
     end
   end
 
+  context "Merging hash at runtime" do
+    let(:config) { RailsConfig.load_files(setting_path("settings.yml")) }
+    let(:hash) { {:options => {:suboption => 'value'}} }
+    
+    it 'should be chainable' do
+      config.merge!({}).should === config
+    end
+    
+    it 'should preserve existing keys' do
+      expect { config.merge!({}) }.to_not change{ config.keys }
+    end
+    
+    it 'should recursively merge keys' do
+      config.merge!(hash)
+      config.options.suboption.should == 'value'
+    end
+  end
 end
