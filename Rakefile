@@ -17,7 +17,7 @@ RSpec::Core::RakeTask.new('spec:progress') do |spec|
   spec.pattern = "spec/**/*_spec.rb"
 end
 
-require "rake/rdoctask"
+require "rdoc/task"
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = "rdoc"
   rdoc.title = "Rails Config #{RailsConfig::VERSION}"
