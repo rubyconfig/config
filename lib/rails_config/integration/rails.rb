@@ -5,13 +5,13 @@ module RailsConfig
         class Railtie < Rails::Railtie
 
           # manually load the custom initializer before everything else
-          initializer :load_custom_rails_config, :before => :bootstrap_hook do
+          initializer :load_custom_rails_config, :before => :load_environment_config do
             initializer = Rails.root.join("config", "initializers", "rails_config.rb")
             require initializer if File.exist?(initializer)
           end
 
           # Parse the settings before any of the initializers
-          initializer :load_rails_config_settings, :after => :load_custom_rails_config, :before => :bootstrap_hook do
+          initializer :load_rails_config_settings, :after => :load_custom_rails_config, :before => :load_environment_config do
             RailsConfig.load_and_set_settings(
               Rails.root.join("config", "settings.yml").to_s,
               Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
