@@ -59,6 +59,14 @@ module RailsConfig
       marshal_load(__convert(hash).marshal_dump)
       self
     end
+
+    def [](param)
+      send("#{param}")
+    end
+
+    def []=(param, value)
+      send("#{param}=", value)
+    end
     
     protected
 
