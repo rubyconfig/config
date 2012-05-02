@@ -171,4 +171,22 @@ describe RailsConfig do
       config.options.suboption.should == 'value'
     end
   end
+
+  context "[] accessors" do
+    let(:config) do
+      files = [setting_path("development.yml")]
+      RailsConfig.load_files(files)
+    end
+
+    it "should access attributes using []" do
+      config.section['size'].should == 3
+      config.section[:size].should == 3
+      config[:section][:size].should == 3
+    end
+
+    it "should set values using []=" do
+      config.section[:foo] = 'bar'
+      config.section.foo.should == 'bar'
+    end
+  end
 end
