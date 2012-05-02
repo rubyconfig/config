@@ -60,6 +60,8 @@ module RailsConfig
       self
     end
 
+    # An alternative mechanism for property access.
+    # This let's you do foo['bar'] along with foo.bar.
     def [](param)
       send("#{param}")
     end

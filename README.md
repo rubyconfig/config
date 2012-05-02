@@ -89,6 +89,15 @@ Nested entries are supported:
 Settings.my_section.some_entry
 ```
 
+Alternatively, you can also use the `[]` operator if you don't know which exact setting you need to access ahead of time.
+
+```ruby
+# All the following are equivalent to Settings.my_section.some_entry
+Settings.my_section[:some_entry]
+Settings.my_section['some_entry]
+Settings[:my_section][:some_entry]
+```
+
 If you have set a different constant name for the object in the initializer file, use that instead.
 
 ## Common config file
