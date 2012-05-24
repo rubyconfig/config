@@ -107,6 +107,10 @@ Config entries are compiled from:
     config/settings.yml
     config/settings/#{environment}.yml
     config/environments/#{environment}.yml
+    
+    config/settings.local.yml
+    config/settings/#{environment}.local.yml
+    config/environments/#{environment}.local.yml    
 
 Settings defined in files that are lower in the list override settings higher.
 
@@ -145,6 +149,16 @@ Example production environment config file:
 #{Rails.root}/config/environments/production.yml
 ```
 
+### Developer specific config files
+
+If you want to have local settings, specific to your machine or development environment, 
+you can use the following files, which are automatically `.gitignored` :
+
+    Rails.root.join("config", "settings.local.yml").to_s,
+    Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
+    Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
+
+
 ### Adding sources at Runtime
 
 You can add new YAML config files at runtime. Just use:
@@ -162,6 +176,9 @@ One thing I like to do for my Rails projects is provide a local.yml config file 
 Settings.add_source!("#{Rails.root}/config/settings/local.yml")
 Settings.reload!
 ```
+
+> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml, settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` 
+>       for your developer specific settings.
 
 ## Embedded Ruby (ERB)
 
