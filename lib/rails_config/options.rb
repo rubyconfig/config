@@ -55,8 +55,8 @@ module RailsConfig
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(current, hash.dup)
-      marshal_load(__convert(hash).marshal_dump)
+      DeepMerge.deep_merge!(hash.dup, current)
+      marshal_load(__convert(current).marshal_dump)
       self
     end
 
