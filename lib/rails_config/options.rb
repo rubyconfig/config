@@ -55,8 +55,8 @@ module RailsConfig
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(current, hash.dup)
-      marshal_load(__convert(hash).marshal_dump)
+      DeepMerge.deep_merge!(hash.dup, current)
+      marshal_load(__convert(current).marshal_dump)
       self
     end
 
@@ -77,6 +77,7 @@ module RailsConfig
       s = self.class.new
 
       h.each do |k, v|
+        k = k.to_s if !k.respond_to?(:to_sym) && k.respond_to?(:to_s)
         s.new_ostruct_member(k)
 
         if v.is_a?(Hash)
