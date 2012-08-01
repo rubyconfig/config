@@ -94,7 +94,7 @@ Alternatively, you can also use the `[]` operator if you don't know which exact 
 ```ruby
 # All the following are equivalent to Settings.my_section.some_entry
 Settings.my_section[:some_entry]
-Settings.my_section['some_entry]
+Settings.my_section['some_entry']
 Settings[:my_section][:some_entry]
 ```
 
