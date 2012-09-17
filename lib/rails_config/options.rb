@@ -2,6 +2,8 @@ require 'ostruct'
 module RailsConfig
   class Options < OpenStruct
 
+    include Enumerable
+
     def empty?
       marshal_dump.empty?
     end
@@ -46,6 +48,10 @@ module RailsConfig
         result[k] = v.instance_of?(RailsConfig::Options) ? v.to_hash : v
       end
       result
+    end
+
+    def each(*args, &block)
+      marshal_dump.each(*args, &block)
     end
 
     def to_json(*args)
