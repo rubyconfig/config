@@ -215,4 +215,27 @@ describe RailsConfig do
       config.section.foo.should eq 'bar'
     end
   end
+
+  context "enumerable" do
+    let(:config) do
+      files = [setting_path("development.yml")]
+      RailsConfig.load_files(files)
+    end
+
+    it "should enumerate top level parameters" do
+      keys = []
+      config.each { |key, value| keys << key }
+      keys.should eq [:size, :section]
+    end
+
+    it "should enumerate inner parameters" do
+      keys = []
+      config.section.each { |key, value| keys << key }
+      keys.should eq [:size, :servers]
+    end
+
+    it "should have methods defined by Enumerable" do
+      config.map { |key, value| key }.should eq [:size, :section]
+    end
+  end
 end
