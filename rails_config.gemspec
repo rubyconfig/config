@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + "/lib/rails_config/version"
 Gem::Specification.new do |s|
   s.name             = "rails_config"
   s.version          = RailsConfig::VERSION
-  s.date             = Date.today.to_s
+  s.date             = Time.now.strftime '%F'
   s.authors          = ["Jacques Crocker", "Fred Wu"]
   s.email            = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
   s.summary          = "Provides a Settings helper for rails3 that reads from config/settings.yml"
