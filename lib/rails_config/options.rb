@@ -50,7 +50,7 @@ module RailsConfig
           if v.instance_of? RailsConfig::Options
             arr[i] = v.to_hash
           elsif v.instance_of? Array
-            arr[i] = descend_array.call(arr)
+            arr[i] = descend_array.call(v)
           end
         end
         arr
