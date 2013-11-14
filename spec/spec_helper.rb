@@ -21,5 +21,13 @@ RSpec.configure do |c|
     @fixture_path.join(filename)
   end
 
+  # loads ENV vars from a file
+  def load_env(filename)
+    if filename and File.exists?(filename.to_s)
+      result = YAML.load(ERB.new(IO.read(filename.to_s)).result)
+    end
+    result.each { |key, value| ENV[key.to_s] = value.to_s } unless result.nil?
+  end
+
 end
 

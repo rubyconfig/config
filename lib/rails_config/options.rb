@@ -16,6 +16,24 @@ module RailsConfig
       @config_sources << source
     end
 
+    def reload_env!
+      conf = Hash.new
+      ENV.each do |key, value|
+        next unless key.to_s.index(RailsConfig.const_name) == 0
+        hash = value
+        key.to_s.split('.').reverse.each do |element|
+          hash = {element => hash}
+        end
+        DeepMerge.deep_merge!(hash, conf, :preserve_unmergeables => false)
+      end
+
+      merge!(conf[RailsConfig.const_name] || {})
+
+      return self
+    end
+
+    alias :load_env! :reload_env!
+
     # look through all our sources and rebuild the configuration
     def reload!
       conf = {}
@@ -31,6 +49,8 @@ module RailsConfig
 
       # swap out the contents of the OStruct with a hash (need to recursively convert)
       marshal_load(__convert(conf).marshal_dump)
+
+      reload_env! if RailsConfig.use_env
 
       return self
     end
