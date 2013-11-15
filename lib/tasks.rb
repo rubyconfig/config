@@ -20,8 +20,7 @@ module RailsConfig
         )
 
         out = ''
-        hash = {RailsConfig.const_name => Kernel.const_get(RailsConfig.const_name).to_hash}
-        dotted_hash = to_dotted_hash hash
+        dotted_hash = to_dotted_hash Kernel.const_get(RailsConfig.const_name).to_hash, {}, RailsConfig.const_name
         dotted_hash.each {|key, value| out += " #{key}=#{value} "}
         out
       end
@@ -33,7 +32,6 @@ module RailsConfig
       def heroku(command)
         with_app = app ? " --app #{app}" : ""
         `heroku #{command}#{with_app}`
-        #puts "heroku #{command}#{with_app}"
       end
 
       def `(command)
