@@ -29,8 +29,6 @@ module RailsConfig
       end
 
       merge!(conf[RailsConfig.const_name] || {})
-
-      return self
     end
 
     alias :load_env! :reload_env!
