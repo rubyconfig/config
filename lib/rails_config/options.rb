@@ -17,6 +17,7 @@ module RailsConfig
     end
 
     def reload_env!
+      return self unless ENV.nil?
       conf = Hash.new
       ENV.each do |key, value|
         next unless key.to_s.index(RailsConfig.const_name) == 0
