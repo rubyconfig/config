@@ -9,8 +9,9 @@ module RailsConfig
   # ensures the setup only gets run once
   @@_ran_once = false
 
-  mattr_accessor :const_name
+  mattr_accessor :const_name, :use_env
   @@const_name = "Settings"
+  @@use_env = false
 
   def self.setup
     yield self if @@_ran_once == false
@@ -28,6 +29,7 @@ module RailsConfig
     end
 
     config.load!
+    config.load_env! if @@use_env
     config
   end
 

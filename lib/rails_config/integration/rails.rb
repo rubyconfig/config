@@ -3,6 +3,9 @@ module RailsConfig
     module Rails3
       if defined?(Rails::Railtie)
         class Railtie < Rails::Railtie
+          rake_tasks do
+            Dir[File.join(File.dirname(__FILE__),'../tasks/*.rake')].each { |f| load f }
+          end
 
           # manually load the custom initializer before everything else
           initializer :load_custom_rails_config, :before => :load_environment_config, :group => :all do
