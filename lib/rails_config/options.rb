@@ -25,7 +25,9 @@ module RailsConfig
         if conf.empty?
           conf = source_conf
         else
-          DeepMerge.deep_merge!(source_conf, conf, :preserve_unmergeables => false)
+          # see Options Details in lib/rails_config/vendor/deep_merge.rb
+          DeepMerge.deep_merge!(source_conf, conf,
+                                preserve_unmergeables: false, knockout_prefix: RailsConfig.knockout_prefix)
         end
       end
 

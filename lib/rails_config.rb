@@ -12,6 +12,9 @@ module RailsConfig
   mattr_accessor :const_name
   @@const_name = "Settings"
 
+  # see Options Details in lib/rails_config/vendor/deep_merge.rb
+  mattr_accessor :knockout_prefix
+
   def self.setup
     yield self if @@_ran_once == false
     @@_ran_once = true

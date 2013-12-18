@@ -130,9 +130,17 @@ describe RailsConfig do
       RailsConfig.const_name.should eq "Settings"
     end
 
-    it "should be able to assign a different settings constant" do
-      RailsConfig.setup{ |config| config.const_name = "Settings2" }
+    it %[should have the default 'knockout_prefix' constant as nil] do
+      RailsConfig.knockout_prefix.should eq nil
+    end
+
+    it "should be able to initialize the constants" do
+      RailsConfig.setup do |config|
+        config.const_name = "Settings2"
+        config.knockout_prefix = '--'
+      end
       RailsConfig.const_name.should eq "Settings2"
+      RailsConfig.knockout_prefix.should eq '--'
     end
   end
 
@@ -238,4 +246,19 @@ describe RailsConfig do
       config.map { |key, value| key }.should eq [:size, :section]
     end
   end
+
+  context %['knockout_prefix' constant is not nil] do
+    let(:config) do
+      files = [setting_path('knockout_prefix/config1.yml'), setting_path('knockout_prefix/config2.yml'),
+               setting_path('knockout_prefix/config3.yml')]
+      RailsConfig.load_files(files)
+    end
+
+    it 'should remove elements from settings by specifying them in a special way in settings that overrides' do
+      config.arraylist1.should eq ['to_not_remove', 'added_by_config2', 'added_by_config3']
+      config.arraylist2.inner.should eq ['to_not_remove', 'added_by_config2', 'added_by_config3']
+    end
+
+  end
+
 end
