@@ -8,3 +8,5 @@ arraylist2:
     - --to_remove_by_config2
     - --to_remove_by_config2_and_config3
     - added_by_config2
+
+arraylist3: --

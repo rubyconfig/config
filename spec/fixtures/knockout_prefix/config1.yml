@@ -10,3 +10,8 @@ arraylist2:
     - to_remove_by_config3
     - to_remove_by_config2_and_config3
     - to_not_remove
+
+arraylist3:
+  - item1
+  - item2
+  - item3

@@ -257,6 +257,7 @@ describe RailsConfig do
     it 'should remove elements from settings by specifying them in a special way in settings that overrides' do
       config.arraylist1.should eq ['to_not_remove', 'added_by_config2', 'added_by_config3']
       config.arraylist2.inner.should eq ['to_not_remove', 'added_by_config2', 'added_by_config3']
+      config.arraylist3.should eq ''
     end
 
   end
