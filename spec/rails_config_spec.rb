@@ -255,9 +255,16 @@ describe RailsConfig do
     end
 
     it 'should remove elements from settings by specifying them in a special way in settings that overrides' do
-      config.arraylist1.should eq ['to_not_remove', 'added_by_config2', 'added_by_config3']
-      config.arraylist2.inner.should eq ['to_not_remove', 'added_by_config2', 'added_by_config3']
-      config.arraylist3.should eq ''
+      config.array1.should eq ['item4', 'item5', 'item6']
+      config.array2.inner.should eq ['item4', 'item5', 'item6']
+      config.array3.should eq ''
+      config.string1.should eq ''
+      config.string2.should eq ''
+      config.hash1.to_hash.should eq({key1: '', key2: '', key3: 'value3'})
+      config.hash2.should eq ''
+      config.hash3.to_hash.should eq({key4: 'value4', key5: 'value5'})
+      config.fixnum1.should eq ''
+      config.fixnum2.should eq ''
     end
 
   end

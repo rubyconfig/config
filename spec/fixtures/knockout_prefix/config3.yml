@@ -1,10 +1,14 @@
-arraylist1:
-  - --to_remove_by_config3
-  - --to_remove_by_config2_and_config3
-  - added_by_config3
+array1:
+  - --item2
+  - --item3
+  - item6
 
-arraylist2:
+array2:
   inner:
-    - --to_remove_by_config3
-    - --to_remove_by_config2_and_config3
-    - added_by_config3
+    - --item2
+    - --item3
+    - item6
+
+hash3:
+  key4: value4
+  key5: value5

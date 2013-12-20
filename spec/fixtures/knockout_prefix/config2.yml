@@ -1,12 +1,28 @@
-arraylist1:
-  - --to_remove_by_config2
-  - --to_remove_by_config2_and_config3
-  - added_by_config2
+array1:
+  - --item1
+  - --item3
+  - item5
 
-arraylist2:
+array2:
   inner:
-    - --to_remove_by_config2
-    - --to_remove_by_config2_and_config3
-    - added_by_config2
+    - --item1
+    - --item3
+    - item5
 
-arraylist3: --
+array3: --
+
+string1: --a_string
+
+string2: --
+
+hash1:
+  key1: --value1
+  key2: --
+
+hash2: --
+
+hash3: --
+
+fixnum1: --1
+
+fixnum2: --
