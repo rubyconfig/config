@@ -231,6 +231,123 @@ Settings.section.servers[0].name # => yahoo.com
 Settings.section.servers[1].name # => amazon.com
 ```
 
+## Customize deep merge behaviour
+
+You may customize the behaviour of deep merge by setting knockout_prefix in `config/initializers/rails_config.rb`:
+```ruby
+RailsConfig.setup do |config|
+  config.const_name = 'Settings'
+  config.knockout_prefix = '--'
+end
+```
+
+in `config/settings.yml`:
+```
+array1:
+  - item1
+  - item2
+  - item3
+  - item4
+
+array2:
+  inner:
+    - item1
+    - item2
+    - item3
+    - item4
+
+array3:
+  - item1
+  - item2
+  - item3
+
+string1: a_string
+
+string2: another_string
+
+hash1:
+  key1: value1
+  key2: value2
+  key3: value3
+
+hash2:
+  key1: value1
+  key2: value2
+  key3: value3
+
+hash3:
+  key1: value1
+  key2: value2
+  key3: value3
+
+fixnum1: 1
+
+fixnum2: 1
+```
+
+in `config/development/settings.yml`:
+```
+array1:
+  - --item1
+  - --item3
+  - item5
+
+array2:
+  inner:
+    - --item1
+    - --item3
+    - item5
+
+array3: --
+
+string1: --a_string
+
+string2: --
+
+hash1:
+  key1: --value1
+  key2: --
+
+hash2: --
+
+hash3: --
+
+fixnum1: --1
+
+fixnum2: --
+```
+
+in `config/settings.local.yml`:
+```
+array1:
+  - --item2
+  - --item3
+  - item6
+
+array2:
+  inner:
+    - --item2
+    - --item3
+    - item6
+
+hash3:
+  key4: value4
+  key5: value5
+```
+
+```ruby
+Settings.array1 # => ["item4", "item5", "item6"]
+Settings.array2.inner # => ["item4", "item5", "item6"]
+Settings.array3 # => ""
+Settings.string1 # => ""
+Settings.string2 # => ""
+Settings.hash1.to_hash # => {:key1=>"", :key2=>"", :key3=>"value3"}
+Settings.hash2 # => ""
+Settings.hash3.to_hash # => {:key4=>"value4", :key5=>"value5"}
+Settings.fixnum1 # => ""
+Settings.fixnum2 # => ""
+```
+
 ## Authors
 
 * [Jacques Crocker](http://github.com/railsjedi)
