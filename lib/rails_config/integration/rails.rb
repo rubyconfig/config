@@ -12,15 +12,7 @@ module RailsConfig
 
           # Parse the settings before any of the initializers
           initializer :load_rails_config_settings, :after => :load_custom_rails_config, :before => :load_environment_config, :group => :all do
-            RailsConfig.load_and_set_settings(
-              Rails.root.join("config", "settings.yml").to_s,
-              Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
-              Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s,
-
-              Rails.root.join("config", "settings.local.yml").to_s,
-              Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
-              Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
-            )
+            RailsConfig.load_and_set_settings(RailsConfig.setting_files(Rails.root.join("config"), Rails.env))
           end
 
           # Rails Dev environment should reload the Settings on every request
