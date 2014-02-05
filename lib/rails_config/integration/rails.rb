@@ -1,6 +1,19 @@
 module RailsConfig
   module Integration
     module Rails3
+      
+      def self.load!
+        RailsConfig.load_and_set_settings(
+          Rails.root.join("config", "settings.yml").to_s,
+          Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
+          Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s,
+
+          Rails.root.join("config", "settings.local.yml").to_s,
+          Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
+          Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
+        )
+      end
+      
       if defined?(Rails::Railtie)
         class Railtie < Rails::Railtie
 
@@ -12,15 +25,7 @@ module RailsConfig
 
           # Parse the settings before any of the initializers
           initializer :load_rails_config_settings, :after => :load_custom_rails_config, :before => :load_environment_config, :group => :all do
-            RailsConfig.load_and_set_settings(
-              Rails.root.join("config", "settings.yml").to_s,
-              Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
-              Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s,
-
-              Rails.root.join("config", "settings.local.yml").to_s,
-              Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
-              Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
-            )
+            RailsConfig::Integration::Rails3.load!
           end
 
           # Rails Dev environment should reload the Settings on every request
