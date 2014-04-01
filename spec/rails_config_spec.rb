@@ -6,6 +6,10 @@ describe RailsConfig do
     config = RailsConfig.load_files(setting_path("settings.yml"))
     config.size.should eq 1
     config.server.should eq "google.com"
+    config['1'].should eq 'one'
+    config.photo_sizes.avatar.should eq [60, 60]
+    config.root['yahoo.com'].should eq 2
+    config.root['google.com'].should eq 3
   end
 
   it "should load 2 basic config files" do
