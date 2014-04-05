@@ -1,9 +1,17 @@
 module RailsConfig
   module Integration
-    module Rails3
+    module Rails
       if defined?(Rails::Railtie)
         class Railtie < Rails::Railtie
-          ActiveSupport.on_load :before_configuration, :yield => true do
+
+          # TODO: allo them to override init_callback via ENV or something?
+          if Rails::VERSION::MAJOR >= 4 and Rails::VERSION::MINOR >= 1
+            init_callback = :before_initialize
+          else
+            init_callback = :before_configuration
+          end
+
+          ActiveSupport.on_load init_callback, :yield => true do
             # manually load the custom initializer before everything else
             initializer = Rails.root.join("config", "initializers", "rails_config.rb")
             require initializer if File.exist?(initializer)
