@@ -1,4 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/rails_config.svg)](http://badge.fury.io/rb/rails_config)
+[![Dependency Status](https://gemnasium.com/railsjedi/rails_config.svg)](https://gemnasium.com/railsjedi/rails_config)
 
 # RailsConfig
 
