@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.name             = "rails_config"
   s.version          = RailsConfig::VERSION
   s.date             = Time.now.strftime '%F'
-  s.authors          = ["Jacques Crocker", "Fred Wu"]
-  s.email            = ["railsjedi@gmail.com", "ifredwu@gmail.com"]
-  s.summary          = "Provides a Settings helper for rails3 that reads from config/settings.yml"
+  s.authors          = ["Jacques Crocker", "Fred Wu", "Piotr Kuczynski"]
+  s.email            = ["railsjedi@gmail.com", "ifredwu@gmail.com", "piotr.kuczynski@gmail.com"]
+  s.summary          = "Provides a Settings helper for Rails that reads from config/settings.yml"
   s.description      = "Easy to use Settings helper that loads its data in from config/settings.yml. Handles adding multiple sources, and easy reloading."
   s.homepage         = "http://github.com/railsjedi/rails_config"
   s.extra_rdoc_files = ["README.md"]
