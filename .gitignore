@@ -3,3 +3,4 @@ pkg/*.gem
 .rvmrc
 Gemfile.lock
 .idea
+rails_config-*.gem
