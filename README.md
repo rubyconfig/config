@@ -180,6 +180,30 @@ Settings.reload!
 > Note: this is an example usage, it is easier to just use the default local files `settings.local.yml, settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` 
 >       for your developer specific settings.
 
+## Working with Heroku
+
+Heroku uses ENV object to store sensitive settings which are like the local files described above. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh.
+
+To use rails_config with Heroku just set the `use_env` var to `true` in your `config/initializers/rails_config.rb` file. Eg:
+
+```ruby
+RailsConfig.setup do |config|
+  config.const_name = 'AppSettings'
+  config.use_env = true
+end
+```
+
+Now rails_config would read values from the ENV object to the settings. For the example above it would look for keys starting with 'AppSettings'. Eg:
+
+```ruby
+ENV['AppSettings.section.size'] = 1
+ENV['AppSettings.section.server'] = 'google.com'
+```
+
+It won't work with arrays, though.
+
+To upload your local values to Heroku you could ran `bundle exec rake rails_config:heroku`.
+
 ## Embedded Ruby (ERB)
 
 Embedded Ruby is allowed in the configuration files. See examples below.
