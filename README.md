@@ -237,3 +237,7 @@ Settings.section.servers[1].name # => amazon.com
 * [Fred Wu](http://github.com/fredwu)
 * [Piotr Kuczynski](http://github.com/pkuczynski)
 * Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
+
+## License
+
+RailsConfig is released under the [MIT License](http://www.opensource.org/licenses/MIT).

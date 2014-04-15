@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.summary          = "Provides a Settings helper for Rails that reads from config/settings.yml"
   s.description      = "Easy to use Settings helper that loads its data in from config/settings.yml. Handles adding multiple sources, and easy reloading."
   s.homepage         = "http://github.com/railsjedi/rails_config"
+  s.license          = "MIT"
   s.extra_rdoc_files = ["README.md"]
   s.rdoc_options     = ["--charset=UTF-8"]
   s.require_paths    = ["lib"]
