@@ -13,13 +13,13 @@ RailsConfig helps you easily manage environment specific Rails settings in an ea
 
 ## Compatibility
 
-* Rails 3.x
+* Rails 3.x and 4.x
 * Padrino
 * Sinatra
 
 For older versions of Rails and other Ruby apps, use [AppConfig](http://github.com/fredwu/app_config).
 
-## Installing on Rails 3
+## Installing on Rails 3 or 4
 
 Add this to your `Gemfile`:
 
