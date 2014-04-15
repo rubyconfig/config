@@ -235,4 +235,5 @@ Settings.section.servers[1].name # => amazon.com
 
 * [Jacques Crocker](http://github.com/railsjedi)
 * [Fred Wu](http://github.com/fredwu)
+* [Piotr Kuczynski](http://github.com/pkuczynski)
 * Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
