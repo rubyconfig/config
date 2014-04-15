@@ -3,6 +3,10 @@ module RailsConfig
     module Rails
       if defined?(::Rails::Railtie)
         class Railtie < ::Rails::Railtie
+          # Load rake tasks (eg. Heroku)
+          rake_tasks do
+            Dir[File.join(File.dirname(__FILE__),'../tasks/*.rake')].each { |f| load f }
+          end
 
           # TODO: allo them to override init_callback via ENV or something?
           if ::Rails::VERSION::MAJOR >= 4 and ::Rails::VERSION::MINOR >= 1
