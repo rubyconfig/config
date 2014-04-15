@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/rails_config.svg)](http://badge.fury.io/rb/rails_config)
+
 # RailsConfig
 
 ## Summary
