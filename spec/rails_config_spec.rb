@@ -70,6 +70,45 @@ describe RailsConfig do
     Settings.size.should eq 2
   end
 
+  context "ENV variables" do
+    let(:config) do
+      RailsConfig.load_files(setting_path("settings.yml"))
+    end
+
+    before :all do
+      load_env(setting_path('env/settings.yml'))
+      RailsConfig.use_env = true
+    end
+    after :all do
+      RailsConfig.use_env = false
+    end
+
+    it "should load basic ENV variables" do
+      config.load_env!
+      config.test_var.should eq "123"
+    end
+
+    it "should load nested sections" do
+      config.load_env!
+      config.hash_test.one.should eq "1-1"
+    end
+
+    it "should override settings from files" do
+      RailsConfig.load_and_set_settings [setting_path("settings.yml")]
+
+      Settings.server.should eq "google.com"
+      Settings.size.should eq "3"
+    end
+
+    it "should reload env" do
+      RailsConfig.load_and_set_settings [setting_path("settings.yml")]
+      RailsConfig.reload!
+
+      Settings.server.should eq "google.com"
+      Settings.size.should eq "3"
+    end
+  end
+
   context "Nested Settings" do
     let(:config) do
       RailsConfig.load_files(setting_path("development.yml"))
