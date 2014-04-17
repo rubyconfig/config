@@ -77,4 +77,9 @@ Rails4::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  ##
+  # RailsConfig
+  #
+  rails_config_available?
 end

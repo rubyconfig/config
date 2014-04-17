@@ -1,6 +1,11 @@
 ENV["RAILS_ENV"] ||= 'test'
 
 ##
+# Load RailsConfig rspec helpers
+#
+require 'rails_config_helper'
+
+##
 # Load Rails dummy application based on gemfile name substituted by Appraisal
 #
 if ENV["APPRAISAL_INITIALIZED"] || ENV["TRAVIS"]
@@ -14,7 +19,6 @@ require File.expand_path("../../spec/app/#{app_name}/config/environment", __FILE
 ##
 # Load Rspec
 #
-#require 'rspec'
 require 'rspec/rails'
 require 'rspec/autorun'
 
@@ -24,18 +28,6 @@ require 'rspec/autorun'
 
 RSpec.configure do |config|
   config.fixture_path = File.join(File.dirname(__FILE__), "/fixtures")
-end
-
-##
-# Helpers
-#
-
-# Loads ENV vars from a file
-def load_env(filename)
-  if filename and File.exists?(filename.to_s)
-    result = YAML.load(ERB.new(IO.read(filename.to_s)).result)
-  end
-  result.each { |key, value| ENV[key.to_s] = value.to_s } unless result.nil?
 end
 
 ##
