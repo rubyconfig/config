@@ -8,14 +8,7 @@ module RailsConfig
             Dir[File.join(File.dirname(__FILE__),'../tasks/*.rake')].each { |f| load f }
           end
 
-          # TODO: allow them to override init_callback via ENV or something?
-          if ::Rails::VERSION::MAJOR >= 4 and ::Rails::VERSION::MINOR >= 1
-            init_callback = :before_initialize
-          else
-            init_callback = :before_configuration
-          end
-
-          ActiveSupport.on_load init_callback, :yield => true do
+          ActiveSupport.on_load :before_configuration, :yield => true do
             # Manually load the custom initializer before everything else
             initializer = ::Rails.root.join("config", "initializers", "rails_config.rb")
             require initializer if File.exist?(initializer)

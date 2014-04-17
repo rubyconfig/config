@@ -1,3 +1,8 @@
+# 0.4.1
+
+* fixed compatibility with Rails 4.1 ([#72](https://github.com/railsjedi/rails_config/issues/72))
+* testing suite verifies compatibility with Rails 3.2, 4.0 and 4.1
+
 # 0.4.0
 
 * compatibility with Heroku ([#64](https://github.com/railsjedi/rails_config/issues/64))
