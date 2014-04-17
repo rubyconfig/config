@@ -1,4 +1,5 @@
 require 'rails'
+
 module RailsConfig
   class Railtie < Rails::Railtie
     rake_tasks do

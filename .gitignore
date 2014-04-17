@@ -1,6 +1,14 @@
 .DS_Store
-pkg/*.gem
 .rvmrc
-Gemfile.lock
 .idea
-rails_config-*.gem
+.bundle
+gemfiles/*.lock
+log
+pkg
+spec/app/**/db/*.sqlite*
+spec/app/**/log/
+spec/app/**/tmp/
+spec/app/**/.sass-cache
+tmp
+Gemfile.lock
+*.gem

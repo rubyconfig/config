@@ -1,5 +1,9 @@
-require File.dirname(__FILE__) + "/lib/rails_config/version"
+$:.push File.expand_path("../lib", __FILE__)
 
+# Maintain your gem's version:
+require 'rails_config/version'
+
+# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name             = "rails_config"
   s.version          = RailsConfig::VERSION
@@ -12,14 +16,32 @@ Gem::Specification.new do |s|
   s.license          = "MIT"
   s.extra_rdoc_files = ["README.md"]
   s.rdoc_options     = ["--charset=UTF-8"]
+
+  #s.files            = `git ls-files -z`.split("\x0")
+  s.files = Dir.glob("{lib}/**/*") + %w(LICENSE.md README.md CHANGELOG.md)
+
+  s.executables      = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  s.test_files       = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths    = ["lib"]
-  s.files            = `git ls-files`.split("\n")
-  s.test_files       = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables      = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
   s.add_dependency "activesupport", ">= 3.0"
+
+  s.add_development_dependency "bundler", "~> 1.5"
   s.add_development_dependency "rake"
-  s.add_development_dependency "rdoc"
-  s.add_development_dependency "pry"
-  s.add_development_dependency "rspec", "~> 2.0"
+  s.add_development_dependency "rdoc", "~> 3.4"
+  #s.add_development_dependency "pry"
+
+  # Testing
+  s.add_development_dependency "rails", "~> 3.2.17"
+  s.add_development_dependency "rspec", "~> 2.14"
+  s.add_development_dependency "rspec-rails", "~> 2.14"
+  s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rubocop"
+
+  # A Ruby library for testing your library against different versions of dependencies.
+  s.add_development_dependency "appraisal"
+
+  # Gem releasing
+  s.add_development_dependency "gem-release"
+
 end

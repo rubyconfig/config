@@ -10,7 +10,7 @@ module RailsConfig::Sources
 
     context "basic yml file" do
       let(:source) do
-        YAMLSource.new setting_path("development.yml")
+        YAMLSource.new "#{fixture_path}/development.yml"
       end
 
       it "should properly read the settings" do
@@ -28,7 +28,7 @@ module RailsConfig::Sources
 
     context "yml file with erb tags" do
       let(:source) do
-        YAMLSource.new setting_path("with_erb.yml")
+        YAMLSource.new "#{fixture_path}/with_erb.yml"
       end
 
       it "should properly evaluate the erb" do
@@ -56,7 +56,7 @@ module RailsConfig::Sources
 
     context "blank yml file" do
       let(:source) do
-        YAMLSource.new setting_path("empty1.yml")
+        YAMLSource.new "#{fixture_path}/empty1.yml"
       end
 
       it "should return an empty hash" do

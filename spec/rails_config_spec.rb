@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RailsConfig do
 
   it "should load a basic config file" do
-    config = RailsConfig.load_files(setting_path("settings.yml"))
+    config = RailsConfig.load_files("#{fixture_path}/settings.yml")
     config.size.should eq 1
     config.server.should eq "google.com"
     config['1'].should eq 'one'
@@ -13,58 +13,58 @@ describe RailsConfig do
   end
 
   it "should load 2 basic config files" do
-    config = RailsConfig.load_files(setting_path("settings.yml"), setting_path("settings2.yml"))
+    config = RailsConfig.load_files("#{fixture_path}/settings.yml", "#{fixture_path}/settings2.yml")
     config.size.should eq 1
     config.server.should eq "google.com"
     config.another.should eq "something"
   end
 
   it "should load empty config for a missing file path" do
-    config = RailsConfig.load_files(setting_path("some_file_that_doesnt_exist.yml"))
+    config = RailsConfig.load_files("#{fixture_path}/some_file_that_doesnt_exist.yml")
     config.should be_empty
   end
 
   it "should load an empty config for multiple missing file paths" do
-    files = [setting_path("doesnt_exist1.yml"), setting_path("doesnt_exist2.yml")]
+    files = ["#{fixture_path}/doesnt_exist1.yml", "#{fixture_path}/doesnt_exist2.yml"]
     config = RailsConfig.load_files(files)
     config.should be_empty
   end
 
   it "should load empty config for an empty setting file" do
-    config = RailsConfig.load_files(setting_path("empty1.yml"))
+    config = RailsConfig.load_files("#{fixture_path}/empty1.yml")
     config.should be_empty
   end
 
   it "should convert to a hash" do
-    config = RailsConfig.load_files(setting_path("development.yml")).to_hash
+    config = RailsConfig.load_files("#{fixture_path}/development.yml").to_hash
     config[:section][:servers].should be_a_kind_of(Array)
   end
 
   it "should convert to a json" do
-    config = RailsConfig.load_files(setting_path("development.yml")).to_json
+    config = RailsConfig.load_files("#{fixture_path}/development.yml").to_json
     JSON.parse(config)["section"]["servers"].should be_a_kind_of(Array)
   end
 
   it "should load an empty config for multiple missing file paths" do
-    files = [setting_path("empty1.yml"), setting_path("empty2.yml")]
+    files = ["#{fixture_path}/empty1.yml", "#{fixture_path}/empty2.yml"]
     config = RailsConfig.load_files(files)
     config.should be_empty
   end
 
   it "should allow overrides" do
-    files = [setting_path("settings.yml"), setting_path("development.yml")]
+    files = ["#{fixture_path}/settings.yml", "#{fixture_path}/development.yml"]
     config = RailsConfig.load_files(files)
     config.server.should eq "google.com"
     config.size.should eq 2
   end
 
   it "should allow full reload of the settings files" do
-    files = [setting_path("settings.yml")]
+    files = ["#{fixture_path}/settings.yml"]
     RailsConfig.load_and_set_settings(files)
     Settings.server.should eq "google.com"
     Settings.size.should eq 1
 
-    files = [setting_path("settings.yml"), setting_path("development.yml")]
+    files = ["#{fixture_path}/settings.yml", "#{fixture_path}/development.yml"]
     Settings.reload_from_files(files)
     Settings.server.should eq "google.com"
     Settings.size.should eq 2
@@ -72,13 +72,14 @@ describe RailsConfig do
 
   context "ENV variables" do
     let(:config) do
-      RailsConfig.load_files(setting_path("settings.yml"))
+      RailsConfig.load_files("#{fixture_path}/settings.yml")
     end
 
     before :all do
-      load_env(setting_path('env/settings.yml'))
+      load_env("#{fixture_path}/env/settings.yml")
       RailsConfig.use_env = true
     end
+
     after :all do
       RailsConfig.use_env = false
     end
@@ -94,14 +95,14 @@ describe RailsConfig do
     end
 
     it "should override settings from files" do
-      RailsConfig.load_and_set_settings [setting_path("settings.yml")]
+      RailsConfig.load_and_set_settings ["#{fixture_path}/settings.yml"]
 
       Settings.server.should eq "google.com"
       Settings.size.should eq "3"
     end
 
     it "should reload env" do
-      RailsConfig.load_and_set_settings [setting_path("settings.yml")]
+      RailsConfig.load_and_set_settings ["#{fixture_path}/settings.yml"]
       RailsConfig.reload!
 
       Settings.server.should eq "google.com"
@@ -111,7 +112,7 @@ describe RailsConfig do
 
   context "Nested Settings" do
     let(:config) do
-      RailsConfig.load_files(setting_path("development.yml"))
+      RailsConfig.load_files("#{fixture_path}/development.yml")
     end
 
     it "should allow nested sections" do
@@ -126,7 +127,7 @@ describe RailsConfig do
 
   context "Settings with ERB tags" do
     let(:config) do
-      RailsConfig.load_files(setting_path("with_erb.yml"))
+      RailsConfig.load_files("#{fixture_path}/with_erb.yml")
     end
 
     it "should evaluate ERB tags" do
@@ -141,7 +142,7 @@ describe RailsConfig do
 
   context "Deep Merging" do
     let(:config) do
-      files = [setting_path("deep_merge/config1.yml"), setting_path("deep_merge/config2.yml")]
+      files = ["#{fixture_path}/deep_merge/config1.yml", "#{fixture_path}/deep_merge/config2.yml"]
       RailsConfig.load_files(files)
     end
 
@@ -158,7 +159,7 @@ describe RailsConfig do
 
   context "Boolean Overrides" do
     let(:config) do
-      files = [setting_path("bool_override/config1.yml"), setting_path("bool_override/config2.yml")]
+      files = ["#{fixture_path}/bool_override/config1.yml", "#{fixture_path}/bool_override/config2.yml"]
       RailsConfig.load_files(files)
     end
 
@@ -181,7 +182,7 @@ describe RailsConfig do
 
   context "Settings with a type value of 'hash'" do
     let(:config) do
-      files = [setting_path("custom_types/hash.yml")]
+      files = ["#{fixture_path}/custom_types/hash.yml"]
       RailsConfig.load_files(files)
     end
 
@@ -198,7 +199,7 @@ describe RailsConfig do
   end
 
   context "Merging hash at runtime" do
-    let(:config) { RailsConfig.load_files(setting_path("settings.yml")) }
+    let(:config) { RailsConfig.load_files("#{fixture_path}/settings.yml") }
     let(:hash) { {:options => {:suboption => 'value'}, :server => 'amazon.com'} }
     
     it 'should be chainable' do
@@ -220,7 +221,7 @@ describe RailsConfig do
   end
   
   context "Merging nested hash at runtime" do
-    let(:config) { RailsConfig.load_files(setting_path("deep_merge/config1.yml")) }
+    let(:config) { RailsConfig.load_files("#{fixture_path}/deep_merge/config1.yml") }
     let(:hash) { {:inner => {:something1 => 'changed1', :something3 => 'changed3'} } }
     
     it 'should preserve first level keys' do
@@ -243,7 +244,7 @@ describe RailsConfig do
 
   context "[] accessors" do
     let(:config) do
-      files = [setting_path("development.yml")]
+      files = ["#{fixture_path}/development.yml"]
       RailsConfig.load_files(files)
     end
 
@@ -261,7 +262,7 @@ describe RailsConfig do
 
   context "enumerable" do
     let(:config) do
-      files = [setting_path("development.yml")]
+      files = ["#{fixture_path}/development.yml"]
       RailsConfig.load_files(files)
     end
 

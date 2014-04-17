@@ -1,28 +1,53 @@
+#!/usr/bin/env rake
+
 begin
-  require "bundler"
+  require 'bundler/setup'
+
   Bundler::GemHelper.install_tasks
-rescue Exception => e
+
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
 end
 
-require "rake"
+
+##
+# Testing
+#
 require "rspec"
 require "rspec/core/rake_task"
 
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = "spec/**/*_spec.rb"
-end
-
-RSpec::Core::RakeTask.new('spec:progress') do |spec|
-  spec.rspec_opts = %w(--format progress)
-  spec.pattern = "spec/**/*_spec.rb"
-end
-
-require "rdoc/task"
-Rake::RDocTask.new do |rdoc|
-  rdoc.rdoc_dir = "rdoc"
-  rdoc.title = "Rails Config #{RailsConfig::VERSION}"
-  rdoc.rdoc_files.include("README*")
-  rdoc.rdoc_files.include("lib/**/*.rb")
-end
+RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
+
+# Test for multiple Rails scenarios
+if !ENV["APPRAISAL_INITIALIZED"] && !ENV["TRAVIS"]
+  require "appraisal"
+
+  task :default => :appraisal
+end
+
+
+##
+# Documentation
+#
+require 'rdoc/task'
+
+RDoc::Task.new(:rdoc) do |rdoc|
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title    = "RailsConfig #{RailsConfig::VERSION}"
+  rdoc.options << '--line-numbers'
+  rdoc.rdoc_files.include('README.*')
+  rdoc.rdoc_files.include('CHANGELOG.*')
+  rdoc.rdoc_files.include('LICENSE.*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+##
+# Rails Application
+#
+
+# APP_RAKEFILE = File.expand_path("../spec/app/rails/Rakefile", __FILE__)
+# load 'rails/tasks/engine.rake'
+
+

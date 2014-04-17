@@ -258,6 +258,22 @@ It won't work with arrays, though.
 
 To upload your local values to Heroku you could ran `bundle exec rake rails_config:heroku`.
 
+
+## Contributing
+
+Bootstrap
+
+```bash
+$ appraisal install
+```
+
+Running the test suite
+
+```bash
+$ appraisal rspec
+```
+
+
 ## Authors
 
 * [Jacques Crocker](http://github.com/railsjedi)
