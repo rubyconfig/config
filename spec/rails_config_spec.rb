@@ -291,14 +291,14 @@ describe RailsConfig do
     end
   end
 
-  context %['knockout_prefix' constant is not nil] do
+  context 'knockout_prefix' do
     let(:config) do
-      files = [setting_path('knockout_prefix/config1.yml'), setting_path('knockout_prefix/config2.yml'),
-               setting_path('knockout_prefix/config3.yml')]
+      files = ["#{fixture_path}/knockout_prefix/config1.yml", "#{fixture_path}/knockout_prefix/config2.yml",
+               "#{fixture_path}/knockout_prefix/config3.yml"]
       RailsConfig.load_files(files)
     end
 
-    it 'should remove elements from settings by specifying them in a special way in settings that overrides' do
+    it 'should remove elements from settings' do
       config.array1.should eq ['item4', 'item5', 'item6']
       config.array2.inner.should eq ['item4', 'item5', 'item6']
       config.array3.should eq ''
