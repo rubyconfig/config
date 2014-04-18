@@ -1,25 +1,42 @@
-require 'rails_config'
-require 'pathname'
-require 'bundler/setup'
+ENV["RAILS_ENV"] ||= 'test'
 
-def in_editor?
-  ENV.has_key?('TM_MODE') || ENV.has_key?('EMACS') || ENV.has_key?('VIM')
+##
+# Load RailsConfig rspec helpers
+#
+require 'rails_config_helper'
+
+##
+# Load Rails dummy application based on gemfile name substituted by Appraisal
+#
+if ENV["APPRAISAL_INITIALIZED"] || ENV["TRAVIS"]
+  app_name = Pathname.new(ENV['BUNDLE_GEMFILE']).basename.sub('.gemfile', '')
+else
+  app_name = 'rails_3'
 end
 
-RSpec.configure do |c|
-  c.color_enabled = !in_editor?
-  c.run_all_when_everything_filtered = true
+require File.expand_path("../../spec/app/#{app_name}/config/environment", __FILE__)
 
-  # setup fixtures path
-  c.before(:all) do
-    @fixture_path = Pathname.new(File.join(File.dirname(__FILE__), "/fixtures"))
-    raise "Fixture folder not found: #{@fixture_path}" unless @fixture_path.directory?
-  end
+##
+# Load Rspec
+#
+require 'rspec/rails'
+require 'rspec/autorun'
 
-  # returns the file path of a fixture setting file
-  def setting_path(filename)
-    @fixture_path.join(filename)
-  end
+# Checks for pending migrations before tests are run.
+# If you are not using ActiveRecord, you can remove this line.
+# ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
+RSpec.configure do |config|
+  config.fixture_path = File.join(File.dirname(__FILE__), "/fixtures")
 end
+
+##
+# Some debug info
+#
+puts
+puts "Gemfile: #{ENV['BUNDLE_GEMFILE']}"
+puts "Rails version:"
+puts "\trails-#{Gem.loaded_specs["rails"].version}"
+puts "\tactivesupport-#{Gem.loaded_specs["activesupport"].version}"
+puts
 

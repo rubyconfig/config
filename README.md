@@ -1,3 +1,6 @@
+[![Gem Version](https://badge.fury.io/rb/rails_config.svg)](http://badge.fury.io/rb/rails_config)
+[![Dependency Status](https://gemnasium.com/railsjedi/rails_config.svg)](https://gemnasium.com/railsjedi/rails_config)
+
 # RailsConfig
 
 ## Summary
@@ -13,13 +16,13 @@ RailsConfig helps you easily manage environment specific Rails settings in an ea
 
 ## Compatibility
 
-* Rails 3.x
+* Rails 3.x and 4.x
 * Padrino
 * Sinatra
 
 For older versions of Rails and other Ruby apps, use [AppConfig](http://github.com/fredwu/app_config).
 
-## Installing on Rails 3
+## Installing on Rails 3 or 4
 
 Add this to your `Gemfile`:
 
@@ -348,8 +351,52 @@ Settings.fixnum1 # => ""
 Settings.fixnum2 # => ""
 ```
 
+## Working with Heroku
+
+Heroku uses ENV object to store sensitive settings which are like the local files described above. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh.
+
+To use rails_config with Heroku just set the `use_env` var to `true` in your `config/initializers/rails_config.rb` file. Eg:
+
+```ruby
+RailsConfig.setup do |config|
+  config.const_name = 'AppSettings'
+  config.use_env = true
+end
+```
+
+Now rails_config would read values from the ENV object to the settings. For the example above it would look for keys starting with 'AppSettings'. Eg:
+
+```ruby
+ENV['AppSettings.section.size'] = 1
+ENV['AppSettings.section.server'] = 'google.com'
+```
+
+It won't work with arrays, though.
+
+To upload your local values to Heroku you could ran `bundle exec rake rails_config:heroku`.
+
+
+## Contributing
+
+Bootstrap
+
+```bash
+$ appraisal install
+```
+
+Running the test suite
+
+```bash
+$ appraisal rspec
+```
+
 ## Authors
 
 * [Jacques Crocker](http://github.com/railsjedi)
 * [Fred Wu](http://github.com/fredwu)
+* [Piotr Kuczynski](http://github.com/pkuczynski)
 * Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
+
+## License
+
+RailsConfig is released under the [MIT License](http://www.opensource.org/licenses/MIT).

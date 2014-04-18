@@ -1,16 +1,18 @@
 require 'active_support/core_ext/module/attribute_accessors'
+
 require 'rails_config/options'
-
-require "rails_config/sources/yaml_source"
-
+require 'rails_config/version'
+require 'rails_config/engine'
+require 'rails_config/sources/yaml_source'
 require 'rails_config/vendor/deep_merge' unless defined?(DeepMerge)
 
 module RailsConfig
   # ensures the setup only gets run once
   @@_ran_once = false
 
-  mattr_accessor :const_name
+  mattr_accessor :const_name, :use_env
   @@const_name = "Settings"
+  @@use_env = false
 
   # see Options Details in lib/rails_config/vendor/deep_merge.rb
   mattr_accessor :knockout_prefix
@@ -31,6 +33,7 @@ module RailsConfig
     end
 
     config.load!
+    config.load_env! if @@use_env
     config
   end
 

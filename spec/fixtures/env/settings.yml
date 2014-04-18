@@ -1,0 +1,4 @@
+Settings.test_var: 123
+Settings.size: 3
+Settings.hash_test.one: 1-1
+Settings.hash_test.two: 1-2
