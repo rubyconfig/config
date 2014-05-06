@@ -21,7 +21,7 @@ module RailsConfig
       conf = Hash.new
       ENV.each do |key, value|
         next unless key.to_s.index(RailsConfig.const_name) == 0
-        hash = value
+        hash = try_to_convert(value)
         key.to_s.split('.').reverse.each do |element|
           hash = {element => hash}
         end
@@ -114,6 +114,17 @@ module RailsConfig
         s.send("#{k}=".to_sym, v)
       end
       s
+    end
+
+    def try_to_convert(str)
+      case str
+      when 'true' then true
+      when 'false' then false
+      else
+        Integer(str, 10)
+      end
+    rescue ArgumentError, TypeError
+      str
     end
   end
 end
