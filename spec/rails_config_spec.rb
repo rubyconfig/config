@@ -282,4 +282,19 @@ describe RailsConfig do
       config.map { |key, value| key }.should eq [:size, :section]
     end
   end
+
+  context "keys" do
+    let(:config) do
+      files = ["#{fixture_path}/development.yml"]
+      RailsConfig.load_files(files)
+    end
+
+    it "should return array of keys" do
+      config.keys.should include(:size, :section)
+    end
+
+    it "should return array of keys for nested entry" do
+      config.section.keys.should include(:size, :servers)
+    end
+  end
 end
