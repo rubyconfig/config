@@ -16,27 +16,32 @@ end
 
 require File.expand_path("../../spec/app/#{app_name}/config/environment", __FILE__)
 
+APP_RAKEFILE = File.expand_path("../../spec/app/#{app_name}/Rakefile", __FILE__)
+
 ##
 # Load Rspec
 #
 require 'rspec/rails'
-require 'rspec/autorun'
 
-# Checks for pending migrations before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
-# ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
-
+# Configure
 RSpec.configure do |config|
   config.fixture_path = File.join(File.dirname(__FILE__), "/fixtures")
 end
 
+# Load Rspec supporting files
+Dir['./spec/support/**/*.rb'].sort.each {|f| require f}
+
+
 ##
-# Some debug info
+# Print some debug info
 #
 puts
 puts "Gemfile: #{ENV['BUNDLE_GEMFILE']}"
 puts "Rails version:"
-puts "\trails-#{Gem.loaded_specs["rails"].version}"
-puts "\tactivesupport-#{Gem.loaded_specs["activesupport"].version}"
+
+Gem.loaded_specs.each{|name, spec|
+  puts "\t#{name}-#{spec.version}" if %w{rails activesupport sqlite3}.include?(name)
+}
+
 puts
 
