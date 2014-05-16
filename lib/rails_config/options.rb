@@ -4,9 +4,8 @@ module RailsConfig
 
     include Enumerable
 
-    def empty?
-      marshal_dump.empty?
-    end
+    delegate :keys,   to: :marshal_dump
+    delegate :empty?, to: :marshal_dump
 
     def add_source!(source)
       # handle yaml file paths
