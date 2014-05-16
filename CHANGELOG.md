@@ -1,3 +1,6 @@
+# 0.4.2
+* ability to specify the app name when calling the Heroku rake task ([#75](https://github.com/railsjedi/rails_config/issues/75))
+
 # 0.4.1
 
 * fixed compatibility with Rails 4.1 ([#72](https://github.com/railsjedi/rails_config/issues/72))

@@ -1,3 +1,16 @@
+##
+# Settings for Rails database.yml
+#
+databases:
+  development:
+    database: db/development.sqlite3
+  test:
+    database: db/test.sqlite3
+  production:
+    database: db/production.sqlite3
+##
+# ...
+#
 size: 1
 server: google.com
 1: "one"
