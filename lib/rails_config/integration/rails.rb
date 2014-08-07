@@ -1,6 +1,12 @@
 module RailsConfig
   module Integration
     module Rails
+      if defined?(::Rails::Engine)
+        class Engine < ::Rails::Engine
+          isolate_namespace RailsConfig
+        end
+      end
+
       if defined?(::Rails::Railtie)
         class Railtie < ::Rails::Railtie
           # Load rake tasks (eg. Heroku)
