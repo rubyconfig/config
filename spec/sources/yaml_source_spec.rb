@@ -64,6 +64,16 @@ module RailsConfig::Sources
         results.should == {}
       end
     end
+    
+    context "malformed yml file" do
+      let(:source) do
+        YAMLSource.new setting_path("malformed.yml")
+      end
+      
+      it "should raise an useful exception" do
+        expect { source.load }.to raise_error(/malformed\.yml/)
+      end
+    end
 
   end
 end
