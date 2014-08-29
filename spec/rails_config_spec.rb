@@ -52,7 +52,7 @@ describe RailsConfig do
   end
 
   it "should convert to a hash (We Need To Go Deeper)" do
-    config = RailsConfig.load_files(setting_path("development.yml")).to_hash
+    config = RailsConfig.load_files("#{fixture_path}/development.yml").to_hash
     servers = config[:section][:servers]
     servers.should == [ { name: "yahoo.com" }, { name: "amazon.com" } ]
   end
