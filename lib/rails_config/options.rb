@@ -61,8 +61,25 @@ module RailsConfig
 
     def to_hash
       result = {}
+      descend_array = Proc.new do |arr|
+        arr.length.times do |i|
+          v = arr[i]
+          if v.instance_of? RailsConfig::Options
+            arr[i] = v.to_hash
+          elsif v.instance_of? Array
+            arr[i] = descend_array.call(v)
+          end
+        end
+        arr
+      end
       marshal_dump.each do |k, v|
-        result[k] = v.instance_of?(RailsConfig::Options) ? v.to_hash : v
+        if v.instance_of? RailsConfig::Options
+          result[k] = v.to_hash
+        elsif v.instance_of? Array
+          result[k] = descend_array.call(v)
+        else
+          result[k] = v
+        end          
       end
       result
     end
