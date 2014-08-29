@@ -17,8 +17,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.md"]
   s.rdoc_options     = ["--charset=UTF-8"]
 
-  #s.files            = `git ls-files -z`.split("\x0")
-  s.files = Dir.glob("{lib}/**/*") + %w(LICENSE.md README.md CHANGELOG.md)
+  s.files            = `git ls-files`.split($/)
 
   s.executables      = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.test_files       = s.files.grep(%r{^(test|spec|features)/})
@@ -26,22 +25,16 @@ Gem::Specification.new do |s|
 
   s.add_dependency "activesupport", ">= 3.0"
 
-  s.add_development_dependency "bundler", "~> 1.5"
+  s.add_development_dependency "bundler",     "~> 1.5"
   s.add_development_dependency "rake"
-  s.add_development_dependency "rdoc", "~> 3.4"
-  #s.add_development_dependency "pry"
+  s.add_development_dependency "rdoc",        "~> 3.4"
+  s.add_development_dependency "pry"
+  s.add_development_dependency "appraisal"
 
-  # Testing
-  s.add_development_dependency "rails", "~> 3.2.17"
-  s.add_development_dependency "rspec", "~> 2.14"
+  # For testing
+  s.add_development_dependency "rails",       "~> 3.2.17"
+  s.add_development_dependency "rspec",       "~> 2.14"
   s.add_development_dependency "rspec-rails", "~> 2.14"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rubocop"
-
-  # A Ruby library for testing your library against different versions of dependencies.
-  s.add_development_dependency "appraisal"
-
-  # Gem releasing
-  s.add_development_dependency "gem-release"
-
 end
