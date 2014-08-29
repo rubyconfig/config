@@ -18,6 +18,8 @@ module RailsConfig
       end
 
       def modify_gitignore
+        create_file '.gitignore' unless File.exists? '.gitignore'
+
         append_to_file '.gitignore' do
           "\n"                                +
           "config/settings.local.yml\n"       +
