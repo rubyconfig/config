@@ -1,6 +1,17 @@
 require 'spec_helper'
 
 describe RailsConfig do
+  it "should get setting files" do
+    config = RailsConfig.setting_files("root/config", "test")
+    config.should eq [
+      'root/config/settings.yml',
+      'root/config/settings/test.yml',
+      'root/config/environments/test.yml',
+      'root/config/settings.local.yml',
+      'root/config/settings/test.local.yml',
+      'root/config/environments/test.local.yml'
+    ]
+  end
 
   it "should load a basic config file" do
     config = RailsConfig.load_files("#{fixture_path}/settings.yml")

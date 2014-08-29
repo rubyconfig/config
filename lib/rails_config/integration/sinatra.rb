@@ -18,15 +18,7 @@ module RailsConfig
         root = Padrino.root
       end
 
-      RailsConfig.load_and_set_settings(
-        File.join(root.to_s, "config", "settings.yml").to_s,
-        File.join(root.to_s, "config", "settings", "#{env}.yml").to_s,
-        File.join(root.to_s, "config", "environments", "#{env}.yml").to_s,
-
-        File.join(root.to_s, "config", "settings.local.yml").to_s,
-        File.join(root.to_s, "config", "settings", "#{env}.local.yml").to_s,
-        File.join(root.to_s, "config", "environments", "#{env}.local.yml").to_s
-      )
+      RailsConfig.load_and_set_settings(RailsConfig.setting_files(File.join(root, 'config'), env))
 
       inner_app.use(::RailsConfig::Rack::Reloader) if inner_app.development?
     end

@@ -15,13 +15,7 @@ module RailsConfig
 
             # Parse the settings before any of the initializers
             RailsConfig.load_and_set_settings(
-              ::Rails.root.join("config", "settings.yml").to_s,
-              ::Rails.root.join("config", "settings", "#{::Rails.env}.yml").to_s,
-              ::Rails.root.join("config", "environments", "#{::Rails.env}.yml").to_s,
-
-              ::Rails.root.join("config", "settings.local.yml").to_s,
-              ::Rails.root.join("config", "settings", "#{::Rails.env}.local.yml").to_s,
-              ::Rails.root.join("config", "environments", "#{::Rails.env}.local.yml").to_s
+              RailsConfig.setting_files(::Rails.root.join("config"), ::Rails.env)
             )
           end
 
