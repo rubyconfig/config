@@ -2,7 +2,6 @@ require 'spec_helper'
 
 module RailsConfig::Sources
   describe YAMLSource do
-
     it "should take a path as initializer" do
       source = YAMLSource.new "somepath"
       source.path.should == "somepath"

@@ -23,5 +23,4 @@ module RailsConfig
       inner_app.use(::RailsConfig::Rack::Reloader) if inner_app.development?
     end
   end
-
 end

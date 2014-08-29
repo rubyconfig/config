@@ -4,7 +4,6 @@ require 'erb'
 module RailsConfig
   module Sources
     class YAMLSource
-
       attr_accessor :path
 
       def initialize(path)
@@ -17,12 +16,11 @@ module RailsConfig
           result = YAML.load(ERB.new(IO.read(@path.to_s)).result)
         end
         result || {}
-        rescue Psych::SyntaxError => e
-          raise "YAML syntax error occurred while parsing #{@path}. " \
-                "Please note that YAML must be consistently indented using spaces. Tabs are not allowed. " \
-                "Error: #{e.message}"
+      rescue Psych::SyntaxError => e
+        raise "YAML syntax error occurred while parsing #{@path}. " \
+              "Please note that YAML must be consistently indented using spaces. Tabs are not allowed. " \
+              "Error: #{e.message}"
       end
-
     end
   end
 end
