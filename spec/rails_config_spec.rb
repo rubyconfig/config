@@ -1,6 +1,17 @@
 require 'spec_helper'
 
 describe RailsConfig do
+  it "should get setting files" do
+    config = RailsConfig.setting_files("root/config", "test")
+    config.should eq [
+      'root/config/settings.yml',
+      'root/config/settings/test.yml',
+      'root/config/environments/test.yml',
+      'root/config/settings.local.yml',
+      'root/config/settings/test.local.yml',
+      'root/config/environments/test.local.yml'
+    ]
+  end
 
   it "should load a basic config file" do
     config = RailsConfig.load_files("#{fixture_path}/settings.yml")
@@ -291,6 +302,21 @@ describe RailsConfig do
     end
   end
 
+  context "keys" do
+    let(:config) do
+      files = ["#{fixture_path}/development.yml"]
+      RailsConfig.load_files(files)
+    end
+
+    it "should return array of keys" do
+      config.keys.should include(:size, :section)
+    end
+
+    it "should return array of keys for nested entry" do
+      config.section.keys.should include(:size, :servers)
+    end
+  end
+
   context 'knockout_prefix' do
     let(:config) do
       files = ["#{fixture_path}/knockout_prefix/config1.yml", "#{fixture_path}/knockout_prefix/config2.yml",
@@ -310,7 +336,6 @@ describe RailsConfig do
       config.fixnum1.should eq ''
       config.fixnum2.should eq ''
     end
-
   end
 
 end

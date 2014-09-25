@@ -1,12 +1,10 @@
 require 'ostruct'
 module RailsConfig
   class Options < OpenStruct
-
     include Enumerable
 
-    def empty?
-      marshal_dump.empty?
-    end
+    def keys()   marshal_dump.keys;   end
+    def empty?() marshal_dump.empty?; end
 
     def add_source!(source)
       # handle yaml file paths
@@ -96,7 +94,7 @@ module RailsConfig
     def []=(param, value)
       send("#{param}=", value)
     end
-    
+
     protected
 
     # Recursively converts Hashes to Options (including Hashes inside Arrays)

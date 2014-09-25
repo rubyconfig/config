@@ -2,7 +2,7 @@ require 'active_support/core_ext/module/attribute_accessors'
 
 require 'rails_config/options'
 require 'rails_config/version'
-require 'rails_config/engine'
+require 'rails_config/engine' if defined?(::Rails)
 require 'rails_config/sources/yaml_source'
 require 'rails_config/vendor/deep_merge' unless defined?(DeepMerge)
 
@@ -41,6 +41,18 @@ module RailsConfig
   def self.load_and_set_settings(*files)
     Kernel.send(:remove_const, RailsConfig.const_name) if Kernel.const_defined?(RailsConfig.const_name)
     Kernel.const_set(RailsConfig.const_name, RailsConfig.load_files(files))
+  end
+
+  def self.setting_files(config_root, env)
+    [
+      File.join(config_root, "settings.yml").to_s,
+      File.join(config_root, "settings", "#{env}.yml").to_s,
+      File.join(config_root, "environments", "#{env}.yml").to_s,
+
+      File.join(config_root, "settings.local.yml").to_s,
+      File.join(config_root, "settings", "#{env}.local.yml").to_s,
+      File.join(config_root, "environments", "#{env}.local.yml").to_s
+    ].freeze
   end
 
   def self.reload!

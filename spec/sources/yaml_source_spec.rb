@@ -2,7 +2,6 @@ require 'spec_helper'
 
 module RailsConfig::Sources
   describe YAMLSource do
-
     it "should take a path as initializer" do
       source = YAMLSource.new "somepath"
       source.path.should == "somepath"
@@ -65,5 +64,14 @@ module RailsConfig::Sources
       end
     end
 
+    context "malformed yml file" do
+      let(:source) do
+        YAMLSource.new "#{fixture_path}/malformed.yml"
+      end
+
+      it "should raise an useful exception" do
+        expect { source.load }.to raise_error(/malformed\.yml/)
+      end
+    end
   end
 end
