@@ -185,9 +185,17 @@ describe RailsConfig do
       RailsConfig.const_name.should eq "Settings"
     end
 
-    it "should be able to assign a different settings constant" do
-      RailsConfig.setup{ |config| config.const_name = "Settings2" }
+    it %[should have the default 'knockout_prefix' constant as nil] do
+      RailsConfig.knockout_prefix.should eq nil
+    end
+
+    it "should be able to initialize the constants" do
+      RailsConfig.setup do |config|
+        config.const_name = "Settings2"
+        config.knockout_prefix = '--'
+      end
       RailsConfig.const_name.should eq "Settings2"
+      RailsConfig.knockout_prefix.should eq '--'
     end
   end
 
@@ -308,4 +316,26 @@ describe RailsConfig do
       config.section.keys.should include(:size, :servers)
     end
   end
+
+  context 'knockout_prefix' do
+    let(:config) do
+      files = ["#{fixture_path}/knockout_prefix/config1.yml", "#{fixture_path}/knockout_prefix/config2.yml",
+               "#{fixture_path}/knockout_prefix/config3.yml"]
+      RailsConfig.load_files(files)
+    end
+
+    it 'should remove elements from settings' do
+      config.array1.should eq ['item4', 'item5', 'item6']
+      config.array2.inner.should eq ['item4', 'item5', 'item6']
+      config.array3.should eq ''
+      config.string1.should eq ''
+      config.string2.should eq ''
+      config.hash1.to_hash.should eq({key1: '', key2: '', key3: 'value3'})
+      config.hash2.should eq ''
+      config.hash3.to_hash.should eq({key4: 'value4', key5: 'value5'})
+      config.fixnum1.should eq ''
+      config.fixnum2.should eq ''
+    end
+  end
+
 end

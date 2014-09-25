@@ -14,6 +14,9 @@ module RailsConfig
   @@const_name = "Settings"
   @@use_env = false
 
+  # see Options Details in lib/rails_config/vendor/deep_merge.rb
+  mattr_accessor :knockout_prefix
+
   def self.setup
     yield self if @@_ran_once == false
     @@_ran_once = true
