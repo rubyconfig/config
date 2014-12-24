@@ -10,9 +10,10 @@ module RailsConfig
   # ensures the setup only gets run once
   @@_ran_once = false
 
-  mattr_accessor :const_name, :use_env
+  mattr_accessor :const_name, :use_env, :overwrite_arrays
   @@const_name = "Settings"
   @@use_env = false
+  @@overwrite_arrays = true
 
   def self.setup
     yield self if @@_ran_once == false
@@ -23,6 +24,7 @@ module RailsConfig
   # file will overwrite existing sections of the first file.
   def self.load_files(*files)
     config = Options.new
+    config.overwrite_arrays = overwrite_arrays
 
     # add yaml sources
     [files].flatten.compact.uniq.each do |file|
