@@ -79,9 +79,13 @@ module DeepMerge
       source.each do |src_key, src_value|
         if dest.kind_of?(Hash)
           puts "#{di} looping: #{src_key.inspect} => #{src_value.inspect} :: #{dest.inspect}" if merge_debug
-          if !dest[src_key].nil?
-            puts "#{di} ==>merging: #{src_key.inspect} => #{src_value.inspect} :: #{dest[src_key].inspect}" if merge_debug
-            dest[src_key] = deep_merge!(src_value, dest[src_key], options.merge(:debug_indent => di + '  '))
+          if dest.has_key?(src_key)
+            if dest[src_key].nil?
+              puts "#{di} ==>skipping: #{src_key.inspect} => #{src_value.inspect} :: #{dest[src_key].inspect}" if merge_debug
+            else
+              puts "#{di} ==>merging: #{src_key.inspect} => #{src_value.inspect} :: #{dest[src_key].inspect}" if merge_debug
+              dest[src_key] = deep_merge!(src_value, dest[src_key], options.merge(:debug_indent => di + '  '))
+            end
           else # dest[src_key] doesn't exist so we want to create and overwrite it (but we do this via deep_merge!)
             puts "#{di} ==>merging over: #{src_key.inspect} => #{src_value.inspect}" if merge_debug
             # note: we rescue here b/c some classes respond to "dup" but don't implement it (Numeric, TrueClass, FalseClass, NilClass among maybe others)
