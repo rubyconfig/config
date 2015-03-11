@@ -31,6 +31,8 @@ module DeepMerge
   #      Set to string value to run "Array::join" then "String::split" against all arrays
   #   :merge_debug            DEFAULT: false
   #      Set to true to get console output of merge process for debugging
+  #   :overwrite_arrays       DEFAULT: false
+  #      Set to true if you want to avoid merging arrays
   #
   # Selected Options Details:
   # :knockout_prefix => The purpose of this is to provide a way to remove elements
@@ -61,6 +63,7 @@ module DeepMerge
     merge_debug = options[:merge_debug] || false
     overwrite_unmergeable = !options[:preserve_unmergeables]
     knockout_prefix = options[:knockout_prefix] || nil
+    overwrite_arrays = options[:overwrite_arrays] || false
     if knockout_prefix == ""; raise InvalidParameter, "knockout_prefix cannot be an empty string in deep_merge!"; end
     if knockout_prefix && !overwrite_unmergeable; raise InvalidParameter, "overwrite_unmergeable must be true if knockout_prefix is specified in deep_merge!"; end
     # if present: we will split and join arrays on this char before merging
@@ -101,38 +104,43 @@ module DeepMerge
       end
     elsif source.kind_of?(Array)
       puts "#{di}Arrays: #{source.inspect} :: #{dest.inspect}" if merge_debug
-      # if we are instructed, join/split any source arrays before processing
-      if array_split_char
-        puts "#{di} split/join on source: #{source.inspect}" if merge_debug
-        source = source.join(array_split_char).split(array_split_char)
-        if dest.kind_of?(Array); dest = dest.join(array_split_char).split(array_split_char); end
-      end
-      # if there's a naked knockout_prefix in source, that means we are to truncate dest
-      if source.index(knockout_prefix); dest = clear_or_nil(dest); source.delete(knockout_prefix); end
-      if dest.kind_of?(Array)
-        if knockout_prefix
-          print "#{di} knocking out: " if merge_debug
-          # remove knockout prefix items from both source and dest
-          source.delete_if do |ko_item|
-            retval = false
-            item = ko_item.respond_to?(:gsub) ? ko_item.gsub(%r{^#{knockout_prefix}}, "") : ko_item
-            if item != ko_item
-              print "#{ko_item} - " if merge_debug
-              dest.delete(item)
-              dest.delete(ko_item)
-              retval = true
-            end
-            retval
-          end
-          puts if merge_debug
+      if overwrite_arrays
+        puts "#{di} overwrite arrays" if merge_debug
+        dest = source
+      else
+        # if we are instructed, join/split any source arrays before processing
+        if array_split_char
+          puts "#{di} split/join on source: #{source.inspect}" if merge_debug
+          source = source.join(array_split_char).split(array_split_char)
+          if dest.kind_of?(Array); dest = dest.join(array_split_char).split(array_split_char); end
         end
-        puts "#{di} merging arrays: #{source.inspect} :: #{dest.inspect}" if merge_debug
-        dest = dest | source
-        if sort_merged_arrays; dest.sort!; end
-      elsif overwrite_unmergeable
-        puts "#{di} overwriting dest: #{source.inspect} -over-> #{dest.inspect}" if merge_debug
-        dest = overwrite_unmergeables(source, dest, options)
+        # if there's a naked knockout_prefix in source, that means we are to truncate dest
+        if source.index(knockout_prefix); dest = clear_or_nil(dest); source.delete(knockout_prefix); end
+        if dest.kind_of?(Array)
+          if knockout_prefix
+            print "#{di} knocking out: " if merge_debug
+            # remove knockout prefix items from both source and dest
+            source.delete_if do |ko_item|
+              retval = false
+              item = ko_item.respond_to?(:gsub) ? ko_item.gsub(%r{^#{knockout_prefix}}, "") : ko_item
+              if item != ko_item
+                print "#{ko_item} - " if merge_debug
+                dest.delete(item)
+                dest.delete(ko_item)
+                retval = true
+              end
+              retval
+            end
+            puts if merge_debug
+          end
+          puts "#{di} merging arrays: #{source.inspect} :: #{dest.inspect}" if merge_debug
+          dest = dest | source
+          if sort_merged_arrays; dest.sort!; end
+        end
       end
+    elsif overwrite_unmergeable
+      puts "#{di} overwriting dest: #{source.inspect} -over-> #{dest.inspect}" if merge_debug
+      dest = overwrite_unmergeables(source, dest, options)
     else # src_hash is not an array or hash, so we'll have to overwrite dest
       puts "#{di}Others: #{source.inspect} :: #{dest.inspect}" if merge_debug
       dest = overwrite_unmergeables(source, dest, options)
