@@ -31,6 +31,25 @@ Add this to your `Gemfile`:
 gem "rails_config"
 ```
 
+If you want to use Settings before rails application initialization process you can load RailsConfig railtie manually:
+
+```ruby
+module Appname
+  class Application < Rails::Application
+
+    Bundler.require(*Rails.groups)
+    RailsConfig::Integration::Rails::Railtie.preload
+
+    ...
+
+    config.time_zone = Settings.time_zone
+
+    ...
+
+   end
+end
+```
+
 ## Installing on Padrino
 
 Add this to your `Gemfile`:

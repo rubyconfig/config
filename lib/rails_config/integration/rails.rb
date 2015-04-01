@@ -8,7 +8,9 @@ module RailsConfig
             Dir[File.join(File.dirname(__FILE__),'../tasks/*.rake')].each { |f| load f }
           end
 
-          ActiveSupport.on_load :before_configuration, :yield => true do
+          config.before_configuration { preload }
+
+          def preload
             # Manually load the custom initializer before everything else
             initializer = ::Rails.root.join("config", "initializers", "rails_config.rb")
             require initializer if File.exist?(initializer)
