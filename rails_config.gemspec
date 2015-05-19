@@ -42,6 +42,6 @@ Gem::Specification.new do |s|
   end
 
   if ENV['TRAVIS']
-    s.add_development_dependency "codeclimate-test-reporter", require: nil
+    s.add_development_dependency "codeclimate-test-reporter"
   end
 end
