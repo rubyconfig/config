@@ -4,7 +4,7 @@ module RailsConfig::Sources
   describe YAMLSource do
     it "should take a path as initializer" do
       source = YAMLSource.new "somepath"
-      source.path.should == "somepath"
+      expect(source.path).to eq("somepath")
     end
 
     context "basic yml file" do
@@ -14,14 +14,14 @@ module RailsConfig::Sources
 
       it "should properly read the settings" do
         results = source.load
-        results["size"].should == 2
+        expect(results["size"]).to eq(2)
       end
 
       it "should properly read nested settings" do
         results = source.load
-        results["section"]["size"].should == 3
-        results["section"]["servers"].should be_an(Array)
-        results["section"]["servers"].size.should == 2
+        expect(results["section"]["size"]).to eq(3)
+        expect(results["section"]["servers"]).to be_instance_of(Array)
+        expect(results["section"]["servers"].size).to eq(2)
       end
     end
 
@@ -32,13 +32,13 @@ module RailsConfig::Sources
 
       it "should properly evaluate the erb" do
         results = source.load
-        results["computed"].should == 6
+        expect(results["computed"]).to eq(6)
       end
 
       it "should properly evaluate the nested erb settings" do
         results = source.load
-        results["section"]["computed1"].should == 1
-        results["section"]["computed2"].should == 2
+        expect(results["section"]["computed1"]).to eq(1)
+        expect(results["section"]["computed2"]).to eq(2)
       end
     end
 
@@ -49,7 +49,7 @@ module RailsConfig::Sources
 
       it "should return an empty hash" do
         results = source.load
-        results.should == {}
+        expect(results).to eq({})
       end
     end
 
@@ -60,7 +60,7 @@ module RailsConfig::Sources
 
       it "should return an empty hash" do
         results = source.load
-        results.should == {}
+        expect(results).to eq({})
       end
     end
 

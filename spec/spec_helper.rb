@@ -26,6 +26,9 @@ require 'rspec/rails'
 # Configure
 RSpec.configure do |config|
   config.fixture_path = File.join(File.dirname(__FILE__), "/fixtures")
+
+  # Turn the deprecation warnings into errors, giving you the full backtrace
+  config.raise_errors_for_deprecations!
 end
 
 # Load Rspec supporting files
