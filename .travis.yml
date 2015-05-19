@@ -7,8 +7,8 @@ rvm:
 gemfile:
   - gemfiles/rails_3.gemfile
   - gemfiles/rails_4.gemfile
-  - gemfiles/rails_4_1.gemfile
-  - gemfiles/rails_4_2.gemfile
+  - gemfiles/rails_4.1.gemfile
+  - gemfiles/rails_4.2.gemfile
 matrix:
   exclude:
     - rvm: 2.2.2
