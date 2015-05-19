@@ -13,5 +13,3 @@ matrix:
   exclude:
     - rvm: 2.2.2
       gemfile: gemfiles/rails_3.gemfile
-script:
-  - bundle exec rake test
