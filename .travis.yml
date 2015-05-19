@@ -1,6 +1,9 @@
 language: ruby
 rvm:
-  - 2.1.2
+  - 1.9.3
+  - 2.0.0
+  - 2.1.6
+  - 2.2.2
 before_script:
   - bundle exec appraisal install
 script:
