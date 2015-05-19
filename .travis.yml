@@ -4,7 +4,14 @@ rvm:
   - 2.0.0
   - 2.1.6
   - 2.2.2
-before_script:
-  - bundle exec appraisal install
+gemfile:
+  - gemfiles/rails_3.gemfile
+  - gemfiles/rails_4.gemfile
+  - gemfiles/rails_4_1.gemfile
+  - gemfiles/rails_4_2.gemfile
+matrix:
+  exclude:
+    - rvm: 2.2.2
+      gemfile: gemfiles/rails_3.gemfile
 script:
-  - bundle exec appraisal rspec
+  - bundle exec rake test
