@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rdoc",        "~> 3.4"
   s.add_development_dependency "pry"
 
-  # For testing
+  # Testing
   s.add_development_dependency "appraisal",   "~> 2.0.1"
   s.add_development_dependency "rails",       "~> 3.2.21"
   s.add_development_dependency "rspec-rails", "~> 3.2.1"
@@ -39,5 +39,9 @@ Gem::Specification.new do |s|
 
   if ENV['RUBY_VERSION'] >= 'ruby-2.2'
     s.add_development_dependency "test-unit",   "~> 3.0"
+  end
+
+  if ENV['TRAVIS']
+    s.add_development_dependency "codeclimate-test-reporter", require: nil
   end
 end

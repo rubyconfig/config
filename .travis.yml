@@ -15,3 +15,6 @@ matrix:
       gemfile: gemfiles/rails_3.gemfile
 script:
   - bundle exec rspec
+addons:
+  code_climate:
+    repo_token: 88c5452d41835351d037ce45781e2e88b1c0bdc8508ee9722746bac633bba88e

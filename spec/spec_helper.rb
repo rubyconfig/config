@@ -1,6 +1,14 @@
 ENV["RAILS_ENV"] ||= 'test'
 
 ##
+# Code Climate
+#
+if ENV["TRAVIS"]
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+end
+
+##
 # Load RailsConfig rspec helpers
 #
 require 'rails_config_helper'
@@ -32,7 +40,7 @@ RSpec.configure do |config|
 end
 
 # Load Rspec supporting files
-Dir['./spec/support/**/*.rb'].sort.each {|f| require f}
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
 
 ##
@@ -42,7 +50,7 @@ puts
 puts "Gemfile: #{ENV['BUNDLE_GEMFILE']}"
 puts "Rails version:"
 
-Gem.loaded_specs.each{|name, spec|
+Gem.loaded_specs.each { |name, spec|
   puts "\t#{name}-#{spec.version}" if %w{rails activesupport sqlite3 rspec-rails}.include?(name)
 }
 
