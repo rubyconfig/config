@@ -33,8 +33,8 @@ Gem::Specification.new do |s|
   # For testing
   s.add_development_dependency "rspec",       "~> 2.14"
   s.add_development_dependency "rspec-rails", "~> 2.14"
-  s.add_development_dependency "appraisal"
+  s.add_development_dependency "appraisal",   "~> 2.0.1"
   s.add_development_dependency "rails",       "~> 3.2.21"
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "rubocop"
+  s.add_development_dependency "rubocop",     "~> 0.31.0"
 end
