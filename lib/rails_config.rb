@@ -10,9 +10,10 @@ module RailsConfig
   # ensures the setup only gets run once
   @@_ran_once = false
 
-  mattr_accessor :const_name, :use_env
+  mattr_accessor :const_name, :use_env, :overwrite_arrays
   @@const_name = "Settings"
   @@use_env = false
+  @@overwrite_arrays = false
 
   def self.setup
     yield self if @@_ran_once == false
