@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rubocop",     "~> 0.32.0"
 
   if ENV['RUBY_VERSION'] >= 'ruby-2.2'
-    s.add_development_dependency "test-unit",   "~> 3.0"
+    s.add_development_dependency "test-unit",   "~> 3.1.2"
   end
 
   if ENV['TRAVIS']
