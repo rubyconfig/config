@@ -10,9 +10,9 @@ Gem::Specification.new do |s|
   s.date             = Time.now.strftime '%F'
   s.authors          = ["Jacques Crocker", "Fred Wu", "Piotr Kuczynski"]
   s.email            = ["railsjedi@gmail.com", "ifredwu@gmail.com", "piotr.kuczynski@gmail.com"]
-  s.summary          = "Provides a Settings helper for Rails that reads from config/settings.yml"
-  s.description      = "Easy to use Settings helper that loads its data in from config/settings.yml. Handles adding multiple sources, and easy reloading."
-  s.homepage         = "http://github.com/railsjedi/rails_config"
+  s.summary          = "Easiest way to add multi-environment yaml settings to Rails 3 or 4, Padrino and Sinatra"
+  s.description      = "Easy to use Settings object supporting multiple environments and sources with easy reloading."
+  s.homepage         = "https://github.com/railsconfig/rails_config"
   s.license          = "MIT"
   s.extra_rdoc_files = ["README.md"]
   s.rdoc_options     = ["--charset=UTF-8"]
