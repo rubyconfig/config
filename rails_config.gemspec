@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rails",       "~> 3.2.21"
   s.add_development_dependency "rspec-rails", "~> 3.3.1"
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "rubocop",     "~> 0.31.0"
+  s.add_development_dependency "rubocop",     "~> 0.32.0"
 
   if ENV['RUBY_VERSION'] >= 'ruby-2.2'
     s.add_development_dependency "test-unit",   "~> 3.0"
