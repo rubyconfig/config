@@ -19,8 +19,8 @@ module RailsConfig
     @@_ran_once = true
   end
 
-  # Create a populated Options instance from a yaml file.  If a second yaml file is given, then the sections of that file will overwrite the sections
-  # if the first file if they exist in the first file.
+  # Create a populated Options instance from a yaml file. If a second yaml file is given, then the sections of that
+  # file will overwrite existing sections of the first file.
   def self.load_files(*files)
     config = Options.new
 
