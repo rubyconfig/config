@@ -280,6 +280,46 @@ It won't work with arrays, though.
 
 To upload your local values to Heroku you could ran `bundle exec rake rails_config:heroku`.
 
+## Overwriting or Merging Arrays
+
+We changed the default behavior for arrays from merging to overwriting. Eg:
+
+settings.yml
+
+```yaml
+some_array:
+- 1
+- 2
+```
+
+settings.local.yml
+
+```yaml
+some_array:
+- 3
+- 4
+```
+
+config/initializers/rails_config.rb
+
+```ruby
+RailsConfig.setup do |config|
+  config.const_name = 'settings'
+end
+```
+
+`Settings.some_array` becomes `[3, 4]`.
+
+If you want the old behavior (merging arrays), just set the `overwrite_arrays` var to `false` in your `config/initializers/rails_config.rb` file. Eg:
+
+```ruby
+RailsConfig.setup do |config|
+  config.overwrite_arrays = false
+  config.const_name = 'settings'
+end
+```
+
+`Settings.some_array` becomes `[1, 2, 3, 4]`.
 
 ## Contributing
 

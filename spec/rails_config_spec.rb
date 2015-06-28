@@ -160,9 +160,81 @@ describe RailsConfig do
       expect(config.inner2.inner2_inner.marshal_dump.keys.size).to eq(3)
     end
 
+    it "should overwrite arrays with higher priority config" do
+      expect(config.arraylist1.size).to eq(3)
+      expect(config.arraylist1).to eq([4, 5, 6])
+      expect(config.arraylist2.inner.size).to eq(3)
+      expect(config.arraylist2.inner).to eq([4, 5, 6])
+    end
+  end
+
+  context "Deep Merging case #2" do
+    let(:config) do
+      files = ["#{fixture_path}/deep_merge2/config1.yml", "#{fixture_path}/deep_merge2/config2.yml"]
+      RailsConfig.load_files(files)
+    end
+
+    it "should merge hashes from multiple configs" do
+      expect(config.tvrage.service_url).to eq("http://url2")
+      expect(config.tvrage.cache).to eq(500)
+    end
+
+    it "should overwrite arrays with higher priority config" do
+      expect(config.arraylist1.size).to eq(2)
+      expect(config.arraylist1).to eq([4, 5])
+    end
+
+    it "should overwrite hash arrays with higher priority config" do
+      expect(config.hasharray1.size).to eq(2)
+      expect(config.hasharray1[0].to_h).to eq({c: 5})
+      expect(config.hasharray1[1].to_h).to eq({d: 6})
+    end
+  end
+
+  context "Deep Merging with overwrite_arrays = false (old behavior)" do
+    let(:config) do
+      files = ["#{fixture_path}/deep_merge/config1.yml", "#{fixture_path}/deep_merge/config2.yml"]
+      RailsConfig.overwrite_arrays = false
+      RailsConfig.load_files(files)
+    end
+
+    it "should merge hashes from multiple configs" do
+      expect(config.inner.marshal_dump.keys.size).to eq(3)
+      expect(config.inner2.inner2_inner.marshal_dump.keys.size).to eq(3)
+    end
+
     it "should merge arrays from multiple configs" do
       expect(config.arraylist1.size).to eq(6)
+      expect(config.arraylist1).to eq([1, 2, 3, 4, 5, 6])
       expect(config.arraylist2.inner.size).to eq(6)
+      expect(config.arraylist2.inner).to eq([1, 2, 3, 4, 5, 6])
+    end
+  end
+
+  context "Deep Merging case #2 with overwrite_arrays = false (old behavior)" do
+    let(:config) do
+      files = ["#{fixture_path}/deep_merge2/config1.yml", "#{fixture_path}/deep_merge2/config2.yml"]
+      RailsConfig.overwrite_arrays = false
+      RailsConfig.load_files(files)
+    end
+
+    it "should merge hashes from multiple configs" do
+      expect(config.tvrage.service_url).to eq("http://url2")
+      expect(config.tvrage.cache).to eq(500)
+    end
+
+    it "should merge arrays from multiple configs" do
+      expect(config.arraylist1.size).to eq(5)
+      expect(config.arraylist1).to eq([1, 2, 3, 4, 5])
+    end
+
+    it "should merge hash arrays from multiple configs" do
+      expect(config.hasharray1.size).to eq(5)
+      expect(config.hasharray1[0].to_h).to eq({a: 1})
+      expect(config.hasharray1[1].to_h).to eq({b: 2})
+      expect(config.hasharray1[2].to_h).to eq({c: 3, d: 4})
+      expect(config.hasharray1[3].to_h).to eq({c: 5})
+      expect(config.hasharray1[4].to_h).to eq({d: 6})
     end
   end
 

@@ -1,3 +1,14 @@
 tvrage:
   service_url: 'http://services.tvrage.com'
   cache: 500
+
+arraylist1:
+  - 1
+  - 2
+  - 3
+
+hasharray1:
+  - a: 1
+  - b: 2
+  - c: 3
+    d: 4

@@ -1,2 +1,10 @@
 tvrage:
   service_url: "http://url2"
+
+arraylist1:
+  - 4
+  - 5
+
+hasharray1:
+  - c: 5
+  - d: 6
