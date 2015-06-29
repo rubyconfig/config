@@ -14,7 +14,7 @@ matrix:
     - rvm: 2.2.2
       gemfile: gemfiles/rails_3.gemfile
 before_install:
-  - gem install bundler --version 1.10.3
+  - gem install bundler
 script:
   - bundle exec rspec
 addons:
