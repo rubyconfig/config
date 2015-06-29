@@ -84,7 +84,7 @@ module RailsConfig
     end
 
     # Some keywords that don't play nicely with OpenStruct
-    SETTINGS_RESERVED_NAMES = %w{select collect system}
+    SETTINGS_RESERVED_NAMES = %w{select collect}
 
     # An alternative mechanism for property access.
     # This let's you do foo['bar'] along with foo.bar.
