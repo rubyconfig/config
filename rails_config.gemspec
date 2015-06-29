@@ -26,17 +26,17 @@ Gem::Specification.new do |s|
   s.add_dependency "activesupport", ">= 3.0"
   s.add_dependency "deep_merge", "~> 1.0"
 
-  s.add_development_dependency "bundler",     "~> 1.10.3"
+  s.add_development_dependency "bundler",     "~> 1.10.5"
   s.add_development_dependency "rake"
   s.add_development_dependency "rdoc",        "~> 3.4"
   s.add_development_dependency "pry"
 
   # Testing
-  s.add_development_dependency "appraisal",   "~> 2.0.1"
+  s.add_development_dependency "appraisal",   "~> 2.0.2"
   s.add_development_dependency "rails",       "~> 3.2.22"
   s.add_development_dependency "rspec-rails", "~> 3.3.1"
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "rubocop",     "~> 0.32.0"
+  s.add_development_dependency "rubocop",     "~> 0.32.1"
 
   if ENV['RUBY_VERSION'].to_s >= 'ruby-2.2'
     s.add_development_dependency "test-unit",   "~> 3.1.2"
