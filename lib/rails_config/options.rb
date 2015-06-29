@@ -3,8 +3,13 @@ module RailsConfig
   class Options < OpenStruct
     include Enumerable
 
-    def keys()   marshal_dump.keys;   end
-    def empty?() marshal_dump.empty?; end
+    def keys
+      marshal_dump.keys
+    end
+
+    def empty?
+      marshal_dump.empty?
+    end
 
     def add_source!(source)
       # handle yaml file paths
