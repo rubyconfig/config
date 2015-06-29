@@ -9,9 +9,9 @@ if ENV["TRAVIS"]
 end
 
 ##
-# Load RailsConfig rspec helpers
+# Load Rspec supporting files
 #
-require 'rails_config_helper'
+Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 ##
 # Load Rails dummy application based on gemfile name substituted by Appraisal
@@ -39,9 +39,6 @@ RSpec.configure do |config|
   config.raise_errors_for_deprecations!
 end
 
-# Load Rspec supporting files
-Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
-
 
 ##
 # Print some debug info
@@ -55,4 +52,3 @@ Gem.loaded_specs.each { |name, spec|
 }
 
 puts
-
