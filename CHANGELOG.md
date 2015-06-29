@@ -1,6 +1,7 @@
 # 0.5.0.beta1
 
-* Made rails_config work without Rails as a hard dependency ([#86](https://github.com/railsjedi/rails_config/issues/86 [#88](https://github.com/railsjedi/rails_config/issues/88)
+* Ability to use in Settings file keywords reserved for OpenStruct: select, collect ([#95](https://github.com/railsjedi/rails_config/issues/95))
+* Made rails_config work without Rails as a hard dependency ([#86](https://github.com/railsjedi/rails_config/issues/86), [#88](https://github.com/railsjedi/rails_config/issues/88))
 * Fix generate error when .gitignore is missing ([#85](https://github.com/railsjedi/rails_config/issues/85))
 * Fix deprecation warning on File.exists? ([#81](https://github.com/railsjedi/rails_config/issues/81))
 * Add a shortcut method for setting files ([#67](https://github.com/railsjedi/rails_config/issues/67))
