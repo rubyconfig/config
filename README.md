@@ -213,15 +213,13 @@ Embedded Ruby is allowed in the configuration files. See examples below.
 
 Consider the two following config files.
 
- #{Rails.root}/config/settings.yml:
-
+* ```#{Rails.root}/config/settings.yml```
 ```yaml
 size: 1
 server: google.com
 ```
 
- #{Rails.root}/config/environments/development.yml:
-
+* ```#{Rails.root}/config/environments/development.yml```
 ```yaml
 size: 2
 computed: <%= 1 + 2 + 3 %>
