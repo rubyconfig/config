@@ -19,6 +19,7 @@ RailsConfig helps you easily manage environment specific Rails settings in an ea
 
 ## Compatibility
 
+* Ruby 2.x
 * Rails 3.x and 4.x
 * Padrino
 * Sinatra
