@@ -53,6 +53,12 @@ describe RailsConfig do
     expect(config[:section][:servers][1][:name]).to eq("amazon.com")
   end
 
+  it "should convert to a hash (We Need To Go Deeper)" do
+    config = RailsConfig.load_files("#{fixture_path}/development.yml").to_hash
+    servers = config[:section][:servers]
+    servers.should == [ { name: "yahoo.com" }, { name: "amazon.com" } ]
+  end
+
   it "should convert to a json" do
     config = RailsConfig.load_files("#{fixture_path}/development.yml").to_json
     expect(JSON.parse(config)["section"]["servers"]).to be_kind_of(Array)
