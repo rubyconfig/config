@@ -1,4 +1,4 @@
-module RailsConfig
+module Config
   module Integration
     module Rails
       if defined?(::Rails::Railtie)
@@ -12,20 +12,20 @@ module RailsConfig
 
           def preload
             # Manually load the custom initializer before everything else
-            initializer = ::Rails.root.join("config", "initializers", "rails_config.rb")
+            initializer = ::Rails.root.join("config", "initializers", "config.rb")
             require initializer if File.exist?(initializer)
 
             # Parse the settings before any of the initializers
-            RailsConfig.load_and_set_settings(
-              RailsConfig.setting_files(::Rails.root.join("config"), ::Rails.env)
+            Config.load_and_set_settings(
+              Config.setting_files(::Rails.root.join("config"), ::Rails.env)
             )
           end
 
           # Rails Dev environment should reload the Settings on every request
           if ::Rails.env.development?
-            initializer :rails_config_reload_on_development do
+            initializer :config_reload_on_development do
               ActionController::Base.class_eval do
-                prepend_before_filter { ::RailsConfig.reload! }
+                prepend_before_filter { ::Config.reload! }
               end
             end
           end

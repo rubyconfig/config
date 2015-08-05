@@ -24,8 +24,8 @@ module Rails42
     config.active_record.raise_in_transactional_callbacks = true
 
     ##
-    # RailsConfig
+    # Config
     #
-    rails_config_available?
+    config_available?
   end
 end

@@ -66,7 +66,7 @@ Rails3::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   ##
-  # RailsConfig
+  # Config
   #
-  rails_config_available?
+  config_available?
 end

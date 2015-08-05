@@ -36,7 +36,7 @@ Rails3::Application.configure do
   config.active_support.deprecation = :stderr
 
   ##
-  # RailsConfig
+  # Config
   #
-  rails_config_available?
+  config_available?
 end

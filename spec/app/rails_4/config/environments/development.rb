@@ -28,7 +28,7 @@ Rails4::Application.configure do
   config.assets.debug = true
 
   ##
-  # RailsConfig
+  # Config
   #
-  rails_config_available?
+  config_available?
 end

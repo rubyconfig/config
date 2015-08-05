@@ -36,7 +36,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   ##
-  # RailsConfig
+  # Config
   #
-  rails_config_available?
+  config_available?
 end

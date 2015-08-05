@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe RailsConfig::Options do
+describe Config::Options do
 
   context 'when Settings file is using keywords reserved for OpenStruct' do
     let(:config) do
-      RailsConfig.load_files("#{fixture_path}/reserved_keywords.yml")
+      Config.load_files("#{fixture_path}/reserved_keywords.yml")
     end
 
     it 'should allow to access them via object member notation' do
@@ -23,7 +23,7 @@ describe RailsConfig::Options do
 
   context 'adding sources' do
     let(:config) do
-      RailsConfig.load_files("#{fixture_path}/settings.yml")
+      Config.load_files("#{fixture_path}/settings.yml")
     end
 
     before do
@@ -53,7 +53,7 @@ describe RailsConfig::Options do
 
   context 'prepending sources' do
     let(:config) do
-      RailsConfig.load_files("#{fixture_path}/settings.yml")
+      Config.load_files("#{fixture_path}/settings.yml")
     end
 
     before do

@@ -1,28 +1,28 @@
-[![Build Status](https://api.travis-ci.org/railsconfig/rails_config.svg?branch=master)](http://travis-ci.org/railsconfig/rails_config)
-[![Gem Version](https://badge.fury.io/rb/rails_config.svg)](http://badge.fury.io/rb/rails_config)
-[![Dependency Status](https://gemnasium.com/railsconfig/rails_config.svg)](https://gemnasium.com/railsconfig/rails_config)
-[![Code Climate](https://codeclimate.com/github/railsconfig/rails_config/badges/gpa.svg)](https://codeclimate.com/github/railsconfig/rails_config)
-[![Test Coverage](https://codeclimate.com/github/railsconfig/rails_config/badges/coverage.svg)](https://codeclimate.com/github/railsconfig/rails_config/coverage)
+[![Build Status](https://api.travis-ci.org/railsconfig/config.svg?branch=master)](http://travis-ci.org/railsconfig/config)
+[![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
+[![Dependency Status](https://gemnasium.com/railsconfig/config.svg)](https://gemnasium.com/railsconfig/config)
+[![Code Climate](https://codeclimate.com/github/railsconfig/config/badges/gpa.svg)](https://codeclimate.com/github/railsconfig/config)
+[![Test Coverage](https://codeclimate.com/github/railsconfig/config/badges/coverage.svg)](https://codeclimate.com/github/railsconfig/config/coverage)
 
-# RailsConfig
+# Config
 
 ## Summary
 
-RailsConfig helps you easily manage environment specific Rails settings in an easy and usable manner
+Config helps you easily manage environment specific settings in an easy and usable manner.
 
 ## Features
 
-* simple YAML config files
-* config files support ERB
-* config files support inheritance
-* access config information via convenient object member notation
+- simple YAML config files
+- config files support ERB
+- config files support inheritance
+- access config information via convenient object member notation
 
 ## Compatibility
 
-* Ruby 2.x
-* Rails 3.x and 4.x
-* Padrino
-* Sinatra
+- Ruby 2.x
+- Rails 3.x and 4.x
+- Padrino
+- Sinatra
 
 For older versions of Rails and other Ruby apps, use [AppConfig](http://github.com/fredwu/app_config).
 
@@ -31,25 +31,25 @@ For older versions of Rails and other Ruby apps, use [AppConfig](http://github.c
 Add this to your `Gemfile`:
 
 ```ruby
-gem "rails_config"
+gem "config"
 ```
 
-If you want to use Settings before rails application initialization process you can load RailsConfig railtie manually:
+If you want to use Settings before rails application initialization process you can load Config railtie manually:
 
 ```ruby
 module Appname
   class Application < Rails::Application
 
     Bundler.require(*Rails.groups)
-    RailsConfig::Integration::Rails::Railtie.preload
+    Config::Integration::Rails::Railtie.preload
 
-    ...
+    # ...
 
     config.time_zone = Settings.time_zone
 
-    ...
+    # ...
 
-   end
+  end
 end
 ```
 
@@ -58,13 +58,13 @@ end
 Add this to your `Gemfile`:
 
 ```ruby
-gem "rails_config"
+gem "config"
 ```
 
-in your app.rb, you'll also need to register RailsConfig
+in your app.rb, you'll also need to register Config
 
 ```ruby
-register RailsConfig
+register Config
 ```
 
 ## Installing on Sinatra
@@ -72,29 +72,29 @@ register RailsConfig
 Add this to your `Gemfile`:
 
 ```ruby
-gem "rails_config"
+gem "config"
 ```
 
-in your app, you'll need to register RailsConfig. You'll also need to give it a root so it can find the config files.
+in your app, you'll need to register Config. You'll also need to give it a root so it can find the config files.
 
 ```ruby
 set :root, File.dirname(__FILE__)
-register RailsConfig
+register Config
 ```
 
 It's also possible to initialize it manually within your configure block if you want to just give it some yml paths to load from.
 
 ```ruby
-RailsConfig.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
+Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
 ```
 
-## Customizing RailsConfig
+## Customizing Config
 
-You may customize the behavior of RailsConfig by generating an initializer file:
+You may customize the behavior of Config by generating an initializer file:
 
-    rails g rails_config:install
+    rails g config:install
 
-This will generate `config/initializers/rails_config.rb` with a set of default settings as well as to generate a set of default settings files:
+This will generate `config/initializers/config.rb` with a set of default settings as well as to generate a set of default settings files:
 
     config/settings.yml
     config/settings/development.yml
@@ -180,10 +180,11 @@ Example production environment config file:
 If you want to have local settings, specific to your machine or development environment,
 you can use the following files, which are automatically `.gitignored` :
 
-    Rails.root.join("config", "settings.local.yml").to_s,
-    Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
-    Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
-
+```ruby
+Rails.root.join("config", "settings.local.yml").to_s,
+Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
+Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
+```
 
 ### Adding sources at Runtime
 
@@ -213,8 +214,7 @@ Settings.add_source!("#{Rails.root}/config/settings/local.yml")
 Settings.reload!
 ```
 
-> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml, settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml`
->       for your developer specific settings.
+> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml, settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
 
 ## Embedded Ruby (ERB)
 
@@ -269,16 +269,16 @@ Settings.section.servers[1].name # => amazon.com
 
 Heroku uses ENV object to store sensitive settings which are like the local files described above. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh.
 
-To use rails_config with Heroku just set the `use_env` var to `true` in your `config/initializers/rails_config.rb` file. Eg:
+To use config with Heroku just set the `use_env` var to `true` in your `config/initializers/config.rb` file. Eg:
 
 ```ruby
-RailsConfig.setup do |config|
+Config.setup do |config|
   config.const_name = 'AppSettings'
   config.use_env = true
 end
 ```
 
-Now rails_config would read values from the ENV object to the settings. For the example above it would look for keys starting with 'AppSettings'. Eg:
+Now config would read values from the ENV object to the settings. For the example above it would look for keys starting with 'AppSettings'. Eg:
 
 ```ruby
 ENV['AppSettings.section.size'] = 1
@@ -287,8 +287,7 @@ ENV['AppSettings.section.server'] = 'google.com'
 
 It won't work with arrays, though.
 
-To upload your local values to Heroku you could ran `bundle exec rake rails_config:heroku`.
-
+To upload your local values to Heroku you could ran `bundle exec rake config:heroku`.
 
 ## Contributing
 
@@ -304,14 +303,13 @@ Running the test suite
 $ appraisal rspec
 ```
 
-
 ## Authors
 
 * [Jacques Crocker](http://github.com/railsjedi)
-* [Fred Wu](http://github.com/fredwu)
+- [Fred Wu](http://github.com/fredwu)
 * [Piotr Kuczynski](http://github.com/pkuczynski)
-* Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
+- Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
 
 ## License
 
-RailsConfig is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+Config is released under the [MIT License](http://www.opensource.org/licenses/MIT).

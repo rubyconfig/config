@@ -1,7 +1,7 @@
 require 'yaml'
 require 'erb'
 
-module RailsConfig
+module Config
   module Sources
     class YAMLSource
       attr_accessor :path

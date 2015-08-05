@@ -82,7 +82,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   ##
-  # RailsConfig
+  # Config
   #
-  rails_config_available?
+  config_available?
 end

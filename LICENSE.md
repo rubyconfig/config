@@ -23,5 +23,5 @@ THE SOFTWARE.
 
 Third-party materials and licenses:
 
-* RailsConfig contains Deep Merge (deep_merge.rb) which is governed by the MIT license
+* Config contains Deep Merge (deep_merge.rb) which is governed by the MIT license
   Copyright (C) 2008 Steve Midgley

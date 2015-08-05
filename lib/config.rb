@@ -1,12 +1,12 @@
 require 'active_support/core_ext/module/attribute_accessors'
 
-require 'rails_config/options'
-require 'rails_config/version'
-require 'rails_config/engine' if defined?(::Rails)
-require 'rails_config/sources/yaml_source'
+require 'config/options'
+require 'config/version'
+require 'config/engine' if defined?(::Rails)
+require 'config/sources/yaml_source'
 require 'deep_merge'
 
-module RailsConfig
+module Config
   # ensures the setup only gets run once
   @@_ran_once = false
 
@@ -36,8 +36,8 @@ module RailsConfig
 
   # Loads and sets the settings constant!
   def self.load_and_set_settings(*files)
-    Kernel.send(:remove_const, RailsConfig.const_name) if Kernel.const_defined?(RailsConfig.const_name)
-    Kernel.const_set(RailsConfig.const_name, RailsConfig.load_files(files))
+    Kernel.send(:remove_const, Config.const_name) if Kernel.const_defined?(Config.const_name)
+    Kernel.const_set(Config.const_name, Config.load_files(files))
   end
 
   def self.setting_files(config_root, env)
@@ -53,12 +53,12 @@ module RailsConfig
   end
 
   def self.reload!
-    Kernel.const_get(RailsConfig.const_name).reload!
+    Kernel.const_get(Config.const_name).reload!
   end
 end
 
 # add rails integration
-require('rails_config/integration/rails') if defined?(::Rails)
+require('config/integration/rails') if defined?(::Rails)
 
 # add sinatra integration
-require('rails_config/integration/sinatra') if defined?(::Sinatra)
+require('config/integration/sinatra') if defined?(::Sinatra)

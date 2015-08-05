@@ -1,10 +1,10 @@
-require "rails_config/rack/reloader"
+require "config/rack/reloader"
 
-module RailsConfig
+module Config
   # provide helper to register within your Sinatra app
   #
   # set :root, File.dirname(__FILE__)
-  # register RailsConfig
+  # register Config
   #
   def self.registered(app)
     app.configure do |inner_app|
@@ -18,9 +18,9 @@ module RailsConfig
         root = Padrino.root
       end
 
-      RailsConfig.load_and_set_settings(RailsConfig.setting_files(File.join(root, 'config'), env))
+      Config.load_and_set_settings(Config.setting_files(File.join(root, 'config'), env))
 
-      inner_app.use(::RailsConfig::Rack::Reloader) if inner_app.development?
+      inner_app.use(::Config::Rack::Reloader) if inner_app.development?
     end
   end
 end

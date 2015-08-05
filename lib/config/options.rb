@@ -1,5 +1,5 @@
 require 'ostruct'
-module RailsConfig
+module Config
   class Options < OpenStruct
     include Enumerable
 
@@ -30,7 +30,7 @@ module RailsConfig
       return self if ENV.nil? || ENV.empty?
       conf = Hash.new
       ENV.each do |key, value|
-        next unless key.to_s.index(RailsConfig.const_name) == 0
+        next unless key.to_s.index(Config.const_name) == 0
         hash = value
         key.to_s.split('.').reverse.each do |element|
           hash = {element => hash}
@@ -38,7 +38,7 @@ module RailsConfig
         DeepMerge.deep_merge!(hash, conf, :preserve_unmergeables => false)
       end
 
-      merge!(conf[RailsConfig.const_name] || {})
+      merge!(conf[Config.const_name] || {})
     end
 
     alias :load_env! :reload_env!
@@ -59,7 +59,7 @@ module RailsConfig
       # swap out the contents of the OStruct with a hash (need to recursively convert)
       marshal_load(__convert(conf).marshal_dump)
 
-      reload_env! if RailsConfig.use_env
+      reload_env! if Config.use_env
 
       return self
     end
@@ -67,14 +67,14 @@ module RailsConfig
     alias :load! :reload!
 
     def reload_from_files(*files)
-      RailsConfig.load_and_set_settings(files)
+      Config.load_and_set_settings(files)
       reload!
     end
 
     def to_hash
       result = {}
       marshal_dump.each do |k, v|
-        if v.instance_of? RailsConfig::Options
+        if v.instance_of? Config::Options
           result[k] = v.to_hash
         elsif v.instance_of? Array
           result[k] = descend_array(v)
@@ -126,7 +126,7 @@ module RailsConfig
     def descend_array(array)
       array.length.times do |i|
         value = array[i]
-        if value.instance_of? RailsConfig::Options
+        if value.instance_of? Config::Options
           array[i] = value.to_hash
         elsif value.instance_of? Array
           array[i] = descend_array(value)

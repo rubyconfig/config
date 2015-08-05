@@ -79,7 +79,7 @@ Rails4::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   ##
-  # RailsConfig
+  # Config
   #
-  rails_config_available?
+  config_available?
 end

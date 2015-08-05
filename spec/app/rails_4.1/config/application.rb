@@ -19,9 +19,9 @@ module Rails41
     # config.i18n.default_locale = :de
 
     ##
-    # RailsConfig
+    # Config
     #
-    rails_config_available?
+    config_available?
   end
 end
 

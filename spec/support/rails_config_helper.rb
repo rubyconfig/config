@@ -1,5 +1,5 @@
 ##
-# RailsConfig Rspec Helpers
+# Config Rspec Helpers
 #
 
 # Loads ENV vars from a yaml file
@@ -10,13 +10,13 @@ def load_env(filename)
   result.each { |key, value| ENV[key.to_s] = value.to_s } unless result.nil?
 end
 
-# Checks if (default) RailsConfig const is already available
-def rails_config_available?
+# Checks if (default) Config const is already available
+def config_available?
   where = caller[0].split(':')[0].gsub(File.expand_path(File.dirname(__FILE__)), '')
 
   if defined?(::Settings)
-    puts "RailsConfig available in #{where}"
+    puts "Config available in #{where}"
   else
-    raise "RailsConfig not available in #{where}"
+    raise "Config not available in #{where}"
   end
 end

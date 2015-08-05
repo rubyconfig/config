@@ -1,6 +1,6 @@
 require "bundler"
 
-module RailsConfig
+module Config
   module Tasks
     class Heroku < Struct.new(:app)
       def invoke
@@ -13,14 +13,14 @@ module RailsConfig
 
       def vars
         # Load only local options to Heroku
-        RailsConfig.load_and_set_settings(
+        Config.load_and_set_settings(
             Rails.root.join("config", "settings.local.yml").to_s,
             Rails.root.join("config", "settings", "#{environment}.local.yml").to_s,
             Rails.root.join("config", "environments", "#{environment}.local.yml").to_s
         )
 
         out = ''
-        dotted_hash = to_dotted_hash Kernel.const_get(RailsConfig.const_name).to_hash, {}, RailsConfig.const_name
+        dotted_hash = to_dotted_hash Kernel.const_get(Config.const_name).to_hash, {}, Config.const_name
         dotted_hash.each {|key, value| out += " #{key}=#{value} "}
         out
       end

@@ -1,18 +1,18 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require 'rails_config/version'
+require 'config/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name             = "rails_config"
-  s.version          = RailsConfig::VERSION
+  s.name             = "config"
+  s.version          = Config::VERSION
   s.date             = Time.now.strftime '%F'
   s.authors          = ["Jacques Crocker", "Fred Wu", "Piotr Kuczynski"]
   s.email            = ["railsjedi@gmail.com", "ifredwu@gmail.com", "piotr.kuczynski@gmail.com"]
-  s.summary          = "Easiest way to add multi-environment yaml settings to Rails 3 or 4, Padrino and Sinatra"
-  s.description      = "Easy to use Settings object supporting multiple environments and sources with easy reloading."
-  s.homepage         = "https://github.com/railsconfig/rails_config"
+  s.summary          = "Easiest way to add multi-environment yaml settings to Rails, Sinatra, Pandrino and other ruby projects."
+  s.description      = "Easiest way to add multi-environment yaml settings to Rails, Sinatra, Pandrino and other ruby projects."
+  s.homepage         = "https://github.com/railsconfig/config"
   s.license          = "MIT"
   s.extra_rdoc_files = ["README.md"]
   s.rdoc_options     = ["--charset=UTF-8"]
