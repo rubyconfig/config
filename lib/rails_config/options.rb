@@ -19,6 +19,13 @@ module RailsConfig
       @config_sources << source
     end
 
+    def prepend_source!(source)
+      source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
+
+      @config_sources ||= []
+      @config_sources.unshift(source)
+    end
+
     def reload_env!
       return self if ENV.nil? || ENV.empty?
       conf = Hash.new

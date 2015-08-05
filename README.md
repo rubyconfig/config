@@ -196,6 +196,16 @@ Settings.reload!
 
 This will use the given source.yml file and use its settings to overwrite any previous ones.
 
+On the other hand, you can prepend a YML file to the list of configuration files:
+
+```ruby
+Settings.prepend_source!("/path/to/source.yml")
+Settings.reload!
+```
+
+This will do the same as `add_source`, but the given YML file will be loaded first (instead of last) and its settings will be overwritten by any other configuration file.
+This is especially useful if you want to define defaults.
+
 One thing I like to do for my Rails projects is provide a local.yml config file that is .gitignored (so its independent per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
 
 ```ruby
