@@ -1,3 +1,0 @@
-tvrage:
-  service_url: 'http://services.tvrage.com'
-  cache: 500
