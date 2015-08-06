@@ -1,5 +1,6 @@
 require 'active_support/core_ext/module/attribute_accessors'
 
+require 'config/compatibility'
 require 'config/options'
 require 'config/version'
 require 'config/engine' if defined?(::Rails)
