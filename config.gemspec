@@ -17,11 +17,12 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.md", "CHANGELOG.md", "LICENSE.md"]
   s.rdoc_options     = ["--charset=UTF-8"]
 
-  s.files            = `git ls-files`.split($/)
+  s.files = `git ls-files`.split($/)
+  s.files.select! { |file| /(^lib\/|\.md$|\.gemspec$)/ =~ file }
+  s.files += Dir.glob["doc/**/*"]
 
-  s.executables      = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files       = s.files.grep(%r{^(test|spec|features)/})
-  s.require_paths    = ["lib"]
+  s.require_paths         = ["lib"]
+  s.required_ruby_version = ">= 2.0.0"
 
   s.add_dependency "activesupport",           ">= 3.0"
   s.add_dependency "deep_merge",              "~> 1.0.0"
