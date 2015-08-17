@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description      = "Easiest way to add multi-environment yaml settings to Rails 3 and 4, Sinatra, Pandrino and other ruby projects."
   s.homepage         = "https://github.com/railsconfig/config"
   s.license          = "MIT"
-  s.extra_rdoc_files = ["README.md"]
+  s.extra_rdoc_files = ["README.md", "CHANGELOG.md", "LICENSE.md"]
   s.rdoc_options     = ["--charset=UTF-8"]
 
   s.files            = `git ls-files`.split($/)
