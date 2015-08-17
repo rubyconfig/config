@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files`.split($/)
   s.files.select! { |file| /(^lib\/|\.md$|\.gemspec$)/ =~ file }
-  s.files += Dir.glob["doc/**/*"]
+  s.files += Dir.glob("doc/**/*")
 
   s.require_paths         = ["lib"]
   s.required_ruby_version = ">= 2.0.0"
