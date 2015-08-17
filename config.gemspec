@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pry"
 
   # Testing
-  s.add_development_dependency "appraisal",   "~> 2.0.2"
+  s.add_development_dependency "appraisal",   "~> 2.1.0"
   s.add_development_dependency "rails",       "~> 4.2.3"
   s.add_development_dependency "rspec",       "~> 3.3.0"
   s.add_development_dependency "rspec-rails", "~> 3.3.3"
