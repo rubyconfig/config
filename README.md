@@ -19,8 +19,8 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Compatibility
 
-- Ruby 2.x
-- Rails 3.x and 4.x
+- Ruby `2.x`
+- Rails `>= 3.1` and `4`
 - Padrino
 - Sinatra
 
