@@ -69,7 +69,7 @@ describe Config::Options do
       expect(config['tvrage']['service_url']).to eq('http://services.tvrage.com')
     end
 
-    context 'be overwriten' do
+    context 'be overwritten' do
       before do
         config.prepend_source!("#{fixture_path}/deep_merge2/config2.yml")
         config.reload!
