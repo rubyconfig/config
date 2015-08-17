@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors          = ["Jacques Crocker", "Fred Wu", "Piotr Kuczynski"]
   s.email            = ["railsjedi@gmail.com", "ifredwu@gmail.com", "piotr.kuczynski@gmail.com"]
   s.summary          = "Easiest way to add multi-environment yaml settings to Rails, Sinatra, Pandrino and other ruby projects."
-  s.description      = "Easiest way to add multi-environment yaml settings to Rails, Sinatra, Pandrino and other ruby projects."
+  s.description      = "Easiest way to add multi-environment yaml settings to Rails 3 and 4, Sinatra, Pandrino and other ruby projects."
   s.homepage         = "https://github.com/railsconfig/config"
   s.license          = "MIT"
   s.extra_rdoc_files = ["README.md"]
