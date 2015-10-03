@@ -186,6 +186,18 @@ Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
 Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
 ```
 
+If you want to have specific environment settings, you can add environment variables starting with SETTINGS_ to your ruby instance:
+
+```ruby
+SETTINGS_I_LIKE_CATS="miauw" bundle exec rails s
+```
+
+You can access these settings by using the env method:
+
+```ruby
+Settings.env.i_like_cats # => "miauw"
+```
+
 ### Adding sources at Runtime
 
 You can add new YAML config files at runtime. Just use:
