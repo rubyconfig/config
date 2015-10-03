@@ -50,9 +50,11 @@ module Config
 
   # Loads and sets the settings constant!
   def self.load_and_set_settings(*files)
-    Kernel.send(:remove_const, Config.const_name) if Kernel.const_defined?(Config.const_name)
+    config = Config.load_files(files)
+    config.merge!(Config.environment_variable_settings)
 
-    Kernel.const_set(Config.const_name, Config.load_files(files))
+    Kernel.send(:remove_const, Config.const_name) if Kernel.const_defined?(Config.const_name)
+    Kernel.const_set(Config.const_name, config)
   end
 
   def self.setting_files(config_root, env)

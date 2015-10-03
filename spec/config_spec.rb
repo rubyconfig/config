@@ -128,6 +128,12 @@ describe Config do
       expect(Settings.size).to eq("3")
     end
 
+    it 'should load environment settings' do
+      stub_const('ENV', ENV.to_hash.merge('SETTINGS_I_LIKE_CATS' => 'fubar'))
+      Config.load_and_set_settings ["#{fixture_path}/settings.yml"]
+      expect(Settings.env.i_like_cats).to eq 'fubar'
+    end
+
     it "should reload env" do
       Config.load_and_set_settings ["#{fixture_path}/settings.yml"]
       Config.reload!
