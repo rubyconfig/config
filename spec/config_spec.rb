@@ -94,7 +94,7 @@ describe Config do
       stub_const('ENV', ENV.to_hash.merge('SETTINGS_I_LIKE_CATS' => 'fubar'))
       env_settings = Config.environment_variable_settings
 
-      expect(env_settings['i_like_cats']).to eq 'fubar'
+      expect(env_settings[:env]['i_like_cats']).to eq 'fubar'
     end
   end
 

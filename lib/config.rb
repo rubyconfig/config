@@ -45,12 +45,13 @@ module Config
     settings = {}
 
     env_settings.each { |name, value| settings[name] = value }
-    settings
+    { env: settings }
   end
 
   # Loads and sets the settings constant!
   def self.load_and_set_settings(*files)
     Kernel.send(:remove_const, Config.const_name) if Kernel.const_defined?(Config.const_name)
+
     Kernel.const_set(Config.const_name, Config.load_files(files))
   end
 
