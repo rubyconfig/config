@@ -35,10 +35,26 @@ module Config
     config
   end
 
+  # Read configured environment settings out of the ruby environment.
+  def self.environment_variable_settings
+    settings_prefix = "#{Config.const_name.downcase}_"
+
+    env_settings = ENV.select { |name| name.downcase.start_with?(settings_prefix) }
+    env_settings = env_settings.map { |name, value| [name[settings_prefix.size..-1].downcase, value] }
+
+    settings = {}
+
+    env_settings.each { |name, value| settings[name] = value }
+    { env: settings }
+  end
+
   # Loads and sets the settings constant!
   def self.load_and_set_settings(*files)
+    config = Config.load_files(files)
+    config.merge!(Config.environment_variable_settings)
+
     Kernel.send(:remove_const, Config.const_name) if Kernel.const_defined?(Config.const_name)
-    Kernel.const_set(Config.const_name, Config.load_files(files))
+    Kernel.const_set(Config.const_name, config)
   end
 
   def self.setting_files(config_root, env)

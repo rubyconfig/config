@@ -89,6 +89,15 @@ describe Config do
     expect(Settings.size).to eq(2)
   end
 
+  context '.environment_variable_settings' do
+    it 'returns environment settings' do
+      stub_const('ENV', ENV.to_hash.merge('SETTINGS_I_LIKE_CATS' => 'fubar'))
+      env_settings = Config.environment_variable_settings
+
+      expect(env_settings[:env]['i_like_cats']).to eq 'fubar'
+    end
+  end
+
   context "ENV variables" do
     let(:config) do
       Config.load_files("#{fixture_path}/settings.yml")
@@ -117,6 +126,12 @@ describe Config do
       Config.load_and_set_settings ["#{fixture_path}/settings.yml"]
       expect(Settings.server).to eq("google.com")
       expect(Settings.size).to eq("3")
+    end
+
+    it 'should load environment settings' do
+      stub_const('ENV', ENV.to_hash.merge('SETTINGS_I_LIKE_CATS' => 'fubar'))
+      Config.load_and_set_settings ["#{fixture_path}/settings.yml"]
+      expect(Settings.env.i_like_cats).to eq 'fubar'
     end
 
     it "should reload env" do
