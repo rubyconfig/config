@@ -3,17 +3,17 @@ require 'active_support/core_ext/module/attribute_accessors'
 require 'config/compatibility'
 require 'config/options'
 require 'config/version'
-require 'config/engine' if defined?(::Rails)
+require 'config/integrations/rails/engine' if defined?(::Rails)
 require 'config/sources/yaml_source'
 require 'deep_merge'
 
 module Config
-  # ensures the setup only gets run once
+  # Ensures the setup only gets run once
   @@_ran_once = false
 
   mattr_accessor :const_name, :use_env
   @@const_name = "Settings"
-  @@use_env = false
+  @@use_env    = false
 
   def self.setup
     yield self if @@_ran_once == false
@@ -58,8 +58,8 @@ module Config
   end
 end
 
-# add rails integration
-require('config/integration/rails') if defined?(::Rails)
+# Rails integration
+require('config/integrations/rails/railtie') if defined?(::Rails)
 
-# add sinatra integration
-require('config/integration/sinatra') if defined?(::Sinatra)
+# Sinatra integration
+require('config/integrations/sinatra') if defined?(::Sinatra)
