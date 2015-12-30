@@ -22,22 +22,21 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("doc/**/*")
 
   s.require_paths         = ["lib"]
-  s.required_ruby_version = ">= 2.0.0"
+  s.required_ruby_version = ">= 2.2.2"
 
   s.add_dependency "activesupport",           ">= 3.0"
-  s.add_dependency "deep_merge",              "~> 1.0.0"
+  s.add_dependency "deep_merge",              "~> 1.0.1"
 
-  s.add_development_dependency "bundler",     "~> 1.10.5"
+  s.add_development_dependency "bundler",     "~> 1.11.2"
   s.add_development_dependency "rake"
   s.add_development_dependency "rdoc"
   s.add_development_dependency "pry"
 
   # Testing
   s.add_development_dependency "appraisal",   "~> 2.1.0"
-  s.add_development_dependency "rails",       "~> 4.2.3"
-  s.add_development_dependency "rspec",       "~> 3.3.0"
-  s.add_development_dependency "rspec-rails", "~> 3.3.3"
-  s.add_development_dependency "test-unit",   "~> 3.1.3"
+  s.add_development_dependency "rails",       "~> 4.2.5"
+  s.add_development_dependency "rspec",       "~> 3.4.0"
+  s.add_development_dependency "rspec-rails", "~> 3.4.0"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rubocop"
 
