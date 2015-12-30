@@ -4,12 +4,12 @@ describe Config do
   it "should get setting files" do
     config = Config.setting_files("root/config", "test")
     expect(config).to eq([
-                             'root/config/settings.yml',
-                             'root/config/settings/test.yml',
-                             'root/config/environments/test.yml',
-                             'root/config/settings.local.yml',
-                             'root/config/settings/test.local.yml',
-                             'root/config/environments/test.local.yml'
+                           'root/config/settings.yml',
+                           'root/config/settings/test.yml',
+                           'root/config/environments/test.yml',
+                           'root/config/settings.local.yml',
+                           'root/config/settings/test.local.yml',
+                           'root/config/environments/test.local.yml'
                          ])
   end
 
@@ -54,9 +54,9 @@ describe Config do
   end
 
   it "should convert to a hash (We Need To Go Deeper)" do
-    config = Config.load_files("#{fixture_path}/development.yml").to_hash
+    config  = Config.load_files("#{fixture_path}/development.yml").to_hash
     servers = config[:section][:servers]
-    expect(servers).to eq([ { name: "yahoo.com" }, { name: "amazon.com" } ])
+    expect(servers).to eq([{ name: "yahoo.com" }, { name: "amazon.com" }])
   end
 
   it "should convert to a json" do
@@ -115,6 +115,7 @@ describe Config do
 
     it "should override settings from files" do
       Config.load_and_set_settings ["#{fixture_path}/settings.yml"]
+
       expect(Settings.server).to eq("google.com")
       expect(Settings.size).to eq("3")
     end
@@ -122,6 +123,7 @@ describe Config do
     it "should reload env" do
       Config.load_and_set_settings ["#{fixture_path}/settings.yml"]
       Config.reload!
+
       expect(Settings.server).to eq("google.com")
       expect(Settings.size).to eq("3")
     end
@@ -312,6 +314,42 @@ describe Config do
 
     it "should return array of keys for nested entry" do
       expect(config.section.keys).to contain_exactly(:size, :servers)
+    end
+  end
+
+  context 'knockout_prefix' do
+    context 'configuration' do
+      it "should be able to assign a different settings constant" do
+        Config.setup { |config| config.knockout_prefix = "--" }
+
+        expect(Config.knockout_prefix).to eq("--")
+      end
+
+      it "should have the default 'knockout_prefix' constant as nil" do
+        expect(Config.knockout_prefix).to eq(nil)
+      end
+    end
+
+    context 'merging' do
+      let(:config) do
+        Config.setup { |config| config.knockout_prefix = "--" }
+        Config.load_files(["#{fixture_path}/knockout_prefix/config1.yml",
+                           "#{fixture_path}/knockout_prefix/config2.yml",
+                           "#{fixture_path}/knockout_prefix/config3.yml"])
+      end
+
+      it 'should remove elements from settings' do
+        expect(config.array1).to eq(['item4', 'item5', 'item6'])
+        expect(config.array2.inner).to eq(['item4', 'item5', 'item6'])
+        expect(config.array3).to eq('')
+        expect(config.string1).to eq('')
+        expect(config.string2).to eq('')
+        expect(config.hash1.to_hash).to eq({ key1: '', key2: '', key3: 'value3' })
+        expect(config.hash2).to eq('')
+        expect(config.hash3.to_hash).to eq({ key4: 'value4', key5: 'value5' })
+        expect(config.fixnum1).to eq('')
+        expect(config.fixnum2).to eq('')
+      end
     end
   end
 end

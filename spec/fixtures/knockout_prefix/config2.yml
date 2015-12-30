@@ -1,0 +1,28 @@
+array1:
+  - --item1
+  - --item3
+  - item5
+
+array2:
+  inner:
+    - --item1
+    - --item3
+    - item5
+
+array3: --
+
+string1: --a_string
+
+string2: --
+
+hash1:
+  key1: --value1
+  key2: --
+
+hash2: --
+
+hash3: --
+
+fixnum1: --1
+
+fixnum2: --

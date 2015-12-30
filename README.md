@@ -178,7 +178,7 @@ Example production environment config file:
 ### Developer specific config files
 
 If you want to have local settings, specific to your machine or development environment,
-you can use the following files, which are automatically `.gitignored` :
+you can use the following files, which are automatically `.gitignore` :
 
 ```ruby
 Rails.root.join("config", "settings.local.yml").to_s,
@@ -264,6 +264,14 @@ Notice array notation and object member notation is maintained.
 Settings.section.servers[0].name # => yahoo.com
 Settings.section.servers[1].name # => amazon.com
 ```
+
+## Customize merge behaviour
+
+You may customize merge behaviour by setting following options:
+
+* knockout_prefix
+
+Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
 ## Working with Heroku
 

@@ -15,6 +15,10 @@ module Config
   @@const_name = "Settings"
   @@use_env    = false
 
+  # deep_merge options
+  mattr_accessor :knockout_prefix
+  @@knockout_prefix = nil
+
   def self.setup
     yield self if @@_ran_once == false
     @@_ran_once = true

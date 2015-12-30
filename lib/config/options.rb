@@ -1,4 +1,5 @@
 require 'ostruct'
+
 module Config
   class Options < OpenStruct
     include Enumerable
@@ -52,7 +53,11 @@ module Config
         if conf.empty?
           conf = source_conf
         else
-          DeepMerge.deep_merge!(source_conf, conf, :preserve_unmergeables => false)
+          # see Options Details in lib/rails_config/vendor/deep_merge.rb
+          DeepMerge.deep_merge!(source_conf,
+                                conf,
+                                preserve_unmergeables: false,
+                                knockout_prefix: Config.knockout_prefix)
         end
       end
 
@@ -61,7 +66,7 @@ module Config
 
       reload_env! if Config.use_env
 
-      return self
+      self
     end
 
     alias :load! :reload!

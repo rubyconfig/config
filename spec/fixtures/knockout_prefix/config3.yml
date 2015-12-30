@@ -1,0 +1,14 @@
+array1:
+  - --item2
+  - --item3
+  - item6
+
+array2:
+  inner:
+    - --item2
+    - --item3
+    - item6
+
+hash3:
+  key4: value4
+  key5: value5
