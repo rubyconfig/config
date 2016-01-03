@@ -37,6 +37,18 @@ RSpec.configure do |config|
 
   # Turn the deprecation warnings into errors, giving you the full backtrace
   config.raise_errors_for_deprecations!
+
+  config.before(:suite) do
+    Config.module_eval do
+
+      # Extend Config module with ability to reset configuration to the default values
+      def self.reset
+        self.const_name      = 'Settings'
+        self.use_env         = false
+        self.knockout_prefix = nil
+      end
+    end
+  end
 end
 
 

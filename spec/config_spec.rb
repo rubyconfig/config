@@ -319,38 +319,43 @@ describe Config do
     end
   end
 
-  context 'knockout_prefix' do
-    context 'configuration' do
-      it "should be able to assign a different settings constant" do
-        Config.setup { |config| config.knockout_prefix = "--" }
+  context 'when loading settings files' do
+    context 'using knockout_prefix' do
+      context 'in configuration phase' do
+        it 'should be able to assign a different knockout_prefix value' do
+          Config.reset
+          Config.knockout_prefix = '--'
 
-        expect(Config.knockout_prefix).to eq("--")
+          expect(Config.knockout_prefix).to eq('--')
+        end
+
+        it 'should have the default knockout_prefix value equal nil' do
+          Config.reset
+
+          expect(Config.knockout_prefix).to eq(nil)
+        end
       end
 
-      it "should have the default 'knockout_prefix' constant as nil" do
-        expect(Config.knockout_prefix).to eq(nil)
-      end
-    end
+      context 'merging' do
+        let(:config) do
+          Config.knockout_prefix = '--'
+          Config.load_files(["#{fixture_path}/knockout_prefix/config1.yml",
+                             "#{fixture_path}/knockout_prefix/config2.yml",
+                             "#{fixture_path}/knockout_prefix/config3.yml"])
+        end
 
-    context 'merging' do
-      let(:config) do
-        Config.setup { |config| config.knockout_prefix = "--" }
-        Config.load_files(["#{fixture_path}/knockout_prefix/config1.yml",
-                           "#{fixture_path}/knockout_prefix/config2.yml",
-                           "#{fixture_path}/knockout_prefix/config3.yml"])
-      end
-
-      it 'should remove elements from settings' do
-        expect(config.array1).to eq(['item4', 'item5', 'item6'])
-        expect(config.array2.inner).to eq(['item4', 'item5', 'item6'])
-        expect(config.array3).to eq('')
-        expect(config.string1).to eq('')
-        expect(config.string2).to eq('')
-        expect(config.hash1.to_hash).to eq({ key1: '', key2: '', key3: 'value3' })
-        expect(config.hash2).to eq('')
-        expect(config.hash3.to_hash).to eq({ key4: 'value4', key5: 'value5' })
-        expect(config.fixnum1).to eq('')
-        expect(config.fixnum2).to eq('')
+        it 'should remove elements from settings' do
+          expect(config.array1).to eq(['item4', 'item5', 'item6'])
+          expect(config.array2.inner).to eq(['item4', 'item5', 'item6'])
+          expect(config.array3).to eq('')
+          expect(config.string1).to eq('')
+          expect(config.string2).to eq('')
+          expect(config.hash1.to_hash).to eq({ key1: '', key2: '', key3: 'value3' })
+          expect(config.hash2).to eq('')
+          expect(config.hash3.to_hash).to eq({ key4: 'value4', key5: 'value5' })
+          expect(config.fixnum1).to eq('')
+          expect(config.fixnum2).to eq('')
+        end
       end
     end
   end
