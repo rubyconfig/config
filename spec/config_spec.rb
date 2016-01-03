@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Config do
+
   it "should get setting files" do
     config = Config.setting_files("root/config", "test")
     expect(config).to eq([
@@ -195,6 +196,7 @@ describe Config do
 
     it "should be able to assign a different settings constant" do
       Config.setup { |config| config.const_name = "Settings2" }
+
       expect(Config.const_name).to eq("Settings2")
     end
   end

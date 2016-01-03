@@ -24,12 +24,12 @@ module Config
     @@_ran_once = true
   end
 
-  # Create a populated Options instance from a yaml file. If a second yaml file is given, then the sections of that
+  # Create a populated Options instance from a settings file. If a second file is given, then the sections of that
   # file will overwrite existing sections of the first file.
   def self.load_files(*files)
     config = Options.new
 
-    # add yaml sources
+    # add settings sources
     [files].flatten.compact.uniq.each do |file|
       config.add_source!(file.to_s)
     end
