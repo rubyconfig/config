@@ -1,3 +1,5 @@
 Config.setup do |config|
-  config.const_name = "Settings"
+  # Name of the constat exposing loaded settings
+  config.const_name = 'Settings'
+
 end

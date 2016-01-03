@@ -14,8 +14,10 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 - simple YAML config files
 - config files support ERB
-- config files support inheritance
+- config files support inheritance and multiple environments
 - access config information via convenient object member notation
+- support for multi-level settings (`Settings.group.subgroup.setting`)
+- local developer settings ignored when committing the code
 
 ## Compatibility
 
@@ -24,15 +26,25 @@ Config helps you easily manage environment specific settings in an easy and usab
 - Padrino
 - Sinatra
 
-For older versions of Rails and other Ruby apps, use [AppConfig](http://github.com/fredwu/app_config).
+For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
 
-## Installing on Rails 3 or 4
 
-Add this to your `Gemfile`:
+## Installing
 
-```ruby
-gem "config"
-```
+### Installing on Rails 3 or 4
+
+Add the gem to your `Gemfile` and run `bundle install` to install it. Then run
+
+    rails g config:install
+
+which will generate customizable config file `config/initializers/config.rb` and set of default settings files:
+
+    config/settings.yml
+    config/settings/development.yml
+    config/settings/production.yml
+    config/settings/test.yml
+
+You can now edit them to adjust to your needs.
 
 If you want to use Settings before rails application initialization process you can load Config railtie manually:
 
@@ -53,57 +65,42 @@ module Appname
 end
 ```
 
-## Installing on Padrino
+### Installing on Padrino
 
-Add this to your `Gemfile`:
-
-```ruby
-gem "config"
-```
-
-in your app.rb, you'll also need to register Config
+Add the gem to your `Gemfile` and run `bundle install` to install it. Then edit `app.rb` and register `Config`
 
 ```ruby
 register Config
 ```
 
-## Installing on Sinatra
+### Installing on Sinatra
 
-Add this to your `Gemfile`:
-
-```ruby
-gem "config"
-```
-
-in your app, you'll need to register Config. You'll also need to give it a root so it can find the config files.
+Add the gem to your `Gemfile` and run `bundle install` to install it. Afterwards in need to register `Config` in your app and give it a root so it can find the config files.
 
 ```ruby
 set :root, File.dirname(__FILE__)
 register Config
 ```
 
-It's also possible to initialize it manually within your configure block if you want to just give it some yml paths to load from.
+It's also possible to initialize `Config` manually within your configure block if you want to just give it some yml paths to load from.
 
 ```ruby
 Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
 ```
 
-## Customizing Config
-
-You may customize the behavior of Config by generating an initializer file:
-
-    rails g config:install
-
-This will generate `config/initializers/config.rb` with a set of default settings as well as to generate a set of default settings files:
-
-    config/settings.yml
-    config/settings/development.yml
-    config/settings/production.yml
-    config/settings/test.yml
-
 ## Accessing the Settings object
 
-After installing this plugin, the `Settings` object will be available globally. Entries are accessed via object member notation:
+After installing the gem, `Settings` object will become available globally and by default will be compiled from the files listed below. Settings defined in files that are lower in the list override settings higher.
+
+    config/settings.yml
+    config/settings/#{environment}.yml
+    config/environments/#{environment}.yml
+
+    config/settings.local.yml
+    config/settings/#{environment}.local.yml
+    config/environments/#{environment}.local.yml
+
+Entries can be accessed via object member notation:
 
 ```ruby
 Settings.my_config_entry
@@ -123,22 +120,6 @@ Settings.my_section[:some_entry]
 Settings.my_section['some_entry']
 Settings[:my_section][:some_entry]
 ```
-
-If you have set a different constant name for the object in the initializer file, use that instead.
-
-## Common config file
-
-Config entries are compiled from:
-
-    config/settings.yml
-    config/settings/#{environment}.yml
-    config/environments/#{environment}.yml
-
-    config/settings.local.yml
-    config/settings/#{environment}.local.yml
-    config/environments/#{environment}.local.yml
-
-Settings defined in files that are lower in the list override settings higher.
 
 ### Reloading settings
 
@@ -186,7 +167,7 @@ Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
 Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
 ```
 
-### Adding sources at Runtime
+### Adding sources at runtime
 
 You can add new YAML config files at runtime. Just use:
 
@@ -218,11 +199,7 @@ Settings.reload!
 
 ## Embedded Ruby (ERB)
 
-Embedded Ruby is allowed in the configuration files. See examples below.
-
-## Accessing Configuration Settings
-
-Consider the two following config files.
+Embedded Ruby is allowed in the configuration files. Consider the two following config files.
 
 * ```#{Rails.root}/config/settings.yml```
 ```yaml
@@ -265,13 +242,25 @@ Settings.section.servers[0].name # => yahoo.com
 Settings.section.servers[1].name # => amazon.com
 ```
 
-## Customize merge behaviour
+## Configuration
 
-You may customize merge behaviour by setting following options:
+You can customize `Config` only once, preferably during application initialization phase:
 
-* knockout_prefix
+```ruby
+Config.setup do |config|
+  config.const_name = 'Settings'
+  config.knockout_prefix = nil
+end
+```
 
-Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
+After installing `Config` in Rails, you will find this configuration at `config/initializers/config.rb`.
+
+Following options are available:
+
+* `const_name` - name of the object holing you settings. Default: ```ruby 'Settings'```
+* settings inheritance customization (check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details)
+    * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
+
 
 ## Working with Heroku
 
@@ -313,10 +302,10 @@ $ appraisal rspec
 
 ## Authors
 
-* [Jacques Crocker](http://github.com/railsjedi)
-- [Fred Wu](http://github.com/fredwu)
+* [Fred Wu](http://github.com/fredwu)
 * [Piotr Kuczynski](http://github.com/pkuczynski)
-- Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
+* [Jacques Crocker](http://github.com/railsjedi)
+* Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
 
 ## License
 
