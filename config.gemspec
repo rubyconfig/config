@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.date             = Time.now.strftime '%F'
   s.authors          = ["Jacques Crocker", "Fred Wu", "Piotr Kuczynski"]
   s.email            = ["railsjedi@gmail.com", "ifredwu@gmail.com", "piotr.kuczynski@gmail.com"]
-  s.summary          = "Easiest way to add multi-environment yaml settings to Rails, Sinatra, Pandrino and other ruby projects."
-  s.description      = "Easiest way to add multi-environment yaml settings to Rails 3 and 4, Sinatra, Pandrino and other ruby projects."
+  s.summary          = "Effortless multi-environment settings in Rails, Sinatra, Pandrino and others"
+  s.description      = "Easiest way to manage multi-environment settings in any ruby project or framework: Rails, Sinatra, Pandrino and others"
   s.homepage         = "https://github.com/railsconfig/config"
   s.license          = "MIT"
   s.extra_rdoc_files = ["README.md", "CHANGELOG.md", "LICENSE.md"]
@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rails",       "~> 4.2.5"
   s.add_development_dependency "rspec",       "~> 3.4.0"
   s.add_development_dependency "rspec-rails", "~> 3.4.0"
+  s.add_development_dependency "test-unit",   "~> 3.1.3"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rubocop"
 
