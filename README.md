@@ -257,9 +257,11 @@ After installing `Config` in Rails, you will find this configuration at `config/
 
 Following options are available:
 
-* `const_name` - name of the object holing you settings. Default: ```ruby 'Settings'```
-* settings inheritance customization (check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details)
-    * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
+* `const_name` - name of the object holing you settings. Default: `'Settings'`
+
+Inheritance customization (check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details):
+
+* `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
 
 
 ## Working with Heroku
