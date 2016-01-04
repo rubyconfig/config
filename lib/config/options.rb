@@ -31,15 +31,21 @@ module Config
       return self if ENV.nil? || ENV.empty?
       conf = Hash.new
       ENV.each do |key, value|
-        next unless key.to_s.index(Config.const_name) == 0
-        hash = value
-        key.to_s.split('.').reverse.each do |element|
+        next unless key.to_s.index(Config.env_prefix || Config.const_name) == 0
+        hash = Config.env_parse_values ? __value(value) : value
+        key.to_s.split(Config.env_separator).reverse[0...-1].each do |element|
+          element = case Config.env_converter
+          when :downcase then element.downcase
+          when nil then element
+          else raise "Invalid env converter: #{Config.env_converter}"
+          end
+
           hash = {element => hash}
         end
         DeepMerge.deep_merge!(hash, conf, :preserve_unmergeables => false)
       end
 
-      merge!(conf[Config.const_name] || {})
+      merge!(conf)
     end
 
     alias :load_env! :reload_env!
@@ -157,6 +163,11 @@ module Config
         s.send("#{k}=".to_sym, v)
       end
       s
+    end
+
+    # Return an integer if it looks like one
+    def __value(v)
+      Integer(v) rescue v
     end
   end
 end

@@ -11,9 +11,13 @@ module Config
   # Ensures the setup only gets run once
   @@_ran_once = false
 
-  mattr_accessor :const_name, :use_env
+  mattr_accessor :const_name, :use_env, :env_prefix, :env_separator, :env_converter, :env_parse_values
   @@const_name = "Settings"
   @@use_env    = false
+  @@env_prefix = nil
+  @@env_separator = "."
+  @@env_converter = nil
+  @@env_parse_values = false
 
   # deep_merge options
   mattr_accessor :knockout_prefix

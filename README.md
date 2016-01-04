@@ -263,12 +263,9 @@ Inheritance customization (check [Deep Merge](https://github.com/danielsdeleo/de
 
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
 
+## Environment variables
 
-## Working with Heroku
-
-Heroku uses ENV object to store sensitive settings which are like the local files described above. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh.
-
-To use config with Heroku just set the `use_env` var to `true` in your `config/initializers/config.rb` file. Eg:
+To load environment variables from the `ENV` object, that will override any settings defined in files, set the `use_env` to true in your `config/initializers/config.rb` file. Eg:
 
 ```ruby
 Config.setup do |config|
@@ -286,7 +283,41 @@ ENV['AppSettings.section.server'] = 'google.com'
 
 It won't work with arrays, though.
 
+### Working with Heroku
+
+Heroku uses ENV object to store sensitive settings. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh. To use config with Heroku just set the `use_env` var to `true` as mentioned above.
+
 To upload your local values to Heroku you could ran `bundle exec rake config:heroku`.
+
+### Fine-tuning
+
+You can config how the environment variables will be processed, in case you want to specify variables in ALL CAPS, using double underscores instead of dots for separators, or parse numeric values as integers instead of strings.
+
+For instance, given the following environment:
+
+```bash
+APP__SECTION__SERVER_SIZE=1
+APP__SECTION__SERVER=google.com
+```
+
+And the following configuration:
+
+```ruby
+Config.setup do |config|
+  config.use_env = true
+  config.env_prefix = "APP"
+  config.env_separator = '__'
+  config.env_converter = :downcase
+  config.env_parse_values = true
+end
+```
+
+The following settings will be available:
+
+```ruby
+Settings.section.server_size # => 1
+Settings.section.server # => 'google.com'
+```
 
 ## Contributing
 
