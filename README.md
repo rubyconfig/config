@@ -33,7 +33,7 @@ For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app
 
 ### Installing on Rails 3 or 4
 
-Add the gem to your `Gemfile` and run `bundle install` to install it. Then run
+Add `gem 'config'` to your `Gemfile` and run `bundle install` to install it. Then run
 
     rails g config:install
 
