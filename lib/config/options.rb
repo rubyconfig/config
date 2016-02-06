@@ -77,8 +77,7 @@ module Config
     end
 
     def to_hash
-      result = {}
-      marshal_dump.each do |k, v|
+      marshal_dump.each_with_object({}) do |(k, v), result|
         if v.instance_of? Config::Options
           result[k] = v.to_hash
         elsif v.instance_of? Array
@@ -87,7 +86,6 @@ module Config
           result[k] = v
         end
       end
-      result
     end
 
     def each(*args, &block)
