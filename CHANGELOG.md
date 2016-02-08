@@ -8,6 +8,9 @@
 * Added `prepend_source!` (thanks [@eugenk](https://github.com/railsconfig/config/pull/102))
 * Miscellaneous tweaks and fixes by @pkuczynski and co
 
+# 0.99
+Gem released here
+
 # 0.5.0.beta1
 
 * Ability to use in Settings file keywords reserved for OpenStruct: select, collect ([#95](https://github.com/railsjedi/config/issues/95))
