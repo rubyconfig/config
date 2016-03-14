@@ -13,7 +13,7 @@
 * Added `prepend_source!` ([#102](https://github.com/railsconfig/config/pull/102))
 
 # 0.99
-Gem released here
+* Released deprecated gem migrating to the new name
 
 # 0.5.0.beta1
 
