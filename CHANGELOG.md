@@ -1,12 +1,16 @@
+# 1.1.0
+
+* Add ability to specify knockout_prefix option for deep_merge
+* Minor code and documentation refactoring and cleanup
+
 # 1.0.0
 
 * `RailsConfig` is now officially renamed to `Config`
-* Fixed array descent when converting to hash (thanks [@slicedpan](https://github.com/railsconfig/config/commit/c24d09907aeb09231586dc0914050fa7a05542e3))
-* Catch OpenStruct reserved keywords (thanks [@dudo](https://github.com/railsconfig/config/commit/2bf3baf10590d56c6382d79e323dc11295d9e5c1))
-* Allows loading before app configuration process (thanks [Andrey Voronkov](https://github.com/railsconfig/config/commit/8732c18d1fb9715554274543b707c1006daa50f5))
-* `deep_merge` is now properly managed via gemspec (thanks [@firedev](https://github.com/railsconfig/config/commit/a2560bcec1a902a807d8c1766368906e5789a18e))
-* Added `prepend_source!` (thanks [@eugenk](https://github.com/railsconfig/config/pull/102))
-* Miscellaneous tweaks and fixes by @pkuczynski and co
+* Fixed array descent when converting to hash ([#89](https://github.com/railsconfig/config/pull/89))
+* Catch OpenStruct reserved keywords ([#95](https://github.com/railsconfig/config/pull/95) thanks @dudo)
+* Allows loading before app configuration process ([#107](https://github.com/railsconfig/config/pull/107) thanks @Antiarchitect)
+* `deep_merge` is now properly managed via gemspec ([#110](https://github.com/railsconfig/config/pull/110))
+* Added `prepend_source!` ([#102](https://github.com/railsconfig/config/pull/102))
 
 # 0.5.0.beta1
 
@@ -33,3 +37,6 @@
 
 * Expose Settings in application.rb, so you don't have to duplicate configuration for each environment file ([#59](https://github.com/railsjedi/config/issues/59))
 * Adding support for Rails 4.1.0.rc ([#70](https://github.com/railsjedi/config/issues/70))
+
+
+
