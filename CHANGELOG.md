@@ -12,6 +12,9 @@
 * `deep_merge` is now properly managed via gemspec ([#110](https://github.com/railsconfig/config/pull/110))
 * Added `prepend_source!` ([#102](https://github.com/railsconfig/config/pull/102))
 
+# 0.99
+Gem released here
+
 # 0.5.0.beta1
 
 * Ability to use in Settings file keywords reserved for OpenStruct: select, collect ([#95](https://github.com/railsjedi/config/issues/95))
