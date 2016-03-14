@@ -34,10 +34,10 @@ Gem::Specification.new do |s|
 
   # Testing
   s.add_development_dependency "appraisal",   "~> 2.1.0"
-  s.add_development_dependency "rails",       "~> 4.2.5"
+  s.add_development_dependency "rails",       "~> 4.2.6"
   s.add_development_dependency "rspec",       "~> 3.4.0"
-  s.add_development_dependency "rspec-rails", "~> 3.4.0"
-  s.add_development_dependency "test-unit",   "~> 3.1.3"
+  s.add_development_dependency "rspec-rails", "~> 3.4.2"
+  s.add_development_dependency "test-unit",   "~> 3.1.7"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rubocop"
 
