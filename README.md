@@ -12,22 +12,21 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Features
 
-- simple YAML config files
-- config files support ERB
-- config files support inheritance and multiple environments
-- access config information via convenient object member notation
-- support for multi-level settings (`Settings.group.subgroup.setting`)
-- local developer settings ignored when committing the code
+* simple YAML config files
+* config files support ERB
+* config files support inheritance and multiple environments
+* access config information via convenient object member notation
+* support for multi-level settings (`Settings.group.subgroup.setting`)
+* local developer settings ignored when committing the code
 
 ## Compatibility
 
-- Ruby `2.x`
-- Rails `>= 3.1` and `4`
-- Padrino
-- Sinatra
+* Ruby `2.x`
+* Rails `>= 3.1` and `4`
+* Padrino
+* Sinatra
 
 For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
-
 
 ## Installing
 
@@ -75,14 +74,16 @@ register Config
 
 ### Installing on Sinatra
 
-Add the gem to your `Gemfile` and run `bundle install` to install it. Afterwards in need to register `Config` in your app and give it a root so it can find the config files.
+Add the gem to your `Gemfile` and run `bundle install` to install it. Afterwards in need to register `Config` in your
+app and give it a root so it can find the config files.
 
 ```ruby
 set :root, File.dirname(__FILE__)
 register Config
 ```
 
-It's also possible to initialize `Config` manually within your configure block if you want to just give it some yml paths to load from.
+It's also possible to initialize `Config` manually within your configure block if you want to just give it some yml
+paths to load from.
 
 ```ruby
 Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
@@ -90,7 +91,8 @@ Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
 
 ## Accessing the Settings object
 
-After installing the gem, `Settings` object will become available globally and by default will be compiled from the files listed below. Settings defined in files that are lower in the list override settings higher.
+After installing the gem, `Settings` object will become available globally and by default will be compiled from the
+files listed below. Settings defined in files that are lower in the list override settings higher.
 
     config/settings.yml
     config/settings/#{environment}.yml
@@ -142,7 +144,8 @@ Settings.reload_from_files(
 
 ### Environment specific config files
 
-You can have environment specific config files. Environment specific config entries take precedence over common config entries.
+You can have environment specific config files. Environment specific config entries take precedence over common config
+entries.
 
 Example development environment config file:
 
@@ -185,29 +188,33 @@ Settings.prepend_source!("/path/to/source.yml")
 Settings.reload!
 ```
 
-This will do the same as `add_source`, but the given YML file will be loaded first (instead of last) and its settings will be overwritten by any other configuration file.
-This is especially useful if you want to define defaults.
+This will do the same as `add_source`, but the given YML file will be loaded first (instead of last) and its settings
+will be overwritten by any other configuration file. This is especially useful if you want to define defaults.
 
-One thing I like to do for my Rails projects is provide a local.yml config file that is .gitignored (so its independent per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
+One thing I like to do for my Rails projects is provide a local.yml config file that is .gitignored (so its independent
+per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
 
 ```ruby
 Settings.add_source!("#{Rails.root}/config/settings/local.yml")
 Settings.reload!
 ```
 
-> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml, settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
+> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml,
+settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
 
 ## Embedded Ruby (ERB)
 
 Embedded Ruby is allowed in the configuration files. Consider the two following config files.
 
 * ```#{Rails.root}/config/settings.yml```
+
 ```yaml
 size: 1
 server: google.com
 ```
 
 * ```#{Rails.root}/config/environments/development.yml```
+
 ```yaml
 size: 2
 computed: <%= 1 + 2 + 3 %>
@@ -263,10 +270,10 @@ Inheritance customization (check [Deep Merge](https://github.com/danielsdeleo/de
 
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
 
-
 ## Working with Heroku
 
-Heroku uses ENV object to store sensitive settings which are like the local files described above. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh.
+Heroku uses ENV object to store sensitive settings which are like the local files described above. You cannot upload
+such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh.
 
 To use config with Heroku just set the `use_env` var to `true` in your `config/initializers/config.rb` file. Eg:
 
@@ -277,7 +284,8 @@ Config.setup do |config|
 end
 ```
 
-Now config would read values from the ENV object to the settings. For the example above it would look for keys starting with 'AppSettings'. Eg:
+Now config would read values from the ENV object to the settings. For the example above it would look for keys starting
+with 'AppSettings'. Eg:
 
 ```ruby
 ENV['AppSettings.section.size'] = 1
@@ -293,13 +301,19 @@ To upload your local values to Heroku you could ran `bundle exec rake config:her
 Bootstrap
 
 ```bash
-$ appraisal install
+appraisal install
 ```
 
-Running the test suite
+Run the test suite:
 
 ```bash
-$ appraisal rspec
+appraisal rspec
+```
+
+If you modified any of the documentation files verify their format:
+
+```bash
+mdl --style .mdlstyle.rb *.md
 ```
 
 ## Authors

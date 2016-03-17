@@ -39,6 +39,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails", "~> 3.4.2"
   s.add_development_dependency "test-unit",   "~> 3.1.7"
   s.add_development_dependency "sqlite3"
+
+  # Static code analysis
+  s.add_development_dependency "mdl"
   s.add_development_dependency "rubocop"
 
   if ENV['TRAVIS']
