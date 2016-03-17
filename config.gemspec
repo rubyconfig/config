@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
 
   # Static code analysis
   s.add_development_dependency "mdl"
+  s.add_development_dependency "reek"
   s.add_development_dependency "rubocop"
 
   if ENV['TRAVIS']

@@ -5,3 +5,9 @@ languages:
 engines:
   markdownlint:
     enabled: true
+ reek:
+    enabled: true
+ratings:
+  paths:
+    - "lib/**"
+    - "**.md"
