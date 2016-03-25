@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("doc/**/*")
 
   s.require_paths         = ["lib"]
-  s.required_ruby_version = ">= 2.2.2"
+  s.required_ruby_version = ">= 2.0.0"
 
   s.add_dependency "activesupport",           ">= 3.0"
   s.add_dependency "deep_merge",              "~> 1.0.1"
