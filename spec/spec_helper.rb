@@ -43,9 +43,10 @@ RSpec.configure do |config|
 
       # Extend Config module with ability to reset configuration to the default values
       def self.reset
-        self.const_name      = 'Settings'
-        self.use_env         = false
-        self.knockout_prefix = nil
+        self.const_name       = 'Settings'
+        self.use_env          = false
+        self.knockout_prefix  = nil
+        self.overwrite_arrays = false
       end
     end
   end

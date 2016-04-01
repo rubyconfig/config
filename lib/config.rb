@@ -20,8 +20,9 @@ module Config
   @@env_parse_values = true
 
   # deep_merge options
-  mattr_accessor :knockout_prefix
+  mattr_accessor :knockout_prefix, :overwrite_arrays
   @@knockout_prefix = nil
+  @@overwrite_arrays = false
 
   def self.setup
     yield self if @@_ran_once == false
