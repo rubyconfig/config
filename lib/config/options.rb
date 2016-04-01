@@ -73,6 +73,8 @@ module Config
                                 conf,
                                 preserve_unmergeables: false,
                                 knockout_prefix:       Config.knockout_prefix)
+                                knockout_prefix: Config.knockout_prefix,
+                                overwrite_arrays: Config.overwrite_arrays)
         end
       end
 
@@ -116,7 +118,10 @@ module Config
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(hash.dup, current)
+      DeepMerge.deep_merge!(hash.dup,
+                            current,
+                            preserve_unmergeables: false,
+                            overwrite_arrays: Config.overwrite_arrays)
       marshal_load(__convert(current).marshal_dump)
       self
     end

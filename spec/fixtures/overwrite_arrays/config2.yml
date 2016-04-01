@@ -1,0 +1,12 @@
+array1:
+  - item2
+  - item4
+  - item5
+
+array2:
+  inner:
+    - item2
+    - item4
+    - item5
+
+array3: []
