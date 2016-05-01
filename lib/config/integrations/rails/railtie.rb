@@ -25,7 +25,11 @@ module Config
           if ::Rails.env.development?
             initializer :config_reload_on_development do
               ActionController::Base.class_eval do
-                prepend_before_filter { ::Config.reload! }
+                if ::Rails::VERSION::MAJOR >= 4
+                  prepend_before_action { ::Config.reload! }
+                else
+                  prepend_before_filter { ::Config.reload! }
+                end
               end
             end
           end
