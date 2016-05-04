@@ -12,8 +12,10 @@ module Config
   @@_ran_once = false
 
   mattr_accessor :const_name, :use_env
+  mattr_accessor :prepend_sources, :_ran_once
   @@const_name = "Settings"
   @@use_env    = false
+  @@prepend_sources = []
 
   # deep_merge options
   mattr_accessor :knockout_prefix
@@ -46,7 +48,7 @@ module Config
   end
 
   def self.setting_files(config_root, env)
-    [
+    (@@prepend_sources + [
       File.join(config_root, "settings.yml").to_s,
       File.join(config_root, "settings", "#{env}.yml").to_s,
       File.join(config_root, "environments", "#{env}.yml").to_s,
@@ -54,7 +56,7 @@ module Config
       File.join(config_root, "settings.local.yml").to_s,
       File.join(config_root, "settings", "#{env}.local.yml").to_s,
       File.join(config_root, "environments", "#{env}.local.yml").to_s
-    ].freeze
+    ]).freeze
   end
 
   def self.reload!

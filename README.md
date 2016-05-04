@@ -258,6 +258,7 @@ You can customize `Config` only once, preferably during application initializati
 Config.setup do |config|
   config.const_name = 'Settings'
   config.knockout_prefix = nil
+  config.prepend_sources = ["path_to_some_custom_settings_to_prepend.yml"]
 end
 ```
 
@@ -270,6 +271,10 @@ Following options are available:
 Inheritance customization (check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details):
 
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
+
+Prepend sources
+
+* `prepend_sources` - ability to prepend settings via Config without the need to reload settings after they run once.
 
 ## Working with Heroku
 

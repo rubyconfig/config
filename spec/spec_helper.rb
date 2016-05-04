@@ -30,6 +30,7 @@ APP_RAKEFILE = File.expand_path("../../spec/app/#{app_name}/Rakefile", __FILE__)
 # Load Rspec
 #
 require 'rspec/rails'
+require 'pry'
 
 # Configure
 RSpec.configure do |config|
