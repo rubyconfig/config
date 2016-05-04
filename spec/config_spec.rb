@@ -190,6 +190,11 @@ describe Config do
   end
 
   context "Custom Configuration" do
+
+    before :each do
+      Config._ran_once=false
+    end
+
     it "should have the default settings constant as 'Settings'" do
       expect(Config.const_name).to eq("Settings")
     end
@@ -199,6 +204,18 @@ describe Config do
 
       expect(Config.const_name).to eq("Settings2")
     end
+
+    it "should have prepend_sources empty" do
+      expect(Config.prepend_sources).to eq([])
+    end
+
+    it "should be able to assign prepend_sources" do
+      Config.setup { |config| config.prepend_sources = ["file.yml"] }
+
+      expect(Config.prepend_sources).to eq(["file.yml"])
+      expect(Config.setting_files("./","test")[0]).to eq("file.yml")
+    end
+
   end
 
   context "Settings with a type value of 'hash'" do
