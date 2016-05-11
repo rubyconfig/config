@@ -24,13 +24,11 @@ Gem::Specification.new do |s|
   s.require_paths         = ['lib']
   s.required_ruby_version = '>= 2.0.0'
 
-  s.add_dependency 'activesupport',           '~> 3',     '>= 3.0'
+  s.add_dependency 'activesupport',           '>= 3.0'
   s.add_dependency 'deep_merge',              '~> 1.0',   '>= 1.0.1'
 
-  s.add_development_dependency 'bundler',     '~> 0'
-  s.add_development_dependency 'rake',        '~> 0'
-  s.add_development_dependency 'rdoc',        '~> 0'
-  s.add_development_dependency 'pry',         '~> 0'
+  s.add_development_dependency 'bundler',     '~> 1.11',  '>= 1.11.2'
+  s.add_development_dependency 'rake',        '~> 11.1',  '>= 11.1.2'
 
   # Testing
   s.add_development_dependency 'appraisal',   '~> 2.1',   '>= 2.1.0'
@@ -38,11 +36,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec',       '~> 3.4',   '>= 3.4.0'
   s.add_development_dependency 'rspec-rails', '~> 3.4',   '>= 3.4.2'
   s.add_development_dependency 'test-unit',   '~> 3.1',   '>= 3.1.7'
-  s.add_development_dependency 'sqlite3',     '~> 0'
+  s.add_development_dependency 'sqlite3',     '~> 1.3',   '>= 1.3.11'
 
-  # Static code analysis``
-  s.add_development_dependency 'mdl',         '~> 0'
-  s.add_development_dependency 'rubocop',     '~> 0'
+  # Static code analysis
+  s.add_development_dependency 'mdl',         '~> 0.3',   '>= 0.3.1'
+  s.add_development_dependency 'rubocop',     '~> 0.40',  '>= 0.40.0'
 
   if ENV['TRAVIS']
     s.add_development_dependency 'codeclimate-test-reporter'
