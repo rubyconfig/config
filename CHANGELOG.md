@@ -1,5 +1,9 @@
 # Changelog
 
+## Latest changes
+
+* Removed Rails 5 deprecation warnings for prepend_before_filter ([#141](https://github.com/railsconfig/config/pull/141)
+
 ## 1.1.1
 
 * Downgrade minimum ruby version to 2.0.0 ([#136](https://github.com/railsconfig/config/issues/136))
