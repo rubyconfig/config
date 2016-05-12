@@ -104,14 +104,64 @@ describe Config do
       Config.use_env = false
     end
 
+    after :each do
+      Config.env_prefix = nil
+      Config.env_separator = "."
+      Config.env_converter = nil
+      Config.env_parse_values = false
+    end
+
     it "should load basic ENV variables" do
       config.load_env!
       expect(config.test_var).to eq("123")
     end
 
+    it "should parse ENV variables as numeric" do
+      Config.env_parse_values = true
+      config.load_env!
+      expect(config.test_var).to eq(123)
+    end
+
+    it "should leave ENV variables as strings" do
+      Config.env_parse_values = true
+      config.load_env!
+      expect(config.test_str_var).to eq("foobar")
+    end
+
     it "should load nested sections" do
       config.load_env!
       expect(config.hash_test.one).to eq("1-1")
+    end
+
+    it "should use env specific prefix" do
+      ENV['MyConfig.hash_test.three'] = "1-3"
+      Config.env_prefix = "MyConfig"
+      config.load_env!
+      expect(config.hash_test.one).to be_nil
+      expect(config.hash_test.three).to eq("1-3")
+    end
+
+    it "should use env specific separator" do
+      ENV['Settings__hash_test__four'] = "1-4"
+      Config.env_separator = "__"
+      config.load_env!
+      expect(config.hash_test.four).to eq("1-4")
+    end
+
+    it "should convert env keys to downcase" do
+      ENV['Settings.HASH_TEST.FIVE'] = "1-5"
+      Config.env_converter = :downcase
+      config.load_env!
+      expect(config.hash_test.five).to eq("1-5")
+    end
+
+    it "should parse env-like keys" do
+      ENV['APP__HASH_TEST__SIX'] = "1-6"
+      Config.env_converter = :downcase
+      Config.env_prefix = "APP"
+      Config.env_separator = "__"
+      config.load_env!
+      expect(config.hash_test.six).to eq("1-6")
     end
 
     it "should override settings from files" do
