@@ -252,50 +252,101 @@ Settings.section.servers[1].name # => amazon.com
 
 ## Configuration
 
-You can customize `Config` only once, preferably during application initialization phase:
+There are multiple configuration options available, however you can customize `Config` only once, preferably during
+application initialization phase:
 
 ```ruby
 Config.setup do |config|
   config.const_name = 'Settings'
-  config.knockout_prefix = nil
+  ...
 end
 ```
 
-After installing `Config` in Rails, you will find this configuration at `config/initializers/config.rb`.
+After installing `Config` in Rails, you will find automatically generated file that contains default configuration
+located at `config/initializers/config.rb`.
 
-Following options are available:
+### General
 
 * `const_name` - name of the object holing you settings. Default: `'Settings'`
 
-Inheritance customization (check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details):
+### Merge customization
 
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
 
-## Working with Heroku
+Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
-Heroku uses ENV object to store sensitive settings which are like the local files described above. You cannot upload
-such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh.
+### Environment variables
 
-To use config with Heroku just set the `use_env` var to `true` in your `config/initializers/config.rb` file. Eg:
+See section below for more details.
+
+## Working with environment variables
+
+To load environment variables from the `ENV` object, that will override any settings defined in files, set the `use_env`
+to true in your `config/initializers/config.rb` file:
 
 ```ruby
 Config.setup do |config|
-  config.const_name = 'AppSettings'
+  config.const_name = 'Settings'
   config.use_env = true
 end
 ```
 
 Now config would read values from the ENV object to the settings. For the example above it would look for keys starting
-with 'AppSettings'. Eg:
+with `Settings`:
 
 ```ruby
-ENV['AppSettings.section.size'] = 1
-ENV['AppSettings.section.server'] = 'google.com'
+ENV['Settings.section.size'] = 1
+ENV['Settings.section.server'] = 'google.com'
 ```
 
 It won't work with arrays, though.
 
+### Working with Heroku
+
+Heroku uses ENV object to store sensitive settings. You cannot upload such files to Heroku because it's ephemeral
+filesystem gets recreated from the git sources on each instance refresh. To use config with Heroku just set the
+`use_env` var to `true` as mentioned above.
+
 To upload your local values to Heroku you could ran `bundle exec rake config:heroku`.
+
+### Fine-tuning
+
+You can customize how environment variables are processed:
+
+* `env_prefix` - which variables to load into config
+* `env_separator` - what string to use as level separator instead of dots - default value of `.` works well with
+  Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using
+  dots in variable names might not be allowed (eg. Bash)
+* `env_converter` - how to process variables names:
+  * `nil` - no change
+  * `:downcase` - convert to lower case
+* `env_parse_values` - parse numeric values as integers instead of strings
+
+For instance, given the following environment:
+
+```bash
+SETTINGS__SECTION__SERVER_SIZE=1
+SETTINGS__SECTION__SERVER=google.com
+```
+
+And the following configuration:
+
+```ruby
+Config.setup do |config|
+  config.use_env = true
+  config.env_prefix = 'Settings'
+  config.env_separator = '__'
+  config.env_converter = :downcase
+  config.env_parse_values = true
+end
+```
+
+The following settings will be available:
+
+```ruby
+Settings.section.server_size # => 1
+Settings.section.server # => 'google.com'
+```
 
 ## Contributing
 
