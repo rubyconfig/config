@@ -23,7 +23,7 @@ Config helps you easily manage environment specific settings in an easy and usab
 ## Compatibility
 
 * Ruby `2.x`
-* Rails `>= 3.1` and `4`
+* Rails `>= 3.1`, `4` and `5`
 * Padrino
 * Sinatra
 
@@ -31,7 +31,7 @@ For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app
 
 ## Installing
 
-### Installing on Rails 3 or 4
+### Installing on Rails 3, 4 or 5
 
 Add `gem 'config'` to your `Gemfile` and run `bundle install` to install it. Then run
 
@@ -370,8 +370,8 @@ mdl --style .mdlstyle.rb *.md
 
 ## Authors
 
-* [Fred Wu](http://github.com/fredwu)
 * [Piotr Kuczynski](http://github.com/pkuczynski)
+* [Fred Wu](http://github.com/fredwu)
 * [Jacques Crocker](http://github.com/railsjedi)
 * Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
 

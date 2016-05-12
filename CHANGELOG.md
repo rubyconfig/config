@@ -1,7 +1,8 @@
 # Changelog
 
-## Latest changes
+## 1.2.0
 
+* Add ability to load settings from ENV variables ([#108](https://github.com/railsconfig/config/issues/108) thanks @vinceve and @spalladino)
 * Removed Rails 5 deprecation warnings for prepend_before_filter ([#141](https://github.com/railsconfig/config/pull/141)
 
 ## 1.1.1

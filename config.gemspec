@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.name             = 'config'
   s.version          = Config::VERSION
   s.date             = Time.now.strftime '%F'
-  s.authors          = ['Jacques Crocker', 'Fred Wu', 'Piotr Kuczynski']
-  s.email            = %w(railsjedi@gmail.com ifredwu@gmail.com piotr.kuczynski@gmail.com)
+  s.authors          = ['Piotr Kuczynski', 'Fred Wu', 'Jacques Crocker']
+  s.email            = %w(piotr.kuczynski@gmail.com ifredwu@gmail.com railsjedi@gmail.com)
   s.summary          = 'Effortless multi-environment settings in Rails, Sinatra, Pandrino and others'
   s.description      = 'Easiest way to manage multi-environment settings in any ruby project or framework: Rails, Sinatra, Pandrino and others'
   s.homepage         = 'https://github.com/railsconfig/config'
