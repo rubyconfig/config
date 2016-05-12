@@ -5,3 +5,5 @@ languages:
 engines:
   markdownlint:
     enabled: true
+exclude_paths:
+- "spec/app/**/*"
