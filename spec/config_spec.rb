@@ -178,6 +178,14 @@ describe Config do
       expect(Settings.server).to eq("google.com")
       expect(Settings.size).to eq("3")
     end
+
+    it "should deep merge hashes" do
+      ENV['Settings.inner.something1'] = 'new blah'
+      config = Config.load_files("#{fixture_path}/deep_merge/config1.yml")
+
+      expect(config.inner.something1).to eq('new blah')
+      expect(config.inner.something2).to eq('blah2')
+    end
   end
 
   context "Nested Settings" do

@@ -107,7 +107,8 @@ module Config
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(hash.dup, current)
+      hash = Config::Options.new(hash.dup).to_hash
+      DeepMerge.deep_merge!(hash, current)
       marshal_load(__convert(current).marshal_dump)
       self
     end
