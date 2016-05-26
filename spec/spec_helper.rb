@@ -1,10 +1,10 @@
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 
 ##
 # Code Climate
 #
-if ENV["TRAVIS"]
-  require "codeclimate-test-reporter"
+if ENV['TRAVIS']
+  require 'codeclimate-test-reporter'
   CodeClimate::TestReporter.start
 end
 
@@ -16,7 +16,7 @@ Dir['./spec/support/**/*.rb'].each { |f| require f }
 ##
 # Load Rails dummy application based on gemfile name substituted by Appraisal
 #
-if ENV["APPRAISAL_INITIALIZED"] || ENV["TRAVIS"]
+if ENV['APPRAISAL_INITIALIZED'] || ENV['TRAVIS']
   app_name = Pathname.new(ENV['BUNDLE_GEMFILE']).basename.sub('.gemfile', '')
 else
   app_name = 'rails_3'
@@ -33,7 +33,7 @@ require 'rspec/rails'
 
 # Configure
 RSpec.configure do |config|
-  config.fixture_path = File.join(File.dirname(__FILE__), "/fixtures")
+  config.fixture_path = File.join(File.dirname(__FILE__), '/fixtures')
 
   # Turn the deprecation warnings into errors, giving you the full backtrace
   config.raise_errors_for_deprecations!
@@ -57,7 +57,7 @@ end
 #
 puts
 puts "Gemfile: #{ENV['BUNDLE_GEMFILE']}"
-puts "Rails version:"
+puts 'Rails version:'
 
 Gem.loaded_specs.each { |name, spec|
   puts "\t#{name}-#{spec.version}" if %w{rails activesupport sqlite3 rspec-rails}.include?(name)
