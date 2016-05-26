@@ -1,35 +1,33 @@
 module Config
-  module Integration
+  module Integrations
     module Rails
-      if defined?(::Rails::Railtie)
-        class Railtie < ::Rails::Railtie
-          # Load rake tasks (eg. Heroku)
-          rake_tasks do
-            Dir[File.join(File.dirname(__FILE__),'../tasks/*.rake')].each { |f| load f }
-          end
+      class Railtie < ::Rails::Railtie
+        # Load rake tasks (eg. Heroku)
+        rake_tasks do
+          Dir[File.join(File.dirname(__FILE__), '../tasks/*.rake')].each { |f| load f }
+        end
 
-          config.before_configuration { preload }
+        config.before_configuration { preload }
 
-          def preload
-            # Manually load the custom initializer before everything else
-            initializer = ::Rails.root.join("config", "initializers", "config.rb")
-            require initializer if File.exist?(initializer)
+        def preload
+          # Manually load the custom initializer before everything else
+          initializer = ::Rails.root.join("config", "initializers", "config.rb")
+          require initializer if File.exist?(initializer)
 
-            # Parse the settings before any of the initializers
-            Config.load_and_set_settings(
-              Config.setting_files(::Rails.root.join("config"), ::Rails.env)
-            )
-          end
+          # Parse the settings before any of the initializers
+          Config.load_and_set_settings(
+            Config.setting_files(::Rails.root.join("config"), ::Rails.env)
+          )
+        end
 
-          # Rails Dev environment should reload the Settings on every request
-          if ::Rails.env.development?
-            initializer :config_reload_on_development do
-              ActionController::Base.class_eval do
-                if ::Rails::VERSION::MAJOR >= 4
-                  prepend_before_action { ::Config.reload! }
-                else
-                  prepend_before_filter { ::Config.reload! }
-                end
+        # Rails Dev environment should reload the Settings on every request
+        if ::Rails.env.development?
+          initializer :config_reload_on_development do
+            ActionController::Base.class_eval do
+              if ::Rails::VERSION::MAJOR >= 4
+                prepend_before_action { ::Config.reload! }
+              else
+                prepend_before_filter { ::Config.reload! }
               end
             end
           end
