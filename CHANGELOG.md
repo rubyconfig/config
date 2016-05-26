@@ -7,7 +7,7 @@
 
 ## 1.2.1
 
-* Fixed support for multilevel settings loaded from ENV variables (inspired by @cbeer in [#144](https://github.com/railsconfig/config/pull/144))gem
+* Fixed support for multilevel settings loaded from ENV variables (inspired by @cbeer in [#144](https://github.com/railsconfig/config/pull/144))
 
 ## 1.2.0
 
