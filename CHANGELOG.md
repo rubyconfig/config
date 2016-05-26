@@ -1,9 +1,13 @@
 # Changelog
 
+## 1.2.1
+
+* Fixed support for multilevel settings loaded from ENV variables (inspired by @cbeer in [#144](https://github.com/railsconfig/config/pull/144))
+
 ## 1.2.0
 
-* Add ability to load settings from ENV variables ([#108](https://github.com/railsconfig/config/issues/108) thanks @vinceve and @spalladino)
-* Removed Rails 5 deprecation warnings for prepend_before_filter ([#141](https://github.com/railsconfig/config/pull/141)
+* Add ability to load settings from ENV variables ([#108](https://github.com/railsconfig/config/issues/108) thanks to @vinceve and @spalladino)
+* Removed Rails 5 deprecation warnings for prepend_before_filter ([#141](https://github.com/railsconfig/config/pull/141))
 
 ## 1.1.1
 
@@ -18,8 +22,8 @@
 
 * `RailsConfig` is now officially renamed to `Config`
 * Fixed array descent when converting to hash ([#89](https://github.com/railsconfig/config/pull/89))
-* Catch OpenStruct reserved keywords ([#95](https://github.com/railsconfig/config/pull/95) thanks @dudo)
-* Allows loading before app configuration process ([#107](https://github.com/railsconfig/config/pull/107) thanks @Antiarchitect)
+* Catch OpenStruct reserved keywords ([#95](https://github.com/railsconfig/config/pull/95) by @dudo)
+* Allows loading before app configuration process ([#107](https://github.com/railsconfig/config/pull/107) by @Antiarchitect)
 * `deep_merge` is now properly managed via gemspec ([#110](https://github.com/railsconfig/config/pull/110))
 * Added `prepend_source!` ([#102](https://github.com/railsconfig/config/pull/102))
 

@@ -29,23 +29,33 @@ module Config
 
     def reload_env!
       return self if ENV.nil? || ENV.empty?
-      conf = Hash.new
-      ENV.each do |key, value|
-        next unless key.to_s.index(Config.env_prefix || Config.const_name) == 0
-        hash = Config.env_parse_values ? __value(value) : value
-        key.to_s.split(Config.env_separator).reverse[0...-1].each do |element|
-          element = case Config.env_converter
-          when :downcase then element.downcase
-          when nil then element
-          else raise "Invalid env converter: #{Config.env_converter}"
-          end
 
-          hash = {element => hash}
-        end
-        DeepMerge.deep_merge!(hash, conf, :preserve_unmergeables => false)
+      hash = Hash.new
+
+      ENV.each do |variable, value|
+        keys = variable.to_s.split(Config.env_separator)
+
+        next if keys.shift != (Config.env_prefix || Config.const_name)
+
+        keys.map! { |key|
+          case Config.env_converter
+            when :downcase then
+              key.downcase.to_sym
+            when nil then
+              key.to_sym
+            else
+              raise "Invalid ENV variables name converter: #{Config.env_converter}"
+          end
+        }
+
+        leaf = keys[0...-1].inject(hash) { |h, key|
+          h[key] ||= {}
+        }
+
+        leaf[keys.last] = Config.env_parse_values ? __value(value) : value
       end
 
-      merge!(conf)
+      merge!(hash)
     end
 
     alias :load_env! :reload_env!
@@ -59,11 +69,10 @@ module Config
         if conf.empty?
           conf = source_conf
         else
-          # see Options Details in lib/rails_config/vendor/deep_merge.rb
           DeepMerge.deep_merge!(source_conf,
                                 conf,
                                 preserve_unmergeables: false,
-                                knockout_prefix: Config.knockout_prefix)
+                                knockout_prefix:       Config.knockout_prefix)
         end
       end
 
