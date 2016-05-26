@@ -174,9 +174,9 @@ module Config
       s
     end
 
-    # Return an integer if it looks like one
+    # Try to convert string to a correct type
     def __value(v)
-      Integer(v) rescue v
+      Integer(v) rescue Float(v) rescue v
     end
   end
 end

@@ -55,6 +55,13 @@ describe Config do
         expect(config.new_var.is_a? Integer).to eq(true)
       end
 
+      it 'should recognize fixed point numbers and expose them as float' do
+        ENV['Settings.new_var'] = '1.9'
+
+        expect(config.new_var).to eq(1.9)
+        expect(config.new_var.is_a? Float).to eq(true)
+      end
+
       it 'should leave strings intact' do
         ENV['Settings.new_var'] = 'foobar'
 

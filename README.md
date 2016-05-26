@@ -313,14 +313,14 @@ To upload your local values to Heroku you could ran `bundle exec rake config:her
 
 You can customize how environment variables are processed:
 
-* `env_prefix` - which variables to load into config
-* `env_separator` - what string to use as level separator instead of dots - default value of `.` works well with
+* `env_prefix` (default: `SETTINGS`) - which ENV variables to load into config
+* `env_separator` (default: `.`)  - what string to use as level separator - default value of `.` works well with
   Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using
   dots in variable names might not be allowed (eg. Bash)
-* `env_converter` - how to process variables names:
+* `env_converter` (default: `:downcase`)  - how to process variables names:
   * `nil` - no change
   * `:downcase` - convert to lower case
-* `env_parse_values` - parse numeric values as integers instead of strings
+* `env_parse_values` (default: `true`) - try to parse values to a correct type (`Integer`, `Float`, `String`)
 
 For instance, given the following environment:
 
