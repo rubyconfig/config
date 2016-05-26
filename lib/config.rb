@@ -16,8 +16,8 @@ module Config
   @@use_env    = false
   @@env_prefix = @@const_name
   @@env_separator = '.'
-  @@env_converter = nil
-  @@env_parse_values = false
+  @@env_converter = :downcase
+  @@env_parse_values = true
 
   # deep_merge options
   mattr_accessor :knockout_prefix
