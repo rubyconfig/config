@@ -53,7 +53,7 @@ module Appname
   class Application < Rails::Application
 
     Bundler.require(*Rails.groups)
-    Config::Integration::Rails::Railtie.preload
+    Config::Integrations::Rails::Railtie.preload
 
     # ...
 
