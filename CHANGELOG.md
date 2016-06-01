@@ -4,6 +4,7 @@
 
 * Changed default ENV variables loading settings to downcase variable names and parse values
 * Added parsing ENV variables values to Float type
+* Change method definition order in Rails integration module to prevent undefined method `preload` error (based on @YaroSpace suggestion in [#111](https://github.com/railsconfig/config/issues/111)
 
 ## 1.2.1
 
