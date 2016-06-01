@@ -4,15 +4,15 @@
 
 * Changed default ENV variables loading settings to downcase variable names and parse values
 * Added parsing ENV variables values to Float type
-* Change method definition order in Rails integration module to prevent undefined method `preload` error (based on @YaroSpace suggestion in [#111](https://github.com/railsconfig/config/issues/111)
+* Change method definition order in Rails integration module to prevent undefined method `preload` error (based on [@YaroSpace](https://github.com/YaroSpace) suggestion in [#111](https://github.com/railsconfig/config/issues/111)
 
 ## 1.2.1
 
-* Fixed support for multilevel settings loaded from ENV variables (inspired by @cbeer in [#144](https://github.com/railsconfig/config/pull/144))
+* Fixed support for multilevel settings loaded from ENV variables (inspired by [@cbeer](https://github.com/cbeer) in [#144](https://github.com/railsconfig/config/pull/144))
 
 ## 1.2.0
 
-* Add ability to load settings from ENV variables ([#108](https://github.com/railsconfig/config/issues/108) thanks to @vinceve and @spalladino)
+* Add ability to load settings from ENV variables ([#108](https://github.com/railsconfig/config/issues/108) thanks to [@vinceve](https://github.com/vinceve) and [@spalladino](https://github.com/spalladino))
 * Removed Rails 5 deprecation warnings for prepend_before_filter ([#141](https://github.com/railsconfig/config/pull/141))
 
 ## 1.1.1
@@ -28,8 +28,8 @@
 
 * `RailsConfig` is now officially renamed to `Config`
 * Fixed array descent when converting to hash ([#89](https://github.com/railsconfig/config/pull/89))
-* Catch OpenStruct reserved keywords ([#95](https://github.com/railsconfig/config/pull/95) by @dudo)
-* Allows loading before app configuration process ([#107](https://github.com/railsconfig/config/pull/107) by @Antiarchitect)
+* Catch OpenStruct reserved keywords ([#95](https://github.com/railsconfig/config/pull/95) by [@dudo](https://github.com/dudo))
+* Allows loading before app configuration process ([#107](https://github.com/railsconfig/config/pull/107) by [@Antiarchitect](https://github.com/Antiarchitect))
 * `deep_merge` is now properly managed via gemspec ([#110](https://github.com/railsconfig/config/pull/110))
 * Added `prepend_source!` ([#102](https://github.com/railsconfig/config/pull/102))
 
