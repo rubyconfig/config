@@ -72,7 +72,6 @@ module Config
           DeepMerge.deep_merge!(source_conf,
                                 conf,
                                 preserve_unmergeables: false,
-                                knockout_prefix:       Config.knockout_prefix)
                                 knockout_prefix: Config.knockout_prefix,
                                 overwrite_arrays: Config.overwrite_arrays)
         end
