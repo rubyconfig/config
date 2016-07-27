@@ -24,8 +24,8 @@ Gem::Specification.new do |s|
   s.require_paths         = ['lib']
   s.required_ruby_version = '>= 2.0.0'
 
-  s.add_dependency 'activesupport',           '>= 3.0'
-  s.add_dependency 'deep_merge',              '~> 1.0',   '>= 1.0.1'
+  s.add_dependency "activesupport",           ">= 3.0"
+  s.add_dependency "deep_merge2",              "~> 1.0"
 
   s.add_development_dependency 'bundler',     '~> 1.11',  '>= 1.11.2'
   s.add_development_dependency 'rake',        '~> 11.1',  '>= 11.1.2'
