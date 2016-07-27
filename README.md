@@ -259,6 +259,8 @@ application initialization phase:
 Config.setup do |config|
   config.const_name = 'Settings'
   ...
+  config.knockout_prefix = nil
+  config.overwrite_arrays = false
 end
 ```
 
@@ -274,6 +276,8 @@ located at `config/initializers/config.rb`.
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
 
 Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
+
+* `overwrite_arrays` - ability to replace an entire array set in earlier loaded settings file. Default: `false`
 
 ### Environment variables
 

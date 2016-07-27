@@ -1,0 +1,10 @@
+array1:
+  - item4
+  - item5
+  - item6
+
+array2:
+  inner:
+    - item4
+    - item5
+    - item6

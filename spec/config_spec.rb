@@ -320,5 +320,37 @@ describe Config do
         end
       end
     end
+
+    context 'using overwrite_arrays' do
+      context 'in configuration phase' do
+        it 'should be able to assign a different overwrite_arrays value' do
+          Config.reset
+          Config.overwrite_arrays = true
+
+          expect(Config.overwrite_arrays).to eq(true)
+        end
+
+        it 'should have the default overwrite_arrays value equal false' do
+          Config.reset
+
+          expect(Config.overwrite_arrays).to eq(false)
+        end
+      end
+
+      context 'overwriting' do
+        let(:config) do
+          Config.overwrite_arrays = true
+          Config.load_files(["#{fixture_path}/overwrite_arrays/config1.yml",
+                             "#{fixture_path}/overwrite_arrays/config2.yml",
+                             "#{fixture_path}/overwrite_arrays/config3.yml"])
+        end
+
+        it 'should remove elements from settings' do
+          expect(config.array1).to eq(['item4', 'item5', 'item6'])
+          expect(config.array2.inner).to eq(['item4', 'item5', 'item6'])
+          expect(config.array3).to eq([])
+        end
+      end
+    end
   end
 end
