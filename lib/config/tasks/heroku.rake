@@ -1,8 +1,7 @@
-# require 'config'
-require 'config/tasks'
+require 'config/integrations/heroku'
 
 namespace 'config' do
   task :heroku, [:app] => :environment do |_, args|
-    Config::Tasks::Heroku.new(args[:app]).invoke
+    Config::Integrations::Heroku.new(args[:app]).invoke
   end
 end
