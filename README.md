@@ -273,6 +273,8 @@ located at `config/initializers/config.rb`.
 
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
 
+* `overwrite_arrays` - ability to replace an entire array set in earlier loaded settings file. Default: `false`
+
 Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
 ### Environment variables
