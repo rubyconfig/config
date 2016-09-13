@@ -43,6 +43,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop',     '~> 0.40',  '>= 0.40.0'
 
   if ENV['TRAVIS']
-    s.add_development_dependency 'codeclimate-test-reporter'
+    s.add_development_dependency 'codeclimate-test-reporter', '~> 0.5.1'
   end
 end
