@@ -15,3 +15,7 @@ appraise 'rails-4.2' do
   gem 'rails', '4.2.7.1'
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 end
+
+appraise 'rails-5' do
+  gem 'rails', '5.0.0.1'
+end

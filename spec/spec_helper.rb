@@ -19,7 +19,7 @@ Dir['./spec/support/**/*.rb'].each { |f| require f }
 if ENV['APPRAISAL_INITIALIZED'] || ENV['TRAVIS']
   app_name = Pathname.new(ENV['BUNDLE_GEMFILE']).basename.sub('.gemfile', '')
 else
-  app_name = 'rails_4'
+  app_name = 'rails_5'
 end
 
 require File.expand_path("../../spec/app/#{app_name}/config/environment", __FILE__)
