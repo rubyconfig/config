@@ -45,26 +45,7 @@ which will generate customizable config file `config/initializers/config.rb` and
     config/settings/test.yml
 
 You can now edit them to adjust to your needs.
-
-If you want to use Settings before rails application initialization process you can load Config railtie manually:
-
-```ruby
-module Appname
-  class Application < Rails::Application
-
-    Bundler.require(*Rails.groups)
-    Config::Integrations::Rails::Railtie.preload
-
-    # ...
-
-    config.time_zone = Settings.time_zone
-
-    # ...
-
-  end
-end
-```
-
+a
 ### Installing on Padrino
 
 Add the gem to your `Gemfile` and run `bundle install` to install it. Then edit `app.rb` and register `Config`
