@@ -1,7 +1,8 @@
 # Changelog
 
-## ...
+## 1.3.0
 
+* **WARNING:** Overwrite arrays found in previously loaded settings file ([#137](https://github.com/railsconfig/config/pull/137) thanks to [@Fryguy](https://github.com/Fryguy) and [@dtaniwaki](https://github.com/dtaniwaki)) - this is a change breaking previous behaviour. If you want to keep Config to work as before, which is merging arrays found in following loaded settings file, please add `config.overwrite_arrays = true` to your Config initializer 
 * Changed default ENV variables loading settings to downcase variable names and parse values
 * Added parsing ENV variables values to Float type
 * Change method definition order in Rails integration module to prevent undefined method `preload` error (based on [@YaroSpace](https://github.com/YaroSpace) suggestion in [#111](https://github.com/railsconfig/config/issues/111)

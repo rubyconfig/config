@@ -22,7 +22,7 @@ module Config
   # deep_merge options
   mattr_accessor :knockout_prefix, :overwrite_arrays
   @@knockout_prefix = nil
-  @@overwrite_arrays = false
+  @@overwrite_arrays = true
 
   def self.setup
     yield self if @@_ran_once == false
