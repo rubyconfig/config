@@ -46,7 +46,7 @@ RSpec.configure do |config|
         self.const_name       = 'Settings'
         self.use_env          = false
         self.knockout_prefix  = nil
-        self.overwrite_arrays = false
+        self.overwrite_arrays = true
       end
     end
   end

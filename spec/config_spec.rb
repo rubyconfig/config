@@ -122,22 +122,6 @@ describe Config do
     end
   end
 
-  context "Deep Merging" do
-    let(:config) do
-      files = ["#{fixture_path}/deep_merge/config1.yml", "#{fixture_path}/deep_merge/config2.yml"]
-      Config.load_files(files)
-    end
-
-    it "should merge hashes from multiple configs" do
-      expect(config.inner.marshal_dump.keys.size).to eq(3)
-      expect(config.inner2.inner2_inner.marshal_dump.keys.size).to eq(3)
-    end
-
-    it "should merge arrays from multiple configs" do
-      expect(config.arraylist1.size).to eq(6)
-      expect(config.arraylist2.inner.size).to eq(6)
-    end
-  end
 
   context "Boolean Overrides" do
     let(:config) do
@@ -301,6 +285,7 @@ describe Config do
       context 'merging' do
         let(:config) do
           Config.knockout_prefix = '--'
+          Config.overwrite_arrays = false
           Config.load_files(["#{fixture_path}/knockout_prefix/config1.yml",
                              "#{fixture_path}/knockout_prefix/config2.yml",
                              "#{fixture_path}/knockout_prefix/config3.yml"])
@@ -325,15 +310,15 @@ describe Config do
       context 'in configuration phase' do
         it 'should be able to assign a different overwrite_arrays value' do
           Config.reset
-          Config.overwrite_arrays = true
+          Config.overwrite_arrays = false
 
-          expect(Config.overwrite_arrays).to eq(true)
+          expect(Config.overwrite_arrays).to eq(false)
         end
 
         it 'should have the default overwrite_arrays value equal false' do
           Config.reset
 
-          expect(Config.overwrite_arrays).to eq(false)
+          expect(Config.overwrite_arrays).to eq(true)
         end
       end
 
@@ -351,6 +336,26 @@ describe Config do
           expect(config.array3).to eq([])
         end
       end
+
+
+      context 'merging' do
+        let(:config) do
+          Config.overwrite_arrays = false
+          Config.load_files(["#{fixture_path}/deep_merge/config1.yml",
+                             "#{fixture_path}/deep_merge/config2.yml"])
+        end
+
+        it 'should merge hashes from multiple configs' do
+          expect(config.inner.marshal_dump.keys.size).to eq(3)
+          expect(config.inner2.inner2_inner.marshal_dump.keys.size).to eq(3)
+        end
+
+        it 'should merge arrays from multiple configs' do
+          expect(config.arraylist1.size).to eq(6)
+          expect(config.arraylist2.inner.size).to eq(6)
+        end
+      end
+
     end
   end
 end
