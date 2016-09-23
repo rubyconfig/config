@@ -64,6 +64,16 @@ set :root, File.dirname(__FILE__)
 register Config
 ```
 
+### Installing on other ruby projects
+
+Add the gem to your `Gemfile` and run `bundle install` to install it.
+Then initialize `Config` manually within your configure block.
+
+```ruby
+require 'config'
+Config.load_and_set_settings(Config.setting_files("/path/to/config_root", "your_project_environment"))
+```
+
 It's also possible to initialize `Config` manually within your configure block if you want to just give it some yml
 paths to load from.
 
