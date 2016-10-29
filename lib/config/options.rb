@@ -3,6 +3,7 @@ require 'ostruct'
 module Config
   class Options < OpenStruct
     include Enumerable
+    include Validation
 
     def keys
       marshal_dump.keys
@@ -81,6 +82,7 @@ module Config
       marshal_load(__convert(conf).marshal_dump)
 
       reload_env! if Config.use_env
+      validate! if Config.schema
 
       self
     end

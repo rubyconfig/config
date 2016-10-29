@@ -1,13 +1,17 @@
 require 'active_support/core_ext/module/attribute_accessors'
 
 require 'config/compatibility'
+require 'config/validation'
 require 'config/options'
 require 'config/version'
 require 'config/integrations/rails/engine' if defined?(::Rails)
 require 'config/sources/yaml_source'
 require 'deep_merge'
+require 'dry-validation'
 
 module Config
+  class ValidationError < StandardError; end
+
   # Ensures the setup only gets run once
   @@_ran_once = false
 
@@ -24,9 +28,20 @@ module Config
   @@knockout_prefix = nil
   @@overwrite_arrays = true
 
+  mattr_writer :schema
+  @@schema = nil
+
   def self.setup
     yield self if @@_ran_once == false
     @@_ran_once = true
+  end
+
+  def self.schema(&block)
+    if block_given?
+      @@schema = Dry::Validation.Schema(&block)
+    else
+      @@schema
+    end
   end
 
   # Create a populated Options instance from a settings file. If a second file is given, then the sections of that
