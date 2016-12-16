@@ -39,7 +39,7 @@ describe Config::Options do
       expect(config['tvrage']['service_url']).to eq('http://services.tvrage.com')
     end
 
-    context 'overwrite' do
+    context 'overwrite with YAML file' do
       before do
         config.add_source!("#{fixture_path}/deep_merge2/config2.yml")
         config.reload!
@@ -47,6 +47,18 @@ describe Config::Options do
 
       it 'should overwrite the previous values' do
         expect(config['tvrage']['service_url']).to eq('http://url2')
+      end
+
+    end
+
+    context 'overwrite with Hash' do
+      before do
+        config.add_source!({tvrage: {service_url: 'http://url3'}})
+        config.reload!
+      end
+
+      it 'should overwrite the previous values' do
+        expect(config['tvrage']['service_url']).to eq('http://url3')
       end
     end
   end
@@ -77,6 +89,24 @@ describe Config::Options do
 
       it 'should overwrite the previous values' do
         expect(config['tvrage']['service_url']).to eq('http://services.tvrage.com')
+      end
+    end
+
+    context 'source is a hash' do
+      let(:hash_source) {
+        { tvrage: { service_url: 'http://url3' }, meaning_of_life: 42 }
+      }
+      before do
+        config.prepend_source!(hash_source)
+        config.reload!
+      end
+
+      it 'should be overwriten by the following values' do
+        expect(config['tvrage']['service_url']).to eq('http://services.tvrage.com')
+      end
+
+      it 'should set meaning of life' do
+        expect(config['meaning_of_life']).to eq(42)
       end
     end
   end

@@ -193,6 +193,15 @@ Settings.reload!
 > Note: this is an example usage, it is easier to just use the default local files `settings.local.yml,
 settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
 
+You also have the option to add a raw hash as a source. One use case might be storing settings in the database or in environment variables that overwrite what is in the YML files.
+
+```ruby
+Settings.add_source!({some_secret: ENV['some_secret']})
+Settings.reload!
+```
+
+You may pass a hash to `prepend_source!` as well.
+
 ## Embedded Ruby (ERB)
 
 Embedded Ruby is allowed in the configuration files. Consider the two following config files.
