@@ -60,6 +60,15 @@ describe Config do
     expect(servers).to eq([{ name: "yahoo.com" }, { name: "amazon.com" }])
   end
 
+  it "should convert to a hash without modifying nested settings" do
+    config = Config.load_files("#{fixture_path}/development.yml")
+    config.to_hash
+    expect(config).to be_kind_of(Config::Options)
+    expect(config[:section]).to be_kind_of(Config::Options)
+    expect(config[:section][:servers][0]).to be_kind_of(Config::Options)
+    expect(config[:section][:servers][1]).to be_kind_of(Config::Options)
+  end
+
   it "should convert to a json" do
     config = Config.load_files("#{fixture_path}/development.yml").to_json
     expect(JSON.parse(config)["section"]["servers"]).to be_kind_of(Array)

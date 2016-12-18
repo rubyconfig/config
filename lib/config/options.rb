@@ -148,15 +148,15 @@ module Config
     protected
 
     def descend_array(array)
-      array.length.times do |i|
-        value = array[i]
+      array.map do |value|
         if value.instance_of? Config::Options
-          array[i] = value.to_hash
+          value.to_hash
         elsif value.instance_of? Array
-          array[i] = descend_array(value)
+          descend_array(value)
+        else
+          value
         end
       end
-      array
     end
 
     # Recursively converts Hashes to Options (including Hashes inside Arrays)
