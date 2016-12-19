@@ -1,0 +1,13 @@
+world:
+  capitals:
+    europe:
+      germany: 'Berlin'
+      poland: 'Warsaw'
+  array:
+  - name: 'Alan'
+  - name: 'Gam'
+  array_with_index:
+    0:
+      name: 'Bob'
+    1:
+      name: 'William'
