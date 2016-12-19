@@ -1,5 +1,9 @@
 # Changelog
 
+## ...
+
+* Added support for passing a raw ruby hash into to both `Settings.add_source!` and `Settings.prepend_source!`.
+
 ## 1.3.0
 
 * **WARNING:** Overwrite arrays found in previously loaded settings file ([#137](https://github.com/railsconfig/config/pull/137) thanks to [@Fryguy](https://github.com/Fryguy) and [@dtaniwaki](https://github.com/dtaniwaki)) - this is a change breaking previous behaviour. If you want to keep Config to work as before, which is merging arrays found in following loaded settings file, please add `config.overwrite_arrays = false` to your Config initializer 

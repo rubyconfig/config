@@ -15,6 +15,7 @@ module Config
     def add_source!(source)
       # handle yaml file paths
       source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
+      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
 
       @config_sources ||= []
       @config_sources << source
@@ -22,6 +23,7 @@ module Config
 
     def prepend_source!(source)
       source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
+      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
 
       @config_sources ||= []
       @config_sources.unshift(source)
