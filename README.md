@@ -275,6 +275,29 @@ located at `config/initializers/config.rb`.
 
 Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
+### Validation
+
+You can optionally define a schema to validate presence (and type) of specific config values:
+
+```ruby
+Config.setup do |config|
+  # ...
+  config.schema do
+    required(:youtube).schema do
+      required(:api_key).filled
+    end
+  end
+end
+```
+
+The above example demonstrates how to ensure that the configuration has the `youtube` structure
+with the `api_key` field filled.
+If you define a schema it will automatically be used to validate your config. If validation fails it will
+raise a `Config::ValidationError` containing a nice message with information about all the mismatches
+between the schema and your config.
+
+Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
+
 ### Environment variables
 
 See section below for more details.

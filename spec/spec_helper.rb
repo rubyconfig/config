@@ -47,6 +47,8 @@ RSpec.configure do |config|
         self.use_env          = false
         self.knockout_prefix  = nil
         self.overwrite_arrays = true
+        self.schema           = nil
+        class_variable_set(:@@_ran_once, false)
       end
     end
   end
