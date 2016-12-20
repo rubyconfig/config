@@ -1,8 +1,10 @@
 # Changelog
 
-## ...
+## 1.4.0
 
-* Added support for passing a raw ruby hash into to both `Settings.add_source!` and `Settings.prepend_source!`.
+* Added support for passing a raw ruby hash into to both `Settings.add_source!` and `Settings.prepend_source!` ([#108](https://github.com/railsconfig/config/pull/159) thanks to [@halloffame](https://github.com/halloffame))
+* Added new reserved name `test` ([#158](https://github.com/railsconfig/config/pull/158) thanks to [@milushov](https://github.com/milushov))
+* `to_hash` should not replace nested config objects with Hash ([#160](https://github.com/railsconfig/config/issues/160) thanks to [@seikichi](https://github.com/seikichi))
 
 ## 1.3.0
 
