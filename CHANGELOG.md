@@ -1,14 +1,22 @@
 # Changelog
 
+## Unreleased
+
+### New features
+* Add ability to validate config schema ([#155](https://github.com/railsconfig/config/pull/155) thanks to [@ok32](https://github.com/ok32))
+
 ## 1.4.0
 
+### New features
 * Added support for passing a raw ruby hash into to both `Settings.add_source!` and `Settings.prepend_source!` ([#108](https://github.com/railsconfig/config/pull/159) thanks to [@halloffame](https://github.com/halloffame))
+
+### Bug fixes
 * Added new reserved name `test` ([#158](https://github.com/railsconfig/config/pull/158) thanks to [@milushov](https://github.com/milushov))
 * `to_hash` should not replace nested config objects with Hash ([#160](https://github.com/railsconfig/config/issues/160) thanks to [@seikichi](https://github.com/seikichi))
 
 ## 1.3.0
 
-* **WARNING:** Overwrite arrays found in previously loaded settings file ([#137](https://github.com/railsconfig/config/pull/137) thanks to [@Fryguy](https://github.com/Fryguy) and [@dtaniwaki](https://github.com/dtaniwaki)) - this is a change breaking previous behaviour. If you want to keep Config to work as before, which is merging arrays found in following loaded settings file, please add `config.overwrite_arrays = false` to your Config initializer 
+* **WARNING:** Overwrite arrays found in previously loaded settings file ([#137](https://github.com/railsconfig/config/pull/137) thanks to [@Fryguy](https://github.com/Fryguy) and [@dtaniwaki](https://github.com/dtaniwaki)) - this is a change breaking previous behaviour. If you want to keep Config to work as before, which is merging arrays found in following loaded settings file, please add `config.overwrite_arrays = false` to your Config initializer
 * Changed default ENV variables loading settings to downcase variable names and parse values
 * Added parsing ENV variables values to Float type
 * Change method definition order in Rails integration module to prevent undefined method `preload` error (based on [@YaroSpace](https://github.com/YaroSpace) suggestion in [#111](https://github.com/railsconfig/config/issues/111)
