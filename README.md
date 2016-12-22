@@ -277,7 +277,7 @@ Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
 ### Validation
 
-You can optionally define a schema to validate presence (and type) of specific config values:
+With Ruby 2.1 or newer, you can optionally define a schema to validate presence (and type) of specific config values:
 
 ```ruby
 Config.setup do |config|
@@ -292,8 +292,9 @@ end
 
 The above example demonstrates how to ensure that the configuration has the `youtube` structure
 with the `api_key` field filled.
+
 If you define a schema it will automatically be used to validate your config. If validation fails it will
-raise a `Config::ValidationError` containing a nice message with information about all the mismatches
+raise a `Config::Validation::Error` containing a nice message with information about all the mismatches
 between the schema and your config.
 
 Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
