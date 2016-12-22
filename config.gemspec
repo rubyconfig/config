@@ -26,10 +26,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport',           '>= 3.0'
   s.add_dependency 'deep_merge',              '~> 1.1.1'
-  s.add_dependency 'dry-validation',          '~> 0.10.3' if RUBY_VERSION >= '2.1'
+  s.add_dependency 'dry-validation',          '~> 0.10.4' if RUBY_VERSION >= '2.1'
 
-  s.add_development_dependency 'bundler',     '~> 1.13',  '>= 1.13.1'
-  s.add_development_dependency 'rake',        '~> 11.2',  '>= 11.2.2'
+  s.add_development_dependency 'bundler',     '~> 1.13',  '>= 1.13.6'
+  s.add_development_dependency 'rake',        '~> 12.0',  '>= 12.0.0'
 
   # Testing
   s.add_development_dependency 'appraisal',   '~> 2.1',   '>= 2.1.0'
@@ -41,9 +41,9 @@ Gem::Specification.new do |s|
 
   # Static code analysis
   s.add_development_dependency 'mdl',         '~> 0.4',   '>= 0.4.0'
-  s.add_development_dependency 'rubocop',     '~> 0.42',  '>= 0.42.0'
+  s.add_development_dependency 'rubocop',     '~> 0.46',  '>= 0.46.0'
 
   if ENV['TRAVIS']
-    s.add_development_dependency 'codeclimate-test-reporter', '~> 0.6.0'
+    s.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.3'
   end
 end
