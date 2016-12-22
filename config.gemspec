@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop',     '~> 0.46',  '>= 0.46.0'
 
   if ENV['TRAVIS']
+    s.add_development_dependency 'simplecov', '~> 0.12.0'
     s.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.3'
   end
 end
