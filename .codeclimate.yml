@@ -1,9 +1,22 @@
-languages:
-  Ruby: true
-  JavaScript: false
-  PHP: false
 engines:
+  rubocop:
+    enabled: true
+  reek:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        ruby:
+          mass_threshold: 18
   markdownlint:
     enabled: true
+
+ratings:
+   paths:
+   - Gemfile.lock
+   - "**.rb"
+   - "**.md"
+
 exclude_paths:
 - "spec/app/**/*"
