@@ -45,7 +45,7 @@ which will generate customizable config file `config/initializers/config.rb` and
     config/settings/test.yml
 
 You can now edit them to adjust to your needs.
-a
+
 ### Installing on Padrino
 
 Add the gem to your `Gemfile` and run `bundle install` to install it. Then edit `app.rb` and register `Config`
