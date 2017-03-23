@@ -131,7 +131,7 @@ module Config
     end
 
     # Some keywords that don't play nicely with OpenStruct
-    SETTINGS_RESERVED_NAMES = %w{select collect test}
+    SETTINGS_RESERVED_NAMES = %w{select collect test count}
 
     # An alternative mechanism for property access.
     # This let's you do foo['bar'] along with foo.bar.
