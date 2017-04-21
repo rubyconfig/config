@@ -127,6 +127,7 @@ module Config
       current = to_hash
       DeepMerge.deep_merge!(hash.dup,
                             current,
+                            merge_nil_values: Config.merge_nil_values,
                             preserve_unmergeables: false,
                             overwrite_arrays:      Config.overwrite_arrays)
       marshal_load(__convert(current).marshal_dump)
