@@ -33,14 +33,15 @@ module Config
     @@_ran_once = true
   end
 
-  # Create a populated Options instance from a settings file. If a second file is given, then the sections of that
-  # file will overwrite existing sections of the first file.
-  def self.load_files(*files)
+  # Create a populated Options instance from a settings source. If a second source is given, then the sections of that
+  # source will overwrite existing sections of the first source.
+  # Source can be either file or hash.
+  def self.load_sources(*sources)
     config = Options.new
 
     # add settings sources
-    [files].flatten.compact.uniq.each do |file|
-      config.add_source!(file.to_s)
+    [sources].flatten.compact.uniq.each do |source|
+      config.add_source!(source)
     end
 
     config.load!
@@ -51,7 +52,7 @@ module Config
   # Loads and sets the settings constant!
   def self.load_and_set_settings(*files)
     Kernel.send(:remove_const, Config.const_name) if Kernel.const_defined?(Config.const_name)
-    Kernel.const_set(Config.const_name, Config.load_files(files))
+    Kernel.const_set(Config.const_name, Config.load_sources(files))
   end
 
   def self.setting_files(config_root, env)

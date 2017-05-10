@@ -4,7 +4,7 @@ describe Config::Options do
 
   context 'when Settings file is using keywords reserved for OpenStruct' do
     let(:config) do
-      Config.load_files("#{fixture_path}/reserved_keywords.yml")
+      Config.load_sources("#{fixture_path}/reserved_keywords.yml")
     end
 
     it 'should allow to access them via object member notation' do
@@ -26,7 +26,7 @@ describe Config::Options do
 
   context 'adding sources' do
     let(:config) do
-      Config.load_files("#{fixture_path}/settings.yml")
+      Config.load_sources("#{fixture_path}/settings.yml")
     end
 
     before do
@@ -68,7 +68,7 @@ describe Config::Options do
 
   context 'prepending sources' do
     let(:config) do
-      Config.load_files("#{fixture_path}/settings.yml")
+      Config.load_sources("#{fixture_path}/settings.yml")
     end
 
     before do

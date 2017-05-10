@@ -18,7 +18,7 @@ if RUBY_VERSION >= '2.1'
           end
         end
 
-        expect { Config.load_files("#{fixture_path}/validation/config.yml") }.
+        expect { Config.load_sources("#{fixture_path}/validation/config.yml") }.
           to raise_error(Config::Validation::Error, /youtube.nonexist_field: is missing/)
       end
 
@@ -31,7 +31,7 @@ if RUBY_VERSION >= '2.1'
           end
         end
 
-        expect { Config.load_files("#{fixture_path}/validation/config.yml") }.
+        expect { Config.load_sources("#{fixture_path}/validation/config.yml") }.
           to_not raise_error
       end
     end
