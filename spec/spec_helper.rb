@@ -45,6 +45,7 @@ RSpec.configure do |config|
       def self.reset
         self.const_name       = 'Settings'
         self.use_env          = false
+        self.extra_sources    = []
         self.knockout_prefix  = nil
         self.overwrite_arrays = true
         self.schema           = nil if RUBY_VERSION >= '2.1'

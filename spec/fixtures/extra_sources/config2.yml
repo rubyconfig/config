@@ -1,0 +1,3 @@
+app_name: App2
+external_service:
+  items_per_page: 20

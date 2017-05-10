@@ -1,0 +1,7 @@
+app_name: App1
+external_service:
+  api_key: secret_key
+  items_per_page: 10
+avatar:
+  width: 128
+  height: 128

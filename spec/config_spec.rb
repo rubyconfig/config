@@ -379,5 +379,44 @@ describe Config do
       end
 
     end
+
+    context 'with extra sources' do
+      before do
+        Config.reset
+      end
+
+      context 'in configuration phase' do
+        it 'should have empty array as default extra_sources value' do
+          expect(Config.extra_sources).to eq([])
+        end
+
+        it 'should be able to assign a different extra_sources values' do
+          Config.extra_sources = ['extra_config.yml', { some_key: 'some_value' }]
+
+          expect(Config.extra_sources).to eq(['extra_config.yml', { some_key: 'some_value' }])
+        end
+      end
+
+      context 'merging' do
+        let(:hash) do
+          { app_name: 'App',
+            external_service: { api_key: 'super_secret_key' }}
+        end
+        let(:config) do
+          Config.load_sources(["#{fixture_path}/extra_sources/config1.yml",
+                               "#{fixture_path}/extra_sources/config2.yml",
+                               hash])
+        end
+        let(:expected_config) do
+          { app_name: 'App',
+            external_service: { api_key: 'super_secret_key', items_per_page: 20 },
+            avatar: { width: 128, height: 128 }}
+        end
+
+        it 'should merge settings from multiple sources' do
+          expect(config.to_hash).to eq(expected_config)
+        end
+      end
+    end
   end
 end

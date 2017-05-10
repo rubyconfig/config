@@ -42,4 +42,11 @@ Config.setup do |config|
   #   required(:email).filled(format?: EMAIL_REGEX)
   # end
 
+  # Define extra sources of config values. Each source can be either file path or hash.
+  # Extra sources will be merged with base settings files.
+  #
+  # config.extra_sources = [
+  #   File.join('app_root', 'config', 'extra_settings.yml').to_s,
+  #   { some_api_key: 'secret_key' }
+  # ]
 end
