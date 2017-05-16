@@ -398,14 +398,18 @@ describe Config do
       end
 
       context 'merging' do
-        let(:hash) do
+        let(:hash1) do
+          { avatar: { width: 64, height: 64 } }
+        end
+        let(:hash2) do
           { app_name: 'App',
             external_service: { api_key: 'super_secret_key' }}
         end
         let(:config) do
-          Config.load_sources(["#{fixture_path}/extra_sources/config1.yml",
+          Config.load_sources([hash1,
+                               "#{fixture_path}/extra_sources/config1.yml",
                                "#{fixture_path}/extra_sources/config2.yml",
-                               hash])
+                               hash2])
         end
         let(:expected_config) do
           { app_name: 'App',
