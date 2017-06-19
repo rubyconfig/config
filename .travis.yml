@@ -3,17 +3,34 @@ cache: bundler
 sudo: false
 rvm:
   - 2.0.0
-  - 2.1.6
-  - 2.2.2
+  - 2.1.10
+  - 2.2.6
+  - 2.3.3
+  - 2.4.1
 gemfile:
   - gemfiles/rails_3.gemfile
   - gemfiles/rails_4.gemfile
   - gemfiles/rails_4.1.gemfile
   - gemfiles/rails_4.2.gemfile
+  - gemfiles/rails_5.gemfile
 matrix:
   exclude:
-    - rvm: 2.2.2
+    - rvm: 2.0.0
+      gemfile: gemfiles/rails_5.gemfile
+    - rvm: 2.1.10
+      gemfile: gemfiles/rails_5.gemfile
+    - rvm: 2.2.6
       gemfile: gemfiles/rails_3.gemfile
+    - rvm: 2.3.3
+      gemfile: gemfiles/rails_3.gemfile
+    - rvm: 2.4.1
+      gemfile: gemfiles/rails_3.gemfile
+    - rvm: 2.4.1
+      gemfile: gemfiles/rails_4.gemfile
+    - rvm: 2.4.1
+      gemfile: gemfiles/rails_4.1.gemfile
+    - rvm: 2.4.1
+      gemfile: gemfiles/rails_4.2.gemfile
 before_install:
   - gem install bundler
 script:
@@ -21,3 +38,5 @@ script:
 addons:
   code_climate:
     repo_token: e233a382471f480a061ac3098edadbb91cee8129e0938973aeb2aa8d84a0a93b
+after_success:
+  - bundle exec codeclimate-test-reporter

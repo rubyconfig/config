@@ -1,4 +1,4 @@
-The MIT License (MIT)
+# The MIT License (MIT)
 
 Copyright (c) 2010-2014 Jacques Crocker, Fred Wu, Piotr Kuczynski
 

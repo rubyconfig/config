@@ -1,7 +1,7 @@
-require "bundler"
+require 'bundler'
 
 module Config
-  module Tasks
+  module Integrations
     class Heroku < Struct.new(:app)
       def invoke
         puts 'Setting vars...'

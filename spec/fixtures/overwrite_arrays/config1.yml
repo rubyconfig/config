@@ -1,0 +1,17 @@
+array1:
+  - item1
+  - item2
+  - item3
+  - item4
+
+array2:
+  inner:
+    - item1
+    - item2
+    - item3
+    - item4
+
+array3:
+  - item1
+  - item2
+  - item3

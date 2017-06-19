@@ -1,0 +1,10 @@
+world:
+  capitals:
+    europe:
+      germany: 'Berlin'
+      poland: 'Warsaw'
+    australia: 'Sydney'
+  countries:
+    europe: 50
+    australia: 1
+  number_of_all_countries: 196

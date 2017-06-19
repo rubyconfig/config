@@ -1,8 +1,10 @@
 require 'ostruct'
+require 'config/validation/validate' if RUBY_VERSION >= '2.1'
 
 module Config
   class Options < OpenStruct
     include Enumerable
+    include Validation::Validate if RUBY_VERSION >= '2.1'
 
     def keys
       marshal_dump.keys
@@ -15,6 +17,7 @@ module Config
     def add_source!(source)
       # handle yaml file paths
       source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
+      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
 
       @config_sources ||= []
       @config_sources << source
@@ -22,6 +25,7 @@ module Config
 
     def prepend_source!(source)
       source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
+      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
 
       @config_sources ||= []
       @config_sources.unshift(source)
@@ -29,17 +33,33 @@ module Config
 
     def reload_env!
       return self if ENV.nil? || ENV.empty?
-      conf = Hash.new
-      ENV.each do |key, value|
-        next unless key.to_s.index(Config.const_name) == 0
-        hash = value
-        key.to_s.split('.').reverse.each do |element|
-          hash = {element => hash}
-        end
-        DeepMerge.deep_merge!(hash, conf, :preserve_unmergeables => false)
+
+      hash = Hash.new
+
+      ENV.each do |variable, value|
+        keys = variable.to_s.split(Config.env_separator)
+
+        next if keys.shift != (Config.env_prefix || Config.const_name)
+
+        keys.map! { |key|
+          case Config.env_converter
+            when :downcase then
+              key.downcase.to_sym
+            when nil then
+              key.to_sym
+            else
+              raise "Invalid ENV variables name converter: #{Config.env_converter}"
+          end
+        }
+
+        leaf = keys[0...-1].inject(hash) { |h, key|
+          h[key] ||= {}
+        }
+
+        leaf[keys.last] = Config.env_parse_values ? __value(value) : value
       end
 
-      merge!(conf[Config.const_name] || {})
+      merge!(hash)
     end
 
     alias :load_env! :reload_env!
@@ -53,11 +73,11 @@ module Config
         if conf.empty?
           conf = source_conf
         else
-          # see Options Details in lib/rails_config/vendor/deep_merge.rb
           DeepMerge.deep_merge!(source_conf,
                                 conf,
                                 preserve_unmergeables: false,
-                                knockout_prefix: Config.knockout_prefix)
+                                knockout_prefix:       Config.knockout_prefix,
+                                overwrite_arrays:      Config.overwrite_arrays)
         end
       end
 
@@ -65,6 +85,7 @@ module Config
       marshal_load(__convert(conf).marshal_dump)
 
       reload_env! if Config.use_env
+      validate! if RUBY_VERSION >= '2.1'
 
       self
     end
@@ -101,13 +122,16 @@ module Config
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(hash.dup, current)
+      DeepMerge.deep_merge!(hash.dup,
+                            current,
+                            preserve_unmergeables: false,
+                            overwrite_arrays:      Config.overwrite_arrays)
       marshal_load(__convert(current).marshal_dump)
       self
     end
 
     # Some keywords that don't play nicely with OpenStruct
-    SETTINGS_RESERVED_NAMES = %w{select collect}
+    SETTINGS_RESERVED_NAMES = %w{select collect test count}
 
     # An alternative mechanism for property access.
     # This let's you do foo['bar'] along with foo.bar.
@@ -129,15 +153,15 @@ module Config
     protected
 
     def descend_array(array)
-      array.length.times do |i|
-        value = array[i]
+      array.map do |value|
         if value.instance_of? Config::Options
-          array[i] = value.to_hash
+          value.to_hash
         elsif value.instance_of? Array
-          array[i] = descend_array(value)
+          descend_array(value)
+        else
+          value
         end
       end
-      array
     end
 
     # Recursively converts Hashes to Options (including Hashes inside Arrays)
@@ -157,6 +181,11 @@ module Config
         s.send("#{k}=".to_sym, v)
       end
       s
+    end
+
+    # Try to convert string to a correct type
+    def __value(v)
+      Integer(v) rescue Float(v) rescue v
     end
   end
 end

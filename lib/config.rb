@@ -5,21 +5,30 @@ require 'config/options'
 require 'config/version'
 require 'config/integrations/rails/engine' if defined?(::Rails)
 require 'config/sources/yaml_source'
+require 'config/sources/hash_source'
+require 'config/validation/schema' if RUBY_VERSION >= '2.1'
 require 'deep_merge'
 
 module Config
+  extend Config::Validation::Schema if RUBY_VERSION >= '2.1'
+
   # Ensures the setup only gets run once
   @@_ran_once = false
 
-  mattr_accessor :const_name, :use_env
+  mattr_accessor :const_name, :use_env, :env_prefix, :env_separator, :env_converter, :env_parse_values
   mattr_accessor :prepend_sources, :_ran_once
-  @@const_name = "Settings"
+  @@const_name = 'Settings'
   @@use_env    = false
   @@prepend_sources = []
+  @@env_prefix = @@const_name
+  @@env_separator = '.'
+  @@env_converter = :downcase
+  @@env_parse_values = true
 
   # deep_merge options
-  mattr_accessor :knockout_prefix
+  mattr_accessor :knockout_prefix, :overwrite_arrays
   @@knockout_prefix = nil
+  @@overwrite_arrays = true
 
   def self.setup
     yield self if @@_ran_once == false

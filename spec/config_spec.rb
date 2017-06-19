@@ -60,6 +60,15 @@ describe Config do
     expect(servers).to eq([{ name: "yahoo.com" }, { name: "amazon.com" }])
   end
 
+  it "should convert to a hash without modifying nested settings" do
+    config = Config.load_files("#{fixture_path}/development.yml")
+    config.to_hash
+    expect(config).to be_kind_of(Config::Options)
+    expect(config[:section]).to be_kind_of(Config::Options)
+    expect(config[:section][:servers][0]).to be_kind_of(Config::Options)
+    expect(config[:section][:servers][1]).to be_kind_of(Config::Options)
+  end
+
   it "should convert to a json" do
     config = Config.load_files("#{fixture_path}/development.yml").to_json
     expect(JSON.parse(config)["section"]["servers"]).to be_kind_of(Array)
@@ -90,45 +99,7 @@ describe Config do
     expect(Settings.size).to eq(2)
   end
 
-  context "ENV variables" do
-    let(:config) do
-      Config.load_files("#{fixture_path}/settings.yml")
-    end
 
-    before :all do
-      load_env("#{fixture_path}/env/settings.yml")
-      Config.use_env = true
-    end
-
-    after :all do
-      Config.use_env = false
-    end
-
-    it "should load basic ENV variables" do
-      config.load_env!
-      expect(config.test_var).to eq("123")
-    end
-
-    it "should load nested sections" do
-      config.load_env!
-      expect(config.hash_test.one).to eq("1-1")
-    end
-
-    it "should override settings from files" do
-      Config.load_and_set_settings ["#{fixture_path}/settings.yml"]
-
-      expect(Settings.server).to eq("google.com")
-      expect(Settings.size).to eq("3")
-    end
-
-    it "should reload env" do
-      Config.load_and_set_settings ["#{fixture_path}/settings.yml"]
-      Config.reload!
-
-      expect(Settings.server).to eq("google.com")
-      expect(Settings.size).to eq("3")
-    end
-  end
 
   context "Nested Settings" do
     let(:config) do
@@ -160,22 +131,6 @@ describe Config do
     end
   end
 
-  context "Deep Merging" do
-    let(:config) do
-      files = ["#{fixture_path}/deep_merge/config1.yml", "#{fixture_path}/deep_merge/config2.yml"]
-      Config.load_files(files)
-    end
-
-    it "should merge hashes from multiple configs" do
-      expect(config.inner.marshal_dump.keys.size).to eq(3)
-      expect(config.inner2.inner2_inner.marshal_dump.keys.size).to eq(3)
-    end
-
-    it "should merge arrays from multiple configs" do
-      expect(config.arraylist1.size).to eq(6)
-      expect(config.arraylist2.inner.size).to eq(6)
-    end
-  end
 
   context "Boolean Overrides" do
     let(:config) do
@@ -356,6 +311,7 @@ describe Config do
       context 'merging' do
         let(:config) do
           Config.knockout_prefix = '--'
+          Config.overwrite_arrays = false
           Config.load_files(["#{fixture_path}/knockout_prefix/config1.yml",
                              "#{fixture_path}/knockout_prefix/config2.yml",
                              "#{fixture_path}/knockout_prefix/config3.yml"])
@@ -374,6 +330,58 @@ describe Config do
           expect(config.fixnum2).to eq('')
         end
       end
+    end
+
+    context 'using overwrite_arrays' do
+      context 'in configuration phase' do
+        it 'should be able to assign a different overwrite_arrays value' do
+          Config.reset
+          Config.overwrite_arrays = false
+
+          expect(Config.overwrite_arrays).to eq(false)
+        end
+
+        it 'should have the default overwrite_arrays value equal false' do
+          Config.reset
+
+          expect(Config.overwrite_arrays).to eq(true)
+        end
+      end
+
+      context 'overwriting' do
+        let(:config) do
+          Config.overwrite_arrays = true
+          Config.load_files(["#{fixture_path}/overwrite_arrays/config1.yml",
+                             "#{fixture_path}/overwrite_arrays/config2.yml",
+                             "#{fixture_path}/overwrite_arrays/config3.yml"])
+        end
+
+        it 'should remove elements from settings' do
+          expect(config.array1).to eq(['item4', 'item5', 'item6'])
+          expect(config.array2.inner).to eq(['item4', 'item5', 'item6'])
+          expect(config.array3).to eq([])
+        end
+      end
+
+
+      context 'merging' do
+        let(:config) do
+          Config.overwrite_arrays = false
+          Config.load_files(["#{fixture_path}/deep_merge/config1.yml",
+                             "#{fixture_path}/deep_merge/config2.yml"])
+        end
+
+        it 'should merge hashes from multiple configs' do
+          expect(config.inner.marshal_dump.keys.size).to eq(3)
+          expect(config.inner2.inner2_inner.marshal_dump.keys.size).to eq(3)
+        end
+
+        it 'should merge arrays from multiple configs' do
+          expect(config.arraylist1.size).to eq(6)
+          expect(config.arraylist2.inner.size).to eq(6)
+        end
+      end
+
     end
   end
 end

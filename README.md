@@ -1,11 +1,11 @@
+# Config
+
 [![Build Status](https://api.travis-ci.org/railsconfig/config.svg?branch=master)](http://travis-ci.org/railsconfig/config)
 [![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
 [![Dependency Status](https://gemnasium.com/railsconfig/config.svg)](https://gemnasium.com/railsconfig/config)
 [![Code Climate](https://codeclimate.com/github/railsconfig/config/badges/gpa.svg)](https://codeclimate.com/github/railsconfig/config)
 [![Issue Count](https://codeclimate.com/github/railsconfig/config/badges/issue_count.svg)](https://codeclimate.com/github/railsconfig/config)
 [![Test Coverage](https://codeclimate.com/github/railsconfig/config/badges/coverage.svg)](https://codeclimate.com/github/railsconfig/config/coverage)
-
-# Config
 
 ## Summary
 
@@ -23,7 +23,7 @@ Config helps you easily manage environment specific settings in an easy and usab
 ## Compatibility
 
 * Ruby `2.x`
-* Rails `>= 3.1` and `4`
+* Rails `>= 3.1`, `4` and `5`
 * Padrino
 * Sinatra
 
@@ -31,7 +31,7 @@ For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app
 
 ## Installing
 
-### Installing on Rails 3 or 4
+### Installing on Rails 3, 4 or 5
 
 Add `gem 'config'` to your `Gemfile` and run `bundle install` to install it. Then run
 
@@ -45,25 +45,6 @@ which will generate customizable config file `config/initializers/config.rb` and
     config/settings/test.yml
 
 You can now edit them to adjust to your needs.
-
-If you want to use Settings before rails application initialization process you can load Config railtie manually:
-
-```ruby
-module Appname
-  class Application < Rails::Application
-
-    Bundler.require(*Rails.groups)
-    Config::Integration::Rails::Railtie.preload
-
-    # ...
-
-    config.time_zone = Settings.time_zone
-
-    # ...
-
-  end
-end
-```
 
 ### Installing on Padrino
 
@@ -81,6 +62,15 @@ app and give it a root so it can find the config files.
 ```ruby
 set :root, File.dirname(__FILE__)
 register Config
+```
+
+### Installing on other ruby projects
+
+Add the gem to your `Gemfile` and run `bundle install` to install it.
+Then initialize `Config` manually within your configure block.
+
+```ruby
+Config.load_and_set_settings(Config.setting_files("/path/to/config_root", "your_project_environment"))
 ```
 
 It's also possible to initialize `Config` manually within your configure block if you want to just give it some yml
@@ -203,6 +193,15 @@ Settings.reload!
 > Note: this is an example usage, it is easier to just use the default local files `settings.local.yml,
 settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
 
+You also have the option to add a raw hash as a source. One use case might be storing settings in the database or in environment variables that overwrite what is in the YML files.
+
+```ruby
+Settings.add_source!({some_secret: ENV['some_secret']})
+Settings.reload!
+```
+
+You may pass a hash to `prepend_source!` as well.
+
 ## Embedded Ruby (ERB)
 
 Embedded Ruby is allowed in the configuration files. Consider the two following config files.
@@ -252,55 +251,132 @@ Settings.section.servers[1].name # => amazon.com
 
 ## Configuration
 
-You can customize `Config` only once, preferably during application initialization phase:
+There are multiple configuration options available, however you can customize `Config` only once, preferably during
+application initialization phase:
 
 ```ruby
 Config.setup do |config|
   config.const_name = 'Settings'
   config.knockout_prefix = nil
   config.prepend_sources = ["path_to_some_custom_settings_to_prepend.yml"]
+  ...
 end
 ```
 
-After installing `Config` in Rails, you will find this configuration at `config/initializers/config.rb`.
+After installing `Config` in Rails, you will find automatically generated file that contains default configuration
+located at `config/initializers/config.rb`.
 
-Following options are available:
+### General
 
 * `const_name` - name of the object holing you settings. Default: `'Settings'`
 
-Inheritance customization (check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details):
+### Merge customization
 
-* `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Default: `nil`
+* `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
+* `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
+
+Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
+
+### Validation
+
+With Ruby 2.1 or newer, you can optionally define a schema to validate presence (and type) of specific config values:
+
+```ruby
+Config.setup do |config|
+  # ...
+  config.schema do
+    required(:youtube).schema do
+      required(:api_key).filled
+    end
+  end
+end
+```
+
+The above example demonstrates how to ensure that the configuration has the `youtube` structure
+with the `api_key` field filled.
+
+If you define a schema it will automatically be used to validate your config. If validation fails it will
+raise a `Config::Validation::Error` containing a nice message with information about all the mismatches
+between the schema and your config.
+
+Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
+
+### Environment variables
 
 Prepend sources
 
 * `prepend_sources` - ability to prepend settings via Config without the need to reload settings after they run once.
 
-## Working with Heroku
+See section below for more details.
 
-Heroku uses ENV object to store sensitive settings which are like the local files described above. You cannot upload
-such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh.
+## Working with environment variables
 
-To use config with Heroku just set the `use_env` var to `true` in your `config/initializers/config.rb` file. Eg:
+To load environment variables from the `ENV` object, that will override any settings defined in files, set the `use_env`
+to true in your `config/initializers/config.rb` file:
 
 ```ruby
 Config.setup do |config|
-  config.const_name = 'AppSettings'
+  config.const_name = 'Settings'
   config.use_env = true
 end
 ```
 
 Now config would read values from the ENV object to the settings. For the example above it would look for keys starting
-with 'AppSettings'. Eg:
+with `Settings`:
 
 ```ruby
-ENV['AppSettings.section.size'] = 1
-ENV['AppSettings.section.server'] = 'google.com'
+ENV['Settings.section.size'] = 1
+ENV['Settings.section.server'] = 'google.com'
 ```
 
 It won't work with arrays, though.
 
+### Working with Heroku
+
+Heroku uses ENV object to store sensitive settings. You cannot upload such files to Heroku because it's ephemeral
+filesystem gets recreated from the git sources on each instance refresh. To use config with Heroku just set the
+`use_env` var to `true` as mentioned above.
+
 To upload your local values to Heroku you could ran `bundle exec rake config:heroku`.
+
+### Fine-tuning
+
+You can customize how environment variables are processed:
+
+* `env_prefix` (default: `SETTINGS`) - which ENV variables to load into config
+* `env_separator` (default: `.`)  - what string to use as level separator - default value of `.` works well with
+  Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using
+  dots in variable names might not be allowed (eg. Bash)
+* `env_converter` (default: `:downcase`)  - how to process variables names:
+  * `nil` - no change
+  * `:downcase` - convert to lower case
+* `env_parse_values` (default: `true`) - try to parse values to a correct type (`Integer`, `Float`, `String`)
+
+For instance, given the following environment:
+
+```bash
+SETTINGS__SECTION__SERVER_SIZE=1
+SETTINGS__SECTION__SERVER=google.com
+```
+
+And the following configuration:
+
+```ruby
+Config.setup do |config|
+  config.use_env = true
+  config.env_prefix = 'SETTINGS'
+  config.env_separator = '__'
+  config.env_converter = :downcase
+  config.env_parse_values = true
+end
+```
+
+The following settings will be available:
+
+```ruby
+Settings.section.server_size # => 1
+Settings.section.server # => 'google.com'
+```
 
 ## Contributing
 
@@ -324,8 +400,8 @@ mdl --style .mdlstyle.rb *.md
 
 ## Authors
 
-* [Fred Wu](http://github.com/fredwu)
 * [Piotr Kuczynski](http://github.com/pkuczynski)
+* [Fred Wu](http://github.com/fredwu)
 * [Jacques Crocker](http://github.com/railsjedi)
 * Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
 
