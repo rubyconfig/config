@@ -126,6 +126,47 @@ describe Config do
       end
     end
 
+    context 'and custom ENV variables prefix includes custom ENV variables separator' do
+      before :each do
+        Config.env_prefix = 'MY_CONFIG'
+        Config.env_separator = '_'
+      end
+
+      it 'should load variables from the new prefix' do
+        ENV['MY_CONFIG_KEY'] = 'value'
+
+        expect(config.key).to eq('value')
+      end
+
+      it 'should not load variables from the default prefix' do
+        ENV['Settings_key'] = 'value'
+
+        expect(config.key).to eq(nil)
+      end
+
+      it 'should skip ENV variable when partial prefix match' do
+        ENV['MY_CONFIGS_KEY'] = 'value'
+
+        expect(config.key).to eq(nil)
+      end
+
+      it 'should load variables and correctly recognize the new separator' do
+        ENV['MY_CONFIG_KEY']                    = 'value'
+        ENV['MY_CONFIG_KEY.WITH.DOT']           = 'value'
+        ENV['MY_CONFIG_WORLD_COUNTRIES_EUROPE'] = '0'
+
+        expect(config.key).to eq('value')
+        expect(config['key.with.dot']).to eq('value')
+        expect(config.world.countries.europe).to eq(0)
+      end
+
+      it 'should ignore variables wit default separator' do
+        ENV['MY_CONFIG.KEY'] = 'value'
+
+        expect(config.key).to eq(nil)
+      end
+    end
+
     context 'and variable names conversion is enabled' do
       it 'should downcase variable names when :downcase conversion enabled' do
         ENV['Settings.NEW_VAR'] = 'value'
