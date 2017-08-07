@@ -132,35 +132,33 @@ describe Config do
         Config.env_separator = '_'
       end
 
-      it 'should load variables from the new prefix' do
+      it 'should load environment variables which begin with the custom prefix' do
         ENV['MY_CONFIG_KEY'] = 'value'
 
         expect(config.key).to eq('value')
       end
 
-      it 'should not load variables from the default prefix' do
+      it 'should not load environment variables which begin with the default prefix' do
         ENV['Settings_key'] = 'value'
 
         expect(config.key).to eq(nil)
       end
 
-      it 'should skip ENV variable when partial prefix match' do
+      it 'should not load environment variables which partially begin with the custom prefix' do
         ENV['MY_CONFIGS_KEY'] = 'value'
 
         expect(config.key).to eq(nil)
       end
 
-      it 'should load variables and correctly recognize the new separator' do
-        ENV['MY_CONFIG_KEY']                    = 'value'
+      it 'should recognize the custom separator' do
         ENV['MY_CONFIG_KEY.WITH.DOT']           = 'value'
         ENV['MY_CONFIG_WORLD_COUNTRIES_EUROPE'] = '0'
 
-        expect(config.key).to eq('value')
         expect(config['key.with.dot']).to eq('value')
         expect(config.world.countries.europe).to eq(0)
       end
 
-      it 'should ignore variables wit default separator' do
+      it 'should not recognize the default separator' do
         ENV['MY_CONFIG.KEY'] = 'value'
 
         expect(config.key).to eq(nil)
