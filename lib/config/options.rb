@@ -37,9 +37,10 @@ module Config
       hash = Hash.new
 
       ENV.each do |variable, value|
-        keys = variable.to_s.split(Config.env_separator)
+        separator = Config.env_separator
+        prefix = (Config.env_prefix || Config.const_name).to_s.split(separator)
 
-        prefix = (Config.env_prefix || Config.const_name).split(Config.env_separator)
+        keys = variable.to_s.split(separator)
 
         next if keys.shift(prefix.size) != prefix
 
