@@ -37,9 +37,9 @@ module Config
       hash = Hash.new
 
       ENV.each do |variable, value|
-        keys = split(variable)
+        keys = variable.to_s.split(Config.env_separator)
 
-        prefix = split(Config.env_prefix || Config.const_name)
+        prefix = (Config.env_prefix || Config.const_name).split(Config.env_separator)
 
         next if keys.shift(prefix.size) != prefix
 
@@ -153,10 +153,6 @@ module Config
     end
 
     protected
-
-    def split(string)
-      string.to_s.split(Config.env_separator)
-    end
 
     def descend_array(array)
       array.map do |value|
