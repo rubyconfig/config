@@ -6,6 +6,9 @@
 * Add ability to validate config schema ([#155](https://github.com/railsconfig/config/pull/155) thanks to [@ok32](https://github.com/ok32))
 * Add count to the reserved names list ([#167](https://github.com/railsconfig/config/pull/167) thanks to [@carbonin](https://github.com/carbonin))
 
+### Bug fixes
+* Correctly parse `env_prefix`, which contains `env_separator` ([#177](https://github.com/railsconfig/config/pull/177) thanks to [@rdodson41](https://github.com/rdodson41))
+
 ## 1.4.0
 
 ### New features
