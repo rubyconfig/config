@@ -25,21 +25,21 @@ describe Config do
     end
 
     it 'should add new setting from ENV variable' do
-      ENV['Settings.new_var'] = 'value'
+      ENV['RailsConfig.new_var'] = 'value'
 
       expect(config.new_var).to eq('value')
     end
 
     context 'should override existing setting with a value from ENV variable' do
       it 'for a basic values' do
-        ENV['Settings.size'] = 'overwritten by env'
+        ENV['RailsConfig.size'] = 'overwritten by env'
 
         expect(config.size).to eq('overwritten by env')
       end
 
       it 'for multilevel sections' do
-        ENV['Settings.number_of_all_countries'] = '0'
-        ENV['Settings.world.countries.europe']  = '0'
+        ENV['RailsConfig.number_of_all_countries'] = '0'
+        ENV['RailsConfig.world.countries.europe']  = '0'
 
         expect(config.number_of_all_countries).to eq(0)
         expect(config.world.countries.europe).to eq(0)
@@ -49,21 +49,21 @@ describe Config do
 
     context 'and parsing ENV variable names is enabled' do
       it 'should recognize numbers and expose them as integers' do
-        ENV['Settings.new_var'] = '123'
+        ENV['RailsConfig.new_var'] = '123'
 
         expect(config.new_var).to eq(123)
         expect(config.new_var.is_a? Integer).to eq(true)
       end
 
       it 'should recognize fixed point numbers and expose them as float' do
-        ENV['Settings.new_var'] = '1.9'
+        ENV['RailsConfig.new_var'] = '1.9'
 
         expect(config.new_var).to eq(1.9)
         expect(config.new_var.is_a? Float).to eq(true)
       end
 
       it 'should leave strings intact' do
-        ENV['Settings.new_var'] = 'foobar'
+        ENV['RailsConfig.new_var'] = 'foobar'
 
         expect(config.new_var).to eq('foobar')
         expect(config.new_var.is_a? String).to eq(true)
@@ -72,7 +72,7 @@ describe Config do
 
     context 'and parsing ENV variable names is disabled' do
       it 'should not convert numbers to integers' do
-        ENV['Settings.new_var'] = '123'
+        ENV['RailsConfig.new_var'] = '123'
 
         Config.env_parse_values = false
 
@@ -92,7 +92,7 @@ describe Config do
       end
 
       it 'should not load variables from the default prefix' do
-        ENV['Settings.new_var'] = 'value'
+        ENV['RailsConfig.new_var'] = 'value'
 
         expect(config.new_var).to eq(nil)
       end
@@ -110,9 +110,9 @@ describe Config do
       end
 
       it 'should load variables and correctly recognize the new separator' do
-        ENV['Settings__new_var']                  = 'value'
-        ENV['Settings__var.with.dot']             = 'value'
-        ENV['Settings__world__countries__europe'] = '0'
+        ENV['RailsConfig__new_var']                  = 'value'
+        ENV['RailsConfig__var.with.dot']             = 'value'
+        ENV['RailsConfig__world__countries__europe'] = '0'
 
         expect(config.new_var).to eq('value')
         expect(config['var.with.dot']).to eq('value')
@@ -120,7 +120,7 @@ describe Config do
       end
 
       it 'should ignore variables wit default separator' do
-        ENV['Settings.new_var'] = 'value'
+        ENV['RailsConfig.new_var'] = 'value'
 
         expect(config.new_var).to eq(nil)
       end
@@ -167,7 +167,7 @@ describe Config do
 
     context 'and variable names conversion is enabled' do
       it 'should downcase variable names when :downcase conversion enabled' do
-        ENV['Settings.NEW_VAR'] = 'value'
+        ENV['RailsConfig.NEW_VAR'] = 'value'
 
         expect(config.new_var).to eq('value')
       end
@@ -175,7 +175,7 @@ describe Config do
 
     context 'and variable names conversion is disabled' do
       it 'should not change variable names by default' do
-        ENV['Settings.NEW_VAR'] = 'value'
+        ENV['RailsConfig.NEW_VAR'] = 'value'
 
         Config.env_converter = nil
 
@@ -185,7 +185,7 @@ describe Config do
     end
 
     it 'should always load ENV variables when reloading settings from files' do
-      ENV['Settings.new_var'] = 'value'
+      ENV['RailsConfig.new_var'] = 'value'
 
       expect(config.new_var).to eq('value')
 

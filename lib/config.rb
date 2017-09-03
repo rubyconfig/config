@@ -16,7 +16,7 @@ module Config
   @@_ran_once = false
 
   mattr_accessor :const_name, :use_env, :env_prefix, :env_separator, :env_converter, :env_parse_values
-  @@const_name = 'Settings'
+  @@const_name = 'RailsConfig'
   @@use_env    = false
   @@env_prefix = @@const_name
   @@env_separator = '.'
