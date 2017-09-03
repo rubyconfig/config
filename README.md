@@ -17,7 +17,7 @@ Config helps you easily manage environment specific settings in an easy and usab
 * config files support ERB
 * config files support inheritance and multiple environments
 * access config information via convenient object member notation
-* support for multi-level settings (`Settings.group.subgroup.setting`)
+* support for multi-level settings (`RailsConfig.group.subgroup.setting`)
 * local developer settings ignored when committing the code
 
 ## Compatibility
@@ -80,10 +80,10 @@ paths to load from.
 Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
 ```
 
-## Accessing the Settings object
+## Accessing the RailsConfig object
 
-After installing the gem, `Settings` object will become available globally and by default will be compiled from the
-files listed below. Settings defined in files that are lower in the list override settings higher.
+After installing the gem, `RailsConfig` object will become available globally and by default will be compiled from the
+files listed below. RailsConfig defined in files that are lower in the list override settings higher.
 
     config/settings.yml
     config/settings/#{environment}.yml
@@ -96,37 +96,37 @@ files listed below. Settings defined in files that are lower in the list overrid
 Entries can be accessed via object member notation:
 
 ```ruby
-Settings.my_config_entry
+RailsConfig.my_config_entry
 ```
 
 Nested entries are supported:
 
 ```ruby
-Settings.my_section.some_entry
+RailsConfig.my_section.some_entry
 ```
 
 Alternatively, you can also use the `[]` operator if you don't know which exact setting you need to access ahead of time.
 
 ```ruby
-# All the following are equivalent to Settings.my_section.some_entry
-Settings.my_section[:some_entry]
-Settings.my_section['some_entry']
-Settings[:my_section][:some_entry]
+# All the following are equivalent to RailsConfig.my_section.some_entry
+RailsConfig.my_section[:some_entry]
+RailsConfig.my_section['some_entry']
+RailsConfig[:my_section][:some_entry]
 ```
 
 ### Reloading settings
 
-You can reload the Settings object at any time by running `Settings.reload!`.
+You can reload the RailsConfig object at any time by running `RailsConfig.reload!`.
 
 ### Reloading settings and config files
 
-You can also reload the `Settings` object from different config files at runtime.
+You can also reload the `RailsConfig` object from different config files at runtime.
 
 For example, in your tests if you want to test the production settings, you can:
 
 ```ruby
 Rails.env = "production"
-Settings.reload_from_files(
+RailsConfig.reload_from_files(
   Rails.root.join("config", "settings.yml").to_s,
   Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
   Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
@@ -166,8 +166,8 @@ Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
 You can add new YAML config files at runtime. Just use:
 
 ```ruby
-Settings.add_source!("/path/to/source.yml")
-Settings.reload!
+RailsConfig.add_source!("/path/to/source.yml")
+RailsConfig.reload!
 ```
 
 This will use the given source.yml file and use its settings to overwrite any previous ones.
@@ -175,8 +175,8 @@ This will use the given source.yml file and use its settings to overwrite any pr
 On the other hand, you can prepend a YML file to the list of configuration files:
 
 ```ruby
-Settings.prepend_source!("/path/to/source.yml")
-Settings.reload!
+RailsConfig.prepend_source!("/path/to/source.yml")
+RailsConfig.reload!
 ```
 
 This will do the same as `add_source`, but the given YML file will be loaded first (instead of last) and its settings
@@ -186,8 +186,8 @@ One thing I like to do for my Rails projects is provide a local.yml config file 
 per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
 
 ```ruby
-Settings.add_source!("#{Rails.root}/config/settings/local.yml")
-Settings.reload!
+RailsConfig.add_source!("#{Rails.root}/config/settings/local.yml")
+RailsConfig.reload!
 ```
 
 > Note: this is an example usage, it is easier to just use the default local files `settings.local.yml,
@@ -196,8 +196,8 @@ settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for you
 You also have the option to add a raw hash as a source. One use case might be storing settings in the database or in environment variables that overwrite what is in the YML files.
 
 ```ruby
-Settings.add_source!({some_secret: ENV['some_secret']})
-Settings.reload!
+RailsConfig.add_source!({some_secret: ENV['some_secret']})
+RailsConfig.reload!
 ```
 
 You may pass a hash to `prepend_source!` as well.
@@ -226,27 +226,27 @@ section:
 Notice that the environment specific config entries overwrite the common entries.
 
 ```ruby
-Settings.size   # => 2
-Settings.server # => google.com
+RailsConfig.size   # => 2
+RailsConfig.server # => google.com
 ```
 
 Notice the embedded Ruby.
 
 ```ruby
-Settings.computed # => 6
+RailsConfig.computed # => 6
 ```
 
 Notice that object member notation is maintained even in nested entries.
 
 ```ruby
-Settings.section.size # => 3
+RailsConfig.section.size # => 3
 ```
 
 Notice array notation and object member notation is maintained.
 
 ```ruby
-Settings.section.servers[0].name # => yahoo.com
-Settings.section.servers[1].name # => amazon.com
+RailsConfig.section.servers[0].name # => yahoo.com
+RailsConfig.section.servers[1].name # => amazon.com
 ```
 
 ## Configuration
@@ -256,7 +256,7 @@ application initialization phase:
 
 ```ruby
 Config.setup do |config|
-  config.const_name = 'Settings'
+  config.const_name = 'RailsConfig'
   ...
 end
 ```
@@ -266,7 +266,7 @@ located at `config/initializers/config.rb`.
 
 ### General
 
-* `const_name` - name of the object holing you settings. Default: `'Settings'`
+* `const_name` - name of the object holing you settings. Default: `'RailsConfig'`
 
 ### Merge customization
 
@@ -310,17 +310,17 @@ to true in your `config/initializers/config.rb` file:
 
 ```ruby
 Config.setup do |config|
-  config.const_name = 'Settings'
+  config.const_name = 'RailsConfig'
   config.use_env = true
 end
 ```
 
 Now config would read values from the ENV object to the settings. For the example above it would look for keys starting
-with `Settings`:
+with `RailsConfig`:
 
 ```ruby
-ENV['Settings.section.size'] = 1
-ENV['Settings.section.server'] = 'google.com'
+ENV['RailsConfig.section.size'] = 1
+ENV['RailsConfig.section.server'] = 'google.com'
 ```
 
 It won't work with arrays, though.
@@ -368,8 +368,8 @@ end
 The following settings will be available:
 
 ```ruby
-Settings.section.server_size # => 1
-Settings.section.server # => 'google.com'
+RailsConfig.section.server_size # => 1
+RailsConfig.section.server # => 'google.com'
 ```
 
 ## Contributing

@@ -90,13 +90,13 @@ describe Config do
   it "should allow full reload of the settings files" do
     files = ["#{fixture_path}/settings.yml"]
     Config.load_and_set_settings(files)
-    expect(Settings.server).to eq("google.com")
-    expect(Settings.size).to eq(1)
+    expect(RailsConfig.server).to eq("google.com")
+    expect(RailsConfig.size).to eq(1)
 
     files = ["#{fixture_path}/settings.yml", "#{fixture_path}/development.yml"]
-    Settings.reload_from_files(files)
-    expect(Settings.server).to eq("google.com")
-    expect(Settings.size).to eq(2)
+    RailsConfig.reload_from_files(files)
+    expect(RailsConfig.server).to eq("google.com")
+    expect(RailsConfig.size).to eq(2)
   end
 
 
@@ -146,7 +146,7 @@ describe Config do
 
   context "Custom Configuration" do
     it "should have the default settings constant as 'Settings'" do
-      expect(Config.const_name).to eq("Settings")
+      expect(Config.const_name).to eq("RailsConfig")
     end
 
     it "should be able to assign a different settings constant" do
