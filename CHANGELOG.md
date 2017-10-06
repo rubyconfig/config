@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+...
+
+## 1.5.0
+
 ### New features
 * Add ability to validate config schema ([#155](https://github.com/railsconfig/config/pull/155) thanks to [@ok32](https://github.com/ok32))
 * Add count to the reserved names list ([#167](https://github.com/railsconfig/config/pull/167) thanks to [@carbonin](https://github.com/carbonin))
