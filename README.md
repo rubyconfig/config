@@ -45,7 +45,7 @@ which will generate customizable config file `config/initializers/config.rb` and
     config/settings/test.yml
 
 You can now edit them to adjust to your needs.
-a
+
 ### Installing on Padrino
 
 Add the gem to your `Gemfile` and run `bundle install` to install it. Then edit `app.rb` and register `Config`
@@ -373,7 +373,7 @@ And the following configuration:
 ```ruby
 Config.setup do |config|
   config.use_env = true
-  config.env_prefix = 'Settings'
+  config.env_prefix = 'SETTINGS'
   config.env_separator = '__'
   config.env_converter = :downcase
   config.env_parse_values = true
