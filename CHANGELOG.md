@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### New features
+
+* Add parsing of ENV variable values to Boolean type
+
 ...
 
 ## 1.5.0
@@ -86,6 +90,3 @@
 
 * Expose Settings in application.rb, so you don't have to duplicate configuration for each environment file ([#59](https://github.com/railsjedi/config/issues/59))
 * Adding support for Rails 4.1.0.rc ([#70](https://github.com/railsjedi/config/issues/70))
-
-
-

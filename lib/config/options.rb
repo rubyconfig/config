@@ -188,7 +188,14 @@ module Config
 
     # Try to convert string to a correct type
     def __value(v)
-      Integer(v) rescue Float(v) rescue v
+      case v
+      when 'false'
+        false
+      when 'true'
+        true
+      else
+        Integer(v) rescue Float(v) rescue v
+      end
     end
   end
 end

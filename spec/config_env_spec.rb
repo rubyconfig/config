@@ -48,6 +48,20 @@ describe Config do
     end
 
     context 'and parsing ENV variable names is enabled' do
+      it 'should recognize "false" and expose as Boolean' do
+        ENV['Settings.new_var'] = 'false'
+
+        expect(config.new_var).to eq(false)
+        expect(config.new_var.is_a? FalseClass).to eq(true)
+      end
+
+      it 'should recognize "true" and expose as Boolean' do
+        ENV['Settings.new_var'] = 'true'
+
+        expect(config.new_var).to eq(true)
+        expect(config.new_var.is_a? TrueClass).to eq(true)
+      end
+
       it 'should recognize numbers and expose them as integers' do
         ENV['Settings.new_var'] = '123'
 
