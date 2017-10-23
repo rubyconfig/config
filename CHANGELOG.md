@@ -4,9 +4,12 @@
 
 ### New features
 
-* Add parsing of ENV variable values to Boolean type
-
 ...
+
+## 1.5.1
+
+### New features
+* Add parsing of ENV variable values to Boolean type
 
 ## 1.5.0
 
