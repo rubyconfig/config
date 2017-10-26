@@ -299,6 +299,42 @@ between the schema and your config.
 
 Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
 
+### Missing keys
+
+You can test if a value was set for a given key using `key?` and its alias `has_key?`:
+
+```ruby
+Settings.key?(:not_existing_key)
+# => false
+Settings.key?(:existing_key)
+# => true
+```
+
+By default, accessing to a missing key returns `nil`:
+
+```ruby
+Settings.key?(:not_existing_key)
+# => false
+Settings.not_existing_key
+# => nil
+```
+
+This is not "typos-safe". To solve this problem, you can configure the `fail_on_missing` option:
+
+```ruby
+Config.setup do |config|
+  config.fail_on_missing = true
+  # ...
+end
+```
+
+So it will raise a `KeyError` when accessing a non-existing key (similar to `Hash#fetch` behaviour):
+
+```ruby
+Settings.not_existing_key
+# => raises KeyError: key not found: :not_existing_key
+```
+
 ### Environment variables
 
 See section below for more details.
