@@ -301,25 +301,32 @@ Check [dry-validation](https://github.com/dry-rb/dry-validation) for more detail
 
 ### Missing keys
 
+For an example settings file:
+
+```yaml
+size: 1
+server: google.com
+```
+
 You can test if a value was set for a given key using `key?` and its alias `has_key?`:
 
 ```ruby
-Settings.key?(:not_existing_key)
+Settings.key?(:path)
 # => false
-Settings.key?(:existing_key)
+Settings.key?(:server)
 # => true
 ```
 
 By default, accessing to a missing key returns `nil`:
 
 ```ruby
-Settings.key?(:not_existing_key)
+Settings.key?(:path)
 # => false
-Settings.not_existing_key
+Settings.path
 # => nil
 ```
 
-This is not "typos-safe". To solve this problem, you can configure the `fail_on_missing` option:
+This is not "typo-safe". To solve this problem, you can configure the `fail_on_missing` option:
 
 ```ruby
 Config.setup do |config|
@@ -331,8 +338,8 @@ end
 So it will raise a `KeyError` when accessing a non-existing key (similar to `Hash#fetch` behaviour):
 
 ```ruby
-Settings.not_existing_key
-# => raises KeyError: key not found: :not_existing_key
+Settings.path
+# => raises KeyError: key not found: :path
 ```
 
 ### Environment variables
