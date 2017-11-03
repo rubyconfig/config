@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+...
+
+## 1.6.0
+
 ### New features
 
 * `Config#fail_on_missing` option (default `false`) to raise a `KeyError` exception when accessing a non-existing key
