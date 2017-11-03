@@ -15,13 +15,15 @@ module Config
   # Ensures the setup only gets run once
   @@_ran_once = false
 
-  mattr_accessor :const_name, :use_env, :env_prefix, :env_separator, :env_converter, :env_parse_values
+  mattr_accessor :const_name, :use_env, :env_prefix, :env_separator,
+                 :env_converter, :env_parse_values, :fail_on_missing
   @@const_name = 'Settings'
   @@use_env    = false
   @@env_prefix = @@const_name
   @@env_separator = '.'
   @@env_converter = :downcase
   @@env_parse_values = true
+  @@fail_on_missing = false
 
   # deep_merge options
   mattr_accessor :knockout_prefix, :overwrite_arrays

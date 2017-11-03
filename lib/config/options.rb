@@ -153,6 +153,19 @@ module Config
       end
     end
 
+    delegate :key?, :has_key?, to: :table
+
+    def method_missing(method_name, *args)
+      if Config.fail_on_missing && method_name !~ /.*(?==\z)/m
+        raise KeyError, "key not found: #{method_name.inspect}" unless key?(method_name)
+      end
+      super
+    end
+
+    def respond_to_missing?(*args)
+      super
+    end
+
     protected
 
     def descend_array(array)

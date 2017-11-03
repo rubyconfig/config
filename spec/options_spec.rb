@@ -114,4 +114,66 @@ describe Config::Options do
     end
   end
 
+  context 'when fail_on_missing option' do
+    before { Config.reset }
+
+    context 'is set to true' do
+      before { Config.setup { |cfg| cfg.fail_on_missing = true } }
+
+      it 'should raise an error when accessing a missing key' do
+        config = Config.load_files("#{fixture_path}/empty1.yml")
+
+        expect { config.not_existing_method }.to raise_error(KeyError)
+        expect { config[:not_existing_method] }.to raise_error(KeyError)
+      end
+
+      it 'should raise an error when accessing a removed key' do
+        config = Config.load_files("#{fixture_path}/empty1.yml")
+
+        config.tmp_existing = 1337
+        expect(config.tmp_existing).to eq(1337)
+
+        config.delete_field(:tmp_existing)
+        expect { config.tmp_existing }.to raise_error(KeyError)
+        expect { config[:tmp_existing] }.to raise_error(KeyError)
+      end
+    end
+
+    context 'is set to false' do
+      before { Config.setup { |cfg| cfg.fail_on_missing = false } }
+
+      it 'should return nil when accessing a missing key' do
+        config = Config.load_files("#{fixture_path}/empty1.yml")
+
+        expect(config.not_existing_method).to eq(nil)
+        expect(config[:not_existing_method]).to eq(nil)
+      end
+    end
+  end
+
+  context '#key? and #has_key? methods' do
+    let(:config) {
+      config = Config.load_files("#{fixture_path}/empty1.yml")
+      config.existing = nil
+      config.send('complex_value=', nil)
+      config.send('even_more_complex_value==', nil)
+      config.nested = Config.load_files("#{fixture_path}/empty2.yml")
+      config.nested.existing = nil
+      config
+    }
+
+    it 'should test if a value exists for a given key' do
+      expect(config.key?(:not_existing)).to eq(false)
+      expect(config.key?(:complex_value)).to eq(true)
+      expect(config.key?('even_more_complex_value='.to_sym)).to eq(true)
+      expect(config.key?(:nested)).to eq(true)
+      expect(config.nested.key?(:not_existing)).to eq(false)
+      expect(config.nested.key?(:existing)).to eq(true)
+    end
+
+    it 'should be sensible to key\'s class' do
+      expect(config.key?(:existing)).to eq(true)
+      expect(config.key?('existing')).to eq(false)
+    end
+  end
 end
