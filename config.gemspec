@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport',           '>= 3.0'
   s.add_dependency 'deep_merge',              '~> 1.1.1'
-  s.add_dependency 'dry-validation',          '~> 0.10.4' if RUBY_VERSION >= '2.1'
+  s.add_dependency 'dry-validation',          '>= 0.10.4' if RUBY_VERSION >= '2.1'
 
   s.add_development_dependency 'bundler',     '~> 1.13',  '>= 1.13.6'
   s.add_development_dependency 'rake',        '~> 12.0',  '>= 12.0.0'
