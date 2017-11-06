@@ -153,7 +153,13 @@ module Config
       end
     end
 
-    delegate :key?, :has_key?, to: :table
+    def key?
+      table.key?
+    end
+
+    def has_key?
+      table.has_key?
+    end
 
     def method_missing(method_name, *args)
       if Config.fail_on_missing && method_name !~ /.*(?==\z)/m

@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-...
+### Bug fixes
+* Fix `key?` and `has_key?` which have raised NoMethodError in not rails environment by using ActiveSupport `#delegate` implicitly
 
 ## 1.6.0
 
