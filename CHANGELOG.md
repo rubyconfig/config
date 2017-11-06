@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-...
+## 1.6.1
+
+* Allow newer dry-validation dependency
 
 ## 1.6.0
 
