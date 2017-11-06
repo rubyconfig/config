@@ -2,8 +2,6 @@
 
 ## Unreleased
 
-## 1.6.1
-
 * Makje dry-validation dependency less strict allowing to use newer versions ([#183](https://github.com/railsconfig/config/pull/183))
 
 ## 1.6.0
