@@ -4,7 +4,7 @@
 
 ## 1.6.1
 
-* Allow newer dry-validation dependency
+* Makje dry-validation dependency less strict allowing to use newer versions
 
 ## 1.6.0
 
