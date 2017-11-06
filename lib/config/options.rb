@@ -153,12 +153,12 @@ module Config
       end
     end
 
-    def key?
-      table.key?
+    def key?(key)
+      table.key?(key)
     end
 
-    def has_key?
-      table.has_key?
+    def has_key?(key)
+      table.has_key?(key)
     end
 
     def method_missing(method_name, *args)
