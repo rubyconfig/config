@@ -13,12 +13,17 @@ gemfile:
   - gemfiles/rails_4.1.gemfile
   - gemfiles/rails_4.2.gemfile
   - gemfiles/rails_5.gemfile
+  - gemfiles/sinatra.gemfile
 matrix:
   exclude:
     - rvm: 2.0.0
       gemfile: gemfiles/rails_5.gemfile
+    - rvm: 2.0.0
+      gemfile: gemfiles/sinatra.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/rails_5.gemfile
+    - rvm: 2.1.10
+      gemfile: gemfiles/sinatra.gemfile
     - rvm: 2.2.6
       gemfile: gemfiles/rails_3.gemfile
     - rvm: 2.3.3
