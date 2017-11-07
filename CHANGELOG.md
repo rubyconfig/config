@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-* Makje dry-validation dependency less strict allowing to use newer versions ([#183](https://github.com/railsconfig/config/pull/183))
+* Make dry-validation dependency less strict allowing to use newer versions ([#183](https://github.com/railsconfig/config/pull/183))
+* Fix `key?` and `has_key?`, which raise NoMethodError in non Rails environment, by using ActiveSupport `#delegate` implicitly ([#185](https://github.com/railsconfig/config/pull/185))
 
 ## 1.6.0
 
