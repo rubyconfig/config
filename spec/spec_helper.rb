@@ -39,7 +39,7 @@ when 'rails'
 
   # Configure
   RSpec.configure do |config|
-    config.fixture_path = File.join(File.dirname(__FILE__), '/fixtures')
+    config.fixture_path = FixtureHelper::FIXTURE_PATH
   end
 
 when 'sinatra'
@@ -52,10 +52,7 @@ when 'sinatra'
   # Configure
   RSpec.configure do |config|
     config.filter_run_excluding :rails
-
-    def fixture_path
-      File.join(File.dirname(__FILE__), '/fixtures')
-    end
+    config.include FixtureHelper
   end
 end
 
