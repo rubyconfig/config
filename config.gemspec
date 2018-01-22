@@ -41,7 +41,12 @@ Gem::Specification.new do |s|
 
   # Static code analysis
   s.add_development_dependency 'mdl',         '~> 0.4',   '>= 0.4.0'
-  s.add_development_dependency 'rubocop',     '~> 0.46',  '>= 0.46.0'
+
+  if RUBY_VERSION < '2.1'
+    s.add_development_dependency 'rubocop',     '~> 0.50',  '>= 0.50.0'
+  else
+    s.add_development_dependency 'rubocop',     '~> 0.52',  '>= 0.52.1'
+  end
 
   if ENV['TRAVIS']
     s.add_development_dependency 'simplecov', '~> 0.12.0'
