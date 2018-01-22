@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mdl',         '~> 0.4',   '>= 0.4.0'
 
   if RUBY_VERSION < '2.1'
-    s.add_development_dependency 'rubocop',     '~> 0.50',  '>= 0.50.0' 
+    s.add_development_dependency 'rubocop',     '~> 0.50',  '>= 0.50.0'
   else
     s.add_development_dependency 'rubocop',     '~> 0.52',  '>= 0.52.1'
   end
