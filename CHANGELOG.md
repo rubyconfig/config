@@ -4,6 +4,7 @@
 
 * Make dry-validation dependency less strict allowing to use newer versions ([#183](https://github.com/railsconfig/config/pull/183))
 * Fix `key?` and `has_key?`, which raise NoMethodError in non Rails environment, by using ActiveSupport `#delegate` implicitly ([#185](https://github.com/railsconfig/config/pull/185))
+* Update `deep_merge` dependency to latest version (v1.2.1) ([#191](https://github.com/railsconfig/config/pull/191))
 
 ## 1.6.0
 
