@@ -6,6 +6,7 @@
 * Fix `key?` and `has_key?`, which raise NoMethodError in non Rails environment, by using ActiveSupport `#delegate` implicitly ([#185](https://github.com/railsconfig/config/pull/185))
 * Update `deep_merge` dependency to latest version (v1.2.1) ([#191](https://github.com/railsconfig/config/pull/191))
 * Upgrade `rubocop` to version 0.52.1 ([#193](https://github.com/railsconfig/config/pull/193))
+* Add `zip` to the list of reserved keywords ([#197](https://github.com/railsconfig/config/pull/197))
 
 ## 1.6.0
 
