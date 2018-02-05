@@ -1,3 +1,4 @@
-select: 123
-collect: 456
-count: 789
+select: apple
+collect: banana
+count: lemon
+zip: cherry

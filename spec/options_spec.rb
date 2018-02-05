@@ -8,19 +8,22 @@ describe Config::Options do
     end
 
     it 'should allow to access them via object member notation' do
-      expect(config.select).to eq(123)
-      expect(config.collect).to eq(456)
-      expect(config.count).to eq(789)
+      expect(config.select).to eq('apple')
+      expect(config.collect).to eq('banana')
+      expect(config.count).to eq('lemon')
+      expect(config.zip).to eq('cherry')
     end
 
     it 'should allow to access them using [] operator' do
-      expect(config['select']).to eq(123)
-      expect(config['collect']).to eq(456)
-      expect(config['count']).to eq(789)
+      expect(config['select']).to eq('apple')
+      expect(config['collect']).to eq('banana')
+      expect(config['count']).to eq('lemon')
+      expect(config['zip']).to eq('cherry')
 
-      expect(config[:select]).to eq(123)
-      expect(config[:collect]).to eq(456)
-      expect(config[:count]).to eq(789)
+      expect(config[:select]).to eq('apple')
+      expect(config[:collect]).to eq('banana')
+      expect(config[:count]).to eq('lemon')
+      expect(config[:zip]).to eq('cherry')
     end
   end
 

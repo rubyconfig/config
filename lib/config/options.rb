@@ -134,7 +134,7 @@ module Config
     end
 
     # Some keywords that don't play nicely with OpenStruct
-    SETTINGS_RESERVED_NAMES = %w{select collect test count}
+    SETTINGS_RESERVED_NAMES = %w[select collect test count zip].freeze
 
     # An alternative mechanism for property access.
     # This let's you do foo['bar'] along with foo.bar.
