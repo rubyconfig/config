@@ -6,7 +6,7 @@ Config.setup do |config|
   #
   # config.knockout_prefix = nil
 
-  # Overwrite an existing value when merging a nil value.
+  # Overwrite an existing value when merging a `nil` value.
   # When set to `false`, the existing value is retained after merge.
   #
   # config.merge_nil_values = true
