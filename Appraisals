@@ -20,6 +20,10 @@ appraise 'rails-5' do
   gem 'rails', '5.0.1'
 end
 
+appraise 'rails-5.1' do
+  gem 'rails', '5.1.4'
+end
+
 appraise 'sinatra' do
   gem 'sinatra', '2.0.0'
 end
