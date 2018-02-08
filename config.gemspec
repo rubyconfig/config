@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
   end
 
   if ENV['TRAVIS']
-    s.add_development_dependency 'simplecov', '~> 0.15.1'
+    s.add_development_dependency 'simplecov', '~> 0.13.0'
     s.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.8'
   end
 end
