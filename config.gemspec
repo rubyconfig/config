@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'appraisal',   '~> 2.2',   '>= 2.2.0'
   s.add_development_dependency 'rails',       '~> 5.1',   '>= 5.1.4'
   s.add_development_dependency 'rspec',       '~> 3.7',   '>= 3.7.0'
-  s.add_development_dependency 'rspec-rails', '~> 3.5',   '>= 3.5.2'
+  s.add_development_dependency 'rspec-rails', '~> 3.7',   '>= 3.7.2'
   s.add_development_dependency 'test-unit',   '~> 3.2',   '>= 3.2.1'
   s.add_development_dependency 'sqlite3',     '~> 1.3',   '>= 1.3.11'
 
