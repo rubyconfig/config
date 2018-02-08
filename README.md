@@ -272,7 +272,7 @@ located at `config/initializers/config.rb`.
 
 * `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
-* `merge_nil_values` - overwrite an existing value with a nil value.  Default: `true`.
+* `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
 
 ```ruby
 # merge_nil_values is true by default
