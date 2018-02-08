@@ -36,18 +36,15 @@ matrix:
       gemfile: gemfiles/rails_5.1.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/sinatra.gemfile
-#    - rvm: 2.2.9
-#      gemfile: gemfiles/rails_3.gemfile
-#    - rvm: 2.3.6
-#      gemfile: gemfiles/rails_3.gemfile
-#    - rvm: 2.4.3
-#      gemfile: gemfiles/rails_3.gemfile
-#    - rvm: 2.4.3
-#      gemfile: gemfiles/rails_4.gemfile
-#    - rvm: 2.4.3
-#      gemfile: gemfiles/rails_4.1.gemfile
-#    - rvm: 2.4.3
-#      gemfile: gemfiles/rails_4.2.gemfile
+    # Rails 4 and 4.1 fails with Ruby newer then 2.3
+    - rvm: 2.4.3
+      gemfile: gemfiles/rails_4.gemfile
+    - rvm: 2.4.3
+      gemfile: gemfiles/rails_4.1.gemfile
+    - rvm: 2.5.0
+      gemfile: gemfiles/rails_4.gemfile
+    - rvm: 2.5.0
+      gemfile: gemfiles/rails_4.1.gemfile
 before_install:
   - gem install bundler
 script:
