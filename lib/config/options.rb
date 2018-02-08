@@ -80,7 +80,9 @@ module Config
                                 conf,
                                 preserve_unmergeables: false,
                                 knockout_prefix:       Config.knockout_prefix,
-                                overwrite_arrays:      Config.overwrite_arrays)
+                                overwrite_arrays:      Config.overwrite_arrays,
+                                merge_nil_values:      Config.merge_nil_values
+                               )
         end
       end
 
@@ -128,6 +130,7 @@ module Config
       DeepMerge.deep_merge!(hash.dup,
                             current,
                             preserve_unmergeables: false,
+                            knockout_prefix:       Config.knockout_prefix,
                             overwrite_arrays:      Config.overwrite_arrays,
                             merge_nil_values:      Config.merge_nil_values
                            )
