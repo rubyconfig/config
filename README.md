@@ -3,9 +3,8 @@
 [![Build Status](https://api.travis-ci.org/railsconfig/config.svg?branch=master)](http://travis-ci.org/railsconfig/config)
 [![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
 [![Dependency Status](https://gemnasium.com/railsconfig/config.svg)](https://gemnasium.com/railsconfig/config)
-[![Code Climate](https://codeclimate.com/github/railsconfig/config/badges/gpa.svg)](https://codeclimate.com/github/railsconfig/config)
-[![Issue Count](https://codeclimate.com/github/railsconfig/config/badges/issue_count.svg)](https://codeclimate.com/github/railsconfig/config)
-[![Test Coverage](https://codeclimate.com/github/railsconfig/config/badges/coverage.svg)](https://codeclimate.com/github/railsconfig/config/coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/railsconfig/config/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/railsconfig/config/test_coverage)
 
 ## Summary
 
