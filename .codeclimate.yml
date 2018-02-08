@@ -13,6 +13,8 @@ engines:
     enabled: true
   git-legal:
     enabled: true
+  flog:
+      enabled: true
 
 ratings:
    paths:
