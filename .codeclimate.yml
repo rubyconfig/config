@@ -11,6 +11,8 @@ engines:
           mass_threshold: 18
   markdownlint:
     enabled: true
+  git-legal:
+    enabled: true
 
 ratings:
    paths:
