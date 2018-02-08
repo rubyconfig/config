@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
 
   # Testing
   s.add_development_dependency 'appraisal',   '~> 2.2',   '>= 2.2.0'
-  s.add_development_dependency 'rails',       '~> 5.0',   '>= 5.0.1'
+  s.add_development_dependency 'rails',       '~> 5.1',   '>= 5.1.4'
   s.add_development_dependency 'rspec',       '~> 3.5',   '>= 3.5.0'
   s.add_development_dependency 'rspec-rails', '~> 3.5',   '>= 3.5.2'
   s.add_development_dependency 'test-unit',   '~> 3.2',   '>= 3.2.1'
