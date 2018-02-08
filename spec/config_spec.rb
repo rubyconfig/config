@@ -198,7 +198,8 @@ describe Config do
 
   context "Merging nested hash at runtime" do
     let(:config) { Config.load_files("#{fixture_path}/deep_merge/config1.yml") }
-    let(:hash) { { :inner => { :something1 => 'changed1', :something3 => 'changed3' } } }
+    let(:hash) { { inner: { something1: 'changed1', something3: 'changed3' } } }
+    let(:hash_with_nil) { { inner: { something1: nil } } }
 
     it 'should preserve first level keys' do
       expect { config.merge!(hash) }.to_not change { config.keys }
@@ -210,11 +211,61 @@ describe Config do
     end
 
     it 'should add new nested key' do
-      expect { config.merge!(hash) }.to change { config.inner.something3 }.from(nil).to("changed3")
+      expect { config.merge!(hash) }
+        .to change { config.inner.something3 }.from(nil).to('changed3')
     end
 
     it 'should rewrite a merged value' do
-      expect { config.merge!(hash) }.to change { config.inner.something1 }.from('blah1').to('changed1')
+      expect { config.merge!(hash) }
+        .to change { config.inner.something1 }.from('blah1').to('changed1')
+    end
+
+    it 'should update a string to nil ' do
+      expect { config.merge!(hash_with_nil) }
+        .to change { config.inner.something1 }.from('blah1').to(nil)
+    end
+
+    it 'should update something nil to true' do
+      expect { config.merge!(inner: { somethingnil: true }) }
+        .to change { config.inner.somethingnil }.from(nil).to(true)
+    end
+
+    it 'should update something nil to false' do
+      expect { config.merge!(inner: { somethingnil: false }) }
+        .to change { config.inner.somethingnil }.from(nil).to(false)
+    end
+
+    it 'should update something false to true' do
+      expect { config.merge!(inner: { somethingfalse: true }) }
+        .to change { config.inner.somethingfalse }.from(false).to(true)
+    end
+
+    it 'should update something false to nil' do
+      expect { config.merge!(inner: { somethingfalse: nil }) }
+        .to change { config.inner.somethingfalse }.from(false).to(nil)
+    end
+
+    it 'should update something true to false' do
+      expect { config.merge!(inner: { somethingtrue: false }) }
+        .to change { config.inner.somethingtrue }.from(true).to(false)
+    end
+
+    it 'should update something true to nil' do
+      expect { config.merge!(inner: { somethingtrue: nil }) }
+        .to change { config.inner.somethingtrue }.from(true).to(nil)
+    end
+
+    context 'with Config.merge_nil_values = false' do
+      let(:config) do
+        Config.merge_nil_values = false
+        Config.load_files("#{fixture_path}/deep_merge/config1.yml")
+      end
+
+      it 'should not overwrite values with nil' do
+        old_value = config.inner.something1
+        config.merge!(hash_with_nil)
+        expect(config.inner.something1).to eq(old_value)
+      end
     end
   end
 
@@ -355,7 +406,7 @@ describe Config do
         end
 
         it 'should merge hashes from multiple configs' do
-          expect(config.inner.marshal_dump.keys.size).to eq(3)
+          expect(config.inner.marshal_dump.keys.size).to eq(6)
           expect(config.inner2.inner2_inner.marshal_dump.keys.size).to eq(3)
         end
 

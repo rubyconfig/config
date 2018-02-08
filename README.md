@@ -271,6 +271,27 @@ located at `config/initializers/config.rb`.
 
 * `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
+* `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
+
+```ruby
+# merge_nil_values is true by default
+c = Config.load_files("./spec/fixtures/development.yml") # => #<Config::Options size=2, ...>
+c.size # => 2
+c.merge!(size: nil) => #<Config::Options size=nil, ...>
+c.size # => nil
+```
+
+```ruby
+# To reject nil values when merging settings:
+Config.setup do |config|
+  config.merge_nil_values = false
+end
+
+c = Config.load_files("./spec/fixtures/development.yml") # => #<Config::Options size=2, ...>
+c.size # => 2
+c.merge!(size: nil) => #<Config::Options size=nil, ...>
+c.size # => 2
+```
 
 Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 

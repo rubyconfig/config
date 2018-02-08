@@ -26,8 +26,9 @@ module Config
   @@fail_on_missing = false
 
   # deep_merge options
-  mattr_accessor :knockout_prefix, :overwrite_arrays
+  mattr_accessor :knockout_prefix, :merge_nil_values, :overwrite_arrays
   @@knockout_prefix = nil
+  @@merge_nil_values = true
   @@overwrite_arrays = true
 
   def self.setup
