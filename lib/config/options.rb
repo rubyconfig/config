@@ -76,7 +76,8 @@ module Config
         if conf.empty?
           conf = source_conf
         else
-          DeepMerge.deep_merge!(source_conf,
+          DeepMerge.deep_merge!(
+                                source_conf,
                                 conf,
                                 preserve_unmergeables: false,
                                 knockout_prefix:       Config.knockout_prefix,
@@ -127,7 +128,8 @@ module Config
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(hash.dup,
+      DeepMerge.deep_merge!(
+                            hash.dup,
                             current,
                             preserve_unmergeables: false,
                             knockout_prefix:       Config.knockout_prefix,
