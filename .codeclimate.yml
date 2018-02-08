@@ -1,26 +1,26 @@
 engines:
-  rubocop:
-    enabled: true
-  reek:
-    enabled: true
   duplication:
     enabled: true
     config:
       languages:
         ruby:
           mass_threshold: 18
-  markdownlint:
-    enabled: true
-  git-legal:
-    enabled: true
   flog:
       enabled: true
+  git-legal:
+    enabled: true
+  markdownlint:
+    enabled: true
+  reek:
+    enabled: true
+  rubocop:
+    enabled: true
 
 ratings:
    paths:
    - Gemfile.lock
-   - "**.rb"
    - "**.md"
+   - "**.rb"
 
 exclude_paths:
 - "spec/app/**/*"
