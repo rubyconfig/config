@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+...
+
+## 1.7.0
+
+**New features:**
+
 * **WARNING:** `nil` values will from now on overwrite an existing value when merging configs! This change of behavior can be reverted via `config.merge_nil_values = false` in your Config initializer ([#196](https://github.com/railsconfig/config/pull/196))
 
 ## 1.6.1
