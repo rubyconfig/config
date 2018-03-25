@@ -1,8 +1,9 @@
-require 'rake'
-
 shared_context 'rake' do
 
   # include rails rake tasks
-  load 'rails/tasks/engine.rake'
+  before do
+    require 'rake'
+    load 'rails/tasks/engine.rake'
+  end
 
 end

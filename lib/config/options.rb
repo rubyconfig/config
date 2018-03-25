@@ -76,11 +76,14 @@ module Config
         if conf.empty?
           conf = source_conf
         else
-          DeepMerge.deep_merge!(source_conf,
+          DeepMerge.deep_merge!(
+                                source_conf,
                                 conf,
                                 preserve_unmergeables: false,
                                 knockout_prefix:       Config.knockout_prefix,
-                                overwrite_arrays:      Config.overwrite_arrays)
+                                overwrite_arrays:      Config.overwrite_arrays,
+                                merge_nil_values:      Config.merge_nil_values
+                               )
         end
       end
 
@@ -125,16 +128,20 @@ module Config
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(hash.dup,
+      DeepMerge.deep_merge!(
+                            hash.dup,
                             current,
                             preserve_unmergeables: false,
-                            overwrite_arrays:      Config.overwrite_arrays)
+                            knockout_prefix:       Config.knockout_prefix,
+                            overwrite_arrays:      Config.overwrite_arrays,
+                            merge_nil_values:      Config.merge_nil_values
+                           )
       marshal_load(__convert(current).marshal_dump)
       self
     end
 
     # Some keywords that don't play nicely with OpenStruct
-    SETTINGS_RESERVED_NAMES = %w{select collect test count}
+    SETTINGS_RESERVED_NAMES = %w[select collect test count zip].freeze
 
     # An alternative mechanism for property access.
     # This let's you do foo['bar'] along with foo.bar.
@@ -151,6 +158,25 @@ module Config
       define_method name do
         self[name]
       end
+    end
+
+    def key?(key)
+      table.key?(key)
+    end
+
+    def has_key?(key)
+      table.has_key?(key)
+    end
+
+    def method_missing(method_name, *args)
+      if Config.fail_on_missing && method_name !~ /.*(?==\z)/m
+        raise KeyError, "key not found: #{method_name.inspect}" unless key?(method_name)
+      end
+      super
+    end
+
+    def respond_to_missing?(*args)
+      super
     end
 
     protected
@@ -188,7 +214,14 @@ module Config
 
     # Try to convert string to a correct type
     def __value(v)
-      Integer(v) rescue Float(v) rescue v
+      case v
+      when 'false'
+        false
+      when 'true'
+        true
+      else
+        Integer(v) rescue Float(v) rescue v
+      end
     end
   end
 end

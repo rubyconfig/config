@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'db:create' do
+describe 'db:create', :rails do
   include_context 'rake'
 
   before { allow($stdout).to receive(:puts) } # suppressing console output during testing

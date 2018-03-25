@@ -14,8 +14,8 @@ module Config
 
       # use Padrino settings if applicable
       if defined?(Padrino)
-        env = Padrino.env
-        root = Padrino.root
+        env = Padrino.env if Padrino.respond_to?(:env)
+        root = Padrino.root if Padrino.respond_to?(:root)
       end
 
       Config.load_and_set_settings(Config.setting_files(File.join(root, 'config'), env))

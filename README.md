@@ -3,9 +3,8 @@
 [![Build Status](https://api.travis-ci.org/railsconfig/config.svg?branch=master)](http://travis-ci.org/railsconfig/config)
 [![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
 [![Dependency Status](https://gemnasium.com/railsconfig/config.svg)](https://gemnasium.com/railsconfig/config)
-[![Code Climate](https://codeclimate.com/github/railsconfig/config/badges/gpa.svg)](https://codeclimate.com/github/railsconfig/config)
-[![Issue Count](https://codeclimate.com/github/railsconfig/config/badges/issue_count.svg)](https://codeclimate.com/github/railsconfig/config)
-[![Test Coverage](https://codeclimate.com/github/railsconfig/config/badges/coverage.svg)](https://codeclimate.com/github/railsconfig/config/coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/railsconfig/config/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/railsconfig/config/test_coverage)
 
 ## Summary
 
@@ -272,6 +271,27 @@ located at `config/initializers/config.rb`.
 
 * `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
+* `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
+
+```ruby
+# merge_nil_values is true by default
+c = Config.load_files("./spec/fixtures/development.yml") # => #<Config::Options size=2, ...>
+c.size # => 2
+c.merge!(size: nil) => #<Config::Options size=nil, ...>
+c.size # => nil
+```
+
+```ruby
+# To reject nil values when merging settings:
+Config.setup do |config|
+  config.merge_nil_values = false
+end
+
+c = Config.load_files("./spec/fixtures/development.yml") # => #<Config::Options size=2, ...>
+c.size # => 2
+c.merge!(size: nil) => #<Config::Options size=nil, ...>
+c.size # => 2
+```
 
 Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
@@ -298,6 +318,49 @@ raise a `Config::Validation::Error` containing a nice message with information a
 between the schema and your config.
 
 Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
+
+### Missing keys
+
+For an example settings file:
+
+```yaml
+size: 1
+server: google.com
+```
+
+You can test if a value was set for a given key using `key?` and its alias `has_key?`:
+
+```ruby
+Settings.key?(:path)
+# => false
+Settings.key?(:server)
+# => true
+```
+
+By default, accessing to a missing key returns `nil`:
+
+```ruby
+Settings.key?(:path)
+# => false
+Settings.path
+# => nil
+```
+
+This is not "typo-safe". To solve this problem, you can configure the `fail_on_missing` option:
+
+```ruby
+Config.setup do |config|
+  config.fail_on_missing = true
+  # ...
+end
+```
+
+So it will raise a `KeyError` when accessing a non-existing key (similar to `Hash#fetch` behaviour):
+
+```ruby
+Settings.path
+# => raises KeyError: key not found: :path
+```
 
 ### Environment variables
 
@@ -359,13 +422,14 @@ You can customize how environment variables are processed:
 * `env_converter` (default: `:downcase`)  - how to process variables names:
   * `nil` - no change
   * `:downcase` - convert to lower case
-* `env_parse_values` (default: `true`) - try to parse values to a correct type (`Integer`, `Float`, `String`)
+* `env_parse_values` (default: `true`) - try to parse values to a correct type (`Boolean`, `Integer`, `Float`, `String`)
 
 For instance, given the following environment:
 
 ```bash
 SETTINGS__SECTION__SERVER_SIZE=1
 SETTINGS__SECTION__SERVER=google.com
+SETTINGS__SECTION__SSL_ENABLED=false
 ```
 
 And the following configuration:
@@ -385,6 +449,7 @@ The following settings will be available:
 ```ruby
 Settings.section.server_size # => 1
 Settings.section.server # => 'google.com'
+Settings.section.ssl_enabled # => false
 ```
 
 ## Contributing
