@@ -6,7 +6,7 @@
 
 **New features:**
 
-* Add Ruby 2.6 to the list of tested ruby versions
+* Add Ruby 2.6 to the list of tested ruby versions ([#210](https://github.com/railsconfig/config/pull/210))
 
 ## 1.7.0
 
