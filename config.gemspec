@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'activesupport',           '>= 3.0'
   s.add_dependency 'deep_merge',              '~> 1.2.1'
 
-  s.add_dependency 'dry-validation',        '>= 0.10.7' if RUBY_VERSION >= '2.1' and RUBY_VERSION < '2.2'
+  s.add_dependency 'dry-validation',        '>= 0.10.7' if RUBY_VERSION >= '2.1' && RUBY_VERSION < '2.2'
   s.add_dependency 'dry-validation',        '>= 0.12.2' if RUBY_VERSION >= '2.2'
 
   s.add_development_dependency 'bundler',     '~> 1.13',  '>= 1.13.6'
@@ -47,12 +47,12 @@ Gem::Specification.new do |s|
   # Version 0.51 drops support for Ruby 2.0
   s.add_development_dependency 'rubocop',     '~> 0.50',  '< 0.51' if RUBY_VERSION < '2.1'
   # Version 0.58 drops support for Ruby 2.1
-  s.add_development_dependency 'rubocop',     '~> 0.57',  '< 0.58' if RUBY_VERSION >= '2.1' and RUBY_VERSION < '2.2'
+  s.add_development_dependency 'rubocop',     '~> 0.57',  '< 0.58' if RUBY_VERSION >= '2.1' && RUBY_VERSION < '2.2'
   # Version 0.62 requires Ruby 2.2
   s.add_development_dependency 'rubocop',     '~> 0.62'            if RUBY_VERSION >= '2.2'
 
   if ENV['TRAVIS']
-    s.add_development_dependency 'simplecov', '~> 0.13.0'
     s.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.9'
+    s.add_development_dependency 'simplecov', '~> 0.13.0'
   end
 end
