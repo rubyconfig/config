@@ -42,10 +42,12 @@ Gem::Specification.new do |s|
   # Static code analysis
   s.add_development_dependency 'mdl',         '~> 0.5',   '>= 0.5.0'
 
-  if RUBY_VERSION < '2.1'
-    s.add_development_dependency 'rubocop',     '~> 0.50',  '<= 0.57.2'
+  if RUBY_VERSION < '2.1' # Version 0.51 drops support for Ruby 2.0
+    s.add_development_dependency 'rubocop',   '~> 0.50',  '< 0.51'
+  elsif RUBY_VERSION < '2.2' # Version 0.58 drops support for Ruby 2.1
+    s.add_development_dependency 'rubocop',   '~> 0.57',  '< 0.58'
   else
-    s.add_development_dependency 'rubocop',     '~> 0.62',  '>= 0.62.0'
+    s.add_development_dependency 'rubocop',   '~> 0.62'
   end
 
   if ENV['TRAVIS']
