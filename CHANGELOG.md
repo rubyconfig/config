@@ -2,22 +2,29 @@
 
 ## Unreleased
 
+...
+
 ## 1.7.1
 
-**New features:**
+### New features
 
-* Add Ruby 2.6 to the list of tested ruby versions ([#210](https://github.com/railsconfig/config/pull/210))
+* Upgrade dependencies ([#211](https://github.com/railsconfig/config/pull/211))
+
+### Changes
+
+* Add Ruby 2.5 and Rails 5.1 to the testing matrix on Travis ([#201](https://github.com/railsconfig/config/pull/201))
+* Add Ruby 2.6 tto the test matrix ([#210](https://github.com/railsconfig/config/pull/210))
 * Add Rails 5.2 to the test matrix ([#212](https://github.com/railsconfig/config/pull/212))
 
 ## 1.7.0
 
-**New features:**
+### New features
 
 * **WARNING:** `nil` values will from now on overwrite an existing value when merging configs! This change of behavior can be reverted via `config.merge_nil_values = false` in your Config initializer ([#196](https://github.com/railsconfig/config/pull/196))
 
 ## 1.6.1
 
-**Bug fixes:**
+### Bug fixes
 
 * Make dry-validation dependency less strict allowing to use newer versions ([#183](https://github.com/railsconfig/config/pull/183))
 * Fix `key?` and `has_key?`, which raise NoMethodError in non Rails environment, by using ActiveSupport `#delegate` implicitly ([#185](https://github.com/railsconfig/config/pull/185))
@@ -27,35 +34,35 @@
 
 ## 1.6.0
 
-**New features:**
+### New features
 
 * `Config#fail_on_missing` option (default `false`) to raise a `KeyError` exception when accessing a non-existing key
 * Add ability to test if a value was set for a given key with `key?` and `has_key?` ([#182](https://github.com/railsconfig/config/pull/182))
 
 ## 1.5.1
 
-**New features:**
+### New features
 
 * Add parsing of ENV variable values to Boolean type ([#180](https://github.com/railsconfig/config/pull/180))
 
 ## 1.5.0
 
-**New features:**
+### New features
 
 * Add ability to validate config schema ([#155](https://github.com/railsconfig/config/pull/155) thanks to [@ok32](https://github.com/ok32))
 * Add count to the reserved names list ([#167](https://github.com/railsconfig/config/pull/167) thanks to [@carbonin](https://github.com/carbonin))
 
-**Bug fixes:**
+### Bug fixes
 
 * Correctly parse `env_prefix`, which contains `env_separator` ([#177](https://github.com/railsconfig/config/pull/177) thanks to [@rdodson41](https://github.com/rdodson41))
 
 ## 1.4.0
 
-**New features:**
+### New features
 
 * Added support for passing a raw ruby hash into to both `Settings.add_source!` and `Settings.prepend_source!` ([#108](https://github.com/railsconfig/config/pull/159) thanks to [@halloffame](https://github.com/halloffame))
 
-**Bug fixes:**
+### Bug fixes
 
 * Added new reserved name `test` ([#158](https://github.com/railsconfig/config/pull/158) thanks to [@milushov](https://github.com/milushov))
 * `to_hash` should not replace nested config objects with Hash ([#160](https://github.com/railsconfig/config/issues/160) thanks to [@seikichi](https://github.com/seikichi))

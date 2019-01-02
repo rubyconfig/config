@@ -1,5 +1,5 @@
 appraise 'rails-3' do
-  gem 'rails', '3.2.22.4'
+  gem 'rails', '3.2.22.5'
 end
 
 appraise 'rails-4' do
@@ -12,7 +12,7 @@ appraise 'rails-4.1' do
 end
 
 appraise 'rails-4.2' do
-  gem 'rails', '4.2.10'
+  gem 'rails', '4.2.11'
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 end
 
@@ -30,5 +30,5 @@ appraise 'rails-5.2' do
 end
 
 appraise 'sinatra' do
-  gem 'sinatra', '2.0.0'
+  gem 'sinatra', '2.0.5'
 end
