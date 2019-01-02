@@ -17,11 +17,16 @@ appraise 'rails-4.2' do
 end
 
 appraise 'rails-5' do
-  gem 'rails', '5.0.6'
+  gem 'rails', '5.0.7.1'
 end
 
 appraise 'rails-5.1' do
-  gem 'rails', '5.1.5'
+  gem 'rails', '5.1.6.1'
+end
+
+appraise 'rails-5.2' do
+  gem 'rails', '5.2.2'
+  gem 'bootsnap'
 end
 
 appraise 'sinatra' do

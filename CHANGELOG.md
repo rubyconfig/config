@@ -7,6 +7,7 @@
 **New features:**
 
 * Add Ruby 2.6 to the list of tested ruby versions ([#210](https://github.com/railsconfig/config/pull/210))
+* Add Rails 5.2 to the test matrix ([#212](https://github.com/railsconfig/config/pull/212))
 
 ## 1.7.0
 

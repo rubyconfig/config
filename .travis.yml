@@ -16,6 +16,7 @@ gemfile:
   - gemfiles/rails_4.2.gemfile
   - gemfiles/rails_5.gemfile
   - gemfiles/rails_5.1.gemfile
+  - gemfiles/rails_5.2.gemfile
   - gemfiles/sinatra.gemfile
 matrix:
   exclude:
@@ -30,11 +31,15 @@ matrix:
     - rvm: 2.0.0
       gemfile: gemfiles/rails_5.1.gemfile
     - rvm: 2.0.0
+      gemfile: gemfiles/rails_5.2.gemfile
+    - rvm: 2.0.0
       gemfile: gemfiles/sinatra.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/rails_5.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/rails_5.1.gemfile
+    - rvm: 2.1.10
+      gemfile: gemfiles/rails_5.2.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/sinatra.gemfile
     # Rails 4 and 4.1 fails with Ruby newer then 2.3
