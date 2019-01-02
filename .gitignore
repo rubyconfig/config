@@ -12,3 +12,4 @@ spec/app/**/.sass-cache
 tmp
 Gemfile.lock
 *.gem
+.keep
