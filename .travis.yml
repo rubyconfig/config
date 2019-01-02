@@ -4,10 +4,11 @@ sudo: false
 rvm:
   - 2.0.0
   - 2.1.10
-  - 2.2.9
-  - 2.3.6
-  - 2.4.3
-  - 2.5.0
+  - 2.2.10
+  - 2.3.8
+  - 2.4.5
+  - 2.5.3
+  - 2.6.0
 gemfile:
   - gemfiles/rails_3.gemfile
   - gemfiles/rails_4.gemfile
@@ -37,13 +38,17 @@ matrix:
     - rvm: 2.1.10
       gemfile: gemfiles/sinatra.gemfile
     # Rails 4 and 4.1 fails with Ruby newer then 2.3
-    - rvm: 2.4.3
+    - rvm: 2.4.5
       gemfile: gemfiles/rails_4.gemfile
-    - rvm: 2.4.3
+    - rvm: 2.4.5
       gemfile: gemfiles/rails_4.1.gemfile
-    - rvm: 2.5.0
+    - rvm: 2.5.3
       gemfile: gemfiles/rails_4.gemfile
-    - rvm: 2.5.0
+    - rvm: 2.5.3
+      gemfile: gemfiles/rails_4.1.gemfile
+    - rvm: 2.6.0
+      gemfile: gemfiles/rails_4.gemfile
+    - rvm: 2.6.0
       gemfile: gemfiles/rails_4.1.gemfile
 before_install:
   - gem install bundler
