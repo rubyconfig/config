@@ -43,13 +43,13 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mdl',         '~> 0.5',   '>= 0.5.0'
 
   if RUBY_VERSION < '2.1'
-    s.add_development_dependency 'rubocop',     '~> 0.50',  '>= 0.50.0'
+    s.add_development_dependency 'rubocop',     '~> 0.50',  '<= 0.57.2'
   else
     s.add_development_dependency 'rubocop',     '~> 0.62',  '>= 0.62.0'
   end
 
   if ENV['TRAVIS']
-    s.add_development_dependency 'simplecov', '~> 0.16.1'
+    s.add_development_dependency 'simplecov', '~> 0.13.0'
     s.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.9'
   end
 end
