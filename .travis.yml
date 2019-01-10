@@ -56,7 +56,7 @@ matrix:
     - rvm: 2.6.0
       gemfile: gemfiles/rails_4.1.gemfile
 before_install:
-  - gem install bundler
+  - gem install bundler -v '<2'
 script:
   - bundle exec rspec
 addons:
