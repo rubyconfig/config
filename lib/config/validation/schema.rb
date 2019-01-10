@@ -1,5 +1,4 @@
 require 'dry-validation'
-require 'config/validation/schema'
 
 module Config
   module Validation
