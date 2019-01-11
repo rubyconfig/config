@@ -185,9 +185,9 @@ describe Config::Options do
 
     context 'is set to true' do
       before { Config.setup { |cfg|
-				cfg.overwrite_arrays = false
-				cfg.merge_hash_arrays = true
-			} }
+        cfg.overwrite_arrays = false
+        cfg.merge_hash_arrays = true
+      } }
 
       it 'should merge the arrays' do
         config = Config.load_files("#{fixture_path}/deep_merge3/config1.yml", "#{fixture_path}/deep_merge3/config2.yml")
@@ -200,9 +200,9 @@ describe Config::Options do
 
     context 'is set to false' do
       before { Config.setup { |cfg|
-				cfg.overwrite_arrays = false
-				cfg.merge_hash_arrays = false
-			} }
+        cfg.overwrite_arrays = false
+        cfg.merge_hash_arrays = false
+      } }
 
       it 'should merge the arrays' do
         config = Config.load_files("#{fixture_path}/deep_merge3/config1.yml", "#{fixture_path}/deep_merge3/config2.yml")
