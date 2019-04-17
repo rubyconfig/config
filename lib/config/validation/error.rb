@@ -5,7 +5,7 @@ module Config
       def self.format(v_res)
         flatten_hash(v_res.messages).map do |field, msgs|
           "#{' ' * 2}#{field}: #{msgs.join('; ')}"
-        end.join('\n')
+        end.join("\n")
       end
 
       def self.flatten_hash(h, acc={}, pref=[])
