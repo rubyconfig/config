@@ -3,7 +3,7 @@ module Config
     class Error < StandardError
 
       def self.format(v_res)
-        flatten_hash(v_res.messages).map do |field, msgs|
+        flatten_hash(v_res.errors.to_h).map do |field, msgs|
           "#{' ' * 2}#{field}: #{msgs.join('; ')}"
         end.join("\n")
       end
