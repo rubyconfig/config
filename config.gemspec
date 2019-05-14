@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec',       '~> 3.7',   '>= 3.7.0'
   s.add_development_dependency 'rspec-rails', '~> 3.7',   '>= 3.7.2'
   s.add_development_dependency 'test-unit',   '~> 3.2',   '>= 3.2.7'
-  s.add_development_dependency 'sqlite3',     '~> 1.3',   '>= 1.3.13'
+  s.add_development_dependency 'sqlite3',     '~> 1.3.0',   '>= 1.3.6'
 
   # Static code analysis
   s.add_development_dependency 'mdl',         '~> 0.5',   '>= 0.5.0'
