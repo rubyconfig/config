@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
 
   if RUBY_VERSION >= '2.1' && RUBY_VERSION < '2.2'
     s.add_dependency 'dry-validation', '~> 0.10', '>= 0.10.7', '< 1.0.0'
-    s.add_dependency 'dry-logic', '~> 0.5'
+    s.add_dependency 'dry-logic', '~> 0.5.0'
   end
 
   s.add_development_dependency 'bundler',     '~> 1.13',  '>= 1.13.6'
