@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.require_paths         = ['lib']
   s.required_ruby_version = '>= 2.0.0'
 
-  s.add_dependency 'deep_merge',     '~> 1.2',  '>= 1.2.1'
+  s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
 
   if RUBY_VERSION >= '2.2'
     s.add_dependency 'activesupport',  '>= 3.0'
@@ -34,8 +34,8 @@ Gem::Specification.new do |s|
 
   if RUBY_VERSION >= '2.1' && RUBY_VERSION < '2.2'
     s.add_dependency 'activesupport',    '>= 3.0', '< 5.0.0'
-    s.add_dependency 'dry-logic',        '~> 0.5.0'
     s.add_dependency 'dry-configurable', '~> 0.5.0'
+    s.add_dependency 'dry-logic',        '~> 0.5.0'
     s.add_dependency 'dry-validation',   '~> 0.10', '>= 0.10.7', '< 1.0.0'
     s.add_dependency 'i18n',             '~> 0.9.0'
 
