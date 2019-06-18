@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-...
+## 1.7.2
+
+### Bug fixes
+
+* Lock max version of dry-validation depending on the ruby version ([#223](https://github.com/railsconfig/config/pull/223))
 
 ## 1.7.1
 
