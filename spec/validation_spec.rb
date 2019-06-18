@@ -14,12 +14,17 @@ if RUBY_VERSION >= '2.1'
           config.schema do
             required(:youtube).schema do
               required(:nonexist_field).filled
+              required(:multiple_requirements).filled(:integer, gt?: 18)
             end
           end
         end
 
+        msg = "Config validation failed:\n\n"
+        msg += "  youtube.nonexist_field: is missing\n"
+        msg += "  youtube.multiple_requirements: must be an integer"
+
         expect { Config.load_files("#{fixture_path}/validation/config.yml") }.
-          to raise_error(Config::Validation::Error, /youtube.nonexist_field: is missing/)
+          to raise_error(Config::Validation::Error, Regexp.new(msg))
       end
 
       it 'should work if validation passes' do
