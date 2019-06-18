@@ -5,7 +5,6 @@ rvm:
   - 2.4.5
   - 2.5.3
   - 2.6.0
-  - jruby-9.2.7.0
 gemfile:
   # Rails 3 requires Ruby 1.8.7 or newer
   # Rails 4 prefers Ruby 2.0 and requires 1.9.3 or newer
