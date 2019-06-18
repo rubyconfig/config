@@ -4,7 +4,6 @@
 [![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
 [![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/railsconfig/config/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/railsconfig/config/test_coverage)
-<a href="https://issuehunt.io/r/railsconfig/config"><img src="https://raw.githubusercontent.com/BoostIO/issuehunt-materials/master/v1/issuehunt-shield-v1.svg"/></a>
 
 ## Summary
 
