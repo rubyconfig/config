@@ -4,7 +4,7 @@
 
 ### Changes
 
-* Add Ruby 2.7.0-preview1 to the test matrix and upgrade older versions
+* Add Ruby 2.7.0-preview1 to the test matrix and upgrade older versions ([#226](https://github.com/railsconfig/config/pull/226))
 
 ## 1.7.2
 
