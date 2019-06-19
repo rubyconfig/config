@@ -42,7 +42,6 @@ Gem::Specification.new do |s|
     s.add_development_dependency 'rails', '< 5.0.0'
   end
 
-  s.add_development_dependency 'bundler',     '~> 1.13',  '>= 1.13.6'
   s.add_development_dependency 'rake',        '~> 12.0',  '>= 12.0.0'
 
   # Testing
