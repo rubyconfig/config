@@ -6,9 +6,10 @@ rvm:
   - 2.1.10
   - 2.2.10
   - 2.3.8
-  - 2.4.5
-  - 2.5.3
-  - 2.6.0
+  - 2.4.6
+  - 2.5.5
+  - 2.6.3
+  - 2.7.0-preview1
 gemfile:
   - gemfiles/rails_3.gemfile
   - gemfiles/rails_4.gemfile

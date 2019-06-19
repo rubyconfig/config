@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changes
+
+* Add Ruby 2.7.0-preview1 to the test matrix and upgrade older versions
+
 ## 1.7.2
 
 ### Bug fixes
@@ -17,7 +21,7 @@
 ### Changes
 
 * Add Ruby 2.5 and Rails 5.1 to the testing matrix on Travis ([#201](https://github.com/railsconfig/config/pull/201))
-* Add Ruby 2.6 tto the test matrix ([#210](https://github.com/railsconfig/config/pull/210))
+* Add Ruby 2.6 to the test matrix ([#210](https://github.com/railsconfig/config/pull/210))
 * Add Rails 5.2 to the test matrix ([#212](https://github.com/railsconfig/config/pull/212))
 
 ## 1.7.0
