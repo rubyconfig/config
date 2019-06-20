@@ -6,11 +6,11 @@ require 'config/version'
 require 'config/integrations/rails/engine' if defined?(::Rails)
 require 'config/sources/yaml_source'
 require 'config/sources/hash_source'
-require 'config/validation/schema' if RUBY_VERSION >= '2.1'
+require 'config/validation/schema'
 require 'deep_merge'
 
 module Config
-  extend Config::Validation::Schema if RUBY_VERSION >= '2.1'
+  extend Config::Validation::Schema
 
   # Ensures the setup only gets run once
   @@_ran_once = false

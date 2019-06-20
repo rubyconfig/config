@@ -2,59 +2,15 @@ language: ruby
 cache: bundler
 sudo: false
 rvm:
-  - 2.0.0
-  - 2.1.10
-  - 2.2.10
-  - 2.3.8
   - 2.4.5
   - 2.5.3
   - 2.6.0
 gemfile:
-  - gemfiles/rails_3.gemfile
-  - gemfiles/rails_4.gemfile
-  - gemfiles/rails_4.1.gemfile
   - gemfiles/rails_4.2.gemfile
   - gemfiles/rails_5.gemfile
   - gemfiles/rails_5.1.gemfile
   - gemfiles/rails_5.2.gemfile
   - gemfiles/sinatra.gemfile
-matrix:
-  exclude:
-    # Rails 3 requires Ruby 1.8.7 or newer
-    # Rails 4 prefers Ruby 2.0 and requires 1.9.3 or newer
-    # Rails 4.1 recommends Ruby 2.1 and requires 1.9.3 or newer
-    # Rails 4.2.1 recommends Ruby 2.2 and requires 1.9.3 or newer
-    # Rails 5 requires Ruby 2.2.2 or newer
-    # Sinatra 2 requires Ruby 2.2.2 or newer
-    - rvm: 2.0.0
-      gemfile: gemfiles/rails_5.gemfile
-    - rvm: 2.0.0
-      gemfile: gemfiles/rails_5.1.gemfile
-    - rvm: 2.0.0
-      gemfile: gemfiles/rails_5.2.gemfile
-    - rvm: 2.0.0
-      gemfile: gemfiles/sinatra.gemfile
-    - rvm: 2.1.10
-      gemfile: gemfiles/rails_5.gemfile
-    - rvm: 2.1.10
-      gemfile: gemfiles/rails_5.1.gemfile
-    - rvm: 2.1.10
-      gemfile: gemfiles/rails_5.2.gemfile
-    - rvm: 2.1.10
-      gemfile: gemfiles/sinatra.gemfile
-    # Rails 4 and 4.1 fails with Ruby newer then 2.3
-    - rvm: 2.4.5
-      gemfile: gemfiles/rails_4.gemfile
-    - rvm: 2.4.5
-      gemfile: gemfiles/rails_4.1.gemfile
-    - rvm: 2.5.3
-      gemfile: gemfiles/rails_4.gemfile
-    - rvm: 2.5.3
-      gemfile: gemfiles/rails_4.1.gemfile
-    - rvm: 2.6.0
-      gemfile: gemfiles/rails_4.gemfile
-    - rvm: 2.6.0
-      gemfile: gemfiles/rails_4.1.gemfile
 before_install:
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
   - gem install bundler -v '< 2'
