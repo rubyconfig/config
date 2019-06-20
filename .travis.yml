@@ -6,8 +6,8 @@ rvm:
   - 2.5.3
   - 2.6.0
   - jruby-9.2
-  - rbx-3
-  - rbx-4
+  - rbx-3.107
+  - rbx-4.2
   - truffleruby
 gemfile:
   - gemfiles/rails_4.2.gemfile
@@ -21,8 +21,6 @@ matrix:
     - rvm: truffleruby
       gemfile: gemfiles/rails_4.2.gemfile
 before_install:
-  - rvm --version
-  - rvm get master
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
   - gem install bundler -v '< 2'
 script:
