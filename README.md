@@ -20,16 +20,18 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Compatibility
 
-* Ruby `2.x`
-* Rails `>= 3.1`, `4` and `5`
+* Ruby `>= 2.4`
+* Rails `>= 4.2` and `5`
 * Padrino
 * Sinatra
+
+For Ruby 2.0 to 2.3 or Rails 3 to 4.1 use version `1.x`.
 
 For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
 
 ## Installing
 
-### Installing on Rails 3, 4 or 5
+### Installing on Rails
 
 Add `gem 'config'` to your `Gemfile` and run `bundle install` to install it. Then run
 
@@ -316,7 +318,7 @@ If you define a schema it will automatically be used to validate your config. If
 raise a `Config::Validation::Error` containing a nice message with information about all the mismatches
 between the schema and your config.
 
-Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
+Check [dry-schema](https://github.com/dry-rb/dry-schema) for more details.
 
 ### Missing keys
 

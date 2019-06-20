@@ -1,10 +1,10 @@
 require 'ostruct'
-require 'config/validation/validate' if RUBY_VERSION >= '2.1'
+require 'config/validation/validate'
 
 module Config
   class Options < OpenStruct
     include Enumerable
-    include Validation::Validate if RUBY_VERSION >= '2.1'
+    include Validation::Validate
 
     def keys
       marshal_dump.keys
@@ -91,7 +91,7 @@ module Config
       marshal_load(__convert(conf).marshal_dump)
 
       reload_env! if Config.use_env
-      validate! if RUBY_VERSION >= '2.1'
+      validate!
 
       self
     end

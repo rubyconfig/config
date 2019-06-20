@@ -2,8 +2,14 @@
 
 ## Unreleased
 
+## BREAKING CHANGES
+
+* Dropped support for Rails `< 4.2`
+* Dropped support for Ruby `< 2.4`
+
 ### Changes
 
+* Upgraded dry-validation dependency to dry-schema 1.0 ([#224](https://github.com/railsconfig/config/pull/224))
 * Add Ruby 2.7.0-preview1 to the test matrix and upgrade older versions ([#226](https://github.com/railsconfig/config/pull/226))
 
 ## 1.7.2
