@@ -2,9 +2,25 @@
 
 ## Unreleased
 
+## BREAKING CHANGES
+
+* Dropped support for Rails `< 4.2`
+* Dropped support for Ruby `< 2.4`
+
 ### New features
 
 * Add `merge_hash_arrays` as a configuration option ([#214](https://github.com/railsconfig/config/pull/214))
+
+### Changes
+
+* Upgraded dry-validation dependency to dry-schema 1.0 ([#224](https://github.com/railsconfig/config/pull/224))
+* Moved constant to be defined on `Object` instead of `Kernel` ([#227](https://github.com/railsconfig/config/issues/227))
+
+## 1.7.2
+
+### Bug fixes
+
+* Lock max version of dry-validation depending on the ruby version ([#223](https://github.com/railsconfig/config/pull/223))
 
 ## 1.7.1
 

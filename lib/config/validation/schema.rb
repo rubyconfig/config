@@ -1,4 +1,4 @@
-require 'dry-validation'
+require 'dry-schema'
 require 'config/validation/schema'
 
 module Config
@@ -10,7 +10,7 @@ module Config
 
       def schema(&block)
         if block_given?
-          @@schema = Dry::Validation.Schema(&block)
+          @@schema = Dry::Schema.define(&block)
         else
           @@schema
         end
