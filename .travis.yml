@@ -20,6 +20,10 @@ matrix:
     # truffleruby does not seem to work with Rails 4.2
     - rvm: truffleruby
       gemfile: gemfiles/rails_4.2.gemfile
+before_install:
+  # Bundler 2.x is supported for Rails > 4.2
+  - ([ "$BUNDLE_GEMFILE" != \*rails_4.2.gemfile ] && gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler) || true
+  - [ "$BUNDLE_GEMFILE" != \*rails_4.2.gemfile ] && gem install bundler -v '< 2'
 script:
   - bundle exec rspec
 addons:
