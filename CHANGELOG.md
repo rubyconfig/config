@@ -2,8 +2,10 @@
 
 ## Unreleased
 
-### Breaking changes
+## BREAKING CHANGES
 
+* Dropped support for Rails `< 4.2`
+* Dropped support for Ruby `< 2.4`
 * Moved constant to be defined on `Object` instead of `Kernel` ([Issue #122](https://github.com/railsconfig/config/issues/122))
 
 ### Changes
