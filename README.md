@@ -441,7 +441,6 @@ Settings.section.ssl_enabled # => false
 Install appraisal
 
 ```bash
-gem install bundler -v 1.17.3
 gem install appraisal
 ```
 
