@@ -6,11 +6,11 @@
 
 * Dropped support for Rails `< 4.2`
 * Dropped support for Ruby `< 2.4`
-* Moved constant to be defined on `Object` instead of `Kernel` ([Issue #122](https://github.com/railsconfig/config/issues/122))
 
 ### Changes
 
 * Upgraded dry-validation dependency to dry-schema 1.0 ([#224](https://github.com/railsconfig/config/pull/224))
+* Moved constant to be defined on `Object` instead of `Kernel` ([#122](https://github.com/railsconfig/config/issues/122))
 
 ## 1.7.2
 
