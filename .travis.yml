@@ -14,8 +14,7 @@ gemfile:
   - gemfiles/sinatra.gemfile
 before_install:
   - gem update --system
-  - echo $BUNDLE_GEMFILE
-  - [ "$BUNDLE_GEMFILE" != "gemfiles/rails_4.2.gemfile" ] && gem install bundler
+  - [ "$BUNDLE_GEMFILE" != \*rails_4.2.gemfile ] && gem install bundler     # Bundler 2.x is supported for Rails > 4.2
 script:
   - bundle exec rspec
 addons:
