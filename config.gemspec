@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
   s.add_dependency 'dry-schema', '~> 1.0'
 
-  s.add_development_dependency 'bundler',     '~> 2.0',   '>= 2.0.2'
   s.add_development_dependency 'rake',        '~> 12.0',  '>= 12.0.0'
 
   # Testing
