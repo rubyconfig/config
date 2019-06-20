@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Breaking changes
+
+* Moved constant to be defined on `Object` instead of `Kernel` ([Issue #122](https://github.com/railsconfig/config/issues/122))
+
 ### Changes
 
 * Upgraded dry-validation dependency to dry-schema 1.0 ([#224](https://github.com/railsconfig/config/pull/224))
