@@ -1,4 +1,5 @@
 appraise 'rails-4.2' do
+  gem 'bundler', '< 2.0'
   gem 'sqlite3', '< 1.4.0', platforms: [:mri]
   gem 'activerecord-jdbcsqlite3-adapter', '~>1.3.23', platforms: [:jruby]
   gem 'rails', '4.2.11'
