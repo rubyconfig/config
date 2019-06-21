@@ -11,7 +11,8 @@
 
 * Upgraded dry-validation dependency to dry-schema 1.0 ([#224](https://github.com/railsconfig/config/pull/224))
 * Moved constant to be defined on `Object` instead of `Kernel` ([#227](https://github.com/railsconfig/config/issues/227))
-* Add JRuby 9.2 and Rubinius 3 and 4 to the test matrix
+* Add TruffleRuby to the test matrix ([#229](https://github.com/railsconfig/config/issues/229))
+* Add JRuby 9.2 and Rubinius 3 and 4 to the test matrix ([#228](https://github.com/railsconfig/config/issues/228))
 
 ## 1.7.2
 

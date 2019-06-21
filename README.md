@@ -20,14 +20,15 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Compatibility
 
-* Ruby `>= 2.4`
-* Rails `>= 4.2` and `5`
-* Padrino
-* Sinatra
+* Interpreters
+  * [Ruby](https://www.ruby-lang.org/en/) `>= 2.4`
+  * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.0.0`
+* Application frameworks
+  * Rails `>= 4.2` and `5`
+  * Padrino
+  * Sinatra
 
-For Ruby 2.0 to 2.3 or Rails 3 to 4.1 use version `1.x`.
-
-For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
+For Ruby `2.0` to `2.3` or Rails `3` to `4.1` use version `1.x` of this gem. For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
 
 ## Installing
 
