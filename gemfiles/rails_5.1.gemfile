@@ -2,7 +2,9 @@
 
 source "https://rubygems.org"
 
-gem "sqlite3", "< 1.4.0"
+gem "sqlite3", "< 1.4.0", platforms: [:mri]
+gem "activerecord-jdbcsqlite3-adapter", "~>51.0", platforms: [:jruby]
 gem "rails", "5.1.6.1"
+gem "rspec-rails", "~> 3.7", ">= 3.7.2"
 
 gemspec path: "../"
