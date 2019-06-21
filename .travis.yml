@@ -22,7 +22,7 @@ matrix:
       gemfile: gemfiles/rails_4.2.gemfile
 before_install:
  # Bundler 2.x is supported for Rails > 4.2
- - ([[ "$BUNDLE_GEMFILE" = "$PWD/gemfiles/rails_4.2.gemfile" ]] && gem uninstall bundler -v '>= 2' && gem install bundler -v '< 2' ) || true
+ - ([[ "$BUNDLE_GEMFILE" = "$PWD/gemfiles/rails_4.2.gemfile" ]] && gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler && gem install bundler -v '< 2' ) || true
 script:
   - bundle exec rspec
 addons:
