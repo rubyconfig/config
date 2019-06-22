@@ -179,4 +179,40 @@ describe Config::Options do
       expect(config.key?('existing')).to eq(false)
     end
   end
+
+  context 'when merge_hash_arrays options' do
+    before { Config.reset }
+
+    context 'is set to true' do
+      before { Config.setup { |cfg|
+        cfg.overwrite_arrays = false
+        cfg.merge_hash_arrays = true
+      } }
+
+      it 'should merge the arrays' do
+        config = Config.load_files("#{fixture_path}/deep_merge3/config1.yml", "#{fixture_path}/deep_merge3/config2.yml")
+
+        expect(config.array.length).to eq(1)
+        expect(config.array[0].a).to eq("one")
+        expect(config.array[0].b).to eq("two")
+      end
+    end
+
+    context 'is set to false' do
+      before { Config.setup { |cfg|
+        cfg.overwrite_arrays = false
+        cfg.merge_hash_arrays = false
+      } }
+
+      it 'should merge the arrays' do
+        config = Config.load_files("#{fixture_path}/deep_merge3/config1.yml", "#{fixture_path}/deep_merge3/config2.yml")
+
+        expect(config.array.length).to eq(2)
+        expect(config.array[0].b).to eq(nil)
+        expect(config.array[1].b).to eq("two")
+      end
+    end
+
+  end
+
 end

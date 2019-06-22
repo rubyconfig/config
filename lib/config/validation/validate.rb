@@ -9,7 +9,8 @@ module Config
           v_res = Config.schema.(self.to_hash)
 
           unless v_res.success?
-            raise Config::Validation::Error.new("Config validation failed:\n\n#{Config::Validation::Error.format(v_res)}")
+            error = Config::Validation::Error.format(v_res)
+            raise Config::Validation::Error.new("Config validation failed:\n\n#{error}")
           end
         end
       end

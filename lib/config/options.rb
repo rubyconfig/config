@@ -1,10 +1,10 @@
 require 'ostruct'
-require 'config/validation/validate' if RUBY_VERSION >= '2.1'
+require 'config/validation/validate'
 
 module Config
   class Options < OpenStruct
     include Enumerable
-    include Validation::Validate if RUBY_VERSION >= '2.1'
+    include Validation::Validate
 
     def keys
       marshal_dump.keys
@@ -82,7 +82,8 @@ module Config
                                 preserve_unmergeables: false,
                                 knockout_prefix:       Config.knockout_prefix,
                                 overwrite_arrays:      Config.overwrite_arrays,
-                                merge_nil_values:      Config.merge_nil_values
+                                merge_nil_values:      Config.merge_nil_values,
+                                merge_hash_arrays:     Config.merge_hash_arrays
                                )
         end
       end
@@ -91,7 +92,7 @@ module Config
       marshal_load(__convert(conf).marshal_dump)
 
       reload_env! if Config.use_env
-      validate! if RUBY_VERSION >= '2.1'
+      validate!
 
       self
     end
@@ -134,7 +135,8 @@ module Config
                             preserve_unmergeables: false,
                             knockout_prefix:       Config.knockout_prefix,
                             overwrite_arrays:      Config.overwrite_arrays,
-                            merge_nil_values:      Config.merge_nil_values
+                            merge_nil_values:      Config.merge_nil_values,
+                            merge_hash_arrays:     Config.merge_hash_arrays
                            )
       marshal_load(__convert(current).marshal_dump)
       self
