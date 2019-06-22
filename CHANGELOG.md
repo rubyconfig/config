@@ -7,6 +7,10 @@
 * Dropped support for Rails `< 4.2`
 * Dropped support for Ruby `< 2.4`
 
+### New features
+
+* Add `merge_hash_arrays` as a configuration option ([#214](https://github.com/railsconfig/config/pull/214))
+
 ### Changes
 
 * Upgraded dry-validation dependency to dry-schema 1.0 ([#224](https://github.com/railsconfig/config/pull/224))

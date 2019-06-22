@@ -272,6 +272,7 @@ located at `config/initializers/config.rb`.
 ### Merge customization
 
 * `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
+* `merge_hash_arrays` - merge hashes inside of arrays from previously loaded settings files. Makes sense only when `overwrite_arrays = false`. Default: `false`
 * `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
 * `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
 

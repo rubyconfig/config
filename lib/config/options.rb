@@ -82,7 +82,8 @@ module Config
                                 preserve_unmergeables: false,
                                 knockout_prefix:       Config.knockout_prefix,
                                 overwrite_arrays:      Config.overwrite_arrays,
-                                merge_nil_values:      Config.merge_nil_values
+                                merge_nil_values:      Config.merge_nil_values,
+                                merge_hash_arrays:     Config.merge_hash_arrays
                                )
         end
       end
@@ -134,7 +135,8 @@ module Config
                             preserve_unmergeables: false,
                             knockout_prefix:       Config.knockout_prefix,
                             overwrite_arrays:      Config.overwrite_arrays,
-                            merge_nil_values:      Config.merge_nil_values
+                            merge_nil_values:      Config.merge_nil_values,
+                            merge_hash_arrays:     Config.merge_hash_arrays
                            )
       marshal_load(__convert(current).marshal_dump)
       self

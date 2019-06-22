@@ -26,10 +26,11 @@ module Config
   @@fail_on_missing = false
 
   # deep_merge options
-  mattr_accessor :knockout_prefix, :merge_nil_values, :overwrite_arrays
+  mattr_accessor :knockout_prefix, :merge_nil_values, :overwrite_arrays, :merge_hash_arrays
   @@knockout_prefix = nil
   @@merge_nil_values = true
   @@overwrite_arrays = true
+  @@merge_hash_arrays = false
 
   def self.setup
     yield self if @@_ran_once == false
