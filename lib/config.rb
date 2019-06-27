@@ -1,5 +1,3 @@
-# Copyright (c) 2019 railsconfig
-
 require 'config/compatibility'
 require 'config/options'
 require 'config/configuration'
