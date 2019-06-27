@@ -1,21 +1,20 @@
 require 'dry-schema'
-require 'config/validation/schema'
 
 module Config
   module Validation
     module Schema
-
-      mattr_writer :schema
-      @@schema = nil
+      # Assigns schema configuration option
+      def schema=(value)
+        @schema = value
+      end
 
       def schema(&block)
         if block_given?
-          @@schema = Dry::Schema.define(&block)
+          @schema = Dry::Schema.define(&block)
         else
-          @@schema
+          @schema
         end
       end
-
     end
   end
 end
