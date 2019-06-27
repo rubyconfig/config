@@ -1,5 +1,3 @@
-# Copyright (c) 2019 railsconfig
-
 require 'spec_helper'
 
 describe Config::Configuration do
