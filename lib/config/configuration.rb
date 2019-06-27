@@ -1,5 +1,3 @@
-# Copyright (c) 2019 railsconfig
-
 module Config
   # The main configuration backbone
   class Configuration < Module
