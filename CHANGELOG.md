@@ -2,10 +2,14 @@
 
 ## Unreleased
 
-## BREAKING CHANGES
+...
 
-* Dropped support for Rails `< 4.2`
-* Dropped support for Ruby `< 2.4`
+## 2.0.0
+
+### BREAKING CHANGES
+
+After upgrade to dry-schema 1.0 we had to drop support for Rails `< 4.2` and Ruby `< 2.4`.
+If you need older version of Ruby or Rails, please stick to 1.x version of this gem. 
 
 ### New features
 
