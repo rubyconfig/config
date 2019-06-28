@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-...
+### Changes
+
+* Get rid of activesupport dependency ([#230](https://github.com/railsconfig/config/pull/230))
 
 ## 2.0.0
 
