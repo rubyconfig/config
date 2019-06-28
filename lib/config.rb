@@ -1,7 +1,6 @@
-require 'active_support/core_ext/module/attribute_accessors'
-
 require 'config/compatibility'
 require 'config/options'
+require 'config/configuration'
 require 'config/version'
 require 'config/integrations/rails/engine' if defined?(::Rails)
 require 'config/sources/yaml_source'
@@ -11,30 +10,25 @@ require 'deep_merge'
 
 module Config
   extend Config::Validation::Schema
-
-  # Ensures the setup only gets run once
-  @@_ran_once = false
-
-  mattr_accessor :const_name, :use_env, :env_prefix, :env_separator,
-                 :env_converter, :env_parse_values, :fail_on_missing
-  @@const_name = 'Settings'
-  @@use_env    = false
-  @@env_prefix = @@const_name
-  @@env_separator = '.'
-  @@env_converter = :downcase
-  @@env_parse_values = true
-  @@fail_on_missing = false
-
-  # deep_merge options
-  mattr_accessor :knockout_prefix, :merge_nil_values, :overwrite_arrays, :merge_hash_arrays
-  @@knockout_prefix = nil
-  @@merge_nil_values = true
-  @@overwrite_arrays = true
-  @@merge_hash_arrays = false
+  extend Config::Configuration.new(
+    # general options
+    const_name: 'Settings',
+    use_env: false,
+    env_prefix: 'Settings',
+    env_separator: '.',
+    env_converter: :downcase,
+    env_parse_values: true,
+    fail_on_missing: false,
+    # deep_merge options
+    knockout_prefix: nil,
+    merge_nil_values: true,
+    overwrite_arrays: true,
+    merge_hash_arrays: false
+  )
 
   def self.setup
-    yield self if @@_ran_once == false
-    @@_ran_once = true
+    yield self unless @_ran_once
+    @_ran_once = true
   end
 
   # Create a populated Options instance from a settings file. If a second file is given, then the sections of that
@@ -48,7 +42,7 @@ module Config
     end
 
     config.load!
-    config.load_env! if @@use_env
+    config.load_env! if use_env
     config
   end
 
@@ -61,13 +55,13 @@ module Config
 
   def self.setting_files(config_root, env)
     [
-      File.join(config_root, "settings.yml").to_s,
-      File.join(config_root, "settings", "#{env}.yml").to_s,
-      File.join(config_root, "environments", "#{env}.yml").to_s,
+      File.join(config_root, 'settings.yml').to_s,
+      File.join(config_root, 'settings', "#{env}.yml").to_s,
+      File.join(config_root, 'environments', "#{env}.yml").to_s,
 
-      File.join(config_root, "settings.local.yml").to_s,
-      File.join(config_root, "settings", "#{env}.local.yml").to_s,
-      File.join(config_root, "environments", "#{env}.local.yml").to_s
+      File.join(config_root, 'settings.local.yml').to_s,
+      File.join(config_root, 'settings', "#{env}.local.yml").to_s,
+      File.join(config_root, 'environments', "#{env}.local.yml").to_s
     ].freeze
   end
 
