@@ -2,16 +2,27 @@
 
 ## Unreleased
 
-## BREAKING CHANGES
+### Changes
 
-* Dropped support for Rails `< 4.2`
-* Dropped support for Ruby `< 2.4`
+* Get rid of activesupport dependency ([#230](https://github.com/railsconfig/config/pull/230))
+* Add Ruby 2.7.0-preview1 to the test matrix and upgrade older versions ([#226](https://github.com/railsconfig/config/pull/226))
+
+## 2.0.0
+
+### BREAKING CHANGES
+
+After upgrade to dry-schema 1.0 we had to drop support for Rails `< 4.2` and Ruby `< 2.4`.
+If you need older version of Ruby or Rails, please stick to 1.x version of this gem. 
+
+### New features
+
+* Add `merge_hash_arrays` as a configuration option ([#214](https://github.com/railsconfig/config/pull/214))
 
 ### Changes
 
 * Upgraded dry-validation dependency to dry-schema 1.0 ([#224](https://github.com/railsconfig/config/pull/224))
 * Moved constant to be defined on `Object` instead of `Kernel` ([#227](https://github.com/railsconfig/config/issues/227))
-* Add Ruby 2.7.0-preview1 to the test matrix and upgrade older versions ([#226](https://github.com/railsconfig/config/pull/226))
+* Add TruffleRuby to the test matrix ([#229](https://github.com/railsconfig/config/issues/229))
 
 ## 1.7.2
 
