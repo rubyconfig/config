@@ -162,6 +162,10 @@ Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
 Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
 ```
 
+**NOTE:** The file `settings.local.yml` will not be loaded in tests to prevent local
+configuration from causing flaky or non-deterministic tests. Environment-specific files
+(e.g. `settings/test.local.yml`) will still be loaded to allow test-specific credentials.
+
 ### Adding sources at runtime
 
 You can add new YAML config files at runtime. Just use:
