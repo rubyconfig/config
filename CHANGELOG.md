@@ -5,6 +5,7 @@
 ### Changes
 
 * Get rid of activesupport dependency ([#230](https://github.com/railsconfig/config/pull/230))
+* Ignore .local files in test environment ([#135](https://github.com/railsconfig/config/issues/135), [#233](https://github.com/railsconfig/config/pull/233))
 
 ## 2.0.0
 
