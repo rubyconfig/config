@@ -453,6 +453,12 @@ gem install bundler -v 1.17.3
 gem install appraisal
 ```
 
+Bundle
+
+```bash
+bundle install
+```
+
 Bootstrap
 
 ```bash
