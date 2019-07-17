@@ -1,13 +1,17 @@
 # Config
 
-[![Build Status](https://api.travis-ci.org/railsconfig/config.svg?branch=master)](http://travis-ci.org/railsconfig/config)
-[![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
+[![Build
+Status](https://api.travis-ci.org/railsconfig/config.svg?branch=master)](http://travis-ci.org/railsconfig/config)
+[![Gem
+Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
 [![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/railsconfig/config/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/railsconfig/config/test_coverage)
+[![Test
+Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/railsconfig/config/test_coverage)
 
 ## Summary
 
-Config helps you easily manage environment specific settings in an easy and usable manner.
+Config helps you easily manage environment specific settings in an easy and
+usable manner.
 
 ## Features
 
@@ -28,17 +32,21 @@ Config helps you easily manage environment specific settings in an easy and usab
   * Padrino
   * Sinatra
 
-For Ruby `2.0` to `2.3` or Rails `3` to `4.1` use version `1.x` of this gem. For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
+For Ruby `2.0` to `2.3` or Rails `3` to `4.1` use version `1.x` of this gem. For
+older versions of Rails or Ruby use
+[AppConfig](http://github.com/fredwu/app_config).
 
 ## Installing
 
 ### Installing on Rails
 
-Add `gem 'config'` to your `Gemfile` and run `bundle install` to install it. Then run
+Add `gem 'config'` to your `Gemfile` and run `bundle install` to install it.
+Then run
 
     rails g config:install
 
-which will generate customizable config file `config/initializers/config.rb` and set of default settings files:
+which will generate customizable config file `config/initializers/config.rb` and
+set of default settings files:
 
     config/settings.yml
     config/settings/development.yml
@@ -49,7 +57,8 @@ You can now edit them to adjust to your needs.
 
 ### Installing on Padrino
 
-Add the gem to your `Gemfile` and run `bundle install` to install it. Then edit `app.rb` and register `Config`
+Add the gem to your `Gemfile` and run `bundle install` to install it. Then edit
+`app.rb` and register `Config`
 
 ```ruby
 register Config
@@ -57,8 +66,9 @@ register Config
 
 ### Installing on Sinatra
 
-Add the gem to your `Gemfile` and run `bundle install` to install it. Afterwards in need to register `Config` in your
-app and give it a root so it can find the config files.
+Add the gem to your `Gemfile` and run `bundle install` to install it. Afterwards
+in need to register `Config` in your app and give it a root so it can find the
+config files.
 
 ```ruby
 set :root, File.dirname(__FILE__)
@@ -74,8 +84,8 @@ Then initialize `Config` manually within your configure block.
 Config.load_and_set_settings(Config.setting_files("/path/to/config_root", "your_project_environment"))
 ```
 
-It's also possible to initialize `Config` manually within your configure block if you want to just give it some yml
-paths to load from.
+It's also possible to initialize `Config` manually within your configure block
+if you want to just give it some yml paths to load from.
 
 ```ruby
 Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
@@ -83,8 +93,9 @@ Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
 
 ## Accessing the Settings object
 
-After installing the gem, `Settings` object will become available globally and by default will be compiled from the
-files listed below. Settings defined in files that are lower in the list override settings higher.
+After installing the gem, `Settings` object will become available globally and
+by default will be compiled from the files listed below. Settings defined in
+files that are lower in the list override settings higher.
 
     config/settings.yml
     config/settings/#{environment}.yml
@@ -106,7 +117,8 @@ Nested entries are supported:
 Settings.my_section.some_entry
 ```
 
-Alternatively, you can also use the `[]` operator if you don't know which exact setting you need to access ahead of time.
+Alternatively, you can also use the `[]` operator if you don't know which exact
+setting you need to access ahead of time.
 
 ```ruby
 # All the following are equivalent to Settings.my_section.some_entry
@@ -121,7 +133,8 @@ You can reload the Settings object at any time by running `Settings.reload!`.
 
 ### Reloading settings and config files
 
-You can also reload the `Settings` object from different config files at runtime.
+You can also reload the `Settings` object from different config files at
+runtime.
 
 For example, in your tests if you want to test the production settings, you can:
 
@@ -136,8 +149,8 @@ Settings.reload_from_files(
 
 ### Environment specific config files
 
-You can have environment specific config files. Environment specific config entries take precedence over common config
-entries.
+You can have environment specific config files. Environment specific config
+entries take precedence over common config entries.
 
 Example development environment config file:
 
@@ -153,8 +166,9 @@ Example production environment config file:
 
 ### Developer specific config files
 
-If you want to have local settings, specific to your machine or development environment,
-you can use the following files, which are automatically `.gitignore` :
+If you want to have local settings, specific to your machine or development
+environment, you can use the following files, which are automatically
+`.gitignore` :
 
 ```ruby
 Rails.root.join("config", "settings.local.yml").to_s,
@@ -162,9 +176,10 @@ Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
 Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
 ```
 
-**NOTE:** The file `settings.local.yml` will not be loaded in tests to prevent local
-configuration from causing flaky or non-deterministic tests. Environment-specific files
-(e.g. `settings/test.local.yml`) will still be loaded to allow test-specific credentials.
+**NOTE:** The file `settings.local.yml` will not be loaded in tests to prevent
+local configuration from causing flaky or non-deterministic tests.
+Environment-specific files (e.g. `settings/test.local.yml`) will still be loaded
+to allow test-specific credentials.
 
 ### Adding sources at runtime
 
@@ -175,30 +190,37 @@ Settings.add_source!("/path/to/source.yml")
 Settings.reload!
 ```
 
-This will use the given source.yml file and use its settings to overwrite any previous ones.
+This will use the given source.yml file and use its settings to overwrite any
+previous ones.
 
-On the other hand, you can prepend a YML file to the list of configuration files:
+On the other hand, you can prepend a YML file to the list of configuration
+files:
 
 ```ruby
 Settings.prepend_source!("/path/to/source.yml")
 Settings.reload!
 ```
 
-This will do the same as `add_source`, but the given YML file will be loaded first (instead of last) and its settings
-will be overwritten by any other configuration file. This is especially useful if you want to define defaults.
+This will do the same as `add_source`, but the given YML file will be loaded
+first (instead of last) and its settings will be overwritten by any other
+configuration file. This is especially useful if you want to define defaults.
 
-One thing I like to do for my Rails projects is provide a local.yml config file that is .gitignored (so its independent
-per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
+One thing I like to do for my Rails projects is provide a local.yml config file
+that is .gitignored (so its independent per developer). Then I create a new
+initializer in `config/initializers/add_local_config.rb` with the contents
 
 ```ruby
 Settings.add_source!("#{Rails.root}/config/settings/local.yml")
 Settings.reload!
 ```
 
-> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml,
-settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
+> Note: this is an example usage, it is easier to just use the default local
+files `settings.local.yml, settings/#{Rails.env}.local.yml and
+environments/#{Rails.env}.local.yml` for your developer specific settings.
 
-You also have the option to add a raw hash as a source. One use case might be storing settings in the database or in environment variables that overwrite what is in the YML files.
+You also have the option to add a raw hash as a source. One use case might be
+storing settings in the database or in environment variables that overwrite what
+is in the YML files.
 
 ```ruby
 Settings.add_source!({some_secret: ENV['some_secret']})
@@ -256,8 +278,8 @@ Settings.section.servers[1].name # => amazon.com
 
 ## Configuration
 
-There are multiple configuration options available, however you can customize `Config` only once, preferably during
-application initialization phase:
+There are multiple configuration options available, however you can customize
+`Config` only once, preferably during application initialization phase:
 
 ```ruby
 Config.setup do |config|
@@ -266,8 +288,8 @@ Config.setup do |config|
 end
 ```
 
-After installing `Config` in Rails, you will find automatically generated file that contains default configuration
-located at `config/initializers/config.rb`.
+After installing `Config` in Rails, you will find automatically generated file
+that contains default configuration located at `config/initializers/config.rb`.
 
 ### General
 
@@ -275,10 +297,16 @@ located at `config/initializers/config.rb`.
 
 ### Merge customization
 
-* `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
-* `merge_hash_arrays` - merge hashes inside of arrays from previously loaded settings files. Makes sense only when `overwrite_arrays = false`. Default: `false`
-* `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
-* `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
+* `overwrite_arrays` - overwrite arrays found in previously loaded settings
+  file. Default: `true`
+* `merge_hash_arrays` - merge hashes inside of arrays from previously loaded
+  settings files. Makes sense only when `overwrite_arrays = false`. Default:
+  `false`
+* `knockout_prefix` - ability to remove elements of the array set in earlier
+  loaded settings file. Makes sense only when `overwrite_arrays = false`,
+  otherwise array settings would be overwritten by default. Default: `nil`
+* `merge_nil_values` - `nil` values will overwrite an existing value when
+  merging configs. Default: `true`.
 
 ```ruby
 # merge_nil_values is true by default
