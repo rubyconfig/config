@@ -5,10 +5,10 @@ module Config
     module Validate
       def validate!
         validation_contract = Config.validation_contract
-        validate_using!(data: to_hash, schema: validation_contract) if validation_contract.present?
+        validate_using!(data: to_hash, schema: validation_contract) unless validation_contract.nil?
 
         schema = Config.schema
-        validate_using!(data: to_hash, schema: schema) if schema.present?
+        validate_using!(data: to_hash, schema: schema) unless schema.nil?
       end
 
       private
