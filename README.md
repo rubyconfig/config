@@ -304,16 +304,25 @@ Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
 ### Validation
 
-With Ruby 2.1 or newer, you can optionally define a [schema](https://github.com/dry-rb/dry-schema) or [contract](https://github.com/dry-rb/dry-validation) using [dry-rb](https://github.com/dry-rb) to validate presence (and type) of specific config values.
+With Ruby 2.1 or newer, you can optionally define a
+[schema](https://github.com/dry-rb/dry-schema) or
+[contract](https://github.com/dry-rb/dry-validation) using
+[dry-rb](https://github.com/dry-rb) to validate presence (and type) of specific
+config values.
 
-If you provide either validation option they (both if provided) will automatically be used to validate your config. If validation fails it will raise a `Config::Validation::Error` containing a nice message with information about all the mismatches between the schema and your config.
+If you provide either validation option they (both if provided) will
+automatically be used to validate your config. If validation fails it will raise
+a `Config::Validation::Error` containing a nice message with information about
+all the mismatches between the schema and your config.
 
-Both examples below demonstrates how to ensure that the configuration has an optional `email` and the `youtube` structure
-with the `api_key` field filled.  The Contract adds an additional rule.
+Both examples below demonstrates how to ensure that the configuration has an
+optional `email` and the `youtube` structure with the `api_key` field filled.
+The Contract adds an additional rule.
 
 #### Contract
 
-Leverage dry-validation, you can create a contract with a params schema and rules:
+Leverage dry-validation, you can create a contract with a params schema and
+rules:
 
 ```ruby
 class ConfigContract < Dry::Validation::Contract
@@ -336,13 +345,16 @@ Config.setup do |config|
 end
 ```
 
-The above example adds a rule to ensure the `email` is valid by matching it against the provided regular expression.
+The above example adds a rule to ensure the `email` is valid by matching it
+against the provided regular expression.
 
-Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
+Check [dry-validation](https://github.com/dry-rb/dry-validation) for more
+details.
 
 #### Schema
 
-You may also specify a schema using [dry-schema](https://github.com/dry-rb/dry-schema):
+You may also specify a schema using
+[dry-schema](https://github.com/dry-rb/dry-schema):
 
 ```ruby
 Config.setup do |config|
