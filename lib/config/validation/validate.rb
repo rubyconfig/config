@@ -11,14 +11,14 @@ module Config
       private
 
       def validate_using!(validator:)
-        return if validator.nil?
-        
-        result = validator.call(to_hash)
+        if validator
+          result = validator.call(to_hash)
 
-        return if result.success?
+          return if result.success?
 
-        error = Config::Validation::Error.format(result)
-        raise Config::Validation::Error, "Config validation failed:\n\n#{error}"
+          error = Config::Validation::Error.format(result)
+          raise Config::Validation::Error, "Config validation failed:\n\n#{error}"
+        end
       end
     end
   end
