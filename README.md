@@ -304,12 +304,11 @@ Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
 ### Validation
 
-With Ruby 2.1 or newer, you can optionally define a [schema](https://github.com/dry-rb/dry-schema) or [contract](https://github.com/dry-rb/dry-validation) using [dry-rb](https://github.com/dry-rb) to validate presence (and type) of specific config values.
+With Ruby 2.1 or newer, you can optionally define a [schema](https://github.com/dry-rb/dry-schema) or [contract](https://github.com/dry-rb/dry-validation) (added in `config-2.1`) using [dry-rb](https://github.com/dry-rb) to validate presence (and type) of specific config values. Generally speaking contracts allow to describe more complex validations with depencecies between fields.
 
-If you provide either validation option they (both if provided) will automatically be used to validate your config. If validation fails it will raise a `Config::Validation::Error` containing a nice message with information about all the mismatches between the schema and your config.
+If you provide either validation option (or both) it will automatically be used to validate your config. If validation fails it will raise a `Config::Validation::Error` containing information about all the mismatches between the schema and your config.
 
-Both examples below demonstrates how to ensure that the configuration has an optional `email` and the `youtube` structure
-with the `api_key` field filled.  The Contract adds an additional rule.
+Both examples below demonstrates how to ensure that the configuration has an optional `email` and the `youtube` structure with the `api_key` field filled. The contract adds an additional rule.
 
 #### Contract
 
@@ -319,6 +318,7 @@ Leverage dry-validation, you can create a contract with a params schema and rule
 class ConfigContract < Dry::Validation::Contract
   params do
     optional(:email).maybe(:str?)
+
     required(:youtube).schema do
       required(:api_key).filled
     end
@@ -349,6 +349,7 @@ Config.setup do |config|
   # ...
   config.schema do
     optional(:email).maybe(:str?)
+
     required(:youtube).schema do
       required(:api_key).filled
     end
