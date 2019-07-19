@@ -4,8 +4,8 @@ module Config
   module Validation
     module Validate
       def validate!
-        validate_using!(Config.validation_contract)
-        validate_using!(Config.schema)
+        validate_using!(validator: Config.validation_contract)
+        validate_using!(validator: Config.schema)
       end
 
       private
