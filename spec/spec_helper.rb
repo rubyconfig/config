@@ -1,5 +1,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 
+puts "TRAVIS_COMPILER #{ENV['TRAVIS_COMPILER']}"
+puts "TRAVIS_RUBY_VERSION #{ENV['TRAVIS_RUBY_VERSION']}"
+puts ENV
+
 ##
 # Code Climate
 #
