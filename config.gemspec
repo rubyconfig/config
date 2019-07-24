@@ -15,13 +15,10 @@ Gem::Specification.new do |s|
   s.license          = 'MIT'
   s.extra_rdoc_files = %w[README.md CHANGELOG.md CONTRIBUTING.md LICENSE.md]
   s.rdoc_options     = ['--charset=UTF-8']
-  s.post_install_message = "
-\e[33mThanks for installing Config\e[0m 🙏
+  s.post_install_message = "\n\e[33mThanks for installing Config\e[0m 🙏
 Please consider donating to our open collective to help us maintain this project.
 
-👉  Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m
-
-"
+👉  Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   s.files = `git ls-files`.split($/)
   s.files.select! { |file| /(^lib\/|\.md$|\.gemspec$)/ =~ file }
