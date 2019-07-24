@@ -7,6 +7,10 @@
 * Get rid of activesupport dependency ([#230](https://github.com/railsconfig/config/pull/230))
 * Ignore .local files in test environment ([#135](https://github.com/railsconfig/config/issues/135), [#233](https://github.com/railsconfig/config/pull/233))
 
+### Bug fixes
+
+* Fix warnings when running tests in Rails 5 scope  ([#240](https://github.com/railsconfig/config/issues/240)
+
 ## 2.0.0
 
 ### BREAKING CHANGES
