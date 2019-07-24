@@ -428,36 +428,21 @@ Settings.section.ssl_enabled # => false
 
 ## Contributing
 
-Install appraisal
+You are very warmly welcome to help. Please follow our [contribution guidelines](CONTRIBUTING.md)
 
-```bash
-gem install bundler -v 1.17.3
-gem install appraisal
-```
+Any and all contributions offered in any form, past present or future are understood to be in complete agreement and acceptance with [MIT](LICENSE) license.
 
-Bundle
+### Backers
 
-```bash
-bundle install
-```
+[Become a backer](https://opencollective.com/rubyconfig#backer) and support us with a small donation to help us continue our activities. Thank you if you already one! 🙏
 
-Bootstrap
+[![Backers](https://opencollective.com/rubyconfig/backers.svg?width=890)](https://opencollective.com/rubyconfig#backers)
 
-```bash
-appraisal install
-```
+### Sponsors
 
-Run the test suite:
+Support this project by becoming a [sponsor](https://opencollective.com/rubyconfig#sponsor). Your logo will show up here with a link to your website.
 
-```bash
-appraisal rspec
-```
-
-If you modified any of the documentation files verify their format:
-
-```bash
-mdl --style .mdlstyle.rb *.md
-```
+[![Sponsors](https://opencollective.com/rubyconfig/sponsors.svg?width=890)](https://opencollective.com/rubyconfig#sponsors)
 
 ## Authors
 
