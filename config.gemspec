@@ -13,8 +13,15 @@ Gem::Specification.new do |s|
                        'Rails, Sinatra, Pandrino and others'
   s.homepage         = 'https://github.com/railsconfig/config'
   s.license          = 'MIT'
-  s.extra_rdoc_files = %w(README.md CHANGELOG.md LICENSE.md)
+  s.extra_rdoc_files = %w(README.md CHANGELOG.md CONTRIBUTING.md LICENSE.md)
   s.rdoc_options     = ['--charset=UTF-8']
+  s.post_install_message = %q{
+Thanks for installing Config 🙏
+Please consider donating to our open collective to help us maintain this project.
+
+👉  Donate: <code>https://opencollective.com/rubyconfig/donate</code>
+
+}
 
   s.files = `git ls-files`.split($/)
   s.files.select! { |file| /(^lib\/|\.md$|\.gemspec$)/ =~ file }
