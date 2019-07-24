@@ -9,7 +9,8 @@
 
 ### Bug fixes
 
-* Fix warnings when running tests in Rails 5 scope  ([#240](https://github.com/railsconfig/config/issues/240)
+* Fix warnings when running tests in Rails 5 scope ([#240](https://github.com/railsconfig/config/issues/240)
+* Do not run incompatible code coverage on truffleruby
 
 ## 2.0.0
 

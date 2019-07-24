@@ -3,7 +3,7 @@ ENV['RAILS_ENV'] ||= 'test'
 ##
 # Code Climate
 #
-if ENV['TRAVIS']
+if ENV['TRAVIS'] && ENV['TRAVIS_RUBY_VERSION'] != 'truffleruby'
   require 'simplecov'
   SimpleCov.start
 end
