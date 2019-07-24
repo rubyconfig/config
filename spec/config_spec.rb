@@ -3,12 +3,23 @@ require 'spec_helper'
 describe Config do
 
   it "should get setting files" do
+    config = Config.setting_files("root/config", "staging")
+    expect(config).to eq([
+                           'root/config/settings.yml',
+                           'root/config/settings/staging.yml',
+                           'root/config/environments/staging.yml',
+                           'root/config/settings.local.yml',
+                           'root/config/settings/staging.local.yml',
+                           'root/config/environments/staging.local.yml'
+                         ])
+  end
+
+  it "should ignore local config in test environment" do
     config = Config.setting_files("root/config", "test")
     expect(config).to eq([
                            'root/config/settings.yml',
                            'root/config/settings/test.yml',
                            'root/config/environments/test.yml',
-                           'root/config/settings.local.yml',
                            'root/config/settings/test.local.yml',
                            'root/config/environments/test.local.yml'
                          ])

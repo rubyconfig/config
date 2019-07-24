@@ -2,9 +2,16 @@
 
 ## Unreleased
 
+### Bug fixes
+
+* Fix warnings when running tests in Rails 5 scope ([#240](https://github.com/railsconfig/config/issues/240)
+* Do not run incompatible code coverage on truffleruby ([#242](https://github.com/railsconfig/config/issues/242)
+
 ### Changes
 
 * Get rid of activesupport dependency ([#230](https://github.com/railsconfig/config/pull/230))
+* Ignore .local files in test environment ([#135](https://github.com/railsconfig/config/issues/135), [#233](https://github.com/railsconfig/config/pull/233))
+* Execute default rspec against latest Rails app and load appropriate development dependencies dynamically ([#241](https://github.com/railsconfig/config/pull/241))
 * Add Ruby 2.7.0-preview1 to the test matrix and upgrade older versions ([#226](https://github.com/railsconfig/config/pull/226))
 
 ## 2.0.0
