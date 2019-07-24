@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.rdoc_options     = ['--charset=UTF-8']
   s.post_install_message = "\n\e[33mThanks for installing Config\e[0m 🙏
 Please consider donating to our open collective to help us maintain this project.
-
+\n
 👉  Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   s.files = `git ls-files`.split($/)
