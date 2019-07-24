@@ -9,7 +9,7 @@
 
 ### Bug fixes
 
-* Fix warnings when running tests in Rails 5 scope
+* Fix warnings when running tests in Rails 5 scope  ([#240](https://github.com/railsconfig/config/issues/240)
 
 ## 2.0.0
 
