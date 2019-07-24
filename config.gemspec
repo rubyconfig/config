@@ -7,14 +7,18 @@ Gem::Specification.new do |s|
   s.version          = Config::VERSION
   s.date             = Time.now.strftime '%F'
   s.authors          = ['Piotr Kuczynski', 'Fred Wu', 'Jacques Crocker']
-  s.email            = %w(piotr.kuczynski@gmail.com ifredwu@gmail.com railsjedi@gmail.com)
+  s.email            = %w[piotr.kuczynski@gmail.com ifredwu@gmail.com railsjedi@gmail.com]
   s.summary          = 'Effortless multi-environment settings in Rails, Sinatra, Pandrino and others'
   s.description      = 'Easiest way to manage multi-environment settings in any ruby project or framework: ' +
                        'Rails, Sinatra, Pandrino and others'
   s.homepage         = 'https://github.com/railsconfig/config'
   s.license          = 'MIT'
-  s.extra_rdoc_files = %w(README.md CHANGELOG.md LICENSE.md)
+  s.extra_rdoc_files = %w[README.md CHANGELOG.md CONTRIBUTING.md LICENSE.md]
   s.rdoc_options     = ['--charset=UTF-8']
+  s.post_install_message = "\n\e[33mThanks for installing Config\e[0m 🙏
+Please consider donating to our open collective to help us maintain this project.
+\n
+👉  Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   s.files = `git ls-files`.split($/)
   s.files.select! { |file| /(^lib\/|\.md$|\.gemspec$)/ =~ file }
