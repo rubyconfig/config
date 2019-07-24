@@ -4,13 +4,13 @@ module Config
   module Validation
     module Validate
       def validate!
-        validate_using!(validator: Config.validation_contract)
-        validate_using!(validator: Config.schema)
+        validate_using!(Config.validation_contract)
+        validate_using!(Config.schema)
       end
 
       private
 
-      def validate_using!(validator:)
+      def validate_using!(validator)
         if validator
           result = validator.call(to_hash)
 
