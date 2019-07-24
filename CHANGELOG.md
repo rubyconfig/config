@@ -6,7 +6,7 @@
 
 * Get rid of activesupport dependency ([#230](https://github.com/railsconfig/config/pull/230))
 * Ignore .local files in test environment ([#135](https://github.com/railsconfig/config/issues/135), [#233](https://github.com/railsconfig/config/pull/233))
-* Execute default rspec against latest Rails app and load appropriate development dependencies dynamically
+* Execute default rspec against latest Rails app and load appropriate development dependencies dynamically ([#241](https://github.com/railsconfig/config/pull/241))
 
 ### Bug fixes
 
