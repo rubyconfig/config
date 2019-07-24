@@ -436,13 +436,13 @@ Any and all contributions offered in any form, past present or future are unders
 
 [Become a backer](https://opencollective.com/rubyconfig#backer) and support us with a small donation to help us continue our activities. Thank you if you already one! 🙏
 
-<a href="https://opencollective.com/rubyconfig#backers" target="_blank"><img src="https://opencollective.com/rubyconfig/backers.svg?width=890"></a>
+[![Backers](https://opencollective.com/rubyconfig/backers.svg?width=890)](https://opencollective.com/rubyconfig#backers)
 
 ### Sponsors
 
 Support this project by becoming a [sponsor](https://opencollective.com/rubyconfig#sponsor). Your logo will show up here with a link to your website.
 
-<a href="https://opencollective.com/rubyconfig#sponsors" target="_blank"><img src="https://opencollective.com/rubyconfig/sponsors.svg?width=890"></a>
+[![Sponsors](https://opencollective.com/rubyconfig/sponsors.svg?width=890)](https://opencollective.com/rubyconfig#sponsors)
 
 ## Authors
 
