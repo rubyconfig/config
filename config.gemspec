@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
 
   # Default RSpec run will test against latest Rails app
   unless ENV['APPRAISAL_INITIALIZED']
-    File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(/gem "(.*?)", "(.*?)"/m) do |name, version|
+    File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(/gem "(.*?)", "(.*?)"(?!, platforms: (?!\[:ruby\]))/) do |name, version|
       s.add_development_dependency name, version
     end
   end

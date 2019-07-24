@@ -2,10 +2,10 @@
 
 source "https://rubygems.org"
 
-gem "sqlite3", "< 1.4.0", platforms: [:ruby]
 gem "activerecord-jdbcsqlite3-adapter", "~>52.0", platforms: [:jruby]
+gem "bootsnap", "~> 1.4"
 gem "rails", "5.2.2"
-gem "rspec-rails", "~> 3.7", ">= 3.7.2"
-gem "bootsnap"
+gem "rspec-rails", "~> 3.7"
+gem "sqlite3", "< 1.4.0", platforms: [:ruby]
 
 gemspec path: "../"
