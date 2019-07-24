@@ -30,11 +30,14 @@ Gem::Specification.new do |s|
 
   # Testing
   s.add_development_dependency 'appraisal',   '~> 2.2',   '>= 2.2.0'
-  s.add_development_dependency 'rails',       '~> 5.2',   '>= 5.2.2'
   s.add_development_dependency 'rspec',       '~> 3.7',   '>= 3.7.0'
-  s.add_development_dependency 'rspec-rails', '~> 3.7',   '>= 3.7.2'
-  s.add_development_dependency 'test-unit',   '~> 3.2',   '>= 3.2.7'
-  s.add_development_dependency 'sqlite3',     '~> 1.3',   '>= 1.3.13'
+
+  # Default RSpec run will test against latest Rails app
+  unless ENV['APPRAISAL_INITIALIZED']
+    File.read(Dir["gemfiles/rails*.gemfile"].sort.last).scan(/gem "(.*?)", "(.*?)"/m) do | name, version |
+      s.add_development_dependency name, version
+    end
+  end
 
   # Static code analysis
   s.add_development_dependency 'mdl',         '~> 0.5',   '>= 0.5.0'

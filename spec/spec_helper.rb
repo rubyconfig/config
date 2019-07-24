@@ -19,14 +19,14 @@ Dir['./spec/support/**/*.rb'].each { |f| require f }
 if ENV['APPRAISAL_INITIALIZED'] || ENV['TRAVIS']
   app_name = Pathname.new(ENV['BUNDLE_GEMFILE']).basename.sub('.gemfile', '')
 else
-  app_name = 'rails_5'
+  /.*?(?<app_name>rails.*?)\.gemfile/ =~ Dir["gemfiles/rails*.gemfile"].sort.last
 end
-
-app_framework = %w{rails sinatra}.find { |f| app_name.to_s.include?(f) }
 
 ##
 # Load dummy application and Rspec
 #
+app_framework = %w{rails sinatra}.find { |f| app_name.to_s.include?(f) }
+
 case app_framework
 when 'rails'
   # Load Rails
