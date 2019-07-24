@@ -26,20 +26,26 @@ Gem::Specification.new do |s|
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
   s.add_dependency 'dry-schema', '~> 1.0'
 
-  s.add_development_dependency 'rake',        '~> 12.0',  '>= 12.0.0'
+  s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
   # Testing
-  s.add_development_dependency 'appraisal',   '~> 2.2',   '>= 2.2.0'
-  s.add_development_dependency 'rspec',       '~> 3.7',   '>= 3.7.0'
-  s.add_development_dependency 'test-unit',   '~> 3.2',   '>= 3.2.7'
+  s.add_development_dependency 'appraisal', '~> 2.2', '>= 2.2.0'
+  s.add_development_dependency 'rspec', '~> 3.7', '>= 3.7.0'
+
+  # Default RSpec run will test against latest Rails app
+  unless ENV['APPRAISAL_INITIALIZED']
+    File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(/gem "(.*?)", "(.*?)"/m) do |name, version|
+      s.add_development_dependency name, version
+    end
+  end
 
   # Static code analysis
-  s.add_development_dependency 'mdl',         '~> 0.5',   '>= 0.5.0'
+  s.add_development_dependency 'mdl', '~> 0.5', '>= 0.5.0'
 
   # Version 0.62 requires Ruby 2.2
-  s.add_development_dependency 'rubocop',     '~> 0.62'
+  s.add_development_dependency 'rubocop', '~> 0.62'
 
-  if ENV['TRAVIS']
+  if ENV['TRAVIS'] && ENV['TRAVIS_RUBY_VERSION'] != 'truffleruby'
     s.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.9'
     s.add_development_dependency 'simplecov', '~> 0.13.0'
   end
