@@ -57,8 +57,7 @@ register Config
 
 ### Installing on Sinatra
 
-Add the gem to your `Gemfile` and run `bundle install` to install it. Afterwards in need to register `Config` in your
-app and give it a root so it can find the config files.
+Add the gem to your `Gemfile` and run `bundle install` to install it. Afterwards in need to register `Config` in your app and give it a root so it can find the config files.
 
 ```ruby
 set :root, File.dirname(__FILE__)
@@ -67,15 +66,13 @@ register Config
 
 ### Installing on other ruby projects
 
-Add the gem to your `Gemfile` and run `bundle install` to install it.
-Then initialize `Config` manually within your configure block.
+Add the gem to your `Gemfile` and run `bundle install` to install it. Then initialize `Config` manually within your configure block.
 
 ```ruby
 Config.load_and_set_settings(Config.setting_files("/path/to/config_root", "your_project_environment"))
 ```
 
-It's also possible to initialize `Config` manually within your configure block if you want to just give it some yml
-paths to load from.
+It's also possible to initialize `Config` manually within your configure block if you want to just give it some yml paths to load from.
 
 ```ruby
 Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
@@ -83,8 +80,7 @@ Config.load_and_set_settings("/path/to/yaml1", "/path/to/yaml2", ...)
 
 ## Accessing the Settings object
 
-After installing the gem, `Settings` object will become available globally and by default will be compiled from the
-files listed below. Settings defined in files that are lower in the list override settings higher.
+After installing the gem, `Settings` object will become available globally and by default will be compiled from the files listed below. Settings defined in files that are lower in the list override settings higher.
 
     config/settings.yml
     config/settings/#{environment}.yml
@@ -136,8 +132,7 @@ Settings.reload_from_files(
 
 ### Environment specific config files
 
-You can have environment specific config files. Environment specific config entries take precedence over common config
-entries.
+You can have environment specific config files. Environment specific config entries take precedence over common config entries.
 
 Example development environment config file:
 
@@ -153,14 +148,15 @@ Example production environment config file:
 
 ### Developer specific config files
 
-If you want to have local settings, specific to your machine or development environment,
-you can use the following files, which are automatically `.gitignore` :
+If you want to have local settings, specific to your machine or development environment, you can use the following files, which are automatically `.gitignore` :
 
 ```ruby
 Rails.root.join("config", "settings.local.yml").to_s,
 Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
 Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
 ```
+
+**NOTE:** The file `settings.local.yml` will not be loaded in tests to prevent local configuration from causing flaky or non-deterministic tests. Environment-specific files (e.g. `settings/test.local.yml`) will still be loaded to allow test-specific credentials.
 
 ### Adding sources at runtime
 
@@ -180,11 +176,9 @@ Settings.prepend_source!("/path/to/source.yml")
 Settings.reload!
 ```
 
-This will do the same as `add_source`, but the given YML file will be loaded first (instead of last) and its settings
-will be overwritten by any other configuration file. This is especially useful if you want to define defaults.
+This will do the same as `add_source`, but the given YML file will be loaded first (instead of last) and its settings will be overwritten by any other configuration file. This is especially useful if you want to define defaults.
 
-One thing I like to do for my Rails projects is provide a local.yml config file that is .gitignored (so its independent
-per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
+One thing I like to do for my Rails projects is provide a local.yml config file that is .gitignored (so its independent per developer). Then I create a new initializer in `config/initializers/add_local_config.rb` with the contents
 
 ```ruby
 Settings.add_source!("#{Rails.root}/config/settings/local.yml")
@@ -252,18 +246,16 @@ Settings.section.servers[1].name # => amazon.com
 
 ## Configuration
 
-There are multiple configuration options available, however you can customize `Config` only once, preferably during
-application initialization phase:
+There are multiple configuration options available, however you can customize `Config` only once, preferably during application initialization phase:
 
 ```ruby
 Config.setup do |config|
   config.const_name = 'Settings'
-  ...
+  # ...
 end
 ```
 
-After installing `Config` in Rails, you will find automatically generated file that contains default configuration
-located at `config/initializers/config.rb`.
+After installing `Config` in Rails, you will find automatically generated file that contains default configuration located at `config/initializers/config.rb`.
 
 ### General
 
@@ -371,8 +363,7 @@ See section below for more details.
 
 ## Working with environment variables
 
-To load environment variables from the `ENV` object, that will override any settings defined in files, set the `use_env`
-to true in your `config/initializers/config.rb` file:
+To load environment variables from the `ENV` object, that will override any settings defined in files, set the `use_env` to true in your `config/initializers/config.rb` file:
 
 ```ruby
 Config.setup do |config|
@@ -381,8 +372,7 @@ Config.setup do |config|
 end
 ```
 
-Now config would read values from the ENV object to the settings. For the example above it would look for keys starting
-with `Settings`:
+Now config would read values from the ENV object to the settings. For the example above it would look for keys starting with `Settings`:
 
 ```ruby
 ENV['Settings.section.size'] = 1
@@ -393,9 +383,7 @@ It won't work with arrays, though.
 
 ### Working with Heroku
 
-Heroku uses ENV object to store sensitive settings. You cannot upload such files to Heroku because it's ephemeral
-filesystem gets recreated from the git sources on each instance refresh. To use config with Heroku just set the
-`use_env` var to `true` as mentioned above.
+Heroku uses ENV object to store sensitive settings. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh. To use config with Heroku just set the `use_env` var to `true` as mentioned above.
 
 To upload your local values to Heroku you could ran `bundle exec rake config:heroku`.
 
@@ -404,9 +392,7 @@ To upload your local values to Heroku you could ran `bundle exec rake config:her
 You can customize how environment variables are processed:
 
 * `env_prefix` (default: `SETTINGS`) - which ENV variables to load into config
-* `env_separator` (default: `.`)  - what string to use as level separator - default value of `.` works well with
-  Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using
-  dots in variable names might not be allowed (eg. Bash)
+* `env_separator` (default: `.`)  - what string to use as level separator - default value of `.` works well with   Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using   dots in variable names might not be allowed (eg. Bash)
 * `env_converter` (default: `:downcase`)  - how to process variables names:
   * `nil` - no change
   * `:downcase` - convert to lower case
@@ -442,30 +428,21 @@ Settings.section.ssl_enabled # => false
 
 ## Contributing
 
-Install appraisal
+You are very warmly welcome to help. Please follow our [contribution guidelines](CONTRIBUTING.md)
 
-```bash
-gem install bundler -v 1.17.3
-gem install appraisal
-```
+Any and all contributions offered in any form, past present or future are understood to be in complete agreement and acceptance with [MIT](LICENSE) license.
 
-Bootstrap
+### Backers
 
-```bash
-appraisal install
-```
+[Become a backer](https://opencollective.com/rubyconfig#backer) and support us with a small donation to help us continue our activities. Thank you if you already one! 🙏
 
-Run the test suite:
+[![Backers](https://opencollective.com/rubyconfig/backers.svg?width=890)](https://opencollective.com/rubyconfig#backers)
 
-```bash
-appraisal rspec
-```
+### Sponsors
 
-If you modified any of the documentation files verify their format:
+Support this project by becoming a [sponsor](https://opencollective.com/rubyconfig#sponsor). Your logo will show up here with a link to your website.
 
-```bash
-mdl --style .mdlstyle.rb *.md
-```
+[![Sponsors](https://opencollective.com/rubyconfig/sponsors.svg?width=890)](https://opencollective.com/rubyconfig#sponsors)
 
 ## Authors
 

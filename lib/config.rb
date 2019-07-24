@@ -58,11 +58,16 @@ module Config
       File.join(config_root, 'settings.yml').to_s,
       File.join(config_root, 'settings', "#{env}.yml").to_s,
       File.join(config_root, 'environments', "#{env}.yml").to_s,
+      *local_setting_files(config_root, env)
+    ].freeze
+  end
 
-      File.join(config_root, 'settings.local.yml').to_s,
+  def self.local_setting_files(config_root, env)
+    [
+      (File.join(config_root, 'settings.local.yml').to_s if env != 'test'),
       File.join(config_root, 'settings', "#{env}.local.yml").to_s,
       File.join(config_root, 'environments', "#{env}.local.yml").to_s
-    ].freeze
+    ].compact
   end
 
   def self.reload!
