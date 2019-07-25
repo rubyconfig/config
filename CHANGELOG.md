@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### New features
+
+* Add dry-validation contract support ([#238](https://github.com/railsconfig/config/pull/238))
+
 ### Changes
 
 * Get rid of activesupport dependency ([#230](https://github.com/railsconfig/config/pull/230))
