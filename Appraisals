@@ -3,7 +3,7 @@ appraise 'rails-4.2' do
   gem 'rails', '4.2.11'
   gem 'rspec-rails', '~> 3.7'
   gem 'sqlite3', '< 1.4.0', platforms: [:ruby]
-  gem 'tzinfo-data', platforms: %i[mswin, mingw, x64_mingw]
+  gem 'tzinfo-data', platforms: %i[mswin mingw x64_mingw]
 end
 
 appraise 'rails-5.0' do
