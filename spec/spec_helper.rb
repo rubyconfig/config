@@ -92,7 +92,7 @@ puts "Gemfile: #{ENV['BUNDLE_GEMFILE']}"
 puts 'Version:'
 
 Gem.loaded_specs.each { |name, spec|
-  puts "\t#{name}-#{spec.version}" if %w{rails activesupport sqlite3 rspec-rails sinatra}.include?(name)
+  puts "\t#{name}-#{spec.version}" if %w{rails activerecord-jdbcsqlite3-adapter sqlite3 rspec-rails sinatra}.include?(name)
 }
 
 puts
