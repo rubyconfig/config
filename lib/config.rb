@@ -1,3 +1,4 @@
+require 'dry-validation'
 require 'config/compatibility'
 require 'config/options'
 require 'config/configuration'
@@ -23,7 +24,8 @@ module Config
     knockout_prefix: nil,
     merge_nil_values: true,
     overwrite_arrays: true,
-    merge_hash_arrays: false
+    merge_hash_arrays: false,
+    validation_contract: nil
   )
 
   def self.setup

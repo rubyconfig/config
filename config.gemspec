@@ -28,7 +28,7 @@ Please consider donating to our open collective to help us maintain this project
   s.required_ruby_version = '>= 2.4.0'
 
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
-  s.add_dependency 'dry-schema', '~> 1.0'
+  s.add_dependency 'dry-validation', '~> 1.0'
 
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
