@@ -6,8 +6,8 @@ rvm:
   - 2.5.3
   - 2.6.0
   - jruby-9.2
-  - rubinius-3.107
-  - rubinius-4.2
+  #  - rubinius-3.107
+  #  - rubinius-4.2
   - truffleruby
 gemfile:
   - gemfiles/rails_4.2.gemfile
