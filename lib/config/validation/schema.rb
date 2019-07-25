@@ -1,5 +1,3 @@
-require 'dry-schema'
-
 module Config
   module Validation
     module Schema
