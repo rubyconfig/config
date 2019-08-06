@@ -1,3 +1,4 @@
+require 'dry-validation'
 require 'config/compatibility'
 require 'config/options'
 require 'config/configuration'
@@ -23,7 +24,8 @@ module Config
     knockout_prefix: nil,
     merge_nil_values: true,
     overwrite_arrays: true,
-    merge_hash_arrays: false
+    merge_hash_arrays: false,
+    validation_contract: nil
   )
 
   def self.setup
@@ -58,11 +60,16 @@ module Config
       File.join(config_root, 'settings.yml').to_s,
       File.join(config_root, 'settings', "#{env}.yml").to_s,
       File.join(config_root, 'environments', "#{env}.yml").to_s,
+      *local_setting_files(config_root, env)
+    ].freeze
+  end
 
-      File.join(config_root, 'settings.local.yml').to_s,
+  def self.local_setting_files(config_root, env)
+    [
+      (File.join(config_root, 'settings.local.yml').to_s if env != 'test'),
       File.join(config_root, 'settings', "#{env}.local.yml").to_s,
       File.join(config_root, 'environments', "#{env}.local.yml").to_s
-    ].freeze
+    ].compact
   end
 
   def self.reload!
