@@ -484,7 +484,7 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 ### Financial Contributors
 
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/rubyconfig/contribute)]
+[[Become a financial contributor](https://opencollective.com/rubyconfig/contribute)] and and support us with a small donation to help us continue our activities. Thank you if you already one! 🙏 
 
 #### Individuals
 
