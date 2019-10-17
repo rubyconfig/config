@@ -12,6 +12,7 @@
 * Ignore .local files in test environment ([#135](https://github.com/railsconfig/config/issues/135), [#233](https://github.com/railsconfig/config/pull/233))
 * Execute default rspec against latest Rails app and load appropriate development dependencies dynamically ([#241](https://github.com/railsconfig/config/pull/241))
 * Fix inconsistent documentation for ENV prefix and default value in generator ([#246](https://github.com/railsconfig/config/pull/246))
+* Defer modification of `ActionController::Base` to when it is loaded in Rails integration ([#250](https://github.com/railsconfig/config/pull/250))
 
 ### Bug fixes
 
