@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### BREAKING CHANGES
+
+Rails 4.2 is no longer supported. If you need to use Rails 4.2, use version 2.x of this gem.
+
 ### New features
 
 * Add dry-validation contract support ([#238](https://github.com/railsconfig/config/pull/238))
