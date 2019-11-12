@@ -1,4 +1,3 @@
-require 'dry-validation'
 require 'config/compatibility'
 require 'config/options'
 require 'config/configuration'

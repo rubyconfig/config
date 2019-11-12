@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'dry-validation'
 
 describe Config do
   context 'validation' do
