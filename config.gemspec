@@ -36,6 +36,11 @@ Please consider donating to our open collective to help us maintain this project
   s.add_development_dependency 'appraisal', '~> 2.2', '>= 2.2.0'
   s.add_development_dependency 'rspec', '~> 3.7', '>= 3.7.0'
 
+  # Sprockets 4.0 support will require some work:
+  # See: https://github.com/rails/sprockets-rails/issues/443
+  # and https://github.com/rails/sprockets/blob/master/UPGRADING.md#guide-to-upgrading-from-sprockets-3x-to-4x
+  s.add_development_dependency 'sprockets', '~>3.0'
+
   # Default RSpec run will test against latest Rails app
   unless ENV['APPRAISAL_INITIALIZED']
     File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(/gem "(.*?)", "(.*?)"/m) do |name, version|
