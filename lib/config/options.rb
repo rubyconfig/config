@@ -208,12 +208,7 @@ module Config
           v = v.collect { |e| e.instance_of?(Hash) ? __convert(e) : e }
         end
 
-        if s.respond_to?(:[]=)
-          s[k] = v
-        else
-          s.new_ostruct_member(k)
-          s.send("#{k}=".to_sym, v)
-        end
+        s[k] = v
       end
       s
     end
