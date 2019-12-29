@@ -25,7 +25,7 @@ Config helps you easily manage environment specific settings in an easy and usab
   * [Ruby](https://www.ruby-lang.org/en/) `>= 2.4`
   * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.0.0`
 * Application frameworks
-  * Rails `>= 4.2` and `5`
+  * Rails `>= 5`
   * Padrino
   * Sinatra
 
@@ -484,7 +484,7 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 ### Financial Contributors
 
-[[Become a financial contributor](https://opencollective.com/rubyconfig/contribute)] and and support us with a small donation to help us continue our activities. Thank you if you already one! 🙏 
+[[Become a financial contributor](https://opencollective.com/rubyconfig/contribute)] and and support us with a small donation to help us continue our activities. Thank you if you already one! 🙏
 
 #### Individuals
 
