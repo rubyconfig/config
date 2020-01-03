@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.1.0
+
 ### New features
 
 * Add dry-validation contract support ([#238](https://github.com/railsconfig/config/pull/238))
