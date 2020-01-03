@@ -5,6 +5,7 @@ rvm:
   - 2.4.5
   - 2.5.3
   - 2.6.0
+  - 2.7.0
   - truffleruby
 gemfile:
   - gemfiles/rails_4.2.gemfile
