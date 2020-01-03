@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+
+### Changes
+
+* Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
+
+## 2.1.0
+
 ### New features
 
 * Add dry-validation contract support ([#238](https://github.com/railsconfig/config/pull/238))
