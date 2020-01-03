@@ -6,6 +6,7 @@
 ### Changes
 
 * Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
+* Pin to sprockets 3 for Rails 4.2 ()
 
 ## 2.1.0
 
