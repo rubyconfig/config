@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+
+### Changes
+
+* Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
+
 ## 2.1.0
 
 ### New features
@@ -14,7 +19,6 @@
 * Ignore .local files in test environment ([#135](https://github.com/railsconfig/config/issues/135), [#233](https://github.com/railsconfig/config/pull/233))
 * Execute default rspec against latest Rails app and load appropriate development dependencies dynamically ([#241](https://github.com/railsconfig/config/pull/241))
 * Fix inconsistent documentation for ENV prefix and default value in generator ([#246](https://github.com/railsconfig/config/pull/246))
-* Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
 
 ### Bug fixes
 
