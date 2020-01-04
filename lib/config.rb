@@ -1,9 +1,7 @@
-require 'dry-validation'
 require 'config/compatibility'
 require 'config/options'
 require 'config/configuration'
 require 'config/version'
-require 'config/integrations/rails/engine' if defined?(::Rails)
 require 'config/sources/yaml_source'
 require 'config/sources/hash_source'
 require 'config/validation/schema'
