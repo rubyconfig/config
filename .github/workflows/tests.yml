@@ -19,7 +19,7 @@ jobs:
           - 2.5
           - 2.6
           - 2.7
-          - truffleruby
+          #- truffleruby
     steps:
       - name: Checkout
         uses: actions/checkout@master
