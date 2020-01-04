@@ -7,7 +7,7 @@ puts ENV
 ##
 # Code Climate
 #
-if ENV['TRAVIS'] && ENV['TRAVIS_RUBY_VERSION'] != 'truffleruby'
+if RUBY_ENGINE == 'ruby'
   require 'simplecov'
   SimpleCov.start
 end
