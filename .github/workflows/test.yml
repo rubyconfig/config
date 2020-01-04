@@ -50,7 +50,7 @@ jobs:
       - name: Install
         run: |
           sudo apt-get -y install libsqlite3-dev
-          gem install bundler
+          gem install bundler -v '< 2'
           bundle install
           bundle exec appraisal install
 #          bundle exec appraisal ${{ matrix.app }} install
