@@ -1,6 +1,10 @@
-name: CI
-
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test:
@@ -41,6 +45,8 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
       - name: Install
-        run: bundle install
+        run: |
+          gem install bundler
+          bundle install
       - name: Test ${{ matrix.app }}
         run: bundle exec appraisal ${{ matrix.app }} rake test
