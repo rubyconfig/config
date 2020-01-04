@@ -1,4 +1,4 @@
-name: Test
+name: tests
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
           - 2.5.x
           - 2.6.x
           - 2.7.x
-          - truffleruby
+#          - truffleruby
     steps:
       - name: Checkout
         uses: actions/checkout@v1
