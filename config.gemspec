@@ -44,7 +44,7 @@ Please consider donating to our open collective to help us maintain this project
   end
 
   # Static code analysis
-  s.add_development_dependency 'mdl', '~> 0.5', '>= 0.5.0'
+  s.add_development_dependency 'mdl', '~> 0.8', '>= 0.8.0'
 
   # Version 0.62 requires Ruby 2.2
   s.add_development_dependency 'rubocop', '~> 0.62'
