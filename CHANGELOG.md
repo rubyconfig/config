@@ -2,11 +2,14 @@
 
 ## Unreleased
 
+### New features
+
+* Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
 
 ### Changes
 
-* Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
-* Use sprockets 3.x for Rails 4.2 ([#256](https://github.com/railsconfig/config/pull/256))
+* Use sprockets 3.x when running unit tests for Rails 4.2 ([#256](https://github.com/railsconfig/config/pull/256))
+* Cleanup example Rails application used for testing ([#263](https://github.com/railsconfig/config/pull/263))
 
 ## 2.1.0
 
