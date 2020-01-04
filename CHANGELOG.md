@@ -16,6 +16,7 @@
 * Use sprockets 3.x when running unit tests for Rails 4.2 ([#256](https://github.com/railsconfig/config/pull/256))
 * Cleanup example Rails application used for testing ([#263](https://github.com/railsconfig/config/pull/263))
 * Upgrade markdown linter and fix errors ([#265](https://github.com/railsconfig/config/pull/265))
+* Upgrade development dependencies and test matrix with latest Ruby and Rails versions ([#264](https://github.com/railsconfig/config/pull/264))
 
 ## 2.1.0
 
@@ -67,7 +68,7 @@ If you need older version of Ruby or Rails, please stick to 1.x version of this 
 ### Changes
 
 * Add Ruby 2.5 and Rails 5.1 to the testing matrix on Travis ([#201](https://github.com/railsconfig/config/pull/201))
-* Add Ruby 2.6 tto the test matrix ([#210](https://github.com/railsconfig/config/pull/210))
+* Add Ruby 2.6 to the test matrix ([#210](https://github.com/railsconfig/config/pull/210))
 * Add Rails 5.2 to the test matrix ([#212](https://github.com/railsconfig/config/pull/212))
 
 ## 1.7.0
