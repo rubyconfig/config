@@ -28,13 +28,20 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
+      - name: Restore gem cache
+        uses: actions/cache@master
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles(['config.gemspec', ''gemfiles/**']) }}
+          restore-keys: |
+            ${{ runner.os }}-gem-
       - name: Install
         run: |
           sudo apt-get -y install libsqlite3-dev
-          gem uninstall -v '>= 2' -ax bundler || true
           gem install bundler -v '< 2'
-          bundle install
-          bundle exec appraisal install
+          bundle config path vendor/bundle
+          bundle install --jobs 4
+          bundle exec appraisal install --jobs 4
       - name: Test
         run: bundle exec appraisal rspec
 
@@ -53,8 +60,9 @@ jobs:
         run: |
           sudo apt-get -y install libsqlite3-dev
           gem install bundler -v '< 2'
-          bundle install
-          bundle exec appraisal install
+          bundle config path vendor/bundle
+          bundle install --jobs 4
+          bundle exec appraisal install --jobs 4
       - name: Test and publish code coverage
         uses: paambaati/codeclimate-action@v2.3.0
         env:
