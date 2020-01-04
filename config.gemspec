@@ -51,6 +51,6 @@ Please consider donating to our open collective to help us maintain this project
 
   if ENV['TRAVIS'] && ENV['TRAVIS_RUBY_VERSION'] != 'truffleruby'
     s.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.9'
-    s.add_development_dependency 'simplecov', '~> 0.17.1'
+    s.add_development_dependency 'simplecov', '~> 0.13'
   end
 end
