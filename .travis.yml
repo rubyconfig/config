@@ -15,6 +15,10 @@ gemfile:
   - gemfiles/sinatra.gemfile
 matrix:
   exclude:
+    # In Ruby 2.7 we can't remove bundler 2.x because it's a default gem.
+    # This in turn interacts badly with rails 4.2.
+    - rvm: 2.7.0
+      gemfile: gemfiles/rails_4.2.gemfile
     # truffleruby does not seem to work with Rails
     - rvm: truffleruby
       gemfile: gemfiles/rails_4.2.gemfile
