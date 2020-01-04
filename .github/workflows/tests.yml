@@ -8,19 +8,6 @@ on:
     branches:
       - master
 
-steps:
-  checkoput: &checkout
-    name: Checkout
-    uses: actions/checkout@master
-
-  install: &install
-    name: Install
-    run: |
-      sudo apt-get -y install libsqlite3-dev
-      gem install bundler -v '< 2'
-      bundle install
-      bundle exec appraisal install
-
 jobs:
   test:
     name: ${{ matrix.ruby }}
@@ -34,13 +21,19 @@ jobs:
           # - 2.7.x                   waiting for https://github.com/actions/setup-ruby/issues/45
           # - truffleruby-19.3.x      waiting for https://github.com/actions/setup-ruby/pull/28
     steps:
-      - <<: *checkout
+      - name: Checkout
+        uses: actions/checkout@master
       - name: Setup Ruby ${{ matrix.ruby }}
         uses: actions/setup-ruby@master
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
-      - <<: *install
+      - name: Install
+        run: |
+          sudo apt-get -y install libsqlite3-dev
+          gem install bundler -v '< 2'
+          bundle install
+          bundle exec appraisal install
       - name: Test
         run: bundle exec appraisal rspec
 
@@ -48,13 +41,19 @@ jobs:
     name: coverage
     runs-on: ubuntu-latest
     steps:
-      - <<: *checkout
+      - name: Checkout
+        uses: actions/checkout@master
       - name: Setup Ruby
         uses: actions/setup-ruby@master
         with:
           ruby-version: 2.6.x
           architecture: 'x64'
-      - <<: *install
+      - name: Install
+        run: |
+          sudo apt-get -y install libsqlite3-dev
+          gem install bundler -v '< 2'
+          bundle install
+          bundle exec appraisal install
       - name: Test and publish code coverage
         uses: paambaati/codeclimate-action@v2.3.0
         env:
