@@ -5,6 +5,7 @@
 ### New features
 
 * Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
+* Require dry-validation only when schema is specified ([#253](https://github.com/railsconfig/config/pull/253))
 
 ### Bug fixes
 
