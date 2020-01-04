@@ -15,16 +15,16 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - 2.4.x
-          - 2.5.x
-          - 2.6.x
-          # - 2.7.x                   waiting for https://github.com/actions/setup-ruby/issues/45
-          # - truffleruby-19.3.x      waiting for https://github.com/actions/setup-ruby/pull/28
+          - 2.4
+          - 2.5
+          - 2.6
+          - 2.7
+          - truffleruby
     steps:
       - name: Checkout
         uses: actions/checkout@master
       - name: Setup Ruby ${{ matrix.ruby }}
-        uses: actions/setup-ruby@master
+        uses: eregon/use-ruby-action@master
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
@@ -44,9 +44,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Setup Ruby
-        uses: actions/setup-ruby@master
+        uses: eregon/use-ruby-action@master
         with:
-          ruby-version: 2.6.x
+          ruby-version: 2.6
           architecture: 'x64'
       - name: Install
         run: |
