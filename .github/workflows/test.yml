@@ -48,7 +48,7 @@ jobs:
           architecture: 'x64'
       - name: Install
         run: |
-          apt-get install libsqlite3-dev
+          sudo apt-get -y install libsqlite3-dev
           gem install bundler
           bundle install
       - name: Test ${{ matrix.app }}
