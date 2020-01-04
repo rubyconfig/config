@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: Ruby ${{ matrix.ruby }}
+    name: ${{ matrix.ruby }}
     runs-on: ubuntu-latest
     strategy:
       matrix:

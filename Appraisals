@@ -2,7 +2,7 @@
 unless RUBY_ENGINE == 'truffleruby'
 
   # Bundler 2.x coming with Ruby 2.7 does not work well with rails 4.2
-  #unless RUBY_VERSION >= '2.7.0'
+  unless RUBY_VERSION >= '2.8.0'
     appraise 'rails-4.2' do
       gem 'rails', '4.2.11.1'
       gem 'rspec-rails', '~> 3.7'
@@ -10,7 +10,7 @@ unless RUBY_ENGINE == 'truffleruby'
       gem 'sqlite3', '< 1.4.0'
       gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
     end
-  #end
+  end
 
   appraise 'rails-5.0' do
     gem 'rails', '5.0.7.2'
