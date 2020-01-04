@@ -32,7 +32,7 @@ jobs:
         uses: actions/cache@master
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles(['config.gemspec', 'gemfiles/**']) }}
+          key: ${{ runner.os }}-gem-${{ hashFiles('config.gemspec') }}-${{ hashFiles('gemfiles/**') }}
           restore-keys: ${{ runner.os }}-gem-
       - name: Install
         run: |
