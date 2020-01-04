@@ -1,0 +1,44 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Run tests for ${{ matrix.app }} on Ruby ${{ matrix.ruby }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby:
+          - 2.4.5
+          - 2.5.3
+          - 2.6.0
+          - 2.7.0
+          - truffleruby
+        app:
+          - rails-4.2
+          - rails-5.0
+          - rails-5.1
+          - rails-5.2
+          - sinatra
+        exclude:
+          # Bundler 2.x coming with Ruby 2.7 does not work well with rails 4.2
+          - ruby: 2.7.0
+            app: rails-4.2
+          # TruffleRuby does not seem to work with Rails
+          - ruby: truffleruby
+            app:
+              - rails-4.2
+              - rails-5.0
+              - rails-5.1
+              - rails-5.2
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Ruby ${{ matrix.ruby }}
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          architecture: 'x64'
+      - name: Install
+        run: bundle install
+      - name: Test ${{ matrix.app }}
+        run: bundle exec appraisal ${{ matrix.app }} rake test
