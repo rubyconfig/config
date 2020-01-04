@@ -18,13 +18,13 @@ jobs:
           - 2.4.x
           - 2.5.x
           - 2.6.x
-          - 2.7.x
-#          - truffleruby
+#          - 2.7.x
+#          - truffleruby-19.3.0
     steps:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Setup Ruby ${{ matrix.ruby }}
-        uses: actions/setup-ruby@v1
+        uses: actions/setup-ruby@master
         with:
           ruby-version: ${{ matrix.ruby }}
           architecture: 'x64'
