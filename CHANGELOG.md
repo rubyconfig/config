@@ -10,7 +10,7 @@
 
 * Use sprockets 3.x when running unit tests for Rails 4.2 ([#256](https://github.com/railsconfig/config/pull/256))
 * Cleanup example Rails application used for testing ([#263](https://github.com/railsconfig/config/pull/263))
-* Upgrade development dependencies and test matrix with latest Ruby and Rails versions
+* Upgrade development dependencies and test matrix with latest Ruby and Rails versions ([#264](https://github.com/railsconfig/config/pull/264))
 
 ## 2.1.0
 
