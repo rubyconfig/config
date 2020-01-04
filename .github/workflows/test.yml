@@ -1,3 +1,5 @@
+name: Test
+
 on:
   push:
     branches:
@@ -8,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: Run tests for ${{ matrix.app }} on Ruby ${{ matrix.ruby }}
+    name: ${{ matrix.app }} on Ruby ${{ matrix.ruby }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -46,6 +48,7 @@ jobs:
           architecture: 'x64'
       - name: Install
         run: |
+          apt-get install libsqlite3-dev
           gem install bundler
           bundle install
       - name: Test ${{ matrix.app }}
