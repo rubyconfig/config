@@ -466,8 +466,6 @@ You are very warmly welcome to help. Please follow our [contribution guidelines]
 
 Any and all contributions offered in any form, past present or future are understood to be in complete agreement and acceptance with [MIT](LICENSE) license.
 
-
-
 ## Authors
 
 * [Piotr Kuczynski](http://github.com/pkuczynski)
@@ -479,32 +477,24 @@ Any and all contributions offered in any form, past present or future are unders
 
 ### Code Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/railsconfig/config/graphs/contributors"><img src="https://opencollective.com/rubyconfig/contributors.svg?width=890&button=false" /></a>
+This project exists thanks to all the people who contribute and you are very warmly welcome to help. Please follow our [contribution guidelines](CONTRIBUTING.md).
+
+Any and all contributions offered in any form, past present or future are understood to be in complete agreement and acceptance with the [MIT](LICENSE) license.
+
+[![Contributors](https://opencollective.com/rubyconfig/contributors.svg?width=890&button=false)](https://github.com/railsconfig/config/graphs/contributors)
 
 ### Financial Contributors
 
-[[Become a financial contributor](https://opencollective.com/rubyconfig/contribute)] and and support us with a small donation to help us continue our activities. Thank you if you already one! 🙏 
+[Become a backer](https://opencollective.com/rubyconfig#backer) and support us with a small monthly donation to help us continue our activities. Thank you if you already one! 🙏
 
-#### Individuals
+[![Backers](https://opencollective.com/rubyconfig/backers.svg?width=890)](https://opencollective.com/rubyconfig)
 
-<a href="https://opencollective.com/rubyconfig"><img src="https://opencollective.com/rubyconfig/individuals.svg?width=890"></a>
+#### Sponsors
 
-#### Organizations
+Support this project by becoming a [sponsor](https://opencollective.com/rubyconfig#sponsor). Your logo will show up here with a link to your website.
 
-Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/rubyconfig/contribute)]
-
-<a href="https://opencollective.com/rubyconfig/organization/0/website"><img src="https://opencollective.com/rubyconfig/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/1/website"><img src="https://opencollective.com/rubyconfig/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/2/website"><img src="https://opencollective.com/rubyconfig/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/3/website"><img src="https://opencollective.com/rubyconfig/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/4/website"><img src="https://opencollective.com/rubyconfig/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/5/website"><img src="https://opencollective.com/rubyconfig/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/6/website"><img src="https://opencollective.com/rubyconfig/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/7/website"><img src="https://opencollective.com/rubyconfig/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/8/website"><img src="https://opencollective.com/rubyconfig/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/rubyconfig/organization/9/website"><img src="https://opencollective.com/rubyconfig/organization/9/avatar.svg"></a>
+[![Sponsors](https://opencollective.com/rubyconfig/sponsors.svg?width=890)](https://opencollective.com/rubyconfig)
 
 ## License
 
-Config is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+Copyright (C) Piotr Kuczynski. Released under the [MIT License](LICENSE).
