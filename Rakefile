@@ -18,7 +18,7 @@ require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new(:spec)
 
 # Test for multiple Rails scenarios
-if !ENV["APPRAISAL_INITIALIZED"] && !ENV["TRAVIS"]
+if !ENV["APPRAISAL_INITIALIZED"] && !ENV["GITHUB_ACTIONS"]
   require "appraisal"
 
   task :default => :appraisal

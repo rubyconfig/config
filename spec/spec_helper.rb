@@ -1,13 +1,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 
-puts "TRAVIS_COMPILER #{ENV['TRAVIS_COMPILER']}"
-puts "TRAVIS_RUBY_VERSION #{ENV['TRAVIS_RUBY_VERSION']}"
-puts ENV
-
 ##
 # Code Climate
 #
-if RUBY_ENGINE == 'ruby'
+if ENV['GITHUB_ACTIONS'] && RUBY_ENGINE == 'ruby'
   require 'simplecov'
   SimpleCov.start
 end
@@ -20,7 +16,7 @@ Dir['./spec/support/**/*.rb'].each { |f| require f }
 ##
 # Detect Rails/Sinatra dummy application based on gemfile name substituted by Appraisal
 #
-if ENV['APPRAISAL_INITIALIZED'] || ENV['TRAVIS']
+if ENV['GITHUB_ACTIONS']
   app_name = Pathname.new(ENV['BUNDLE_GEMFILE']).basename.sub('.gemfile', '')
 else
   /.*?(?<app_name>rails.*?)\.gemfile/ =~ Dir["gemfiles/rails*.gemfile"].sort.last
