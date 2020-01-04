@@ -28,5 +28,5 @@ appraisal rspec
 If you modified any of the documentation files verify their format:
 
 ```bash
-mdl --style .mdlstyle.rb *.md
+mdl *.md
 ```

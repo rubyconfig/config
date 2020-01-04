@@ -15,6 +15,7 @@
 
 * Use sprockets 3.x when running unit tests for Rails 4.2 ([#256](https://github.com/railsconfig/config/pull/256))
 * Cleanup example Rails application used for testing ([#263](https://github.com/railsconfig/config/pull/263))
+* Upgrade markdown linter and fix errors ([#265](https://github.com/railsconfig/config/pull/265))
 
 ## 2.1.0
 
@@ -39,7 +40,7 @@
 ### BREAKING CHANGES
 
 After upgrade to dry-schema 1.0 we had to drop support for Rails `< 4.2` and Ruby `< 2.4`.
-If you need older version of Ruby or Rails, please stick to 1.x version of this gem. 
+If you need older version of Ruby or Rails, please stick to 1.x version of this gem.
 
 ### New features
 
