@@ -321,7 +321,7 @@ class ConfigContract < Dry::Validation::Contract
 end
 
 Config.setup do |config|
-  config.validation_contract = ConfigContract
+  config.validation_contract = ConfigContract.new
 end
 ```
 
