@@ -5,6 +5,9 @@
 ### New features
 
 * Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
+
+### Bug fixes
+
 * Fix missing new_ostruct_member in Ruby 2.7 ([#255](https://github.com/railsconfig/config/pull/255))
 
 ### Changes
