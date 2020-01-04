@@ -32,9 +32,8 @@ jobs:
         uses: actions/cache@master
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles(['config.gemspec', ''gemfiles/**']) }}
-          restore-keys: |
-            ${{ runner.os }}-gem-
+          key: ${{ runner.os }}-gem-${{ hashFiles(['config.gemspec', 'gemfiles/**']) }}
+          restore-keys: ${{ runner.os }}-gem-
       - name: Install
         run: |
           sudo apt-get -y install libsqlite3-dev
