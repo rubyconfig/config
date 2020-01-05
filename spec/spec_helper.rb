@@ -3,7 +3,7 @@ ENV['RAILS_ENV'] ||= 'test'
 ##
 # Code Climate
 #
-if ENV['GITHUB_ACTIONS'] && RUBY_ENGINE == 'ruby'
+if RUBY_ENGINE == 'ruby' && RUBY_VERSION.start_with?(ENV['COVERAGE_RUBY_VERSION'])
   require 'simplecov'
   SimpleCov.start
 end
