@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COVERAGE_RUBY_VERSION: 2.6
-      BUNDLER_VERSION: 1.17.3
     strategy:
       matrix:
         ruby:
@@ -37,8 +36,9 @@ jobs:
         run: |
           sudo apt-get -y install libsqlite3-dev
           gem install bundler -v 1.17.3
+          bundle _1.17.3_ -v
           bundle install
-          bundle exec appraisal install
+          bundle _1.17.3_ exec appraisal _1.17.3_ install
 
       - name: Test
         run: bundle exec appraisal rspec
