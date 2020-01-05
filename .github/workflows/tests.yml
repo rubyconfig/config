@@ -35,7 +35,7 @@ jobs:
       - name: Install
         run: |
           sudo apt-get -y install libsqlite3-dev
-          gem install bundler -v '< 2'
+          gem install bundler -v '< 2' --default
           bundle install --jobs 4
           bundle exec appraisal install --jobs 4
 
