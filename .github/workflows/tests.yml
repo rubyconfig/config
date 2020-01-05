@@ -40,7 +40,6 @@ jobs:
           bundle exec appraisal install --jobs 4
 
       - name: Test
-        if: !(startsWith(env.RUBY_VERSION, env.COVERAGE_RUBY_VERSION))
         run: bundle exec appraisal rspec
 
       - name: Test and publish code coverage
