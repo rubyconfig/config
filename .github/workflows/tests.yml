@@ -18,10 +18,10 @@ jobs:
       matrix:
         ruby:
           - 2.4
-          #- 2.5
-          #- 2.6
-          #- 2.7
-          #- truffleruby
+          - 2.5
+          - 2.6
+          - 2.7
+          - truffleruby
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -37,7 +37,6 @@ jobs:
           sudo apt-get -y install libsqlite3-dev
           gem uninstall bundler -v '>= 2' -ax --force
           gem install bundler -v 1.17.3 --no-rdoc --no-ri
-          bundle -v
           bundle install
           bundle exec appraisal install
 
