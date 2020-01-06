@@ -24,12 +24,13 @@ unless RUBY_ENGINE == 'truffleruby'
     gem 'sqlite3', '< 1.4.0'
   end
 
-  appraise 'rails-5.2' do
-    gem 'bootsnap', '~> 1.4'
-    gem 'rails', '5.2.4.1'
-    gem 'rspec-rails', '~> 3.7'
-    gem 'sqlite3', '< 1.4.0'
-  end
+end
+
+appraise 'rails-5.2' do
+  gem 'bootsnap', '~> 1.4'
+  gem 'rails', '5.2.4.1'
+  gem 'rspec-rails', '~> 3.7'
+  gem 'sqlite3', '< 1.4.0'
 end
 
 appraise 'sinatra' do
