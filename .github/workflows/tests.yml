@@ -36,7 +36,7 @@ jobs:
         run: |
           sudo apt-get -y install libsqlite3-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
-          gem install bundler -v 1.17.3 -N
+          gem install bundler -v 1.17.3 -N || true
           bundle install
           bundle exec appraisal install
 
