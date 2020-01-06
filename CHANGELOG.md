@@ -2,15 +2,23 @@
 
 ## Unreleased
 
-### New features
+### Performance improvements
 
 * Get rid of unused Rails Engine class definition ([#247](https://github.com/railsconfig/config/pull/247))
+* Require dry-validation only when schema is specified ([#253](https://github.com/railsconfig/config/pull/253))
 * Defer modification of `ActionController::Base` to when it is loaded in Rails integration ([#250](https://github.com/railsconfig/config/pull/250))
+
+### Bug fixes
+
+* Fix missing new_ostruct_member in Ruby 2.7 ([#255](https://github.com/railsconfig/config/pull/255))
+* Fix validation contract documentation ([#260](https://github.com/railsconfig/config/pull/260))
 
 ### Changes
 
 * Use sprockets 3.x when running unit tests for Rails 4.2 ([#256](https://github.com/railsconfig/config/pull/256))
 * Cleanup example Rails application used for testing ([#263](https://github.com/railsconfig/config/pull/263))
+* Upgrade markdown linter and fix errors ([#265](https://github.com/railsconfig/config/pull/265))
+* Upgrade development dependencies and test matrix with latest Ruby and Rails versions ([#264](https://github.com/railsconfig/config/pull/264))
 
 ## 2.1.0
 
@@ -35,7 +43,7 @@
 ### BREAKING CHANGES
 
 After upgrade to dry-schema 1.0 we had to drop support for Rails `< 4.2` and Ruby `< 2.4`.
-If you need older version of Ruby or Rails, please stick to 1.x version of this gem. 
+If you need older version of Ruby or Rails, please stick to 1.x version of this gem.
 
 ### New features
 
@@ -62,7 +70,7 @@ If you need older version of Ruby or Rails, please stick to 1.x version of this 
 ### Changes
 
 * Add Ruby 2.5 and Rails 5.1 to the testing matrix on Travis ([#201](https://github.com/railsconfig/config/pull/201))
-* Add Ruby 2.6 tto the test matrix ([#210](https://github.com/railsconfig/config/pull/210))
+* Add Ruby 2.6 to the test matrix ([#210](https://github.com/railsconfig/config/pull/210))
 * Add Rails 5.2 to the test matrix ([#212](https://github.com/railsconfig/config/pull/212))
 
 ## 1.7.0
