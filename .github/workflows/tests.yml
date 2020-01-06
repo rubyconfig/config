@@ -20,7 +20,7 @@ jobs:
           - 2.4
           - 2.5
           - 2.6
-          - 2.7
+          #- 2.7
           #- truffleruby
     steps:
       - name: Checkout
@@ -35,10 +35,11 @@ jobs:
       - name: Install
         run: |
           sudo apt-get -y install libsqlite3-dev
-          gem install bundler -v 1.17.3
-          bundle _1.17.3_ -v
+          gem install bundler -v 1.17.3 --default
+          gem uninstall bundler -v >= 2
+          bundle -v
           bundle install
-          bundle exec appraisal _1.17.3_ install
+          bundle exec appraisal install
 
       - name: Test
         run: bundle exec appraisal rspec
