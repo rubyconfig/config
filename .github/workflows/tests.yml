@@ -30,7 +30,6 @@ jobs:
         uses: eregon/use-ruby-action@master
         with:
           ruby-version: ${{ matrix.ruby }}
-          architecture: 'x64'
 
       - name: Install
         run: |
