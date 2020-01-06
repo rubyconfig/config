@@ -18,12 +18,12 @@ unless RUBY_ENGINE == 'truffleruby'
     gem 'sqlite3', '< 1.4.0'
   end
 
-  appraise 'rails-5.1' do
-    gem 'rails', '5.1.7'
-    gem 'rspec-rails', '~> 3.7'
-    gem 'sqlite3', '< 1.4.0'
-  end
+end
 
+appraise 'rails-5.1' do
+  gem 'rails', '5.1.7'
+  gem 'rspec-rails', '~> 3.7'
+  gem 'sqlite3', '< 1.4.0'
 end
 
 appraise 'rails-5.2' do
