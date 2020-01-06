@@ -34,7 +34,7 @@ jobs:
 
       - name: Install
         run: |
-          sudo apt-get -y install libsqlite3-dev
+          sudo apt-get -y install libsqlite3-dev libxslt
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v 1.17.3 -N || true
           bundle install
