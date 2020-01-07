@@ -40,10 +40,10 @@ jobs:
           echo ${{ env.BUNDLE_PATH }}
 
       - name: Restore cache
-          uses: actions/cache@master
-          with:
-            path: ${{ env.BUNDLE_PATH }}
-            key: ${{ runner.os }}-gem-${{ hashFiles('**/gemfiles/**') }}-${{ hashFiles('*.gemspec') }}
+        uses: actions/cache@master
+        with:
+          path: ${{ env.BUNDLE_PATH }}
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/gemfiles/**') }}-${{ hashFiles('*.gemspec') }}
 
       - name: Install
         run: |
