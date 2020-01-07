@@ -31,12 +31,21 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - name: Install
+      - name: Prepare environment
         run: |
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v '~>1.0' -N || true
           bundle -v
+
+      - name: Restore cache
+          uses: actions/cache@master
+          with:
+            path: ${{ env.BUNDLE_PATH }}
+            key: ${{ runner.os }}-gem-${{ hashFiles('**/gemfiles/**') }}-${{ hashFiles('*.gemspec') }}
+
+      - name: Install
+        run: |
           bundle install
           bundle exec appraisal install
 
