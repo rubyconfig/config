@@ -1,9 +1,5 @@
-# TruffleRuby does not seem to work with Rails
-unless RUBY_ENGINE == 'truffleruby'
-end
-
-# Bundler 2.x coming with Ruby 2.7 does not work with Rails 4.2
-if RUBY_VERSION < '2.7.0'
+# Bundler >= 2.x do not work with Rails 4.2
+if `bundler -v`.match(/\d+\.\d+.\d+/)[0].start_with?('1.17')
   appraise 'rails-4.2' do
     gem 'rails', '4.2.11.1'
     gem 'rspec-rails', '~> 3.7'
