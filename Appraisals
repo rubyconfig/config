@@ -34,6 +34,16 @@ appraise 'rails-5.2' do
   gem 'sqlite3', '< 1.4.0', platform: :ruby
 end
 
+# Rails 6.x requires Ruby >= 2.5.0
+if RUBY_VERSION >= '2.5.0'
+  appraise 'rails-6.0' do
+    gem 'bootsnap', '~> 1.4'
+    gem 'rails', '6.0.2.1'
+    gem 'rspec-rails', '~> 3.7'
+    gem 'sqlite3', '~> 1.4.0'
+  end
+end
+
 appraise 'sinatra' do
   gem 'sinatra', '2.0.8.1'
 end
