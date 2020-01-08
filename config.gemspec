@@ -21,8 +21,7 @@ Please consider donating to our open collective to help us maintain this project
 👉  Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   s.files = `git ls-files`.split($/)
-  s.files.select! { |file| /(^lib\/|\.md$|\.gemspec$)/ =~ file }
-  s.files += Dir.glob('doc/**/*')
+  s.files.select! { |file| /(^lib\/|\w*.md$|\.gemspec$)/ =~ file }
 
   s.require_paths         = ['lib']
   s.required_ruby_version = '>= 2.4.0'
@@ -37,7 +36,7 @@ Please consider donating to our open collective to help us maintain this project
   s.add_development_dependency 'rspec', '~> 3.7', '>= 3.7.0'
 
   # Default RSpec run will test against latest Rails app
-  unless ENV['APPRAISAL_INITIALIZED']
+  unless ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
     File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(/gem "(.*?)", "(.*?)"/m) do |name, version|
       s.add_development_dependency name, version
     end
