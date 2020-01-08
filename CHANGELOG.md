@@ -4,7 +4,7 @@
 
 ...
 
-## 2.2.0
+## 2.2.1
 
 ### Performance improvements
 
@@ -16,7 +16,7 @@
 
 * Fix missing new_ostruct_member in Ruby 2.7 ([#255](https://github.com/rubyconfig/config/pull/255))
 * Fix validation contract documentation ([#260](https://github.com/rubyconfig/config/pull/260))
-* Fix validation contract documentation ([#260](https://github.com/rubyconfig/config/pull/260))
+* Excluded test application's *.md files from the gem build ([#267](https://github.com/rubyconfig/config/pull/267))
 
 ### Changes
 

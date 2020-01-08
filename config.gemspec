@@ -21,7 +21,7 @@ Please consider donating to our open collective to help us maintain this project
 👉  Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   s.files = `git ls-files`.split($/)
-  s.files.select! { |file| /(^lib\/|\w*.md$|\.gemspec$)/ =~ file }
+  s.files.select! { |file| /(^lib\/|^\w+.md$|\.gemspec$)/ =~ file }
 
   s.require_paths         = ['lib']
   s.required_ruby_version = '>= 2.4.0'
