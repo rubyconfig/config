@@ -43,13 +43,9 @@ jobs:
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v '~>1.0' -N || true
-          echo "Bundler version 1.17.3" > test.txt
-          less test.txt
-          grep -V
-          grep -o -E '\d+\.\d+.\d+' test.txt
-          bundle -v
-          bundle -v | grep -o -E '\d+\.\d+.\d+'
-          echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -E '\d+\.\d+.\d+')"
+          echo "puts \`bundler -v\`[/\d+\.\d+\.\d+/]" | ruby
+          echo "::set-env name=BUNDLER_VERSION::$(echo "puts \`bundler -v\`[/\d+\.\d+\.\d+/]" | ruby)"
+          bundle -v | grep -o -P '\d+\.\d+.\d+'
 
       - name: Install dependencies
         run: |
