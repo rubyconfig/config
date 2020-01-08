@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Setup Ruby ${{ matrix.ruby }}
+      - name: Setup ruby ${{ matrix.ruby }}
         uses: eregon/use-ruby-action@master
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -43,14 +43,11 @@ jobs:
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v '~>1.0' -N || true
-          echo "puts \`bundler -v\`[/\d+\.\d+\.\d+/]" | ruby
-          echo "::set-env name=BUNDLER_VERSION::$(echo "puts \`bundler -v\`[/\d+\.\d+\.\d+/]" | ruby)"
-          bundle -v | grep -o -P '\d+\.\d+.\d+'
+          echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -P '\d+\.\d+.\d+')"
 
       - name: Install dependencies
         run: |
           bundle config path ${{ env.BUNDLER_PATH }}
-          bundle -v
           bundle install
           bundle exec appraisal install
 
