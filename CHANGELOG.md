@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+...
+
+## 2.2.0
+
 ### Performance improvements
 
 * Get rid of unused Rails Engine class definition ([#247](https://github.com/rubyconfig/config/pull/247))
