@@ -31,24 +31,21 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - name: Prepare environment
+      - name: Restore cache
+        uses: actions/cache@master
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/gemfiles/**') }}-${{ hashFiles('*.gemspec') }}
+
+      - name: Install
         run: |
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v '~>1.0' -N || true
           bundle -v
-          echo ${{ env.BUNDLE_PATH }}
-
-      - name: Restore cache
-        uses: actions/cache@master
-        with:
-          path: ${{ env.BUNDLE_PATH }}
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/gemfiles/**') }}-${{ hashFiles('*.gemspec') }}
-
-      - name: Install
-        run: |
-          bundle install
-          bundle exec appraisal install
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle exec appraisal install --jobs 4 --retry 3
 
       - name: Test
         run: bundle exec appraisal rspec
