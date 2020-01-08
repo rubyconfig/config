@@ -2,7 +2,6 @@ ENV['RAILS_ENV'] ||= 'test'
 
 puts "RUBY_ENGINE: #{RUBY_ENGINE}"
 puts "RUBY_VERSION: #{RUBY_VERSION}\n\n"
-puts ENV
 
 ##
 # Code Climate
