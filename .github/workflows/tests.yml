@@ -43,8 +43,9 @@ jobs:
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v '~>1.0' -N || true
-          echo "Bundler version 1.17.3" >> test.txt
+          echo "Bundler version 1.17.3" > test.txt
           less test.txt
+          grep -V
           grep -o -E '\d+\.\d+.\d+' test.txt
           bundle -v
           bundle -v | grep -o -E '\d+\.\d+.\d+'
