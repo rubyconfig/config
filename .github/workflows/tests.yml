@@ -44,13 +44,13 @@ jobs:
           gem install bundler -v '~>1.0' -N || true
           bundle -v
           bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
+          bundle install
           bundle exec appraisal install
 
       - name: Test
         run: bundle exec appraisal rspec
 
-      - name: Test and publish code coverage
+      - name: Publish code coverage
         if: startsWith(env.RUBY_VERSION, env.COVERAGE_RUBY_VERSION)
         uses: paambaati/codeclimate-action@v2.3.0
         env:
