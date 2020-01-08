@@ -22,7 +22,7 @@
 * Upgrade development dependencies and test matrix with latest Ruby and Rails versions ([#264](https://github.com/rubyconfig/config/pull/264))
 * Replace Travis CI with GitHub Actions ([#266](https://github.com/rubyconfig/config/pull/266))
 * Add Rails 6.0 to the test matrix ([#258](https://github.com/rubyconfig/config/pull/258))
-* Rename GitHub organization name from `railsconfig` to `rubyconfig` 
+* Rename GitHub organization name from `railsconfig` to `rubyconfig` ([#268](https://github.com/rubyconfig/config/pull/268))
 
 ## 2.1.0
 
