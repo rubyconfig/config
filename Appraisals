@@ -1,9 +1,14 @@
-appraise 'rails-4.2' do
-  gem 'rails', '4.2.11.1'
-  gem 'rspec-rails', '~> 3.7'
-  gem 'sprockets', '~> 3.7'
-  gem 'sqlite3', '< 1.4.0'
-  gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+# Bundler >= 2.x do not work with Rails 4.2
+if (ENV['BUNDLER_VERSION'] || `bundler -v`[/\d+\.\d+\.\d+/]).start_with?('1.17')
+  appraise 'rails-4.2' do
+    gem 'rails', '4.2.11.1'
+    gem 'rspec-rails', '~> 3.7'
+    gem 'sprockets', '~> 3.7'
+    gem 'sqlite3', '< 1.4.0'
+    gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+  end
+else
+  puts 'Skipping rails-4.2 for Bundler >= 2.x'
 end
 
 appraise 'rails-5.0' do
