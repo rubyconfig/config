@@ -38,13 +38,18 @@ jobs:
           path: ${{ env.BUNDLER_PATH }}
           key: bundler-${{ matrix.ruby }}-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
 
-      - name: Install
+      - name: Install bundler
         run: |
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v '~>1.0' -N || true
-          export BUNDLER_VERSION=$(bundle -v | grep -o -E '\d+\.\d+')
+          echo ::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -E '\d+\.\d+.\d+')
+          export BUNDLER_VERSION=$(bundle -v | grep -o -E '\d+\.\d+.\d+')
+          bundle -v | grep -o -E '\d+\.\d+.\d+'
           echo $BUNDLER_VERSION
+
+      - name: Install dependencies
+        run: |
           bundle config path ${{ env.BUNDLER_PATH }}
           bundle -v
           bundle install
