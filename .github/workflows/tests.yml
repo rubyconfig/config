@@ -32,7 +32,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
 
       - name: Restore cache
-        uses: actions/cache@master
+        uses: actions/cache@v1
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gem-${{ hashFiles('**/gemfiles/**') }}-${{ hashFiles('*.gemspec') }}
