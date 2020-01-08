@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "bootsnap", "~> 1.4"
-gem "rails", "5.2.2"
+gem "rails", "5.2.4.1"
 gem "rspec-rails", "~> 3.7"
 gem "sqlite3", "< 1.4.0"
 

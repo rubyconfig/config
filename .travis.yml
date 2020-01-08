@@ -2,9 +2,10 @@ language: ruby
 cache: bundler
 sudo: false
 rvm:
-  - 2.4.5
-  - 2.5.3
-  - 2.6.0
+  - 2.4.9
+  - 2.5.7
+  - 2.6.5
+  - 2.7.0
   - truffleruby
 gemfile:
   - gemfiles/rails_4.2.gemfile
@@ -15,7 +16,10 @@ gemfile:
   - gemfiles/sinatra.gemfile
 matrix:
   exclude:
-    # truffleruby does not seem to work with Rails
+    # Bundler 2.x coming with Ruby 2.7 does not work well with rails 4.2
+    - rvm: 2.7.0
+      gemfile: gemfiles/rails_4.2.gemfile
+    # TruffleRuby does not seem to work with Rails
     - rvm: truffleruby
       gemfile: gemfiles/rails_4.2.gemfile
     - rvm: truffleruby
