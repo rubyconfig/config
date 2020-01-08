@@ -44,6 +44,7 @@ jobs:
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v '~>1.0' -N || true
           bundle config path ${{ env.BUNDLER_PATH }}
+          bundle install bundler -v '~>1.0' -N || true
           bundle -v
           bundle install
           bundle exec appraisal install
