@@ -30,11 +30,13 @@ appraise 'rails-5.2' do
   gem 'sqlite3', '< 1.4.0'
 end
 
-appraise 'rails-6.0' do
-  gem 'bootsnap', '~> 1.4'
-  gem 'rails', '6.0.2.1'
-  gem 'rspec-rails', '~> 3.7'
-  gem 'sqlite3', '~> 1.4.0'
+if RUBY_VERSION >= '2.5.0' do
+  appraise 'rails-6.0' do
+    gem 'bootsnap', '~> 1.4'
+    gem 'rails', '6.0.2.1'
+    gem 'rspec-rails', '~> 3.7'
+    gem 'sqlite3', '~> 1.4.0'
+  end
 end
 
 appraise 'sinatra' do
