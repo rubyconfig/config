@@ -21,14 +21,13 @@ Please consider donating to our open collective to help us maintain this project
 👉  Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   s.files = `git ls-files`.split($/)
-  s.files.select! { |file| /(^lib\/|\.md$|\.gemspec$)/ =~ file }
-  s.files += Dir.glob('doc/**/*')
+  s.files.select! { |file| /(^lib\/|\w*.md$|\.gemspec$)/ =~ file }
 
   s.require_paths         = ['lib']
   s.required_ruby_version = '>= 2.4.0'
 
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
-  s.add_dependency 'dry-validation', '~> 1.0'
+  s.add_dependency 'dry-validation', '~> 1.0', '>= 1.0.0'
 
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
@@ -44,14 +43,12 @@ Please consider donating to our open collective to help us maintain this project
     end
   end
 
-  # Static code analysis
-  s.add_development_dependency 'mdl', '~> 0.5', '>= 0.5.0'
-
-  # Version 0.62 requires Ruby 2.2
-  s.add_development_dependency 'rubocop', '~> 0.62'
-
-  if ENV['TRAVIS'] && ENV['TRAVIS_RUBY_VERSION'] != 'truffleruby'
-    s.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.9'
-    s.add_development_dependency 'simplecov', '~> 0.13.0'
+  if ENV['GITHUB_ACTIONS']
+    # Code coverage is needed only in CI
+    s.add_development_dependency 'simplecov', '~> 0.17.1' if RUBY_ENGINE == 'ruby'
+  else
+    # Static code analysis to be used locally
+    s.add_development_dependency 'mdl', '~> 0.8', '>= 0.8.0'
+    s.add_development_dependency 'rubocop', '~> 0.78.0'
   end
 end

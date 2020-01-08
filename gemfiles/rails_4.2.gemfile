@@ -2,9 +2,10 @@
 
 source "https://rubygems.org"
 
-gem "rails", "4.2.11"
+gem "rails", "4.2.11.1"
 gem "rspec-rails", "~> 3.7"
-gem "tzinfo-data", platforms: [:mswin, :mingw, :x64_mingw]
+gem "sprockets", "~> 3.7"
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw]
 
 platforms :ruby do
   gem "sqlite3", "< 1.4.0"
