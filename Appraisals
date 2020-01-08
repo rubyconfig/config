@@ -30,7 +30,8 @@ appraise 'rails-5.2' do
   gem 'sqlite3', '< 1.4.0'
 end
 
-if RUBY_VERSION >= '2.5.0' do
+# Rails 6.x requires Ruby >= 2.5.0
+if RUBY_VERSION >= '2.5.0'
   appraise 'rails-6.0' do
     gem 'bootsnap', '~> 1.4'
     gem 'rails', '6.0.2.1'
