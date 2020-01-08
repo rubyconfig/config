@@ -46,7 +46,6 @@ jobs:
           bundle -v | grep -o -E '\d+\.\d+.\d+'
           export BUNDLER_VERSION=$(bundle -v | grep -o -E '\d+\.\d+.\d+')
           echo $BUNDLER_VERSION
-          echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -E '\d+\.\d+.\d+')"
 
       - name: Install dependencies
         run: |
