@@ -21,11 +21,14 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Compatibility
 
+Current version supports and is [tested](.github/workflows/tests.yml) for the following interpreters and frameworks:
+
 * Interpreters
-  * [Ruby](https://www.ruby-lang.org/en/) `>= 2.4`
-  * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.0.0`
+  * [Ruby](https://www.ruby-lang.org) `>= 2.4`
+  * [JRuby](https://www.jruby.org) `>= 9.2`
+  * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.3`
 * Application frameworks
-  * Rails `>= 4.2` and `5`
+  * Rails `>= 4.2`, `5` and `6`
   * Padrino
   * Sinatra
 
