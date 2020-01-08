@@ -34,16 +34,17 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v1
         with:
-          path: vendor/bundle
+          path: ${{ env.GEM_PATH }}
           key: bundler-${{ matrix.ruby }}-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
 
       - name: Install
         run: |
+          echo $GEM_PATH
+          echo ${{ env.GEM_PATH }}
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
           gem install bundler -v '~>1.0' -N || true
           bundle -v
-          bundle config path vendor/bundle
           bundle install
           bundle exec appraisal install
 
