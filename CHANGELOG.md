@@ -12,7 +12,7 @@
 
 * Fix missing new_ostruct_member in Ruby 2.7 ([#255](https://github.com/rubyconfig/config/pull/255))
 * Fix validation contract documentation ([#260](https://github.com/rubyconfig/config/pull/260))
-* Fix validation contract documentation ([#260](https://github.com/railsconfig/config/pull/260))
+* Fix validation contract documentation ([#260](https://github.com/rubyconfig/config/pull/260))
 
 ### Changes
 
@@ -20,7 +20,8 @@
 * Cleanup example Rails application used for testing ([#263](https://github.com/rubyconfig/config/pull/263))
 * Upgrade markdown linter and fix errors ([#265](https://github.com/rubyconfig/config/pull/265))
 * Upgrade development dependencies and test matrix with latest Ruby and Rails versions ([#264](https://github.com/rubyconfig/config/pull/264))
-* Replace Travis CI with GitHub Actions ([#266](https://github.com/railsconfig/config/pull/266))
+* Replace Travis CI with GitHub Actions ([#266](https://github.com/rubyconfig/config/pull/266))
+* Add Rails 6.0 to the test matrix ([#258](https://github.com/rubyconfig/config/pull/258))
 * Rename GitHub organization name from `railsconfig` to `rubyconfig` 
 
 ## 2.1.0
