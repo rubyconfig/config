@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COVERAGE_RUBY_VERSION: 2.6
-#      GEM_PATH: vendor/bundle
+      BUNDLER_PATH: vendor/bundle
     strategy:
       matrix:
         ruby:
@@ -32,19 +32,18 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-#      - name: Restore cache
-#        uses: actions/cache@v1
-#        with:
-#          path: ${{ env.GEM_PATH }}
-#          key: bundler-${{ matrix.ruby }}-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
+      - name: Restore cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.BUNDLER_PATH }}
+          key: bundler-${{ matrix.ruby }}-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
 
       - name: Install
         run: |
-          echo $GEM_PATH
-          echo ${{ env.GEM_PATH }}
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
           gem uninstall bundler -v '>= 2' -ax --force || true
-          gem install bundler -v '~>1.0' -N || true
+          gem install --install-dir ${{ env.BUNDLER_PATH }} bundler -v '~>1.0' -N || true
+          bundle config path ${{ env.BUNDLER_PATH }}
           bundle -v
           bundle install
           bundle exec appraisal install
