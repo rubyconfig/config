@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COVERAGE_RUBY_VERSION: 2.6
+#      GEM_PATH: vendor/bundle
     strategy:
       matrix:
         ruby:
@@ -31,11 +32,11 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - name: Restore cache
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.GEM_PATH }}
-          key: bundler-${{ matrix.ruby }}-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
+#      - name: Restore cache
+#        uses: actions/cache@v1
+#        with:
+#          path: ${{ env.GEM_PATH }}
+#          key: bundler-${{ matrix.ruby }}-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
 
       - name: Install
         run: |
