@@ -1,5 +1,5 @@
 # Bundler >= 2.x do not work with Rails 4.2
-if `bundler -v`.match(/\d+\.\d+.\d+/)[0].start_with?('1.17')
+if `bundler -v`.start_with?('Bundler version 1.17')
   appraise 'rails-4.2' do
     gem 'rails', '4.2.11.1'
     gem 'rspec-rails', '~> 3.7'
@@ -7,6 +7,8 @@ if `bundler -v`.match(/\d+\.\d+.\d+/)[0].start_with?('1.17')
     gem 'sqlite3', '< 1.4.0'
     gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
   end
+else
+  puts 'Skipping rails-4.2'
 end
 
 appraise 'rails-5.0' do

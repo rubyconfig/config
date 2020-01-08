@@ -35,7 +35,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/gemfiles/**') }}-${{ hashFiles('*.gemspec') }}
+          key: bundler-${{ matrix.ruby }}-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
 
       - name: Install
         run: |
