@@ -1,9 +1,9 @@
 # Config
 
 [![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
-[![Tests](https://github.com/railsconfig/config/workflows/tests/badge.svg)](https://github.com/railsconfig/config/actions?query=branch%3Amaster)
-[![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/railsconfig/config/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/railsconfig/config/test_coverage)
+[![Tests](https://github.com/rubyconfig/config/workflows/tests/badge.svg)](https://github.com/rubyconfig/config/actions?query=branch%3Amaster)
+[![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/rubyconfig/config/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/rubyconfig/config/test_coverage)
 [![Financial Contributors on Open Collective](https://opencollective.com/rubyconfig/all/badge.svg?label=backers)](https://opencollective.com/rubyconfig)
 
 ## Summary
@@ -481,7 +481,7 @@ This project exists thanks to all the people who contribute and you are very war
 
 Any and all contributions offered in any form, past present or future are understood to be in complete agreement and acceptance with the [MIT](LICENSE) license.
 
-[![Contributors](https://opencollective.com/rubyconfig/contributors.svg?width=890&button=false)](https://github.com/railsconfig/config/graphs/contributors)
+[![Contributors](https://opencollective.com/rubyconfig/contributors.svg?width=890&button=false)](https://github.com/rubyconfig/config/graphs/contributors)
 
 ### Financial Contributors
 

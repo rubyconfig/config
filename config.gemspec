@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary          = 'Effortless multi-environment settings in Rails, Sinatra, Pandrino and others'
   s.description      = 'Easiest way to manage multi-environment settings in any ruby project or framework: ' +
                        'Rails, Sinatra, Pandrino and others'
-  s.homepage         = 'https://github.com/railsconfig/config'
+  s.homepage         = 'https://github.com/rubyconfig/config'
   s.license          = 'MIT'
   s.extra_rdoc_files = %w[README.md CHANGELOG.md CONTRIBUTING.md LICENSE.md]
   s.rdoc_options     = ['--charset=UTF-8']
