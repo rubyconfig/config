@@ -15,6 +15,7 @@ jobs:
     env:
       COVERAGE_RUBY_VERSION: 2.6
       BUNDLE_PATH: vendor/bundle
+      CLASSPATH: ""
     strategy:
       matrix:
         ruby:
