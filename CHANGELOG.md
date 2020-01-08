@@ -21,6 +21,7 @@
 * Upgrade markdown linter and fix errors ([#265](https://github.com/rubyconfig/config/pull/265))
 * Upgrade development dependencies and test matrix with latest Ruby and Rails versions ([#264](https://github.com/rubyconfig/config/pull/264))
 * Replace Travis CI with GitHub Actions ([#266](https://github.com/railsconfig/config/pull/266))
+* Rename GitHub organization name from `railsconfig` to `rubyconfig` 
 
 ## 2.1.0
 
