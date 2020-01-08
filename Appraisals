@@ -11,7 +11,7 @@ if (ENV['BUNDLER_VERSION'] || `bundler -v`[/\d+\.\d+\.\d+/]).start_with?('1.17')
     end
 
     platforms :jruby do
-      gem 'activerecord-jdbcsqlite3-adapter', '~>1.3.25'
+      gem 'activerecord-jdbcsqlite3-adapter', '~> 1.3.25'
     end
   end
 else
@@ -27,7 +27,7 @@ appraise 'rails-5.0' do
   end
 
   platforms :jruby do
-    gem 'activerecord-jdbcsqlite3-adapter', '~>50.3'
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 50.6'
   end
 end
 
@@ -40,7 +40,7 @@ appraise 'rails-5.1' do
   end
 
   platforms :jruby do
-    gem 'activerecord-jdbcsqlite3-adapter', '~>51.3'
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 51.6'
   end
 end
 
@@ -54,7 +54,7 @@ appraise 'rails-5.2' do
   end
 
   platforms :jruby do
-    gem 'activerecord-jdbcsqlite3-adapter', '~>52.2'
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 52.5'
   end
 end
 
