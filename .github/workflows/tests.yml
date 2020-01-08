@@ -38,6 +38,8 @@ jobs:
         with:
           path: ${{ env.BUNDLE_PATH }}
           key: ruby-${{ matrix.ruby }}-bundler-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
+          restore-keys: |
+            ruby-${{ matrix.ruby }}-bundler-
 
       - name: Prepare environment
         run: |
