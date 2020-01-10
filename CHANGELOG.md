@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-...
+### Changes
+
+* Ignore .local files in cucumber environment ([#269](https://github.com/railsconfig/config/pull/269))
 
 ## 2.2.1
 

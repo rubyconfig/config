@@ -64,7 +64,7 @@ module Config
 
   def self.local_setting_files(config_root, env)
     [
-      (File.join(config_root, 'settings.local.yml').to_s if env != 'test'),
+      (File.join(config_root, 'settings.local.yml').to_s if env != 'test' && env != 'cucumber'),
       File.join(config_root, 'settings', "#{env}.local.yml").to_s,
       File.join(config_root, 'environments', "#{env}.local.yml").to_s
     ].compact

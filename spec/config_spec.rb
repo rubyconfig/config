@@ -25,6 +25,17 @@ describe Config do
                          ])
   end
 
+  it "should ignore local config in cucumber environment" do
+    config = Config.setting_files("root/config", "cucumber")
+    expect(config).to eq([
+                           'root/config/settings.yml',
+                           'root/config/settings/cucumber.yml',
+                           'root/config/environments/cucumber.yml',
+                           'root/config/settings/cucumber.local.yml',
+                           'root/config/environments/cucumber.local.yml'
+                         ])
+  end
+
   it "should load a basic config file" do
     config = Config.load_files("#{fixture_path}/settings.yml")
     expect(config.size).to eq(1)
