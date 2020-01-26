@@ -23,6 +23,7 @@ jobs:
           - 2.6
           - 2.7
           - jruby
+          - rubinius
           - truffleruby
     steps:
       - name: Checkout
