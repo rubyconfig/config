@@ -1,10 +1,11 @@
 # Bundler >= 2.x do not work with Rails 4.2
 if (ENV['BUNDLER_VERSION'] || `bundler -v`[/\d+\.\d+\.\d+/]).start_with?('1.17')
   appraise 'rails-4.2' do
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 1.3.25', platform: :jruby
     gem 'rails', '4.2.11.1'
     gem 'rspec-rails', '~> 3.7'
     gem 'sprockets', '~> 3.7'
-    gem 'sqlite3', '< 1.4.0'
+    gem 'sqlite3', '< 1.4.0', platform: :ruby
     gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
   end
 else
@@ -12,31 +13,35 @@ else
 end
 
 appraise 'rails-5.0' do
+  gem 'activerecord-jdbcsqlite3-adapter', '~> 50.6', platform: :jruby
   gem 'rails', '5.0.7.2'
   gem 'rspec-rails', '~> 3.7'
-  gem 'sqlite3', '< 1.4.0'
+  gem 'sqlite3', '< 1.4.0', platform: :ruby
 end
 
 appraise 'rails-5.1' do
+  gem 'activerecord-jdbcsqlite3-adapter', '~> 51.6', platform: :jruby
   gem 'rails', '5.1.7'
   gem 'rspec-rails', '~> 3.7'
-  gem 'sqlite3', '< 1.4.0'
+  gem 'sqlite3', '< 1.4.0', platform: :ruby
 end
 
 appraise 'rails-5.2' do
+  gem 'activerecord-jdbcsqlite3-adapter', '~> 52.5', platform: :jruby
   gem 'bootsnap', '~> 1.4'
   gem 'rails', '5.2.4.1'
   gem 'rspec-rails', '~> 3.7'
-  gem 'sqlite3', '< 1.4.0'
+  gem 'sqlite3', '< 1.4.0', platform: :ruby
 end
 
 # Rails 6.x requires Ruby >= 2.5.0
 if RUBY_VERSION >= '2.5.0'
   appraise 'rails-6.0' do
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 60.1', platform: :jruby
     gem 'bootsnap', '~> 1.4'
     gem 'rails', '6.0.2.1'
     gem 'rspec-rails', '~> 3.7'
-    gem 'sqlite3', '~> 1.4.0'
+    gem 'sqlite3', '~> 1.4.0', platform: :ruby
   end
 end
 

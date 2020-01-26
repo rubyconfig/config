@@ -21,7 +21,7 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Compatibility
 
-Current version supports and is [tested](.github/workflows/tests.yml) for the following interpreters and frameworks:
+Current version supports and is [tested](.github/workflows/tests.yml#L19) for the following interpreters and frameworks:
 
 * Interpreters
   * [Ruby](https://www.ruby-lang.org) `>= 2.4`
