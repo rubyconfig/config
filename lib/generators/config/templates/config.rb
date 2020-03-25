@@ -21,7 +21,12 @@ Config.setup do |config|
 
   # Define ENV variable prefix deciding which variables to load into config.
   #
-  # config.env_prefix = 'Settings'
+  # Reading variables from ENV is case-sensitive. If you define lowercase value below, ensure your ENV variables are
+  # prefixed in the same way.
+  #
+  # When not set it defaults to `config.const_name`.
+  #
+  config.env_prefix = 'SETTINGS'
 
   # What string to use as level separator for settings loaded from ENV variables. Default value of '.' works well
   # with Heroku, but you might want to change it for example for '__' to easy override settings from command line, where
