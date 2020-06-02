@@ -44,9 +44,9 @@ jobs:
       - name: Prepare environment
         run: |
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
-          gem uninstall bundler -v '>= 2' -ax --force || true
-          gem install bundler -v '~>1.0' -N || true
-          echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -P '\d+\.\d+.\d+')"
+          [[ "${{ matrix.ruby }}" -lt "2.7"]] && gem uninstall bundler -v '>= 2' -ax --force || true
+          [[ "${{ matrix.ruby }}" -lt "2.7"]] && gem install bundler -v '~>1.0' -N || true
+#          echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -P '\d+\.\d+.\d+')"
 
       - name: Install
         run: |
