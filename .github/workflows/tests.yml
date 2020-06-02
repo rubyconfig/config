@@ -21,7 +21,7 @@ jobs:
           - 2.4
           - 2.5
           - 2.6
-#          - 2.7
+          - 2.7
           - jruby
           - truffleruby
     steps:
@@ -47,6 +47,8 @@ jobs:
           if [[ "${{ matrix.ruby }}" =~ ^2\.[4-6]$ ]]; then
             gem uninstall bundler -v '>= 2' -ax --force || true
             gem install bundler -v '~>1.0' -N || true
+          else
+            gem install bundler -v '>= 2'
           fi
           echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -P '\d+\.\d+.\d+')"
 
