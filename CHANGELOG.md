@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Bug fixes
+
+* Added alias to_h for to_hash ([#277](https://github.com/railsconfig/config/issues/277))
+
 ### Changes
 
 * Add JRuby 9.2 to the test matrix ([#228](https://github.com/railsconfig/config/issues/228))
