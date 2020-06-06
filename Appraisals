@@ -1,5 +1,5 @@
 # Bundler >= 2.x do not work with Rails 4.2
-if (`bundler -v`[/\d+\.\d+\.\d+/]).start_with?('1.17')
+if (ENV['BUNDLER_VERSION'] || `bundler -v`[/\d+\.\d+\.\d+/]).start_with?('1.17')
   appraise 'rails-4.2' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 1.3.25', platform: :jruby
     gem 'rails', '4.2.11.3'
