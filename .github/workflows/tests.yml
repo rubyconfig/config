@@ -32,6 +32,7 @@ jobs:
         uses: eregon/use-ruby-action@master
         with:
           ruby-version: ${{ matrix.ruby }}
+#          bundler: 1
 
       - name: Restore cache
         uses: actions/cache@v1
@@ -44,13 +45,13 @@ jobs:
       - name: Prepare environment
         run: |
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
-          if [[ "${{ matrix.ruby }}" =~ ^2\.[4-6]$ ]]; then
-            gem uninstall bundler -v '>= 2' -ax --force || true
-            gem install bundler -v '~>1.0' -N || true
-          else
-            gem install bundler -v '>= 2'
-          fi
-          echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -P '\d+\.\d+.\d+')"
+#          if [[ "${{ matrix.ruby }}" =~ ^2\.[4-6]$ ]]; then
+#            gem uninstall bundler -v '>= 2' -ax --force || true
+#            gem install bundler -v '~>1.0' -N || true
+#          else
+#            gem install bundler -v '>= 2'
+#          fi
+#          echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -P '\d+\.\d+.\d+')"
 
       - name: Install
         run: |
