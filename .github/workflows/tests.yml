@@ -28,18 +28,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Setup ruby ${{ matrix.ruby }}
+      - name: Setup ruby ${{ matrix.ruby }} with bundler 1
+        if: ${{ matrix.ruby =~ ^2\.[4-6]$ }}
         uses: eregon/use-ruby-action@master
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler: ${{ [[ matrix.ruby =~ ^2\.[4-6]$ ]] && echo "1" || echo "1" }}
+          bundler: 1
 
-#      - name: Setup ruby ${{ matrix.ruby }} with bundler 2
-#        if: ${{ matrix.ruby =~ ^2\.[4-6]$ }}
-#        uses: eregon/use-ruby-action@master
-#        with:
-#          ruby-version: ${{ matrix.ruby }}
-#          bundler: 2
+      - name: Setup ruby ${{ matrix.ruby }} with bundler 2
+        if: ${{ ! matrix.ruby =~ ^2\.[4-6]$ }}
+        uses: eregon/use-ruby-action@master
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler: 2
 
       - name: Restore cache
         uses: actions/cache@v1
