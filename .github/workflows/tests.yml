@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Setup ruby ${{ matrix.ruby }}
-        uses: eregon/use-ruby-action@master
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler: 1
