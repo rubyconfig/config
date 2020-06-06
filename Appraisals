@@ -37,7 +37,7 @@ appraise 'rails-5.2' do
 end
 
 # Rails 6.x requires Ruby >= 2.5.0
-if RUBY_VERSION >= '2.5.0'
+if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.5.0') || RUBY_ENGINE != 'ruby'
   appraise 'rails-6.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 60.1', platform: :jruby
     gem 'bootsnap', '~> 1.4'
