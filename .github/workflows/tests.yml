@@ -48,7 +48,6 @@ jobs:
 
       - name: Install
         run: |
-          bundle config path ${{ env.BUNDLE_PATH }}
           bundle install
           bundle exec appraisal install
 
