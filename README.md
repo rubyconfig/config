@@ -45,6 +45,7 @@ Add `gem 'config'` to your `Gemfile` and run `bundle install` to install it. The
 which will generate customizable config file `config/initializers/config.rb` and set of default settings files:
 
     config/settings.yml
+    config/settings.local.yml
     config/settings/development.yml
     config/settings/production.yml
     config/settings/test.yml
