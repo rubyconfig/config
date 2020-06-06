@@ -1,8 +1,8 @@
 # Bundler >= 2.x do not work with Rails 4.2
-if (ENV['BUNDLER_VERSION'] || `bundler -v`[/\d+\.\d+\.\d+/]).start_with?('1.17')
+if (`bundler -v`[/\d+\.\d+\.\d+/]).start_with?('1.17')
   appraise 'rails-4.2' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 1.3.25', platform: :jruby
-    gem 'rails', '4.2.11.1'
+    gem 'rails', '4.2.11.3'
     gem 'rspec-rails', '~> 3.7'
     gem 'sprockets', '~> 3.7'
     gem 'sqlite3', '< 1.4.0', platform: :ruby
@@ -29,7 +29,7 @@ end
 appraise 'rails-5.2' do
   gem 'activerecord-jdbcsqlite3-adapter', '~> 52.5', platform: :jruby
   gem 'bootsnap', '~> 1.4'
-  gem 'rails', '5.2.4.1'
+  gem 'rails', '5.2.4.3'
   gem 'rspec-rails', '~> 3.7'
   gem 'sqlite3', '< 1.4.0', platform: :ruby
 end
@@ -39,10 +39,12 @@ if RUBY_VERSION >= '2.5.0'
   appraise 'rails-6.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 60.1', platform: :jruby
     gem 'bootsnap', '~> 1.4'
-    gem 'rails', '6.0.2.1'
+    gem 'rails', '6.0.3.1'
     gem 'rspec-rails', '~> 3.7'
     gem 'sqlite3', '~> 1.4.0', platform: :ruby
   end
+else
+  puts 'Skipping rails-6.0 for Ruby < 2.5'
 end
 
 appraise 'sinatra' do

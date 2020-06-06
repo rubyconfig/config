@@ -32,8 +32,8 @@ Please consider donating to our open collective to help us maintain this project
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
   # Testing
-  s.add_development_dependency 'appraisal', '~> 2.2', '>= 2.2.0'
-  s.add_development_dependency 'rspec', '~> 3.7', '>= 3.7.0'
+  s.add_development_dependency 'appraisal', '~> 2.3', '>= 2.3.0'
+  s.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
 
   # Default RSpec run will test against latest Rails app
   unless ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
@@ -45,10 +45,10 @@ Please consider donating to our open collective to help us maintain this project
 
   if ENV['GITHUB_ACTIONS']
     # Code coverage is needed only in CI
-    s.add_development_dependency 'simplecov', '~> 0.17.1' if RUBY_ENGINE == 'ruby'
+    s.add_development_dependency 'simplecov', '~> 0.18.5' if RUBY_ENGINE == 'ruby'
   else
     # Static code analysis to be used locally
-    s.add_development_dependency 'mdl', '~> 0.8', '>= 0.8.0'
-    s.add_development_dependency 'rubocop', '~> 0.78.0'
+    s.add_development_dependency 'mdl', '~> 0.9', '>= 0.9.0'
+    s.add_development_dependency 'rubocop', '~> 0.85.0'
   end
 end
