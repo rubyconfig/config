@@ -23,6 +23,7 @@ jobs:
           - 2.6
           - 2.7
           - jruby
+          - rubinius
           - truffleruby
     steps:
       - name: Checkout
@@ -56,7 +57,7 @@ jobs:
 
       - name: Publish code coverage
         if: startsWith(env.RUBY_VERSION, env.COVERAGE_RUBY_VERSION)
-        uses: paambaati/codeclimate-action@v2.3.0
+        uses: paambaati/codeclimate-action@v2.4.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:

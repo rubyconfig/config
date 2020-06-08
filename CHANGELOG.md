@@ -9,6 +9,7 @@
 ### Changes
 
 * Add JRuby 9.2 to the test matrix ([#228](https://github.com/railsconfig/config/issues/228))
+* Add Rubinius to the test matrix
 
 ## 2.2.1
 
