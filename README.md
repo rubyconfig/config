@@ -501,4 +501,4 @@ Support this project by becoming a [sponsor](https://opencollective.com/rubyconf
 
 ## License
 
-Copyright (C) Piotr Kuczynski. Released under the [MIT License](LICENSE).
+Copyright (C) Piotr Kuczynski. Released under the [MIT License](LICENSE.md).
