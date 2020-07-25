@@ -35,10 +35,10 @@ jobs:
           bundler: 1
 
       - name: Restore cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.BUNDLE_PATH }}
-          key: ruby-${{ matrix.ruby }}-gems-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
+          key: ruby-${{ matrix.ruby }}-gems-${{ hashFiles('config.gemspec', 'gemfiles/**') }}
           restore-keys: |
             ruby-${{ matrix.ruby }}-gems-
 
