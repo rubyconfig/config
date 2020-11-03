@@ -19,7 +19,7 @@ Dir['./spec/support/**/*.rb'].each { |f| require f }
 ##
 # Detect Rails/Sinatra dummy application based on gemfile name substituted by Appraisal
 #
-if ENV['GITHUB_ACTIONS']
+if ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
   app_name = Pathname.new(ENV['BUNDLE_GEMFILE']).basename.sub('.gemfile', '')
 else
   /.*?(?<app_name>rails.*?)\.gemfile/ =~ Dir["gemfiles/rails*.gemfile"].sort.last
