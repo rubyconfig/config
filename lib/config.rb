@@ -23,7 +23,8 @@ module Config
     merge_nil_values: true,
     overwrite_arrays: true,
     merge_hash_arrays: false,
-    validation_contract: nil
+    validation_contract: nil,
+    environment: nil
   )
 
   def self.setup

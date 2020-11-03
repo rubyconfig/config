@@ -38,13 +38,17 @@ module Config
 
       ENV.each do |variable, value|
         separator = Config.env_separator
-        prefix = (Config.env_prefix || Config.const_name).to_s.split(separator)
+        prefix = (Config.env_prefix || Config.const_name).to_s
+        
+        # remove prefix
+        variable = variable.gsub(prefix, '')
 
-        keys = variable.to_s.split(separator)
+        # split the environment variable name based on the keys we have
+        new_keys = __lookup_key(variable.to_s.split(separator), separator)
 
-        next if keys.shift(prefix.size) != prefix
+        next if new_keys.shift(prefix.size) != prefix
 
-        keys.map! { |key|
+        new_keys.map! { |key|
           case Config.env_converter
             when :downcase then
               key.downcase.to_sym
@@ -55,11 +59,11 @@ module Config
           end
         }
 
-        leaf = keys[0...-1].inject(hash) { |h, key|
+        leaf = new_keys[0...-1].inject(hash) { |h, key|
           h[key] ||= {}
         }
 
-        leaf[keys.last] = Config.env_parse_values ? __value(value) : value
+        leaf[new_keys.last] = Config.env_parse_values ? __value(value) : value
       end
 
       merge!(hash)
@@ -225,6 +229,34 @@ module Config
       else
         Integer(v) rescue Float(v) rescue v
       end
+    end
+
+    def __lookup_key(env_var_split_keys, split_char, found_keys = [])
+      # To allow us to prefix keys with the same seperation character that exists in the config key, we need to search for the keys
+      lookup_key = nil
+
+      search_keys = env_var_split_keys.dup
+      (0..(search_keys.length - 1)).each do
+        byebug
+        lookup_key = keys.find{|k| k.to_sym == search_keys.join(split_char) }
+        break if !lookup_key.nil?
+        
+        search_keys.pop
+      end
+        
+      found_keys ||= []
+      if !lookup_key.nil?
+        # we've found a key in our config that matches our env key, store this, and look inside this for the rest
+        found_keys << lookup_key
+        # get the new search key
+        env_key = env_var_split_keys.join(split_char)
+        env_key = env_key.gsub(lookup_key, split_char)
+        search_keys = env_key.split(split_char)
+        
+        # call myself to get the next key
+        found_keys = __lookup_key(search_keys, split_char, found_keys)
+      end
+      found_keys
     end
   end
 end

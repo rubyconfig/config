@@ -221,4 +221,23 @@ describe Config::Options do
 
   end
 
+  context "values from env with conflicting seperator" do
+    before { Config.setup { |config|
+      config.env_prefix = 'SETTINGS'
+      config.env_separator = '_'
+      config.env_converter = :downcase
+      config.env_parse_values = true
+    } }
+
+    # some_seperated_key:
+    #   to_overide:
+    #     from_the_environment: "NOT SET"
+
+    it 'should find the correct keys' do
+      ENV["SETTINGS_SOME_SEPERATED_KEY_TO_OVERIDE_FROM_THE_ENVIRONMENT"] = "test"
+      Config.load_files("#{fixture_path}/from_env.yml")
+      expect(config.some_seperated_key.to_overide.from_the_environment).to eq("test")
+    end
+  end
+
 end
