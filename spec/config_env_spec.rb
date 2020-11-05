@@ -178,6 +178,13 @@ describe Config::Options do
 
         expect(config.key).to eq(nil)
       end
+
+      it 'should recognise a key name if it contains a character which is the same as the custom separator' do
+        ENV['MY_CONFIG_QUERY_SERVICE_API_KEY'] = "value"
+        expect(config.query_service.api_key).to eq('value')
+        expect(config.query).to be_nil
+        expect(config['query_service_api_key']).to be_nil        
+      end
     end
 
     context 'and variable names conversion' do
