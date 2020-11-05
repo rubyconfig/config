@@ -1,7 +1,6 @@
 $:.push File.expand_path('../lib', __FILE__)
 
 require 'config/version'
-require 'byebug'
 
 Gem::Specification.new do |s|
   s.name             = 'config'
