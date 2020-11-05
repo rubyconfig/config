@@ -14,4 +14,3 @@ tmp
 .sass-cache
 Gemfile.lock
 *.gem
-.byebug_history
