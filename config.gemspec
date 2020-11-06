@@ -33,7 +33,7 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   # Testing
   s.add_development_dependency 'appraisal', '~> 2.3', '>= 2.3.0'
-  s.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'  
+  s.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
 
   # Default RSpec run will test against latest Rails app
   unless ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
