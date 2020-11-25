@@ -14,6 +14,7 @@ describe Config::Options do
       expect(config.zip).to eq('cherry')
       expect(config.max).to eq('kumquat')
       expect(config.min).to eq('fig')
+      expect(config.exit!).to eq('taro')
     end
 
     it 'should allow to access them using [] operator' do
@@ -23,6 +24,7 @@ describe Config::Options do
       expect(config['zip']).to eq('cherry')
       expect(config['max']).to eq('kumquat')
       expect(config['min']).to eq('fig')
+      expect(config['exit!']).to eq('taro')
 
       expect(config[:select]).to eq('apple')
       expect(config[:collect]).to eq('banana')
@@ -30,6 +32,7 @@ describe Config::Options do
       expect(config[:zip]).to eq('cherry')
       expect(config[:max]).to eq('kumquat')
       expect(config[:min]).to eq('fig')
+      expect(config[:exit!]).to eq('taro')
     end
   end
 
