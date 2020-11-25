@@ -37,9 +37,13 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   # Default RSpec run will test against latest Rails app
   unless ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
-    gems_to_install = /gem "(.*?)", "(.*?)"(?!, platform: (?!\[:ruby\]))/
-    File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(gems_to_install) do |name, version|
-      s.add_development_dependency name, version
+    gems_to_install = /gem "(.*?)", "(.*?)"(?:, platform: \:(.*))?/
+    File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(gems_to_install) do |name, version, platform|
+      if platform.nil?
+        s.add_development_dependency name, version
+      elsif platform.to_s == RUBY_ENGINE
+        s.add_development_dependency name, version
+      end
     end
   end
 
