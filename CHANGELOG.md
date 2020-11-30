@@ -5,6 +5,7 @@
 ### Bug fixes
 
 * Added alias to_h for to_hash ([#277](https://github.com/railsconfig/config/issues/277))
+* Prevent unnecessary doubled loading of environment variables ([#291](https://github.com/rubyconfig/config/pull/291))
 
 ### Changes
 
