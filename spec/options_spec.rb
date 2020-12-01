@@ -224,4 +224,10 @@ describe Config::Options do
 
   end
 
+  context 'when calling #as_json' do
+    it 'should return a Hash of the keys and values' do
+      options = Config::Options.new(foo: :bar)
+      expect(options.as_json).to eq({ 'foo' => 'bar' })
+    end
+  end
 end
