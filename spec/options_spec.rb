@@ -226,6 +226,15 @@ describe Config::Options do
 
   context 'when calling #as_json' do
     it 'should return a Hash of the keys and values' do
+      unless defined?(::Rails)
+        skip <<~REASON
+          Config::Options#as_json raises a runtime error unless Active Support
+          Core Extensions are loaded. We don't expect users to call this method
+          at all if they're not using AS, so we disable this test except when
+          running the suite against Rails.
+        REASON
+      end
+
       options = Config::Options.new(foo: :bar)
       expect(options.as_json).to eq({ 'foo' => 'bar' })
     end
