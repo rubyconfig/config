@@ -15,7 +15,7 @@ Config.setup do |config|
   #
   # config.overwrite_arrays = true
 
-  # Use a different method of determining the current environment
+  # Use a different method of determining the current environment for rails applications
   # defaults to ::Rails.env
   # config.environment = ENV.fetch('ENVIRONMENT', :development)
 

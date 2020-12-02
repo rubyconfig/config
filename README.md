@@ -52,6 +52,8 @@ which will generate customizable config file `config/initializers/config.rb` and
 
 You can now edit them to adjust to your needs.
 
+> Note: By default, the config environment will match the Rails environment (Rails.env). This can be changed by setting the ```config.environment``` in the config file.
+
 ### Installing on Padrino
 
 Add the gem to your `Gemfile` and run `bundle install` to install it. Then edit `app.rb` and register `Config`
@@ -265,6 +267,7 @@ After installing `Config` in Rails, you will find automatically generated file t
 ### General
 
 * `const_name` - name of the object holing you settings. Default: `'Settings'`
+* `environment` - value for specifying the environment - currently only affects Rails applications. Default: `Rails.env`
 
 ### Merge customization
 
