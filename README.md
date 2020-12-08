@@ -52,7 +52,7 @@ which will generate customizable config file `config/initializers/config.rb` and
 
 You can now edit them to adjust to your needs.
 
-> Note: By default, the config environment will match the Rails environment (Rails.env). This can be changed by setting the ```config.environment``` in the config file.
+> Note: By default, the config environment will match the Rails environment (`Rails.env`). This can be changed by setting `config.environment`.
 
 ### Installing on Padrino
 
