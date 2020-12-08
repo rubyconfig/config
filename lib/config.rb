@@ -2,7 +2,6 @@ require 'config/compatibility'
 require 'config/options'
 require 'config/configuration'
 require 'config/version'
-require 'config/integrations/rails/engine' if defined?(::Rails)
 require 'config/sources/yaml_source'
 require 'config/sources/hash_source'
 require 'config/validation/schema'
@@ -23,7 +22,8 @@ module Config
     knockout_prefix: nil,
     merge_nil_values: true,
     overwrite_arrays: true,
-    merge_hash_arrays: false
+    merge_hash_arrays: false,
+    validation_contract: nil
   )
 
   def self.setup
@@ -42,7 +42,6 @@ module Config
     end
 
     config.load!
-    config.load_env! if use_env
     config
   end
 

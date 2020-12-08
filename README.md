@@ -1,9 +1,10 @@
 # Config
 
-[![Build Status](https://api.travis-ci.org/railsconfig/config.svg?branch=master)](http://travis-ci.org/railsconfig/config)
 [![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
-[![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/railsconfig/config/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/railsconfig/config/test_coverage)
+[![Tests](https://github.com/rubyconfig/config/workflows/tests/badge.svg)](https://github.com/rubyconfig/config/actions?query=branch%3Amaster)
+[![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/rubyconfig/config/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/rubyconfig/config/test_coverage)
+[![Financial Contributors on Open Collective](https://opencollective.com/rubyconfig/all/badge.svg?label=backers)](https://opencollective.com/rubyconfig)
 
 ## Summary
 
@@ -20,11 +21,14 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Compatibility
 
+Current version supports and is [tested](.github/workflows/tests.yml#L19) for the following interpreters and frameworks:
+
 * Interpreters
-  * [Ruby](https://www.ruby-lang.org/en/) `>= 2.4`
-  * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.0.0`
+  * [Ruby](https://www.ruby-lang.org) `>= 2.4`
+  * [JRuby](https://www.jruby.org) `>= 9.2`
+  * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.3`
 * Application frameworks
-  * Rails `>= 4.2` and `5`
+  * Rails `>= 4.2`, `5` and `6`
   * Padrino
   * Sinatra
 
@@ -41,6 +45,7 @@ Add `gem 'config'` to your `Gemfile` and run `bundle install` to install it. The
 which will generate customizable config file `config/initializers/config.rb` and set of default settings files:
 
     config/settings.yml
+    config/settings.local.yml
     config/settings/development.yml
     config/settings/production.yml
     config/settings/test.yml
@@ -292,25 +297,58 @@ Check [Deep Merge](https://github.com/danielsdeleo/deep_merge) for more details.
 
 ### Validation
 
-With Ruby 2.1 or newer, you can optionally define a schema to validate presence (and type) of specific config values:
+With Ruby 2.1 or newer, you can optionally define a [schema](https://github.com/dry-rb/dry-schema) or [contract](https://github.com/dry-rb/dry-validation) (added in `config-2.1`) using [dry-rb](https://github.com/dry-rb) to validate presence (and type) of specific config values. Generally speaking contracts allow to describe more complex validations with depencecies between fields.
+
+If you provide either validation option (or both) it will automatically be used to validate your config. If validation fails it will raise a `Config::Validation::Error` containing information about all the mismatches between the schema and your config.
+
+Both examples below demonstrates how to ensure that the configuration has an optional `email` and the `youtube` structure with the `api_key` field filled. The contract adds an additional rule.
+
+#### Contract
+
+Leverage dry-validation, you can create a contract with a params schema and rules:
+
+```ruby
+class ConfigContract < Dry::Validation::Contract
+  params do
+    optional(:email).maybe(:str?)
+
+    required(:youtube).schema do
+      required(:api_key).filled
+    end
+  end
+
+  rule(:email) do
+    unless /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.match?(value)
+      key.failure('has invalid format')
+    end
+  end
+end
+
+Config.setup do |config|
+  config.validation_contract = ConfigContract.new
+end
+```
+
+The above example adds a rule to ensure the `email` is valid by matching it against the provided regular expression.
+
+Check [dry-validation](https://github.com/dry-rb/dry-validation) for more details.
+
+#### Schema
+
+You may also specify a schema using [dry-schema](https://github.com/dry-rb/dry-schema):
 
 ```ruby
 Config.setup do |config|
   # ...
   config.schema do
+    optional(:email).maybe(:str?)
+
     required(:youtube).schema do
       required(:api_key).filled
     end
   end
 end
 ```
-
-The above example demonstrates how to ensure that the configuration has the `youtube` structure
-with the `api_key` field filled.
-
-If you define a schema it will automatically be used to validate your config. If validation fails it will
-raise a `Config::Validation::Error` containing a nice message with information about all the mismatches
-between the schema and your config.
 
 Check [dry-schema](https://github.com/dry-rb/dry-schema) for more details.
 
@@ -391,8 +429,8 @@ To upload your local values to Heroku you could ran `bundle exec rake config:her
 
 You can customize how environment variables are processed:
 
-* `env_prefix` (default: `SETTINGS`) - which ENV variables to load into config
-* `env_separator` (default: `.`)  - what string to use as level separator - default value of `.` works well with   Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using   dots in variable names might not be allowed (eg. Bash)
+* `env_prefix` (default: `const_name`) - load only ENV variables starting with this prefix (case-sensitive)
+* `env_separator` (default: `'.'`)  - what string to use as level separator - default value of `.` works well with   Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using   dots in variable names might not be allowed (eg. Bash)
 * `env_converter` (default: `:downcase`)  - how to process variables names:
   * `nil` - no change
   * `:downcase` - convert to lower case
@@ -432,18 +470,6 @@ You are very warmly welcome to help. Please follow our [contribution guidelines]
 
 Any and all contributions offered in any form, past present or future are understood to be in complete agreement and acceptance with [MIT](LICENSE) license.
 
-### Backers
-
-[Become a backer](https://opencollective.com/rubyconfig#backer) and support us with a small donation to help us continue our activities. Thank you if you already one! 🙏
-
-[![Backers](https://opencollective.com/rubyconfig/backers.svg?width=890)](https://opencollective.com/rubyconfig#backers)
-
-### Sponsors
-
-Support this project by becoming a [sponsor](https://opencollective.com/rubyconfig#sponsor). Your logo will show up here with a link to your website.
-
-[![Sponsors](https://opencollective.com/rubyconfig/sponsors.svg?width=890)](https://opencollective.com/rubyconfig#sponsors)
-
 ## Authors
 
 * [Piotr Kuczynski](http://github.com/pkuczynski)
@@ -451,6 +477,28 @@ Support this project by becoming a [sponsor](https://opencollective.com/rubyconf
 * [Jacques Crocker](http://github.com/railsjedi)
 * Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
 
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute and you are very warmly welcome to help. Please follow our [contribution guidelines](CONTRIBUTING.md).
+
+Any and all contributions offered in any form, past present or future are understood to be in complete agreement and acceptance with the [MIT](LICENSE) license.
+
+[![Contributors](https://opencollective.com/rubyconfig/contributors.svg?width=890&button=false)](https://github.com/rubyconfig/config/graphs/contributors)
+
+### Financial Contributors
+
+[Become a backer](https://opencollective.com/rubyconfig#backer) and support us with a small monthly donation to help us continue our activities. Thank you if you already one! 🙏
+
+[![Backers](https://opencollective.com/rubyconfig/backers.svg?width=890)](https://opencollective.com/rubyconfig)
+
+#### Sponsors
+
+Support this project by becoming a [sponsor](https://opencollective.com/rubyconfig#sponsor). Your logo will show up here with a link to your website.
+
+[![Sponsors](https://opencollective.com/rubyconfig/sponsors.svg?width=890)](https://opencollective.com/rubyconfig)
+
 ## License
 
-Config is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+Copyright (C) Piotr Kuczynski. Released under the [MIT License](LICENSE.md).

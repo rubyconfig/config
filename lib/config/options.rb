@@ -118,6 +118,8 @@ module Config
       result
     end
 
+    alias :to_h :to_hash
+
     def each(*args, &block)
       marshal_dump.each(*args, &block)
     end
@@ -125,6 +127,10 @@ module Config
     def to_json(*args)
       require "json" unless defined?(JSON)
       to_hash.to_json(*args)
+    end
+
+    def as_json(options = nil)
+      to_hash.as_json(options)
     end
 
     def merge!(hash)
@@ -143,7 +149,7 @@ module Config
     end
 
     # Some keywords that don't play nicely with OpenStruct
-    SETTINGS_RESERVED_NAMES = %w[select collect test count zip min max].freeze
+    SETTINGS_RESERVED_NAMES = %w[select collect test count zip min max exit!].freeze
 
     # An alternative mechanism for property access.
     # This let's you do foo['bar'] along with foo.bar.
@@ -201,7 +207,6 @@ module Config
 
       h.each do |k, v|
         k = k.to_s if !k.respond_to?(:to_sym) && k.respond_to?(:to_s)
-        s.new_ostruct_member(k)
 
         if v.is_a?(Hash)
           v = v["type"] == "hash" ? v["contents"] : __convert(v)
@@ -209,7 +214,7 @@ module Config
           v = v.collect { |e| e.instance_of?(Hash) ? __convert(e) : e }
         end
 
-        s.send("#{k}=".to_sym, v)
+        s[k] = v
       end
       s
     end

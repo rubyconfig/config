@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe Config do
-
+describe Config::Options do
   context 'when overriding settings via ENV variables is enabled' do
     let(:config) do
       Config.load_files "#{fixture_path}/settings.yml", "#{fixture_path}/multilevel.yml"
@@ -47,50 +46,52 @@ describe Config do
       end
     end
 
-    context 'and parsing ENV variable names is enabled' do
-      it 'should recognize "false" and expose as Boolean' do
-        ENV['Settings.new_var'] = 'false'
+    context 'and parsing ENV variable values' do
+      context 'is enabled' do
+        it 'should recognize "false" and expose as Boolean' do
+          ENV['Settings.new_var'] = 'false'
 
-        expect(config.new_var).to eq(false)
-        expect(config.new_var.is_a? FalseClass).to eq(true)
+          expect(config.new_var).to eq(false)
+          expect(config.new_var.is_a? FalseClass).to eq(true)
+        end
+
+        it 'should recognize "true" and expose as Boolean' do
+          ENV['Settings.new_var'] = 'true'
+
+          expect(config.new_var).to eq(true)
+          expect(config.new_var.is_a? TrueClass).to eq(true)
+        end
+
+        it 'should recognize numbers and expose them as integers' do
+          ENV['Settings.new_var'] = '123'
+
+          expect(config.new_var).to eq(123)
+          expect(config.new_var.is_a? Integer).to eq(true)
+        end
+
+        it 'should recognize fixed point numbers and expose them as float' do
+          ENV['Settings.new_var'] = '1.9'
+
+          expect(config.new_var).to eq(1.9)
+          expect(config.new_var.is_a? Float).to eq(true)
+        end
+
+        it 'should leave strings intact' do
+          ENV['Settings.new_var'] = 'foobar'
+
+          expect(config.new_var).to eq('foobar')
+          expect(config.new_var.is_a? String).to eq(true)
+        end
       end
 
-      it 'should recognize "true" and expose as Boolean' do
-        ENV['Settings.new_var'] = 'true'
+      context 'is disabled' do
+        it 'should not convert numbers to integers' do
+          ENV['Settings.new_var'] = '123'
 
-        expect(config.new_var).to eq(true)
-        expect(config.new_var.is_a? TrueClass).to eq(true)
-      end
+          Config.env_parse_values = false
 
-      it 'should recognize numbers and expose them as integers' do
-        ENV['Settings.new_var'] = '123'
-
-        expect(config.new_var).to eq(123)
-        expect(config.new_var.is_a? Integer).to eq(true)
-      end
-
-      it 'should recognize fixed point numbers and expose them as float' do
-        ENV['Settings.new_var'] = '1.9'
-
-        expect(config.new_var).to eq(1.9)
-        expect(config.new_var.is_a? Float).to eq(true)
-      end
-
-      it 'should leave strings intact' do
-        ENV['Settings.new_var'] = 'foobar'
-
-        expect(config.new_var).to eq('foobar')
-        expect(config.new_var.is_a? String).to eq(true)
-      end
-    end
-
-    context 'and parsing ENV variable names is disabled' do
-      it 'should not convert numbers to integers' do
-        ENV['Settings.new_var'] = '123'
-
-        Config.env_parse_values = false
-
-        expect(config.new_var).to eq('123')
+          expect(config.new_var).to eq('123')
+        end
       end
     end
 
@@ -179,22 +180,26 @@ describe Config do
       end
     end
 
-    context 'and variable names conversion is enabled' do
-      it 'should downcase variable names when :downcase conversion enabled' do
-        ENV['Settings.NEW_VAR'] = 'value'
+    context 'and variable names conversion' do
+      context 'is enabled' do
+        it 'should downcase variable names when :downcase conversion enabled' do
+          ENV['Settings.NEW_VAR'] = 'value'
 
-        expect(config.new_var).to eq('value')
+          Config.env_converter = :downcase
+
+          expect(config.new_var).to eq('value')
+        end
       end
-    end
 
-    context 'and variable names conversion is disabled' do
-      it 'should not change variable names by default' do
-        ENV['Settings.NEW_VAR'] = 'value'
+      context 'is disabled' do
+        it 'should not change variable names by default' do
+          ENV['Settings.NEW_VAR'] = 'value'
 
-        Config.env_converter = nil
+          Config.env_converter = nil
 
-        expect(config.new_var).to eq(nil)
-        expect(config.NEW_VAR).to eq('value')
+          expect(config.new_var).to eq(nil)
+          expect(config.NEW_VAR).to eq('value')
+        end
       end
     end
 

@@ -1,5 +1,3 @@
-require 'dry-schema'
-
 module Config
   module Validation
     module Schema
@@ -10,6 +8,8 @@ module Config
 
       def schema(&block)
         if block_given?
+          # Delay require until optional schema validation is requested
+          require 'dry-validation'
           @schema = Dry::Schema.define(&block)
         else
           @schema
