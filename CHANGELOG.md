@@ -6,6 +6,7 @@
 
 * Added alias to_h for to_hash ([#277](https://github.com/railsconfig/config/issues/277))
 * Prevent unnecessary doubled loading of environment variables ([#291](https://github.com/rubyconfig/config/pull/291))
+* Return `Hash` from `Config::Options#as_json` instead of `Array` of pairs when using ActiveSupport Core Extensions ([#292](https://github.com/rubyconfig/config/pull/292))
 
 ### Changes
 

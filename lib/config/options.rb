@@ -129,6 +129,10 @@ module Config
       to_hash.to_json(*args)
     end
 
+    def as_json(options = nil)
+      to_hash.as_json(options)
+    end
+
     def merge!(hash)
       current = to_hash
       DeepMerge.deep_merge!(
