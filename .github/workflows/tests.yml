@@ -29,24 +29,22 @@ jobs:
         uses: actions/checkout@master
 
       - name: Setup ruby ${{ matrix.ruby }}
-        uses: eregon/use-ruby-action@master
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+          bundler: 1
 
       - name: Restore cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.BUNDLE_PATH }}
-          key: ruby-${{ matrix.ruby }}-gems-${{ hashFiles('*.gemspec') }}-${{ hashFiles('**/gemfiles/**') }}
+          key: ruby-${{ matrix.ruby }}-gems-${{ hashFiles('config.gemspec', 'gemfiles/**') }}
           restore-keys: |
             ruby-${{ matrix.ruby }}-gems-
 
       - name: Prepare environment
         run: |
           sudo apt-get -y install libsqlite3-dev libxslt1-dev
-          gem uninstall bundler -v '>= 2' -ax --force || true
-          gem install bundler -v '~>1.0' -N || true
-          echo "::set-env name=BUNDLER_VERSION::$(bundle -v | grep -o -P '\d+\.\d+.\d+')"
 
       - name: Install
         run: |

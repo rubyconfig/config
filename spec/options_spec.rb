@@ -14,6 +14,7 @@ describe Config::Options do
       expect(config.zip).to eq('cherry')
       expect(config.max).to eq('kumquat')
       expect(config.min).to eq('fig')
+      expect(config.exit!).to eq('taro')
     end
 
     it 'should allow to access them using [] operator' do
@@ -23,6 +24,7 @@ describe Config::Options do
       expect(config['zip']).to eq('cherry')
       expect(config['max']).to eq('kumquat')
       expect(config['min']).to eq('fig')
+      expect(config['exit!']).to eq('taro')
 
       expect(config[:select]).to eq('apple')
       expect(config[:collect]).to eq('banana')
@@ -30,6 +32,7 @@ describe Config::Options do
       expect(config[:zip]).to eq('cherry')
       expect(config[:max]).to eq('kumquat')
       expect(config[:min]).to eq('fig')
+      expect(config[:exit!]).to eq('taro')
     end
   end
 
@@ -221,4 +224,19 @@ describe Config::Options do
 
   end
 
+  context 'when calling #as_json' do
+    it 'should return a Hash of the keys and values' do
+      unless defined?(::Rails)
+        skip <<~REASON
+          Config::Options#as_json raises a runtime error unless Active Support
+          Core Extensions are loaded. We don't expect users to call this method
+          at all if they're not using AS, so we disable this test except when
+          running the suite against Rails.
+        REASON
+      end
+
+      options = Config::Options.new(foo: :bar)
+      expect(options.as_json).to eq({ 'foo' => 'bar' })
+    end
+  end
 end

@@ -42,7 +42,6 @@ module Config
     end
 
     config.load!
-    config.load_env! if use_env
     config
   end
 

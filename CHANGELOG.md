@@ -2,9 +2,16 @@
 
 ## Unreleased
 
+### Bug fixes
+
+* Added alias to_h for to_hash ([#277](https://github.com/railsconfig/config/issues/277))
+* Prevent unnecessary doubled loading of environment variables ([#291](https://github.com/rubyconfig/config/pull/291))
+* Return `Hash` from `Config::Options#as_json` instead of `Array` of pairs when using ActiveSupport Core Extensions ([#292](https://github.com/rubyconfig/config/pull/292))
+
 ### Changes
 
 * Add JRuby 9.2 to the test matrix ([#228](https://github.com/railsconfig/config/issues/228))
+* Add exit! to reserved keywords ([#289](https://github.com/railsconfig/config/issues/289))
 
 ## 2.2.1
 
