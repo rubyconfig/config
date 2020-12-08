@@ -10,7 +10,7 @@
 
 ### Changes
 
-* Add ability to specify the environment for Rails apps ([#290](https://github.com/rubyconfig/config/pull/290))
+* Add option to specify environment (default: `RAILS_ENV`) ([#290](https://github.com/rubyconfig/config/pull/290))
 * Add JRuby 9.2 to the test matrix ([#228](https://github.com/railsconfig/config/issues/228))
 * Add exit! to reserved keywords ([#289](https://github.com/railsconfig/config/issues/289))
 
