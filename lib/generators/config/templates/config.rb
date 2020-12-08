@@ -15,8 +15,8 @@ Config.setup do |config|
   #
   # config.overwrite_arrays = true
 
-  # Use a different method of determining the current environment for rails applications
-  # defaults to ::Rails.env
+  # Defines current environment, affecting which settings file will be loaded.
+  # Default: `::Rails.env`
   # config.environment = ENV.fetch('ENVIRONMENT', :development)
 
   # Load environment variables from the `ENV` object and override any settings defined in files.
@@ -55,5 +55,4 @@ Config.setup do |config|
   #   required(:age).maybe(:int?)
   #   required(:email).filled(format?: EMAIL_REGEX)
   # end
-
 end
