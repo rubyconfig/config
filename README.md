@@ -267,7 +267,7 @@ After installing `Config` in Rails, you will find automatically generated file t
 ### General
 
 * `const_name` - name of the object holing you settings. Default: `'Settings'`
-* `environment` - value for specifying the environment - currently only affects Rails applications. Default: `Rails.env`
+* `environment` - define current environment, affecting which settings file will be loaded. Default: `Rails.env`
 
 ### Merge customization
 
