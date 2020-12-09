@@ -123,8 +123,6 @@ module Config
       result
     end
 
-    alias :to_h :to_hash
-
     def each(*args, &block)
       marshal_dump.each(*args, &block)
     end
