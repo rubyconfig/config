@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+...
+
+## 2.2.3
+
 ### Bug fixes
 
 * Revert added alias to_h for to_hash ([#277](https://github.com/railsconfig/config/issues/277))
