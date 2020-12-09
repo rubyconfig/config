@@ -213,5 +213,12 @@ describe Config::Options do
       expect(config.new_var).to eq('value')
     end
 
+    context 'and env variable names conflict with existing namespaces' do
+      it 'should allow overriding the namespace' do
+        ENV['Settings.databases'] = 'new databases'
+
+        expect(config.databases).to eq('new databases')
+      end
+    end
   end
 end
