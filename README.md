@@ -190,8 +190,9 @@ Settings.add_source!("#{Rails.root}/config/settings/local.yml")
 Settings.reload!
 ```
 
-> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml,
-settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
+> Note: this is an example usage, it is easier to just use the default local
+> files `settings.local.yml`, `settings/#{Rails.env}.local.yml` and
+> `environments/#{Rails.env}.local.yml` for your developer specific settings.
 
 You also have the option to add a raw hash as a source. One use case might be storing settings in the database or in environment variables that overwrite what is in the YML files.
 
