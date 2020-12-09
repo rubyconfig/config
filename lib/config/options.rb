@@ -59,6 +59,11 @@ module Config
           h[key] ||= {}
         }
 
+        unless leaf.is_a?(Hash)
+          conflicting_key = (prefix + keys[0...-1]).join(separator)
+          raise "Environment variable #{variable} conflicts with variable #{conflicting_key}"
+        end
+
         leaf[keys.last] = Config.env_parse_values ? __value(value) : value
       end
 
