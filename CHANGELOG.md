@@ -2,7 +2,13 @@
 
 ## Unreleased
 
+### Bug fixes
+
 ...
+
+### Changes
+
+* Raise explicit error on environment variable conflicts ([#293](https://github.com/railsconfig/config/issues/293))
 
 ## 2.2.2
 

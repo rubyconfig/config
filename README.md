@@ -190,8 +190,9 @@ Settings.add_source!("#{Rails.root}/config/settings/local.yml")
 Settings.reload!
 ```
 
-> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml,
-settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
+> Note: this is an example usage, it is easier to just use the default local
+> files `settings.local.yml`, `settings/#{Rails.env}.local.yml` and
+> `environments/#{Rails.env}.local.yml` for your developer specific settings.
 
 You also have the option to add a raw hash as a source. One use case might be storing settings in the database or in environment variables that overwrite what is in the YML files.
 
@@ -418,6 +419,21 @@ ENV['Settings.section.server'] = 'google.com'
 ```
 
 It won't work with arrays, though.
+
+It is considered an error to use environment variables to simutaneously assign a "flat" value and a multi-level value to a key.
+
+```ruby
+# Raises an error when settings are loaded
+ENV['BACKEND_DATABASE'] = 'development'
+ENV['BACKEND_DATABASE_USER'] = 'postgres'
+```
+
+Instead, specify keys of equal depth in the environment variable names:
+
+```ruby
+ENV['BACKEND_DATABASE_NAME'] = 'development'
+ENV['BACKEND_DATABASE_USER'] = 'postgres'
+```
 
 ### Working with Heroku
 

@@ -213,5 +213,23 @@ describe Config::Options do
       expect(config.new_var).to eq('value')
     end
 
+    context 'and env variable names conflict with new namespaces' do
+      it 'should throw a descriptive error message' do
+        ENV['Settings.backend_database'] = 'development'
+        ENV['Settings.backend_database.user'] = 'postgres'
+
+        expected_message = 'Environment variable Settings.backend_database.user '\
+          'conflicts with variable Settings.backend_database'
+        expect { config }.to raise_error(RuntimeError, expected_message)
+      end
+    end
+
+    context 'and env variable names conflict with existing namespaces' do
+      it 'should allow overriding the namespace' do
+        ENV['Settings.databases'] = 'new databases'
+
+        expect(config.databases).to eq('new databases')
+      end
+    end
   end
 end
