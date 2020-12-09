@@ -420,6 +420,21 @@ ENV['Settings.section.server'] = 'google.com'
 
 It won't work with arrays, though.
 
+It is considered an error to use environment variables to simutaneously assign a "flat" value and a multi-level value to a key.
+
+```ruby
+# Raises an error when settings are loaded
+ENV['BACKEND_DATABASE'] = 'development'
+ENV['BACKEND_DATABASE_USER'] = 'postgres'
+```
+
+Instead, specify keys of equal depth in the environment variable names:
+
+```ruby
+ENV['BACKEND_DATABASE_NAME'] = 'development'
+ENV['BACKEND_DATABASE_USER'] = 'postgres'
+```
+
 ### Working with Heroku
 
 Heroku uses ENV object to store sensitive settings. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh. To use config with Heroku just set the `use_env` var to `true` as mentioned above.
