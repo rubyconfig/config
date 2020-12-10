@@ -239,4 +239,18 @@ describe Config::Options do
       expect(options.as_json).to eq({ 'foo' => 'bar' })
     end
   end
+
+  context 'parsing values' do
+    let(:config) do
+      Config.load_files("#{fixture_path}/settings.yml")
+    end
+
+    it 'should return number when its specified without quotes' do
+      expect(config['size']).to eq(1)
+    end
+
+    it 'should return string when number specified with quotes' do
+      expect(config['number_in_quotes']).to eq("2.56")
+    end
+  end
 end
