@@ -2,7 +2,13 @@
 
 ## Unreleased
 
-...
+### BREAKING CHANGES
+
+After upgrade behaviour of `to_h` would change and match behaviour of `to_hash`. Check [#217](https://github.com/rubyconfig/config/issues/217#issuecomment-741953382) for more details.
+
+### Bug fixes
+
+* Added alias `to_h` for `to_hash` ([#277](https://github.com/railsconfig/config/issues/277))
 
 ## 2.2.3
 
