@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Config::Options do
+  before :each do
+    Config.reset
+  end
 
   context 'when Settings file is using keywords reserved for OpenStruct' do
     let(:config) do
@@ -127,8 +130,6 @@ describe Config::Options do
   end
 
   context 'when fail_on_missing option' do
-    before { Config.reset }
-
     context 'is set to true' do
       before { Config.setup { |cfg| cfg.fail_on_missing = true } }
 
@@ -190,8 +191,6 @@ describe Config::Options do
   end
 
   context 'when merge_hash_arrays options' do
-    before { Config.reset }
-
     context 'is set to true' do
       before { Config.setup { |cfg|
         cfg.overwrite_arrays = false
