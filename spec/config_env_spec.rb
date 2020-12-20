@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Config::Options do
+  before :each do
+    Config.reset
+  end
+
   context 'when overriding settings via ENV variables is enabled' do
     let(:config) do
       Config.load_files "#{fixture_path}/settings.yml", "#{fixture_path}/multilevel.yml"
-    end
-
-    before :all do
-      Config.use_env = true
     end
 
     after :all do
@@ -17,10 +17,11 @@ describe Config::Options do
     before :each do
       ENV.clear
 
-      Config.env_prefix       = nil
-      Config.env_separator    = '.'
-      Config.env_converter    = :downcase
-      Config.env_parse_values = true
+      Config.use_env              = true
+      Config.env_prefix           = nil
+      Config.env_separator        = '.'
+      Config.env_converter        = :downcase
+      Config.env_parse_values     = true
     end
 
     it 'should add new setting from ENV variable' do
