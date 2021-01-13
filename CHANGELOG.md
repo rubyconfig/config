@@ -5,10 +5,15 @@
 ### BREAKING CHANGES
 
 After upgrade behaviour of `to_h` would change and match behaviour of `to_hash`. Check [#217](https://github.com/rubyconfig/config/issues/217#issuecomment-741953382) for more details.
+`Config::Options#load_env!` and `Config::Options#reload_env!` have been removed. If you need to reload settings after modifying the `ENV` hash, use `Config.reload!` or `Config::Options#reload!` instead.
 
 ### Bug fixes
 
 * Added alias `to_h` for `to_hash` ([#277](https://github.com/railsconfig/config/issues/277))
+
+### Changes
+
+* Add `Config::Sources::EnvSource` for loading settings from flat `Hash`es with `String` keys and `String` values ([#299](https://github.com/railsconfig/config/pull/299))
 
 ## 2.2.3
 
