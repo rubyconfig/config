@@ -40,9 +40,7 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
     gems_to_install = /gem "(.*?)", "(.*?)"(?:, platform: \:(.*))?/
 
     File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(gems_to_install) do |name, version, platform|
-      if platform.nil?
-        s.add_development_dependency name, version
-      elsif platform.to_s == RUBY_ENGINE
+      if platform.nil? || platform.to_s == RUBY_ENGINE
         s.add_development_dependency name, version
       end
     end
