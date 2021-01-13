@@ -2,8 +2,21 @@ module Config
   module Sources
     # Allows settings to be loaded from a "flat" hash with string keys, like ENV.
     class EnvSource
-      def initialize(env)
+      attr_reader :prefix
+      attr_reader :separator
+      attr_reader :converter
+      attr_reader :parse_values
+
+      def initialize(env,
+                     prefix: Config.env_prefix || Config.const_name,
+                     separator: Config.env_separator,
+                     converter: Config.env_converter,
+                     parse_values: Config.env_parse_values)
         @env = env
+        @prefix = prefix.to_s.split(separator)
+        @separator = separator
+        @converter = converter
+        @parse_values = parse_values
       end
 
       def load
@@ -12,21 +25,18 @@ module Config
         hash = Hash.new
 
         @env.each do |variable, value|
-          separator = Config.env_separator
-          prefix = (Config.env_prefix || Config.const_name).to_s.split(separator)
-
           keys = variable.to_s.split(separator)
 
           next if keys.shift(prefix.size) != prefix
 
           keys.map! { |key|
-            case Config.env_converter
+            case converter
               when :downcase then
                 key.downcase
               when nil then
                 key
               else
-                raise "Invalid ENV variables name converter: #{Config.env_converter}"
+                raise "Invalid ENV variables name converter: #{converter}"
             end
           }
 
@@ -39,7 +49,7 @@ module Config
             raise "Environment variable #{variable} conflicts with variable #{conflicting_key}"
           end
 
-          leaf[keys.last] = Config.env_parse_values ? __value(value) : value
+          leaf[keys.last] = parse_values ? __value(value) : value
         end
 
         hash
