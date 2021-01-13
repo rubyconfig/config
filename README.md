@@ -480,6 +480,50 @@ Settings.section.server # => 'google.com'
 Settings.section.ssl_enabled # => false
 ```
 
+### Working with AWS Secrets Manager
+
+It is possible to parse variables stored in an AWS Secrets Manager Secret as if they were environment variables by using `Config::Sources::EnvSource`.
+
+For example, the plaintext secret might look like this:
+
+```json
+{
+  "Settings.foo": "hello",
+  "Settings.bar": "world",
+}
+```
+
+In order to load those settings, fetch the settings from AWS Secrets Manager, parse the plaintext as JSON, pass the resulting `Hash` into a new `EnvSource`, load the new source, and reload.
+
+```ruby
+# fetch secrets from AWS
+client = Aws::SecretsManager::Client.new
+response = client.get_secret_value(secret_id: "#{ENV['ENVIRONMENT']}/my_application")
+secrets = JSON.parse(response.secret_string)
+
+# load secrets into config
+secret_source = Config::Sources::EnvSource.new(secrets)
+Settings.add_source!(secret_source)
+Settings.reload!
+```
+
+In this case, the following settings will be available:
+
+```ruby
+Settings.foo # => "hello"
+Settings.bar # => "world"
+```
+
+By default, `EnvSource` will use configuration for `env_prefix`, `env_separator`, `env_converter`, and `env_parse_values`, but any of these can be overridden in the constructor.
+
+```ruby
+secret_source = Config::Sources::EnvSource.new(secrets,
+                                               prefix: 'MyConfig',
+                                               separator: '__',
+                                               converter: nil,
+                                               parse_values: false)
+```
+
 ## Contributing
 
 You are very warmly welcome to help. Please follow our [contribution guidelines](CONTRIBUTING.md)
