@@ -2,10 +2,14 @@
 
 ## Unreleased
 
+...
+
+## 3.0.0
+
 ### BREAKING CHANGES
 
-After upgrade behaviour of `to_h` would change and match behaviour of `to_hash`. Check [#217](https://github.com/rubyconfig/config/issues/217#issuecomment-741953382) for more details.
-`Config::Options#load_env!` and `Config::Options#reload_env!` have been removed. If you need to reload settings after modifying the `ENV` hash, use `Config.reload!` or `Config::Options#reload!` instead.
+* After upgrade behaviour of `to_h` would change and match behaviour of `to_hash`. Check [#217](https://github.com/rubyconfig/config/issues/217#issuecomment-741953382) for more details.
+* `Config::Options#load_env!` and `Config::Options#reload_env!` have been removed. If you need to reload settings after modifying the `ENV` hash, use `Config.reload!` or `Config::Options#reload!` instead.
 
 ### Bug fixes
 
