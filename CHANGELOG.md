@@ -17,7 +17,7 @@
 
 ### Changes
 
-* Add `Config::Sources::EnvSource` for loading settings from flat `Hash`es with `String` keys and `String` values ([#299](https://github.com/railsconfig/config/pull/299))
+* Add `Config::Sources::EnvSource` for loading settings from flat `Hash`es with `String` keys and `String` values, such as from AWS SecretsManager ([#299](https://github.com/railsconfig/config/pull/299))
 
 ## 2.2.3
 
