@@ -14,18 +14,18 @@ module Config
       marshal_dump.empty?
     end
 
-    def add_source!(source)
+    def add_source!(source, namespace = nil)
       # handle yaml file paths
-      source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
-      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
+      source = (Sources::YAMLSource.new(source, namespace)) if source.is_a?(String)
+      source = (Sources::HashSource.new(source, namespace)) if source.is_a?(Hash)
 
       @config_sources ||= []
       @config_sources << source
     end
 
-    def prepend_source!(source)
-      source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
-      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
+    def prepend_source!(source, namespace = nil)
+      source = (Sources::YAMLSource.new(source, namespace)) if source.is_a?(String)
+      source = (Sources::HashSource.new(source, namespace)) if source.is_a?(Hash)
 
       @config_sources ||= []
       @config_sources.unshift(source)
