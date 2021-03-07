@@ -37,7 +37,6 @@ module Config::Sources
 
       it "should properly read nested settings" do
         results = source.load
-        pp results
         expect(results['test_namespace']["section"]["size"]).to eq(3)
         expect(results['test_namespace']["section"]["servers"]).to be_instance_of(Array)
         expect(results['test_namespace']["section"]["servers"].size).to eq(2)
