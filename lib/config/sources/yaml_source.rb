@@ -24,7 +24,7 @@ module Config
         
         # Resolves namespacing multiple layers deep 
         # i.e. ['layer1', 'layer2'] comes out to {'layer1' => {'layer2' => content}}
-        return  result = @namespace.reverse.inject(result) { |a, n| { n => a } }
+        return @namespace.reverse.inject(result) { |a, n| { n => a } }
         
 
         rescue Psych::SyntaxError => e
