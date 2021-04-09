@@ -205,7 +205,9 @@ You may pass a hash to `prepend_source!` as well.
 
 ## Embedded Ruby (ERB)
 
-Embedded Ruby is allowed in the configuration files. Consider the two following config files.
+Embedded Ruby is allowed in the YAML configuration files. ERB will be evaluated at load time by default, and when the `evaluate_erb_in_yaml` configuration is set to `true`.
+
+Consider the two following config files.
 
 * ```#{Rails.root}/config/settings.yml```
 
@@ -266,6 +268,7 @@ After installing `Config` in Rails, you will find automatically generated file t
 ### General
 
 * `const_name` - name of the object holing you settings. Default: `'Settings'`
+* `evaluate_erb_in_yaml` - evaluate ERB in YAML config files. Set to false if the config file contains ERB that should not be evaluated at load time. Default: `true`
 
 ### Merge customization
 

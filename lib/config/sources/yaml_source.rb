@@ -12,7 +12,11 @@ module Config
 
       # returns a config hash from the YML file
       def load
-        result = YAML.load(ERB.new(IO.read(@path)).result) if @path and File.exist?(@path)
+        if @path and File.exist?(@path)
+          file_contents = IO.read(@path)
+          file_contents = ERB.new(file_contents).result if Config.evaluate_erb_in_yaml
+          result = YAML.load(file_contents)
+        end
 
         result || {}
 
