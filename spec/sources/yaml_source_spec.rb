@@ -27,7 +27,7 @@ module Config::Sources
 
     context "yml file with erb tags" do
       let(:source) do
-        YAMLSource.new "#{fixture_path}/with_erb.yml"
+        YAMLSource.new("#{fixture_path}/with_erb.yml")
       end
 
       it "should properly evaluate the erb" do
@@ -43,7 +43,7 @@ module Config::Sources
 
       context "with malformed erb tags" do
         let(:source) do
-          YAMLSource.new "#{fixture_path}/with_malformed_erb.yml"
+          YAMLSource.new("#{fixture_path}/with_malformed_erb.yml")
         end
 
         it "should properly evaluate the erb" do
@@ -56,14 +56,7 @@ module Config::Sources
 
     context "yaml file with erb tags but erb disabled" do
       let(:source) do
-        YAMLSource.new "#{fixture_path}/with_erb.yml"
-      end
-
-      around do |example|
-        original_evaluate_erb_in_yaml = Config.evaluate_erb_in_yaml
-        Config.evaluate_erb_in_yaml = false
-        example.run
-        Config.evaluate_erb_in_yaml = original_evaluate_erb_in_yaml
+        YAMLSource.new("#{fixture_path}/with_erb.yml", evaluate_erb: false)
       end
 
       it "should load the file and leave the erb without being evaluated" do
@@ -72,9 +65,28 @@ module Config::Sources
         expect(results["section"]["computed1"]).to eq("<%= \"1\" %>")
       end
 
+      context "with global config" do
+        let(:source) do
+          YAMLSource.new("#{fixture_path}/with_erb.yml")
+        end
+
+        around do |example|
+          original_evaluate_erb_in_yaml = Config.evaluate_erb_in_yaml
+          Config.evaluate_erb_in_yaml = false
+          example.run
+          Config.evaluate_erb_in_yaml = original_evaluate_erb_in_yaml
+        end
+
+        it "should load the file and leave the erb without being evaluated" do
+          results = source.load
+          expect(results["computed"]).to eq("<%= 1 + 2 + 3 %>")
+          expect(results["section"]["computed1"]).to eq("<%= \"1\" %>")
+        end
+      end
+
       context "with malformed erb tags" do
         let(:source) do
-          YAMLSource.new "#{fixture_path}/with_malformed_erb.yml"
+          YAMLSource.new("#{fixture_path}/with_malformed_erb.yml", evaluate_erb: false)
         end
 
         it "should properly evaluate the erb" do
