@@ -5,14 +5,20 @@ module Config
   module Sources
     class YAMLSource
       attr_accessor :path
+      attr_reader :evaluate_erb
 
-      def initialize(path)
+      def initialize(path, evaluate_erb: Config.evaluate_erb_in_yaml)
         @path = path.to_s
+        @evaluate_erb = !!evaluate_erb
       end
 
       # returns a config hash from the YML file
       def load
-        result = YAML.load(ERB.new(IO.read(@path)).result) if @path and File.exist?(@path)
+        if @path and File.exist?(@path)
+          file_contents = IO.read(@path)
+          file_contents = ERB.new(file_contents).result if evaluate_erb
+          result = YAML.load(file_contents)
+        end
 
         result || {}
 
