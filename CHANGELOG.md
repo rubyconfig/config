@@ -4,6 +4,12 @@
 
 ...
 
+## 3.1.0
+
+### New features
+
+* Evaluating ERB in YAML files can now be disabled with `Config.evaluate_erb_in_yaml = false`. The default value for this option is `true` for backwards-compatibility. ([#303](https://github.com/rubyconfig/config/pull/303))
+
 ## 3.0.0
 
 ### BREAKING CHANGES
