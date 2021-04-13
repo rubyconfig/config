@@ -16,7 +16,7 @@ describe Config::Options do
 
     before :each do
       ENV.clear
-
+      MyRailtie::Railtie.initializers.each(&:run)
       Config.use_env              = true
       Config.env_prefix           = nil
       Config.env_separator        = '.'
