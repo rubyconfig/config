@@ -1,0 +1,6 @@
+##
+# Settings for Rails database.yml
+#
+databases:
+  stage:
+    database: db/stage.sqlite3
