@@ -52,6 +52,8 @@ which will generate customizable config file `config/initializers/config.rb` and
 
 You can now edit them to adjust to your needs.
 
+> Note: By default, the config environment will match the Rails environment (`Rails.env`). This can be changed by setting `config.environment`.
+
 ### Installing on Padrino
 
 Add the gem to your `Gemfile` and run `bundle install` to install it. Then edit `app.rb` and register `Config`
@@ -269,6 +271,7 @@ After installing `Config` in Rails, you will find automatically generated file t
 
 * `const_name` - name of the object holing you settings. Default: `'Settings'`
 * `evaluate_erb_in_yaml` - evaluate ERB in YAML config files. Set to false if the config file contains ERB that should not be evaluated at load time. Default: `true`
+* `environment` - define current environment, affecting which settings file will be loaded. Default: `Rails.env`
 
 ### Merge customization
 
