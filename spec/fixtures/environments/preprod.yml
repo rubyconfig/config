@@ -1,6 +1,0 @@
-##
-# Settings for Rails database.yml
-#
-databases:
-  preprod:
-    database: db/preprod.sqlite3
