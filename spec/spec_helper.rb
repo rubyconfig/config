@@ -3,6 +3,10 @@ ENV['RAILS_ENV'] ||= 'test'
 puts "RUBY_ENGINE: #{RUBY_ENGINE}"
 puts "RUBY_VERSION: #{RUBY_VERSION}\n\n"
 
+# Set the env var that will be used in the config.rb initializer
+# to set a non rails env - ANY_ENV can be any value: stage, preprod ...
+ENV['NON_RAILS_ENVIRONMENT'] = 'ANY_ENV'
+
 ##
 # Code Climate
 #
@@ -22,7 +26,7 @@ Dir['./spec/support/**/*.rb'].each { |f| require f }
 if ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
   app_name = Pathname.new(ENV['BUNDLE_GEMFILE']).basename.sub('.gemfile', '')
 else
-  /.*?(?<app_name>rails.*?)\.gemfile/ =~ Dir["gemfiles/rails*.gemfile"].sort.last
+  /.*?(?<app_name>rails.*?)\.gemfile/ =~ Dir["gemfiles/rails*.gemfile"].sort.first
 end
 
 ##
