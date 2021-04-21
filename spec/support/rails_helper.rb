@@ -14,7 +14,7 @@ end
 def config_available?
   where = caller[0].split(':')[0].gsub(File.expand_path(File.dirname(__FILE__)), '')
 
-  if defined?(::Settings)
+  if defined?(::Settings) || defined?(::RailtieSettings)
     puts "Config available in #{where}"
   else
     raise "Config not available in #{where}"
