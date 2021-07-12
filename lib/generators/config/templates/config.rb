@@ -55,4 +55,8 @@ Config.setup do |config|
   #   required(:age).maybe(:int?)
   #   required(:email).filled(format?: EMAIL_REGEX)
   # end
+
+  # Evaluate ERB in YAML config files at load time.
+  #
+  # config.evaluate_erb_yaml = true
 end

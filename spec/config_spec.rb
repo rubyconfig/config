@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Config do
+  before :each do
+    Config.reset
+  end
 
   it "should get setting files" do
     config = Config.setting_files("root/config", "staging")
@@ -349,15 +352,12 @@ describe Config do
     context 'using knockout_prefix' do
       context 'in configuration phase' do
         it 'should be able to assign a different knockout_prefix value' do
-          Config.reset
           Config.knockout_prefix = '--'
 
           expect(Config.knockout_prefix).to eq('--')
         end
 
         it 'should have the default knockout_prefix value equal nil' do
-          Config.reset
-
           expect(Config.knockout_prefix).to eq(nil)
         end
       end
@@ -389,15 +389,12 @@ describe Config do
     context 'using overwrite_arrays' do
       context 'in configuration phase' do
         it 'should be able to assign a different overwrite_arrays value' do
-          Config.reset
           Config.overwrite_arrays = false
 
           expect(Config.overwrite_arrays).to eq(false)
         end
 
         it 'should have the default overwrite_arrays value equal false' do
-          Config.reset
-
           expect(Config.overwrite_arrays).to eq(true)
         end
       end

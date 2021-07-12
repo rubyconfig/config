@@ -12,6 +12,7 @@ databases:
 # ...
 #
 size: 1
+number_in_quotes: "2.56"
 server: google.com
 1: "one"
 photo_sizes:

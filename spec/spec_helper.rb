@@ -77,6 +77,7 @@ RSpec.configure do |config|
         self.overwrite_arrays     = true
         self.schema               = nil
         self.validation_contract  = nil
+        self.fail_on_missing      = false
         instance_variable_set(:@_ran_once, false)
       end
     end

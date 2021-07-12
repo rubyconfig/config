@@ -4,6 +4,37 @@
 
 ...
 
+## 3.1.0
+
+### New features
+
+* Evaluating ERB in YAML files can now be disabled with `Config.evaluate_erb_in_yaml = false`. The default value for this option is `true` for backwards-compatibility. ([#303](https://github.com/rubyconfig/config/pull/303))
+
+## 3.0.0
+
+### BREAKING CHANGES
+
+* After upgrade behaviour of `to_h` would change and match behaviour of `to_hash`. Check [#217](https://github.com/rubyconfig/config/issues/217#issuecomment-741953382) for more details.
+* `Config::Options#load_env!` and `Config::Options#reload_env!` have been removed. If you need to reload settings after modifying the `ENV` hash, use `Config.reload!` or `Config::Options#reload!` instead.
+
+### Bug fixes
+
+* Added alias `to_h` for `to_hash` ([#277](https://github.com/railsconfig/config/issues/277))
+
+### Changes
+
+* Add `Config::Sources::EnvSource` for loading settings from flat `Hash`es with `String` keys and `String` values, such as from AWS SecretsManager ([#299](https://github.com/railsconfig/config/pull/299))
+
+## 2.2.3
+
+### Bug fixes
+
+* Revert added alias to_h for to_hash ([#277](https://github.com/railsconfig/config/issues/277))
+
+### Changes
+
+* Raise explicit error on environment variable conflicts ([#293](https://github.com/railsconfig/config/issues/293))
+
 ## 2.2.2
 
 ### Bug fixes

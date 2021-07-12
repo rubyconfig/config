@@ -4,6 +4,7 @@ require 'config/configuration'
 require 'config/version'
 require 'config/sources/yaml_source'
 require 'config/sources/hash_source'
+require 'config/sources/env_source'
 require 'config/validation/schema'
 require 'deep_merge'
 
@@ -25,6 +26,7 @@ module Config
     merge_hash_arrays: false,
     validation_contract: nil,
     environment: nil
+    evaluate_erb_in_yaml: true
   )
 
   def self.setup
@@ -41,6 +43,8 @@ module Config
     [files].flatten.compact.uniq.each do |file|
       config.add_source!(file.to_s)
     end
+
+    config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
 
     config.load!
     config

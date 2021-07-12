@@ -31,42 +31,6 @@ module Config
       @config_sources.unshift(source)
     end
 
-    def reload_env!
-      return self if ENV.nil? || ENV.empty?
-
-      hash = Hash.new
-
-      ENV.each do |variable, value|
-        separator = Config.env_separator
-        prefix = (Config.env_prefix || Config.const_name).to_s.split(separator)
-
-        keys = variable.to_s.split(separator)
-
-        next if keys.shift(prefix.size) != prefix
-
-        keys.map! { |key|
-          case Config.env_converter
-            when :downcase then
-              key.downcase.to_sym
-            when nil then
-              key.to_sym
-            else
-              raise "Invalid ENV variables name converter: #{Config.env_converter}"
-          end
-        }
-
-        leaf = keys[0...-1].inject(hash) { |h, key|
-          h[key] ||= {}
-        }
-
-        leaf[keys.last] = Config.env_parse_values ? __value(value) : value
-      end
-
-      merge!(hash)
-    end
-
-    alias :load_env! :reload_env!
-
     # look through all our sources and rebuild the configuration
     def reload!
       conf = {}
@@ -91,7 +55,6 @@ module Config
       # swap out the contents of the OStruct with a hash (need to recursively convert)
       marshal_load(__convert(conf).marshal_dump)
 
-      reload_env! if Config.use_env
       validate!
 
       self
@@ -217,18 +180,6 @@ module Config
         s[k] = v
       end
       s
-    end
-
-    # Try to convert string to a correct type
-    def __value(v)
-      case v
-      when 'false'
-        false
-      when 'true'
-        true
-      else
-        Integer(v) rescue Float(v) rescue v
-      end
     end
   end
 end

@@ -1,9 +1,9 @@
 # Config
 
-[![Gem Version](https://badge.fury.io/rb/config.svg)](http://badge.fury.io/rb/config)
+[![Version](https://img.shields.io/gem/v/config)](https://rubygems.org/gems/config)
+[![Downloads Total](https://img.shields.io/gem/dt/config)](https://rubygems.org/gems/config)
+[![Build](https://img.shields.io/github/workflow/status/rubyconfig/config/tests)](https://rubygems.org/gems/config)
 [![Tests](https://github.com/rubyconfig/config/workflows/tests/badge.svg)](https://github.com/rubyconfig/config/actions?query=branch%3Amaster)
-[![Maintainability](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/maintainability)](https://codeclimate.com/github/rubyconfig/config/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/85c206c13dce7de090af/test_coverage)](https://codeclimate.com/github/rubyconfig/config/test_coverage)
 [![Financial Contributors on Open Collective](https://opencollective.com/rubyconfig/all/badge.svg?label=backers)](https://opencollective.com/rubyconfig)
 
 ## Summary
@@ -12,25 +12,25 @@ Config helps you easily manage environment specific settings in an easy and usab
 
 ## Features
 
-* simple YAML config files
-* config files support ERB
-* config files support inheritance and multiple environments
-* access config information via convenient object member notation
-* support for multi-level settings (`Settings.group.subgroup.setting`)
-* local developer settings ignored when committing the code
+- simple YAML config files
+- config files support ERB
+- config files support inheritance and multiple environments
+- access config information via convenient object member notation
+- support for multi-level settings (`Settings.group.subgroup.setting`)
+- local developer settings ignored when committing the code
 
 ## Compatibility
 
 Current version supports and is [tested](.github/workflows/tests.yml#L19) for the following interpreters and frameworks:
 
-* Interpreters
-  * [Ruby](https://www.ruby-lang.org) `>= 2.4`
-  * [JRuby](https://www.jruby.org) `>= 9.2`
-  * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.3`
-* Application frameworks
-  * Rails `>= 4.2`, `5` and `6`
-  * Padrino
-  * Sinatra
+- Interpreters
+  - [Ruby](https://www.ruby-lang.org) `>= 2.4`
+  - [JRuby](https://www.jruby.org) `>= 9.2`
+  - [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.3`
+- Application frameworks
+  - Rails `>= 4.2`, `5` and `6`
+  - Padrino
+  - Sinatra
 
 For Ruby `2.0` to `2.3` or Rails `3` to `4.1` use version `1.x` of this gem. For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
 
@@ -192,8 +192,9 @@ Settings.add_source!("#{Rails.root}/config/settings/local.yml")
 Settings.reload!
 ```
 
-> Note: this is an example usage, it is easier to just use the default local files `settings.local.yml,
-settings/#{Rails.env}.local.yml and environments/#{Rails.env}.local.yml` for your developer specific settings.
+> Note: this is an example usage, it is easier to just use the default local
+> files `settings.local.yml`, `settings/#{Rails.env}.local.yml` and
+> `environments/#{Rails.env}.local.yml` for your developer specific settings.
 
 You also have the option to add a raw hash as a source. One use case might be storing settings in the database or in environment variables that overwrite what is in the YML files.
 
@@ -206,23 +207,25 @@ You may pass a hash to `prepend_source!` as well.
 
 ## Embedded Ruby (ERB)
 
-Embedded Ruby is allowed in the configuration files. Consider the two following config files.
+Embedded Ruby is allowed in the YAML configuration files. ERB will be evaluated at load time by default, and when the `evaluate_erb_in_yaml` configuration is set to `true`.
 
-* ```#{Rails.root}/config/settings.yml```
+Consider the two following config files.
+
+- `#{Rails.root}/config/settings.yml`
 
 ```yaml
 size: 1
 server: google.com
 ```
 
-* ```#{Rails.root}/config/environments/development.yml```
+- `#{Rails.root}/config/environments/development.yml`
 
 ```yaml
 size: 2
 computed: <%= 1 + 2 + 3 %>
 section:
   size: 3
-  servers: [ {name: yahoo.com}, {name: amazon.com} ]
+  servers: [{ name: yahoo.com }, { name: amazon.com }]
 ```
 
 Notice that the environment specific config entries overwrite the common entries.
@@ -266,15 +269,16 @@ After installing `Config` in Rails, you will find automatically generated file t
 
 ### General
 
-* `const_name` - name of the object holing you settings. Default: `'Settings'`
-* `environment` - define current environment, affecting which settings file will be loaded. Default: `Rails.env`
+- `const_name` - name of the object holing you settings. Default: `'Settings'`
+- `environment` - define current environment, affecting which settings file will be loaded. Default: `Rails.env`
+- `evaluate_erb_in_yaml` - evaluate ERB in YAML config files. Set to false if the config file contains ERB that should not be evaluated at load time. Default: `true`
 
 ### Merge customization
 
-* `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
-* `merge_hash_arrays` - merge hashes inside of arrays from previously loaded settings files. Makes sense only when `overwrite_arrays = false`. Default: `false`
-* `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
-* `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
+- `overwrite_arrays` - overwrite arrays found in previously loaded settings file. Default: `true`
+- `merge_hash_arrays` - merge hashes inside of arrays from previously loaded settings files. Makes sense only when `overwrite_arrays = false`. Default: `false`
+- `knockout_prefix` - ability to remove elements of the array set in earlier loaded settings file. Makes sense only when `overwrite_arrays = false`, otherwise array settings would be overwritten by default. Default: `nil`
+- `merge_nil_values` - `nil` values will overwrite an existing value when merging configs. Default: `true`.
 
 ```ruby
 # merge_nil_values is true by default
@@ -422,6 +426,21 @@ ENV['Settings.section.server'] = 'google.com'
 
 It won't work with arrays, though.
 
+It is considered an error to use environment variables to simutaneously assign a "flat" value and a multi-level value to a key.
+
+```ruby
+# Raises an error when settings are loaded
+ENV['BACKEND_DATABASE'] = 'development'
+ENV['BACKEND_DATABASE_USER'] = 'postgres'
+```
+
+Instead, specify keys of equal depth in the environment variable names:
+
+```ruby
+ENV['BACKEND_DATABASE_NAME'] = 'development'
+ENV['BACKEND_DATABASE_USER'] = 'postgres'
+```
+
 ### Working with Heroku
 
 Heroku uses ENV object to store sensitive settings. You cannot upload such files to Heroku because it's ephemeral filesystem gets recreated from the git sources on each instance refresh. To use config with Heroku just set the `use_env` var to `true` as mentioned above.
@@ -432,12 +451,12 @@ To upload your local values to Heroku you could ran `bundle exec rake config:her
 
 You can customize how environment variables are processed:
 
-* `env_prefix` (default: `const_name`) - load only ENV variables starting with this prefix (case-sensitive)
-* `env_separator` (default: `'.'`)  - what string to use as level separator - default value of `.` works well with   Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using   dots in variable names might not be allowed (eg. Bash)
-* `env_converter` (default: `:downcase`)  - how to process variables names:
-  * `nil` - no change
-  * `:downcase` - convert to lower case
-* `env_parse_values` (default: `true`) - try to parse values to a correct type (`Boolean`, `Integer`, `Float`, `String`)
+- `env_prefix` (default: `const_name`) - load only ENV variables starting with this prefix (case-sensitive)
+- `env_separator` (default: `'.'`) - what string to use as level separator - default value of `.` works well with Heroku, but you might want to change it for example for `__` to easy override settings from command line, where using dots in variable names might not be allowed (eg. Bash)
+- `env_converter` (default: `:downcase`) - how to process variables names:
+  - `nil` - no change
+  - `:downcase` - convert to lower case
+- `env_parse_values` (default: `true`) - try to parse values to a correct type (`Boolean`, `Integer`, `Float`, `String`)
 
 For instance, given the following environment:
 
@@ -467,6 +486,50 @@ Settings.section.server # => 'google.com'
 Settings.section.ssl_enabled # => false
 ```
 
+### Working with AWS Secrets Manager
+
+It is possible to parse variables stored in an AWS Secrets Manager Secret as if they were environment variables by using `Config::Sources::EnvSource`.
+
+For example, the plaintext secret might look like this:
+
+```json
+{
+  "Settings.foo": "hello",
+  "Settings.bar": "world"
+}
+```
+
+In order to load those settings, fetch the settings from AWS Secrets Manager, parse the plaintext as JSON, pass the resulting `Hash` into a new `EnvSource`, load the new source, and reload.
+
+```ruby
+# fetch secrets from AWS
+client = Aws::SecretsManager::Client.new
+response = client.get_secret_value(secret_id: "#{ENV['ENVIRONMENT']}/my_application")
+secrets = JSON.parse(response.secret_string)
+
+# load secrets into config
+secret_source = Config::Sources::EnvSource.new(secrets)
+Settings.add_source!(secret_source)
+Settings.reload!
+```
+
+In this case, the following settings will be available:
+
+```ruby
+Settings.foo # => "hello"
+Settings.bar # => "world"
+```
+
+By default, `EnvSource` will use configuration for `env_prefix`, `env_separator`, `env_converter`, and `env_parse_values`, but any of these can be overridden in the constructor.
+
+```ruby
+secret_source = Config::Sources::EnvSource.new(secrets,
+                                               prefix: 'MyConfig',
+                                               separator: '__',
+                                               converter: nil,
+                                               parse_values: false)
+```
+
 ## Contributing
 
 You are very warmly welcome to help. Please follow our [contribution guidelines](CONTRIBUTING.md)
@@ -475,10 +538,10 @@ Any and all contributions offered in any form, past present or future are unders
 
 ## Authors
 
-* [Piotr Kuczynski](http://github.com/pkuczynski)
-* [Fred Wu](http://github.com/fredwu)
-* [Jacques Crocker](http://github.com/railsjedi)
-* Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
+- [Piotr Kuczynski](http://github.com/pkuczynski)
+- [Fred Wu](http://github.com/fredwu)
+- [Jacques Crocker](http://github.com/railsjedi)
+- Inherited from [AppConfig](http://github.com/cjbottaro/app_config) by [Christopher J. Bottaro](http://github.com/cjbottaro)
 
 ## Contributors
 
