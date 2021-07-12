@@ -25,7 +25,7 @@ module Config
     overwrite_arrays: true,
     merge_hash_arrays: false,
     validation_contract: nil,
-    environment: nil
+    environment: nil,
     evaluate_erb_in_yaml: true
   )
 
