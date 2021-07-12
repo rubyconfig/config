@@ -1,0 +1,8 @@
+#
+# An environment file that doesn't follow
+# the default rails environments
+#
+some_api:
+  scheme: https
+  host: some-non-rails-environment
+  path: /some-path

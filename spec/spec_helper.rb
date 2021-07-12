@@ -1,3 +1,5 @@
+require 'byebug'
+
 ENV['RAILS_ENV'] ||= 'test'
 
 puts "RUBY_ENGINE: #{RUBY_ENGINE}"

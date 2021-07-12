@@ -45,7 +45,6 @@ module Config
     end
 
     config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
-
     config.load!
     config
   end

@@ -269,7 +269,7 @@ After installing `Config` in Rails, you will find automatically generated file t
 
 ### General
 
-- `const_name` - name of the object holing you settings. Default: `'Settings'`
+- `const_name` - name of the object holding you settings. Default: `'Settings'`
 - `environment` - define current environment, affecting which settings file will be loaded. Default: `Rails.env`
 - `evaluate_erb_in_yaml` - evaluate ERB in YAML config files. Set to false if the config file contains ERB that should not be evaluated at load time. Default: `true`
 

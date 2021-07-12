@@ -53,5 +53,6 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
     # Static code analysis to be used locally
     s.add_development_dependency 'mdl', '~> 0.9', '>= 0.9.0'
     s.add_development_dependency 'rubocop', '~> 0.85.0'
+    s.add_development_dependency 'byebug', '~> 11.1.3'
   end
 end

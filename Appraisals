@@ -31,7 +31,7 @@ end
 appraise 'rails-5.2' do
   gem 'activerecord-jdbcsqlite3-adapter', '~> 52.5', platform: :jruby
   gem 'bootsnap', '~> 1.4'
-  gem 'rails', '5.2.4.3'
+  gem 'rails', '5.2.5'
   gem 'rspec-rails', '~> 3.7'
   gem 'sqlite3', '< 1.4.0', platform: :ruby
 end
@@ -41,13 +41,27 @@ if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.5.0') || RUBY_ENGINE != 'ruby'
   appraise 'rails-6.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 60.1', platform: :jruby
     gem 'bootsnap', '~> 1.4'
-    gem 'rails', '6.0.3.1'
+    gem 'rails', '6.0.3.6'
     gem 'rspec-rails', '~> 3.7'
     gem 'sqlite3', '~> 1.4.0', platform: :ruby
   end
 else
   puts 'Skipping rails-6.0 for Ruby < 2.5'
 end
+
+# Rails 6.x requires Ruby >= 2.5.0
+if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.5.0') || RUBY_ENGINE != 'ruby'
+  appraise 'rails-6.1' do
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 60.1', platform: :jruby
+    gem 'bootsnap', '~> 1.4'
+    gem 'rails', '6.1.3.1'
+    gem 'rspec-rails', '~> 3.7'
+    gem 'sqlite3', '~> 1.4.0', platform: :ruby
+  end
+else
+  puts 'Skipping rails-6.0 for Ruby < 2.5'
+end
+
 
 appraise 'sinatra' do
   gem 'sinatra', '2.0.8.1'

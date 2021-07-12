@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe Config::Options do
+  before :all do
+    Config.load_and_set_settings "#{fixture_path}/settings.yml", "#{fixture_path}/multilevel.yml"
+  end
+  
   before :each do
-    Config.reset
+    Config.reset    
   end
 
   context 'when overriding settings via ENV variables is enabled' do
@@ -16,7 +20,6 @@ describe Config::Options do
 
     before :each do
       ENV.clear
-
       Config.use_env              = true
       Config.env_prefix           = nil
       Config.env_separator        = '.'
@@ -208,9 +211,7 @@ describe Config::Options do
       ENV['Settings.new_var'] = 'value'
 
       expect(config.new_var).to eq('value')
-
       Config.reload!
-
       expect(config.new_var).to eq('value')
     end
 
