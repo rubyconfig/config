@@ -1,4 +1,8 @@
-require 'byebug'
+begin
+  require 'byebug'
+rescue LoadError
+  # we don't install this in the ci pipeline
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 
