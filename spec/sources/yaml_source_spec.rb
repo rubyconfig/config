@@ -129,5 +129,15 @@ module Config::Sources
         expect { source.load }.to raise_error(/malformed\.yml/)
       end
     end
+
+    context "unsafe yml file" do
+      let(:source) do
+        YAMLSource.new "#{fixture_path}/unsafe_load.yml"
+      end
+
+      it "should load without any exception" do
+        expect { source.load }.not_to raise_error
+      end
+    end
   end
 end
