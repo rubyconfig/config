@@ -4,6 +4,12 @@
 
 ...
 
+## 3.1.1
+
+### Bug fixes
+
+* Allow the use of unsafe YAML parsing features when using psych >= 4 ([#306](https://github.com/railsconfig/config/issues/306))
+
 ## 3.1.0
 
 ### New features
