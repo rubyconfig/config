@@ -94,5 +94,6 @@ puts 'Version:'
 Gem.loaded_specs.each { |name, spec|
   puts "\t#{name}-#{spec.version}" if %w{rails activerecord-jdbcsqlite3-adapter sqlite3 rspec-rails sinatra}.include?(name)
 }
+puts "\tpsych-#{Psych::VERSION}"
 
 puts
