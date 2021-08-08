@@ -33,6 +33,10 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler: 1
 
+      - name: Update rubygems
+        run: |
+          gem update --system --no-document
+
       - name: Restore cache
         uses: actions/cache@v2
         with:
