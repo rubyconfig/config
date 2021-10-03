@@ -77,6 +77,7 @@ RSpec.configure do |config|
         self.overwrite_arrays     = true
         self.schema               = nil
         self.validation_contract  = nil
+        self.fail_on_missing      = false
         instance_variable_set(:@_ran_once, false)
       end
     end
@@ -93,5 +94,6 @@ puts 'Version:'
 Gem.loaded_specs.each { |name, spec|
   puts "\t#{name}-#{spec.version}" if %w{rails activerecord-jdbcsqlite3-adapter sqlite3 rspec-rails sinatra}.include?(name)
 }
+puts "\tpsych-#{Psych::VERSION}"
 
 puts

@@ -52,4 +52,7 @@ Config.setup do |config|
   #   required(:email).filled(format?: EMAIL_REGEX)
   # end
 
+  # Evaluate ERB in YAML config files at load time.
+  #
+  # config.evaluate_erb_in_yaml = true
 end

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Config::Options do
+  before :each do
+    Config.reset
+  end
+
   context 'when overriding settings via ENV variables is enabled' do
     let(:config) do
       Config.load_files "#{fixture_path}/settings.yml", "#{fixture_path}/multilevel.yml"
-    end
-
-    before :all do
-      Config.use_env = true
     end
 
     after :all do
@@ -17,10 +17,11 @@ describe Config::Options do
     before :each do
       ENV.clear
 
-      Config.env_prefix       = nil
-      Config.env_separator    = '.'
-      Config.env_converter    = :downcase
-      Config.env_parse_values = true
+      Config.use_env              = true
+      Config.env_prefix           = nil
+      Config.env_separator        = '.'
+      Config.env_converter        = :downcase
+      Config.env_parse_values     = true
     end
 
     it 'should add new setting from ENV variable' do
@@ -213,5 +214,23 @@ describe Config::Options do
       expect(config.new_var).to eq('value')
     end
 
+    context 'and env variable names conflict with new namespaces' do
+      it 'should throw a descriptive error message' do
+        ENV['Settings.backend_database'] = 'development'
+        ENV['Settings.backend_database.user'] = 'postgres'
+
+        expected_message = 'Environment variable Settings.backend_database.user '\
+          'conflicts with variable Settings.backend_database'
+        expect { config }.to raise_error(RuntimeError, expected_message)
+      end
+    end
+
+    context 'and env variable names conflict with existing namespaces' do
+      it 'should allow overriding the namespace' do
+        ENV['Settings.databases'] = 'new databases'
+
+        expect(config.databases).to eq('new databases')
+      end
+    end
   end
 end
