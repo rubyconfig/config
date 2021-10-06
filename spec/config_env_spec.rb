@@ -77,6 +77,11 @@ describe Config::Options do
           expect(config.new_var.is_a? Float).to eq(true)
         end
 
+        it 'should recognize strings starting with : as symbols' do
+          ENV['Settings.new_var'] = ':hello'
+          expect(config.new_var).to eq(:hello)
+        end
+
         it 'should leave strings intact' do
           ENV['Settings.new_var'] = 'foobar'
 

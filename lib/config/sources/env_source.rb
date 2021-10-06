@@ -59,11 +59,10 @@ module Config
 
       # Try to convert string to a correct type
       def __value(v)
-        case v
-        when 'false'
-          false
-        when 'true'
-          true
+        if %w(true false).include? v
+          eval(v)
+        elsif v.squish.start_with?(':')
+          v.parameterize.underscore.to_sym
         else
           Integer(v) rescue Float(v) rescue v
         end

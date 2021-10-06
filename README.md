@@ -453,7 +453,7 @@ You can customize how environment variables are processed:
 * `env_converter` (default: `:downcase`)  - how to process variables names:
   * `nil` - no change
   * `:downcase` - convert to lower case
-* `env_parse_values` (default: `true`) - try to parse values to a correct type (`Boolean`, `Integer`, `Float`, `String`)
+* `env_parse_values` (default: `true`) - try to parse values to a correct type (`Boolean`, `Integer`, `Float`, `String` & `Symbol`)
 
 For instance, given the following environment:
 
@@ -461,6 +461,7 @@ For instance, given the following environment:
 SETTINGS__SECTION__SERVER_SIZE=1
 SETTINGS__SECTION__SERVER=google.com
 SETTINGS__SECTION__SSL_ENABLED=false
+SETTINGS__SECTION__SERVER_ACCESS=:remote
 ```
 
 And the following configuration:
@@ -481,6 +482,7 @@ The following settings will be available:
 Settings.section.server_size # => 1
 Settings.section.server # => 'google.com'
 Settings.section.ssl_enabled # => false
+Settings.section.server_access # => :remote
 ```
 
 ### Working with AWS Secrets Manager
