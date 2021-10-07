@@ -61,7 +61,7 @@ module Config
       def __value(v)
         if %w(true false).include? v
           eval(v)
-        elsif v.squish.start_with?(':')
+        elsif v.squish =~ /^:[^:]/
           v.parameterize.underscore.to_sym
         else
           Integer(v) rescue Float(v) rescue v

@@ -78,8 +78,13 @@ describe Config::Options do
         end
 
         it 'should recognize strings starting with : as symbols' do
-          ENV['Settings.new_var'] = ':hello'
-          expect(config.new_var).to eq(:hello)
+          ENV['Settings.new_var'] = ':remote'
+          expect(config.new_var).to eq(:remote)
+        end
+
+        it 'should leave strings starting with :: intact' do
+          ENV['Settings.new_var'] = '::ENABLED'
+          expect(config.new_var).to eq('::ENABLED')
         end
 
         it 'should leave strings intact' do

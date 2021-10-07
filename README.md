@@ -461,7 +461,8 @@ For instance, given the following environment:
 SETTINGS__SECTION__SERVER_SIZE=1
 SETTINGS__SECTION__SERVER=google.com
 SETTINGS__SECTION__SSL_ENABLED=false
-SETTINGS__SECTION__SERVER_ACCESS=:remote
+SETTINGS__SECTION__SERVER_TYPE=:remote
+SETTINGS__SECTION__SERVER_ACCESS=::ENABLED
 ```
 
 And the following configuration:
@@ -482,7 +483,8 @@ The following settings will be available:
 Settings.section.server_size # => 1
 Settings.section.server # => 'google.com'
 Settings.section.ssl_enabled # => false
-Settings.section.server_access # => :remote
+Settings.section.server_type # => :remote
+Settings.section.server_access # => '::ENABLED'
 ```
 
 ### Working with AWS Secrets Manager
