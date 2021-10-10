@@ -31,12 +31,12 @@ module Config
 
           keys.map! { |key|
             case converter
-              when :downcase then
-                key.downcase
-              when nil then
-                key
-              else
-                raise "Invalid ENV variables name converter: #{converter}"
+            when :downcase
+              key.downcase
+            when nil
+              key
+            else
+              raise "Invalid ENV variables name converter: #{converter}"
             end
           }
 

@@ -9,7 +9,7 @@ module Config
 
       def initialize(path, evaluate_erb: Config.evaluate_erb_in_yaml)
         @path = path.to_s
-        @evaluate_erb = !!evaluate_erb
+        @evaluate_erb = evaluate_erb
       end
 
       # returns a config hash from the YML file

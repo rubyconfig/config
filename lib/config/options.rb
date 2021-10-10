@@ -15,20 +15,11 @@ module Config
     end
 
     def add_source!(source)
-      # handle yaml file paths
-      source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
-      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
-
-      @config_sources ||= []
-      @config_sources << source
+      load_config_sources(:push, source)
     end
 
     def prepend_source!(source)
-      source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
-      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
-
-      @config_sources ||= []
-      @config_sources.unshift(source)
+      load_config_sources(:unshift, source)
     end
 
     # look through all our sources and rebuild the configuration
@@ -40,15 +31,7 @@ module Config
         if conf.empty?
           conf = source_conf
         else
-          DeepMerge.deep_merge!(
-                                source_conf,
-                                conf,
-                                preserve_unmergeables: false,
-                                knockout_prefix:       Config.knockout_prefix,
-                                overwrite_arrays:      Config.overwrite_arrays,
-                                merge_nil_values:      Config.merge_nil_values,
-                                merge_hash_arrays:     Config.merge_hash_arrays
-                               )
+          hash_deep_merge(source_conf, conf)
         end
       end
 
@@ -69,14 +52,8 @@ module Config
 
     def to_hash
       result = {}
-      marshal_dump.each do |k, v|
-        if v.instance_of? Config::Options
-          result[k] = v.to_hash
-        elsif v.instance_of? Array
-          result[k] = descend_array(v)
-        else
-          result[k] = v
-        end
+      marshal_dump.each do |key, value|
+        result[key] = instance_of(value)
       end
       result
     end
@@ -98,15 +75,7 @@ module Config
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(
-                            hash.dup,
-                            current,
-                            preserve_unmergeables: false,
-                            knockout_prefix:       Config.knockout_prefix,
-                            overwrite_arrays:      Config.overwrite_arrays,
-                            merge_nil_values:      Config.merge_nil_values,
-                            merge_hash_arrays:     Config.merge_hash_arrays
-                           )
+      hash_deep_merge(hash.dup, current)
       marshal_load(__convert(current).marshal_dump)
       self
     end
@@ -152,23 +121,46 @@ module Config
 
     protected
 
-    def descend_array(array)
-      array.map do |value|
-        if value.instance_of? Config::Options
-          value.to_hash
-        elsif value.instance_of? Array
-          descend_array(value)
-        else
-          value
-        end
+    def load_config_sources(method, source)
+      # handle yaml file paths
+      source = (Sources::YAMLSource.new(source)) if source.is_a?(String)
+      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
+
+      @config_sources ||= []
+      @config_sources.send(method, source)
+    end
+
+    def hash_deep_merge(source, dest)
+      DeepMerge.deep_merge!(
+                            source,
+                            dest,
+                            preserve_unmergeables: false,
+                            knockout_prefix:       Config.knockout_prefix,
+                            overwrite_arrays:      Config.overwrite_arrays,
+                            merge_nil_values:      Config.merge_nil_values,
+                            merge_hash_arrays:     Config.merge_hash_arrays
+                          )
+    end
+
+    def instance_of(value)
+      if value.instance_of? Config::Options
+        value.to_hash
+      elsif value.instance_of? Array
+        descend_array(value)
+      else
+        value
       end
     end
 
+    def descend_array(array)
+      array.map { |value| instance_of(value) }
+    end
+
     # Recursively converts Hashes to Options (including Hashes inside Arrays)
-    def __convert(h) #:nodoc:
+    def __convert(hash) #:nodoc:
       s = self.class.new
 
-      h.each do |k, v|
+      hash.each do |k, v|
         k = k.to_s if !k.respond_to?(:to_sym) && k.respond_to?(:to_s)
 
         if v.is_a?(Hash)
