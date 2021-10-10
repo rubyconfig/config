@@ -62,10 +62,21 @@ module Config
         if %w(true false).include? v
           eval(v)
         elsif v.strip =~ /^:[^:]/
-          v.parameterize.underscore.to_sym
+          convert_str_to_symbol(v)
         else
           Integer(v) rescue Float(v) rescue v
         end
+      end
+
+      # Remove all special characters from a string before converting into a symbol
+      def convert_str_to_symbol(str)
+        str.
+          gsub(/[^a-z0-9\-_]+/i, "-").
+          gsub(/-{2,}/, "-").
+          gsub(/^-|-$/i, "").
+          tr("-", "_").
+          downcase.
+          to_sym
       end
     end
   end
