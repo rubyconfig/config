@@ -60,6 +60,12 @@ describe Config do
     expect(config.server).to eq('google.com')
   end
 
+  it 'should load config from HashSource' do
+    source = Config::Sources::HashSource.new({ 'server' => 'google.com' })
+    config = Config.load_files(source)
+    expect(config.server).to eq('google.com')
+  end
+
   it "should load empty config for a missing file path" do
     config = Config.load_files("#{fixture_path}/some_file_that_doesnt_exist.yml")
     expect(config).to be_empty
