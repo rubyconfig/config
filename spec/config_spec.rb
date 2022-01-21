@@ -45,6 +45,12 @@ describe Config do
     expect(config.another).to eq("something")
   end
 
+  it 'should load config files specified as Pathname objects' do
+    path = Pathname.new(fixture_path).join('settings.yml')
+    config = Config.load_files(path)
+    expect(config.server).to eq('google.com')
+  end
+
   it "should load empty config for a missing file path" do
     config = Config.load_files("#{fixture_path}/some_file_that_doesnt_exist.yml")
     expect(config).to be_empty
