@@ -40,7 +40,8 @@ module Config
 
     # add settings sources
     [sources].flatten.compact.uniq.each do |source|
-      config.add_source!(source.to_s)
+      source = source.to_s unless source.respond_to? :load
+      config.add_source!(source)
     end
 
     config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
