@@ -40,7 +40,6 @@ module Config
 
     # add settings sources
     [sources].flatten.compact.each do |source|
-      source = source.to_s unless source.respond_to? :load
       config.add_source!(source)
     end
 
