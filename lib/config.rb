@@ -35,12 +35,12 @@ module Config
 
   # Create a populated Options instance from a settings file. If a second file is given, then the sections of that
   # file will overwrite existing sections of the first file.
-  def self.load_files(*files)
+  def self.load_files(*sources)
     config = Options.new
 
     # add settings sources
-    [files].flatten.compact.uniq.each do |file|
-      config.add_source!(file.to_s)
+    [sources].flatten.compact.each do |source|
+      config.add_source!(source)
     end
 
     config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
@@ -50,10 +50,10 @@ module Config
   end
 
   # Loads and sets the settings constant!
-  def self.load_and_set_settings(*files)
+  def self.load_and_set_settings(*sources)
     name = Config.const_name
     Object.send(:remove_const, name) if Object.const_defined?(name)
-    Object.const_set(name, Config.load_files(files))
+    Object.const_set(name, Config.load_files(sources))
   end
 
   def self.setting_files(config_root, env)

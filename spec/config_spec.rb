@@ -45,6 +45,35 @@ describe Config do
     expect(config.another).to eq("something")
   end
 
+  it 'should load config files specified as Pathname objects' do
+    path = Pathname.new(fixture_path).join('settings.yml')
+    config = Config.load_files(path)
+    expect(config.server).to eq('google.com')
+  end
+
+  it 'should load config files specified as objects responding to :load' do
+    source = double 'source'
+    allow(source).to receive(:load) do
+      { 'server' => 'google.com' }
+    end
+    config = Config.load_files(source)
+    expect(config.server).to eq('google.com')
+  end
+
+  it 'should load config from HashSource' do
+    source = Config::Sources::HashSource.new({ 'server' => 'google.com' })
+    config = Config.load_files(source)
+    expect(config.server).to eq('google.com')
+  end
+
+  it 'should load config from files and HashSource' do
+    file_source = "#{fixture_path}/settings.yml"
+    hash_source = Config::Sources::HashSource.new({ 'size' => 12 })
+    config = Config.load_files(file_source, hash_source)
+    expect(config.server).to eq('google.com')
+    expect(config.size).to eq(12)
+  end
+
   it "should load empty config for a missing file path" do
     config = Config.load_files("#{fixture_path}/some_file_that_doesnt_exist.yml")
     expect(config).to be_empty

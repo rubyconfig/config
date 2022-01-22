@@ -533,6 +533,33 @@ You are very warmly welcome to help. Please follow our [contribution guidelines]
 
 Any and all contributions offered in any form, past present or future are understood to be in complete agreement and acceptance with [MIT](LICENSE) license.
 
+### Running specs
+
+Setup
+
+```sh
+bundle install
+bundle exec appraisal install
+```
+
+List defined appraisals:
+
+```sh
+bundle exec appraisal list
+```
+
+Run specs for specific appraisal:
+
+```sh
+bundle exec appraisal rails-6.1 rspec
+```
+
+Run specs for all appraisals:
+
+```sh
+bundle exec appraisal rspec
+```
+
 ## Authors
 
 * [Piotr Kuczynski](http://github.com/pkuczynski)
