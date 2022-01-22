@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-...
+### BREAKING CHANGES
+
+* Support `HashSource` and `EnvSource` instances in `Config.load_files` and `Config.load_and_set_settings`. ([#315](https://github.com/rubyconfig/config/pull/315)). There are a few subtle breaking changes:
+  * Previously, `Config.load_files` (called from `Config.load_and_set_settings`) would call `.to_s` on each of its arguments. Now, this responsibility is defered to YAMLSource. In effect, if your application passes String or Pathname objects to `Config.load_files`, no changes are necessary, but if you were somehow relying on the `.to_s` call for some other type of object, you'll now need to call `.to_s` on that object before passing it to `Config`.
+  * Before this change, `Config.load_files` would call `uniq` on its argument array. This call has been removed, so duplicate file paths are not removed before further processing. In some cases, this can cause differences in behavior since later config files override the values in earlier ones. In most cases, it's best to ensure that duplicate paths are not passed to `Config.load_files`.
 
 ## 3.1.1
 
