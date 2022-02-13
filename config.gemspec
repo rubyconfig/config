@@ -24,7 +24,7 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
   s.files.select! { |file| /(^lib\/|^\w+.md$|\.gemspec$)/ =~ file }
 
   s.require_paths         = ['lib']
-  s.required_ruby_version = '>= 2.4.0'
+  s.required_ruby_version = '>= 2.6.0'
 
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
   s.add_dependency 'dry-validation', '~> 1.0', '>= 1.0.0'
