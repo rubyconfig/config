@@ -1,0 +1,9 @@
+Metrics/LineLength:
+  Max: 120
+
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+  AllowInnerSlashes: true
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never

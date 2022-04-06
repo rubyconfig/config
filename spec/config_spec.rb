@@ -1,14 +1,28 @@
 require 'spec_helper'
 
 describe Config do
+  before :each do
+    Config.reset
+  end
 
   it "should get setting files" do
+    config = Config.setting_files("root/config", "staging")
+    expect(config).to eq([
+                           'root/config/settings.yml',
+                           'root/config/settings/staging.yml',
+                           'root/config/environments/staging.yml',
+                           'root/config/settings.local.yml',
+                           'root/config/settings/staging.local.yml',
+                           'root/config/environments/staging.local.yml'
+                         ])
+  end
+
+  it "should ignore local config in test environment" do
     config = Config.setting_files("root/config", "test")
     expect(config).to eq([
                            'root/config/settings.yml',
                            'root/config/settings/test.yml',
                            'root/config/environments/test.yml',
-                           'root/config/settings.local.yml',
                            'root/config/settings/test.local.yml',
                            'root/config/environments/test.local.yml'
                          ])
@@ -29,6 +43,35 @@ describe Config do
     expect(config.size).to eq(1)
     expect(config.server).to eq("google.com")
     expect(config.another).to eq("something")
+  end
+
+  it 'should load config files specified as Pathname objects' do
+    path = Pathname.new(fixture_path).join('settings.yml')
+    config = Config.load_files(path)
+    expect(config.server).to eq('google.com')
+  end
+
+  it 'should load config files specified as objects responding to :load' do
+    source = double 'source'
+    allow(source).to receive(:load) do
+      { 'server' => 'google.com' }
+    end
+    config = Config.load_files(source)
+    expect(config.server).to eq('google.com')
+  end
+
+  it 'should load config from HashSource' do
+    source = Config::Sources::HashSource.new({ 'server' => 'google.com' })
+    config = Config.load_files(source)
+    expect(config.server).to eq('google.com')
+  end
+
+  it 'should load config from files and HashSource' do
+    file_source = "#{fixture_path}/settings.yml"
+    hash_source = Config::Sources::HashSource.new({ 'size' => 12 })
+    config = Config.load_files(file_source, hash_source)
+    expect(config.server).to eq('google.com')
+    expect(config.size).to eq(12)
   end
 
   it "should load empty config for a missing file path" do
@@ -63,6 +106,15 @@ describe Config do
   it "should convert to a hash without modifying nested settings" do
     config = Config.load_files("#{fixture_path}/development.yml")
     config.to_hash
+    expect(config).to be_kind_of(Config::Options)
+    expect(config[:section]).to be_kind_of(Config::Options)
+    expect(config[:section][:servers][0]).to be_kind_of(Config::Options)
+    expect(config[:section][:servers][1]).to be_kind_of(Config::Options)
+  end
+
+  it "should convert to a hash without modifying nested settings" do
+    config = Config.load_files("#{fixture_path}/development.yml")
+    config.to_h
     expect(config).to be_kind_of(Config::Options)
     expect(config[:section]).to be_kind_of(Config::Options)
     expect(config[:section][:servers][0]).to be_kind_of(Config::Options)
@@ -215,7 +267,8 @@ describe Config do
 
   context "Merging nested hash at runtime" do
     let(:config) { Config.load_files("#{fixture_path}/deep_merge/config1.yml") }
-    let(:hash) { { :inner => { :something1 => 'changed1', :something3 => 'changed3' } } }
+    let(:hash) { { inner: { something1: 'changed1', something3: 'changed3' } } }
+    let(:hash_with_nil) { { inner: { something1: nil } } }
 
     it 'should preserve first level keys' do
       expect { config.merge!(hash) }.to_not change { config.keys }
@@ -227,11 +280,61 @@ describe Config do
     end
 
     it 'should add new nested key' do
-      expect { config.merge!(hash) }.to change { config.inner.something3 }.from(nil).to("changed3")
+      expect { config.merge!(hash) }
+        .to change { config.inner.something3 }.from(nil).to('changed3')
     end
 
     it 'should rewrite a merged value' do
-      expect { config.merge!(hash) }.to change { config.inner.something1 }.from('blah1').to('changed1')
+      expect { config.merge!(hash) }
+        .to change { config.inner.something1 }.from('blah1').to('changed1')
+    end
+
+    it 'should update a string to nil ' do
+      expect { config.merge!(hash_with_nil) }
+        .to change { config.inner.something1 }.from('blah1').to(nil)
+    end
+
+    it 'should update something nil to true' do
+      expect { config.merge!(inner: { somethingnil: true }) }
+        .to change { config.inner.somethingnil }.from(nil).to(true)
+    end
+
+    it 'should update something nil to false' do
+      expect { config.merge!(inner: { somethingnil: false }) }
+        .to change { config.inner.somethingnil }.from(nil).to(false)
+    end
+
+    it 'should update something false to true' do
+      expect { config.merge!(inner: { somethingfalse: true }) }
+        .to change { config.inner.somethingfalse }.from(false).to(true)
+    end
+
+    it 'should update something false to nil' do
+      expect { config.merge!(inner: { somethingfalse: nil }) }
+        .to change { config.inner.somethingfalse }.from(false).to(nil)
+    end
+
+    it 'should update something true to false' do
+      expect { config.merge!(inner: { somethingtrue: false }) }
+        .to change { config.inner.somethingtrue }.from(true).to(false)
+    end
+
+    it 'should update something true to nil' do
+      expect { config.merge!(inner: { somethingtrue: nil }) }
+        .to change { config.inner.somethingtrue }.from(true).to(nil)
+    end
+
+    context 'with Config.merge_nil_values = false' do
+      let(:config) do
+        Config.merge_nil_values = false
+        Config.load_files("#{fixture_path}/deep_merge/config1.yml")
+      end
+
+      it 'should not overwrite values with nil' do
+        old_value = config.inner.something1
+        config.merge!(hash_with_nil)
+        expect(config.inner.something1).to eq(old_value)
+      end
     end
   end
 
@@ -295,15 +398,12 @@ describe Config do
     context 'using knockout_prefix' do
       context 'in configuration phase' do
         it 'should be able to assign a different knockout_prefix value' do
-          Config.reset
           Config.knockout_prefix = '--'
 
           expect(Config.knockout_prefix).to eq('--')
         end
 
         it 'should have the default knockout_prefix value equal nil' do
-          Config.reset
-
           expect(Config.knockout_prefix).to eq(nil)
         end
       end
@@ -335,15 +435,12 @@ describe Config do
     context 'using overwrite_arrays' do
       context 'in configuration phase' do
         it 'should be able to assign a different overwrite_arrays value' do
-          Config.reset
           Config.overwrite_arrays = false
 
           expect(Config.overwrite_arrays).to eq(false)
         end
 
         it 'should have the default overwrite_arrays value equal false' do
-          Config.reset
-
           expect(Config.overwrite_arrays).to eq(true)
         end
       end
@@ -372,7 +469,7 @@ describe Config do
         end
 
         it 'should merge hashes from multiple configs' do
-          expect(config.inner.marshal_dump.keys.size).to eq(3)
+          expect(config.inner.marshal_dump.keys.size).to eq(6)
           expect(config.inner2.inner2_inner.marshal_dump.keys.size).to eq(3)
         end
 

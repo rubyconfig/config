@@ -1,0 +1,66 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: ${{ matrix.ruby }}
+    runs-on: ubuntu-latest
+    env:
+      COVERAGE_RUBY_VERSION: 2.6
+      BUNDLE_PATH: vendor/bundle
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - 2.6
+          - 2.7
+          - 3.0
+          - 3.1
+          - jruby
+          - truffleruby-21
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Setup ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler: 1
+
+      - name: Update rubygems
+        run: |
+          gem update --system --no-document
+
+      - name: Restore cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.BUNDLE_PATH }}
+          key: ruby-${{ matrix.ruby }}-gems-${{ hashFiles('config.gemspec', 'gemfiles/**') }}
+          restore-keys: |
+            ruby-${{ matrix.ruby }}-gems-
+
+      - name: Prepare environment
+        run: |
+          sudo apt-get -y install libsqlite3-dev libxslt1-dev
+
+      - name: Install
+        run: |
+          bundle install
+          bundle exec appraisal install
+
+      - name: Test
+        run: bundle exec appraisal rspec
+
+      - name: Publish code coverage
+        if: startsWith(env.RUBY_VERSION, env.COVERAGE_RUBY_VERSION)
+        uses: paambaati/codeclimate-action@v2.3.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: bundle exec appraisal rspec
