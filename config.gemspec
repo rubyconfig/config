@@ -1,7 +1,5 @@
-$:.push File.expand_path('lib', __dir__)
-
-require 'config/version'
-require 'config/dry_validation_requirements'
+require_relative 'lib/config/version'
+require_relative 'lib/config/dry_validation_requirements'
 
 Gem::Specification.new do |s|
   s.name             = 'config'
