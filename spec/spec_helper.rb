@@ -14,13 +14,13 @@ end
 ##
 # Load Rspec supporting files
 #
-Dir['./spec/support/**/*.rb'].each { |f| require f }
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
 ##
 # Detect Rails/Sinatra dummy application based on gemfile name substituted by Appraisal
 #
 if ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
-  app_name = Pathname.new(ENV['BUNDLE_GEMFILE']).basename.sub('.gemfile', '')
+  app_name = File.basename(ENV['BUNDLE_GEMFILE'], '.gemfile')
 else
   /.*?(?<app_name>rails.*?)\.gemfile/ =~ Dir["gemfiles/rails*.gemfile"].sort.last
 end
@@ -33,7 +33,7 @@ app_framework = %w{rails sinatra}.find { |f| app_name.to_s.include?(f) }
 case app_framework
 when 'rails'
   # Load Rails
-  require File.expand_path("../app/#{app_name}/config/environment", __FILE__)
+  require_relative "app/#{app_name}/config/environment"
 
   APP_RAKEFILE = File.expand_path("../app/#{app_name}/Rakefile", __FILE__)
 
@@ -47,7 +47,7 @@ when 'rails'
 
 when 'sinatra'
   # Load Sinatra
-  require File.expand_path("../app/#{app_name}/app", __FILE__)
+  require_relative "app/#{app_name}/app"
 
   # Load Rspec
   require 'rspec'
