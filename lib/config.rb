@@ -79,7 +79,7 @@ module Config
 end
 
 # Rails integration
-require('config/integrations/rails/railtie') if defined?(::Rails)
+require('config/integrations/rails/railtie') if defined?(::Rails::Railtie)
 
 # Sinatra integration
 require('config/integrations/sinatra') if defined?(::Sinatra)
