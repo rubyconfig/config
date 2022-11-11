@@ -18,7 +18,7 @@ module Config
       end
 
       def modify_gitignore
-        create_file '.gitignore' unless File.exists? '.gitignore'
+        create_file '.gitignore' unless File.exist? '.gitignore'
 
         append_to_file '.gitignore' do
           "\n"                                +
