@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.1.0
+
+### Bug fixes
+
+* Only load `Railtie` integration if `Rails::Railtie` is defined ([#319](https://github.com/rubyconfig/config/pull/319))
+* Fix indentation warning in Ruby 3.1 ([#322](https://github.com/rubyconfig/config/pull/322))
+
 ## 4.0.0
 
 ### BREAKING CHANGES
