@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.date             = Time.now.strftime '%F'
   s.authors          = ['Piotr Kuczynski', 'Fred Wu', 'Jacques Crocker']
   s.email            = %w[piotr.kuczynski@gmail.com ifredwu@gmail.com railsjedi@gmail.com]
-  s.summary          = 'Effortless multi-environment settings in Rails, Sinatra, Pandrino and others'
+  s.summary          = 'Effortless multi-environment settings in Rails, Sinatra, Padrino and others'
   s.description      = 'Easiest way to manage multi-environment settings in any ruby project or framework: ' +
-                       'Rails, Sinatra, Pandrino and others'
+                       'Rails, Sinatra, Padrino and others'
   s.homepage         = 'https://github.com/rubyconfig/config'
   s.license          = 'MIT'
   s.extra_rdoc_files = %w[README.md CHANGELOG.md CONTRIBUTING.md LICENSE.md]
