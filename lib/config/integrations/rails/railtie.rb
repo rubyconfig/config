@@ -1,6 +1,14 @@
 module Config
   module Integrations
     module Rails
+      module RailsSettings
+        attr_writer :settings
+
+        def settings
+          @settings = Object.const_get(Config.const_name)
+        end
+      end
+
       class Railtie < ::Rails::Railtie
         def preload
           # Manually load the custom initializer before everything else
@@ -19,6 +27,8 @@ module Config
         end
 
         config.before_configuration { preload }
+
+        ::Rails::Application.prepend RailsSettings
 
         # Development environment should reload settings on every request
         if ::Rails.env.development?
