@@ -27,7 +27,7 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
 
-  s.add_development_dependency 'dry-validation', *Config::DRY_VALIDATION_REQUIREMENTS
+  s.add_development_dependency 'dry-validation', *Config::DryValidationRequirements::VERSIONS
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
   # Testing
