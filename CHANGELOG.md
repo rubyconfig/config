@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.2.0
+
+### Bug fixes
+
+* Remove use of method `File.exists?` to fix use in Ruby 3.0 ([#318](https://github.com/rubyconfig/config/pull/318))
+
 ## 4.1.0
 
 ### Bug fixes
