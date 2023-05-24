@@ -2,9 +2,9 @@ name: tests
 
 on:
   push:
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
   test:
@@ -31,11 +31,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-#          bundler-cache: true
-
-#      - name: Update rubygems
-#        run: |
-#          gem update --system --no-document
 
       - name: Restore cache
         uses: actions/cache@v2
