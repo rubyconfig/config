@@ -2,7 +2,6 @@
 
 [![Version](https://img.shields.io/gem/v/config)](https://rubygems.org/gems/config)
 [![Downloads Total](https://img.shields.io/gem/dt/config)](https://rubygems.org/gems/config)
-[![Build](https://img.shields.io/github/workflow/status/rubyconfig/config/tests)](https://rubygems.org/gems/config)
 [![Tests](https://github.com/rubyconfig/config/workflows/tests/badge.svg)](https://github.com/rubyconfig/config/actions?query=branch%3Amaster)
 [![Financial Contributors on Open Collective](https://opencollective.com/rubyconfig/all/badge.svg?label=backers)](https://opencollective.com/rubyconfig)
 
