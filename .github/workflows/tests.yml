@@ -22,7 +22,7 @@ jobs:
           - '3.0' # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
           - 3.1
           - jruby
-          - truffleruby-21
+          - truffleruby
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -31,11 +31,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler: 1
+#          bundler-cache: true
 
-      - name: Update rubygems
-        run: |
-          gem update --system --no-document
+#      - name: Update rubygems
+#        run: |
+#          gem update --system --no-document
 
       - name: Restore cache
         uses: actions/cache@v2
