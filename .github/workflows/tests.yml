@@ -2,9 +2,9 @@ name: tests
 
 on:
   push:
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
   test:
@@ -22,23 +22,18 @@ jobs:
           - '3.0' # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
           - 3.1
           - jruby
-          - truffleruby-21
+          - truffleruby
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler: 1
-
-      - name: Update rubygems
-        run: |
-          gem update --system --no-document
 
       - name: Restore cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.BUNDLE_PATH }}
           key: ruby-${{ matrix.ruby }}-gems-${{ hashFiles('config.gemspec', 'gemfiles/**') }}
@@ -59,7 +54,7 @@ jobs:
 
       - name: Publish code coverage
         if: startsWith(env.RUBY_VERSION, env.COVERAGE_RUBY_VERSION)
-        uses: paambaati/codeclimate-action@v2.3.0
+        uses: paambaati/codeclimate-action@v4.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
