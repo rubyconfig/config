@@ -18,6 +18,7 @@ describe Config::Options do
       expect(config.max).to eq('kumquat')
       expect(config.min).to eq('fig')
       expect(config.exit!).to eq('taro')
+      expect(config.table).to eq('strawberry')
     end
 
     it 'should allow to access them using [] operator' do
@@ -28,6 +29,7 @@ describe Config::Options do
       expect(config['max']).to eq('kumquat')
       expect(config['min']).to eq('fig')
       expect(config['exit!']).to eq('taro')
+      expect(config['table']).to eq('strawberry')
 
       expect(config[:select]).to eq('apple')
       expect(config[:collect]).to eq('banana')
@@ -36,6 +38,26 @@ describe Config::Options do
       expect(config[:max]).to eq('kumquat')
       expect(config[:min]).to eq('fig')
       expect(config[:exit!]).to eq('taro')
+      expect(config[:table]).to eq('strawberry')
+    end
+
+    context 'when empty' do
+      let(:config) do
+        Config.load_files("#{fixture_path}/empty1.yml")
+      end
+
+      it 'should allow to access them via object member notation' do
+        expect(config.select).to be_nil
+        expect(config.table).to be_nil
+      end
+
+      it 'should allow to access them using [] operator' do
+        expect(config['select']).to be_nil
+        expect(config['table']).to be_nil
+
+        expect(config[:select]).to be_nil
+        expect(config[:table]).to be_nil
+      end
     end
   end
 

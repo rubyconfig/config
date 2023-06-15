@@ -112,7 +112,7 @@ module Config
     end
 
     # Some keywords that don't play nicely with OpenStruct
-    SETTINGS_RESERVED_NAMES = %w[select collect test count zip min max exit!].freeze
+    SETTINGS_RESERVED_NAMES = %w[select collect test count zip min max exit! table].freeze
 
     # An alternative mechanism for property access.
     # This let's you do foo['bar'] along with foo.bar.
@@ -132,11 +132,11 @@ module Config
     end
 
     def key?(key)
-      table.key?(key)
+      @table.key?(key)
     end
 
     def has_key?(key)
-      table.has_key?(key)
+      @table.has_key?(key)
     end
 
     def method_missing(method_name, *args)
