@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.2.1
+
+### Bug fixes
+
+* Address edge case with `table` config param ([#339](https://github.com/rubyconfig/config/pull/339))
+
 ## 4.2.0
 
 ### Bug fixes
