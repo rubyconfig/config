@@ -14,8 +14,8 @@ module Config
       def vars
         # Load only local options to Heroku
         Config.load_and_set_settings(
-            Rails.root.join("config", "settings.local.yml").to_s,
-            Rails.root.join("config", "settings", "#{environment}.local.yml").to_s,
+            Rails.root.join("config", "#{Config.file_name}.local.yml").to_s,
+            Rails.root.join("config", Config.dir_name, "#{environment}.local.yml").to_s,
             Rails.root.join("config", "environments", "#{environment}.local.yml").to_s
         )
 
