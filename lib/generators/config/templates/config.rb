@@ -58,6 +58,6 @@ Config.setup do |config|
 
   # Name of directory and file to store config keys
   #
-  # config.file_name = 'settings.yml'
+  # config.file_name = 'settings'
   # config.dir_name = 'settings'
 end
