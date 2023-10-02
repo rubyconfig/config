@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.0
+
+### BREAKING CHANGES
+
+* `config` no longer loads `deep_merge`'s monkey patch for `Hash#deep_merge` and `Hash#deep_merge!` ([#342](https://github.com/rubyconfig/config/pull/342)). If you rely on those methods and are not using Rails / Active Support, you can load the monkey patch via `require 'deep_merge/deep_merge_hash'`.
+
 ## 4.2.1
 
 ### Bug fixes

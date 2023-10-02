@@ -6,7 +6,7 @@ require 'config/sources/yaml_source'
 require 'config/sources/hash_source'
 require 'config/sources/env_source'
 require 'config/validation/schema'
-require 'deep_merge'
+require 'deep_merge/core'
 
 module Config
   extend Config::Validation::Schema
