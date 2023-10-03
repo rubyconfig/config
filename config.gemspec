@@ -32,7 +32,7 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
   # Testing
-  s.add_development_dependency 'appraisal', '~> 2.3', '>= 2.3.0'
+  s.add_development_dependency 'appraisal', '~> 2.5', '>= 2.5.0'
   s.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
 
   # Default RSpec run will test against latest Rails app
