@@ -27,6 +27,24 @@ appraise 'rails-6.1' do
   gem 'psych', '>= 4'
 end
 
+appraise 'rails-7.0' do
+  gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
+  gem 'bootsnap', '>= 1.4.4'
+  gem 'rails', '7.0.8'
+  gem 'rspec-rails', '~> 6.0.3'
+  gem 'sqlite3', '~> 1.6.4', platform: :ruby
+  gem 'psych', '>= 4'
+end
+
+appraise 'rails-7.1' do
+  gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
+  gem 'bootsnap', '>= 1.16.0'
+  gem 'rails', '7.1.0.rc2'
+  gem 'rspec-rails', '~> 6.0.3'
+  gem 'sqlite3', '~> 1.6.6', platform: :ruby
+  gem 'psych', '>= 4'
+end
+
 appraise 'sinatra' do
   gem 'sinatra', '2.0.8.1'
 end
