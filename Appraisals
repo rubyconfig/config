@@ -27,7 +27,7 @@ appraise 'rails-6.1' do
   gem 'psych', '>= 4'
 end
 
-if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
+if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.4.4'
