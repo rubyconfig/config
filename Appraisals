@@ -28,7 +28,7 @@ appraise 'rails-6.1' do
 end
 
 # Temporary workaround. See https://github.com/rubyconfig/config/pull/344#issuecomment-1766209753
-if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
+if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'sqlite3', '~> 1.6.4', platform: :ruby
@@ -38,10 +38,7 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
     gem 'sprockets-rails', '~> 3.4.2'
     gem 'psych', '>= 4'
   end
-end
 
-# Temporary workaround. See https://github.com/rubyconfig/config/pull/344#issuecomment-1766209753
-if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
   appraise 'rails-7.1' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'sqlite3', '~> 1.6.6', platform: :ruby
