@@ -27,8 +27,10 @@ appraise 'rails-6.1' do
   gem 'psych', '>= 4'
 end
 
-# Temporary workaround. See https://github.com/rubyconfig/config/pull/344#issuecomment-1766209753
-if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
+# Temporarily exclude Truffleruby and JRuby from testing in Rails 7.x until they fix the issues upstream.
+# See https://github.com/rubyconfig/config/pull/344#issuecomment-1766209753
+# if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
+if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'sqlite3', '~> 1.6.4', platform: :ruby
