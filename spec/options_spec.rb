@@ -41,6 +41,21 @@ describe Config::Options do
       expect(config[:table]).to eq('strawberry')
     end
 
+    context 'when Settings file is using keywords reserved by Rails 7' do
+      it 'should allow to access them via object member notation' do
+        expect(config.maximum).to eq(20)
+        expect(config.minimum).to eq(10)
+      end
+
+      it 'should allow to access them using [] operator' do
+        expect(config['maximum']).to eq(20)
+        expect(config['minimum']).to eq(10)
+
+        expect(config[:maximum]).to eq(20)
+        expect(config[:minimum]).to eq(10)
+      end
+    end
+
     context 'when empty' do
       let(:config) do
         Config.load_files("#{fixture_path}/empty1.yml")
