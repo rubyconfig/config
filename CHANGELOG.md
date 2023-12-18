@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+* Fix conflicts with Rails 7 active_support methods ([#347](https://github.com/rubyconfig/config/pull/339))
+
 ## 5.0.0
 
 ### BREAKING CHANGES
