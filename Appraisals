@@ -3,7 +3,7 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION <= '3.0'
   appraise 'rails-5.2' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 52.5', platform: :jruby
     gem 'bootsnap', '~> 1.4'
-    gem 'rails', '5.2.4.3'
+    gem 'rails', '5.2.8'
     gem 'rspec-rails', '~> 3.7'
     gem 'sqlite3', '< 1.4.0', platform: :ruby
   end
@@ -11,7 +11,7 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION <= '3.0'
   appraise 'rails-6.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 60.1', platform: :jruby
     gem 'bootsnap', '~> 1.4'
-    gem 'rails', '6.0.3.1'
+    gem 'rails', '6.0.5'
     gem 'rspec-rails', '~> 3.7'
     gem 'sqlite3', '~> 1.4.0', platform: :ruby
   end
@@ -21,7 +21,7 @@ end
 appraise 'rails-6.1' do
   gem 'activerecord-jdbcsqlite3-adapter', '~> 61.1', platform: :jruby
   gem 'bootsnap', '>= 1.4.4'
-  gem 'rails', '6.1.4'
+  gem 'rails', '6.1.6'
   gem 'rspec-rails', '~> 5.0'
   gem 'sqlite3', '~> 1.4', platform: :ruby
   gem 'psych', '>= 4'
