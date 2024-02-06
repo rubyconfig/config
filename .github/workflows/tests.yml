@@ -27,7 +27,7 @@ jobs:
           - truffleruby
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
@@ -35,7 +35,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
 
       - name: Restore cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.BUNDLE_PATH }}
           key: ruby-${{ matrix.ruby }}-gems-${{ hashFiles('config.gemspec', 'gemfiles/**') }}
