@@ -445,6 +445,21 @@ Heroku uses ENV object to store sensitive settings. You cannot upload such files
 
 To upload your local values to Heroku you could ran `bundle exec rake config:heroku`.
 
+### Working with Cloud Foundry
+
+Cloud Foundry integration will generate a manifest from your CF manifest with the defined ENV variables added 
+under the `env` section. **ENV variables will be added to all applications specified in the manifest.** By default, 
+it uses `manifest.yml` and the current `Rails.env`:
+
+    bundle exec rake config:cf
+    
+You may optionally pass target environment _and_ the name of your CF manifest file (in that case, both are compulsory):
+
+    bundle exec rake config:cf[target_env, your_manifest.yml]
+    
+The result of this command will create a new manifest file, name suffixed with '-merged'. You can then push your app 
+with the generated manifest.    
+
 ### Fine-tuning
 
 You can customize how environment variables are processed:
