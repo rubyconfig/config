@@ -206,6 +206,23 @@ describe Config do
 
       expect(Config.const_name).to eq("Settings2")
     end
+
+    context "filename and directory" do
+      it "should allow to use custom names" do
+        Config.setup do |config|
+          config.file_name = "custom_file"
+          config.dir_name = "custom_dir"
+        end
+
+        expect(Config.file_name).to eq("custom_file")
+        expect(Config.dir_name).to eq("custom_dir")
+      end
+
+      it "should have default values" do
+        expect(Config.file_name).to eq("settings")
+        expect(Config.dir_name).to eq("settings")
+      end
+    end
   end
 
   context "Settings with a type value of 'hash'" do
