@@ -7,6 +7,8 @@ max: kumquat
 min: fig
 exit!: taro
 table: strawberry
+lambda: proc
+proc: lambda 
 
 # Rails 7.* reserved keywords
 minimum: 10

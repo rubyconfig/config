@@ -122,7 +122,7 @@ module Config
     def [](param)
       return super if SETTINGS_RESERVED_NAMES.include?(param)
       return super if RAILS_RESERVED_NAMES.include?(param)
-      send("#{param}")
+      public_send("#{param}")
     end
 
     def []=(param, value)
