@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.1.0
+
+* Fix conflicts with Rails 7 active_support methods ([#347](https://github.com/rubyconfig/config/pull/347))
+
+## 5.0.0
+
+### BREAKING CHANGES
+
+* No longer load `deep_merge`'s monkey patch for `Hash#deep_merge` and `Hash#deep_merge!` ([#342](https://github.com/rubyconfig/config/pull/342)). If you rely on those methods and are not using Rails / Active Support, you can load the monkey patch via `require 'deep_merge/deep_merge_hash'`. This change fixes Rails 7.x support.
+
 ## 4.2.1
 
 ### Bug fixes

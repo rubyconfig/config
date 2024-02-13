@@ -20,6 +20,11 @@ Please consider donating to our open collective to help us maintain this project
 \n
 Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
+  s.metadata = {
+    'changelog_uri' => "https://github.com/rubyconfig/config/blob/master/CHANGELOG.md",
+    'source_code_uri' => 'https://github.com/rubyconfig/config',
+    'bug_tracker_uri' => 'https://github.com/rubyconfig/config/issues'
+  }
   s.files = `git ls-files`.split($/)
   s.files.select! { |file| /(^lib\/|^\w+.md$|\.gemspec$)/ =~ file }
 
@@ -32,7 +37,7 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
   # Testing
-  s.add_development_dependency 'appraisal', '~> 2.3', '>= 2.3.0'
+  s.add_development_dependency 'appraisal', '~> 2.5', '>= 2.5.0'
   s.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
 
   # Default RSpec run will test against latest Rails app
