@@ -70,6 +70,7 @@ describe Config::Options do
       it 'should allow to access them via object member notation' do
         expect(config.select).to be_nil
         expect(config.table).to be_nil
+        expect(config.exit!).to be_nil        
       end
 
       it 'should allow to access them using [] operator' do
@@ -77,9 +78,11 @@ describe Config::Options do
         expect(config['table']).to be_nil
         expect(config['lambda']).to be_nil
         expect(config['proc']).to be_nil
+        expect(config['exit!']).to be_nil
 
         expect(config[:select]).to be_nil
         expect(config[:table]).to be_nil
+        expect(config[:exit!]).to be_nil
       end
     end
   end
