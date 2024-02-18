@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+* Allow to use custom filename && directory name to store configs ([#341](https://github.com/rubyconfig/config/pull/341))
+
 ## 5.1.0
 
 * Fix conflicts with Rails 7 active_support methods ([#347](https://github.com/rubyconfig/config/pull/347))
