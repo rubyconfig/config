@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+* Prevent name collision with private methods from ancestors ([#351](https://github.com/rubyconfig/config/pull/351))
+
 ## 5.1.0
 
 * Fix conflicts with Rails 7 active_support methods ([#347](https://github.com/rubyconfig/config/pull/347))
