@@ -2,6 +2,7 @@
 
 ## Next
 
+* Allow to use custom filename && directory name to store configs ([#341](https://github.com/rubyconfig/config/pull/341))
 * Prevent name collision with private methods from ancestors ([#351](https://github.com/rubyconfig/config/pull/351))
 
 ## 5.1.0
