@@ -112,7 +112,7 @@ module Config
     end
 
     # Some keywords that don't play nicely with OpenStruct
-    SETTINGS_RESERVED_NAMES = %w[select collect test count zip min max table].freeze
+    SETTINGS_RESERVED_NAMES = %w[select collect test count zip min max exit! table].freeze
 
     # Some keywords that don't play nicely with Rails 7.*
     RAILS_RESERVED_NAMES = %w[maximum minimum].freeze
