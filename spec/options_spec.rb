@@ -19,6 +19,8 @@ describe Config::Options do
       expect(config.min).to eq('fig')
       expect(config.exit!).to eq('taro')
       expect(config.table).to eq('strawberry')
+      expect(config.lambda).to eq('proc')
+      expect(config.proc).to eq('lambda')
     end
 
     it 'should allow to access them using [] operator' do
@@ -30,6 +32,8 @@ describe Config::Options do
       expect(config['min']).to eq('fig')
       expect(config['exit!']).to eq('taro')
       expect(config['table']).to eq('strawberry')
+      expect(config['lambda']).to eq('proc')
+      expect(config['proc']).to eq('lambda')
 
       expect(config[:select]).to eq('apple')
       expect(config[:collect]).to eq('banana')
@@ -39,6 +43,23 @@ describe Config::Options do
       expect(config[:min]).to eq('fig')
       expect(config[:exit!]).to eq('taro')
       expect(config[:table]).to eq('strawberry')
+      expect(config[:lambda]).to eq('proc')
+      expect(config[:proc]).to eq('lambda')
+    end
+
+    context 'when Settings file is using keywords reserved by Rails 7' do
+      it 'should allow to access them via object member notation' do
+        expect(config.maximum).to eq(20)
+        expect(config.minimum).to eq(10)
+      end
+
+      it 'should allow to access them using [] operator' do
+        expect(config['maximum']).to eq(20)
+        expect(config['minimum']).to eq(10)
+
+        expect(config[:maximum]).to eq(20)
+        expect(config[:minimum]).to eq(10)
+      end
     end
 
     context 'when empty' do
@@ -49,14 +70,19 @@ describe Config::Options do
       it 'should allow to access them via object member notation' do
         expect(config.select).to be_nil
         expect(config.table).to be_nil
+        expect(config.exit!).to be_nil        
       end
 
       it 'should allow to access them using [] operator' do
         expect(config['select']).to be_nil
         expect(config['table']).to be_nil
+        expect(config['lambda']).to be_nil
+        expect(config['proc']).to be_nil
+        expect(config['exit!']).to be_nil
 
         expect(config[:select]).to be_nil
         expect(config[:table]).to be_nil
+        expect(config[:exit!]).to be_nil
       end
     end
   end

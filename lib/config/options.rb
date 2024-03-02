@@ -114,11 +114,15 @@ module Config
     # Some keywords that don't play nicely with OpenStruct
     SETTINGS_RESERVED_NAMES = %w[select collect test count zip min max exit! table].freeze
 
+    # Some keywords that don't play nicely with Rails 7.*
+    RAILS_RESERVED_NAMES = %w[maximum minimum].freeze
+
     # An alternative mechanism for property access.
     # This let's you do foo['bar'] along with foo.bar.
     def [](param)
       return super if SETTINGS_RESERVED_NAMES.include?(param)
-      send("#{param}")
+      return super if RAILS_RESERVED_NAMES.include?(param)
+      public_send("#{param}")
     end
 
     def []=(param, value)
@@ -126,6 +130,12 @@ module Config
     end
 
     SETTINGS_RESERVED_NAMES.each do |name|
+      define_method name do
+        self[name]
+      end
+    end
+
+    RAILS_RESERVED_NAMES.each do |name|
       define_method name do
         self[name]
       end
