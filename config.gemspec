@@ -1,6 +1,5 @@
-$:.push File.expand_path('../lib', __FILE__)
-
-require 'config/version'
+require_relative 'lib/config/version'
+require_relative 'lib/config/dry_validation_requirements'
 
 Gem::Specification.new do |s|
   s.name             = 'config'
@@ -32,8 +31,8 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
   s.required_ruby_version = '>= 2.6.0'
 
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
-  s.add_dependency 'dry-validation', '~> 1.0', '>= 1.0.0'
 
+  s.add_development_dependency 'dry-validation', *Config::DryValidationRequirements::VERSIONS
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
   # Testing

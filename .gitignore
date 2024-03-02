@@ -12,6 +12,7 @@ tmp
 .keep
 .rvmrc
 .rakeTasks
+.ruby-version
 .sass-cache
 Gemfile.lock
 *.gem

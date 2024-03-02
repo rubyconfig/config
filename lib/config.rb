@@ -1,6 +1,6 @@
-require 'config/compatibility'
 require 'config/options'
 require 'config/configuration'
+require 'config/dry_validation_requirements'
 require 'config/version'
 require 'config/sources/yaml_source'
 require 'config/sources/hash_source'
