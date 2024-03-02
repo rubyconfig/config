@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.3.0
+
+* Remove `dry-validation` from dependencies ([#333](https://github.com/rubyconfig/config/pull/333))
+
 ## 5.2.0
 
 ### New features
