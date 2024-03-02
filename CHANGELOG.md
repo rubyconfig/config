@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 5.2.0
 
 ### New features
 
