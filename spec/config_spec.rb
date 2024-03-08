@@ -480,5 +480,36 @@ describe Config do
       end
 
     end
+
+    context 'rails crendentials' do
+      let(:config) do
+        Config.use_rails_credentials = true
+      end
+
+      if defined?(::Rails)
+        it 'shoud have secret_key_base loaded' do
+          expect(Settings.to_h.keys.include?('secret_key_base')).to eq(true)
+        end
+
+        
+        context 'use_rails_credentials is false' do
+          let(:config) do
+            Config.use_rails_credentials = false
+          end
+
+          it 'shoud have secret_key_base loaded' do
+            expect(Settings.to_h.keys.include?('secret_key_base')).to eq(false)
+          end
+        end
+      end
+      
+      unless defined?(::Rails)
+        context 'when not using rails' do
+          it 'shoud have secret_key_base loaded' do
+            expect(Settings.to_h.keys.include?('secret_key_base')).to eq(false)
+          end
+        end
+      end
+    end
   end
 end
