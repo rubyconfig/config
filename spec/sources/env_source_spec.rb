@@ -43,6 +43,46 @@ module Config::Sources
           results = source.load
           expect(results['action_mailer']['enabled']).to eq('true')
         end
+
+        describe 'arrays' do
+          let(:source) do
+            Config.env_converter = nil
+            EnvSource.new({
+                            'Settings.SomeConfig.0.0' => 'value1',
+                            'Settings.SomeConfig.0.1' => 'value2',
+                            'Settings.SomeConfig.1.1' => 'value3',
+                            'Settings.SomeConfig.1.2' => 'value4',
+                            'Settings.MixedConfig.1.0' => 'value5',
+                            'Settings.MixedConfig.1.1' => 'value6',
+                            'Settings.MixedConfig.1.custom' => 'value7'
+                          })
+          end
+
+          let(:results) { source.load }
+
+          context 'when loading nested configurations' do
+            it 'converts numeric-keyed hashes to arrays' do
+              puts results.inspect
+              expect(results['SomeConfig']).to be_an Array
+              expect(results['SomeConfig'][0]).to be_an Array
+              expect(results['SomeConfig'][0][0]).to eq('value1')
+              expect(results['SomeConfig'][0][1]).to eq('value2')
+            end
+
+            it 'retains hashes for non-sequential numeric keys' do
+              expect(results['SomeConfig'][1]).to be_a Hash
+              expect(results['SomeConfig'][1]['1']).to eq('value3')
+              expect(results['SomeConfig'][1]['2']).to eq('value4')
+            end
+
+            it 'retains hashes for mixed types' do
+              expect(results['MixedConfig'][1]).to be_a Hash
+              expect(results['MixedConfig'][1]['0']).to eq('value5')
+              expect(results['MixedConfig'][1]['1']).to eq('value6')
+              expect(results['MixedConfig'][1]['custom']).to eq('value7')
+            end
+          end
+        end
       end
 
       context 'configuration overrides' do

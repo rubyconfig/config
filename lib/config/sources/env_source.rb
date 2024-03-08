@@ -52,10 +52,28 @@ module Config
           leaf[keys.last] = parse_values ? __value(value) : value
         end
 
-        hash
+        convert_hashes_to_arrays(hash)
       end
 
       private
+      def convert_hashes_to_arrays(hash)
+        hash.each_with_object({}) do |(key, value), new_hash|
+          if value.is_a?(Hash)
+            value = convert_hashes_to_arrays(value)
+            if consecutive_numeric_keys?(value.keys)
+              new_hash[key] = value.keys.sort_by(&:to_i).map { |k| value[k] }
+            else
+              new_hash[key] = value
+            end
+          else
+            new_hash[key] = value
+          end
+        end
+      end
+
+      def consecutive_numeric_keys?(keys)
+        keys.map(&:to_i).sort == (0...keys.size).to_a && keys.all? { |k| k == k.to_i.to_s }
+      end
 
       # Try to convert string to a correct type
       def __value(v)
