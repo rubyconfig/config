@@ -4,6 +4,10 @@ module Config
   module Validation
     module Validate
       def validate!
+        return unless Config.validation_contract || Config.schema
+
+        Config::DryValidationRequirements.load_dry_validation!
+
         validate_using!(Config.validation_contract)
         validate_using!(Config.schema)
       end

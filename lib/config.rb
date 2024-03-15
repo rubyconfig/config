@@ -1,12 +1,12 @@
-require 'config/compatibility'
 require 'config/options'
 require 'config/configuration'
+require 'config/dry_validation_requirements'
 require 'config/version'
 require 'config/sources/yaml_source'
 require 'config/sources/hash_source'
 require 'config/sources/env_source'
 require 'config/validation/schema'
-require 'deep_merge'
+require 'deep_merge/core'
 
 module Config
   extend Config::Validation::Schema
@@ -19,6 +19,8 @@ module Config
     env_converter: :downcase,
     env_parse_values: true,
     fail_on_missing: false,
+    file_name: 'settings',
+    dir_name: 'settings',
     # deep_merge options
     knockout_prefix: nil,
     merge_nil_values: true,
@@ -59,8 +61,8 @@ module Config
 
   def self.setting_files(config_root, env)
     [
-      File.join(config_root, 'settings.yml').to_s,
-      File.join(config_root, 'settings', "#{env}.yml").to_s,
+      File.join(config_root, "#{Config.file_name}.yml").to_s,
+      File.join(config_root, Config.dir_name, "#{env}.yml").to_s,
       File.join(config_root, 'environments', "#{env}.yml").to_s,
       *local_setting_files(config_root, env)
     ].freeze
@@ -68,8 +70,8 @@ module Config
 
   def self.local_setting_files(config_root, env)
     [
-      (File.join(config_root, 'settings.local.yml').to_s if env != 'test'),
-      File.join(config_root, 'settings', "#{env}.local.yml").to_s,
+      (File.join(config_root, "#{Config.file_name}.local.yml").to_s if env != 'test'),
+      File.join(config_root, Config.dir_name, "#{env}.local.yml").to_s,
       File.join(config_root, 'environments', "#{env}.local.yml").to_s
     ].compact
   end
@@ -80,7 +82,7 @@ module Config
 end
 
 # Rails integration
-require('config/integrations/rails/railtie') if defined?(::Rails)
+require('config/integrations/rails/railtie') if defined?(::Rails::Railtie)
 
 # Sinatra integration
 require('config/integrations/sinatra') if defined?(::Sinatra)

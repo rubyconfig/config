@@ -1,6 +1,8 @@
+require_relative "../error"
+
 module Config
   module Validation
-    class Error < StandardError
+    class Error < ::Config::Error
 
       def self.format(v_res)
         v_res.errors.group_by(&:path).map do |path, messages|

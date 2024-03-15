@@ -2,7 +2,6 @@
 
 [![Version](https://img.shields.io/gem/v/config)](https://rubygems.org/gems/config)
 [![Downloads Total](https://img.shields.io/gem/dt/config)](https://rubygems.org/gems/config)
-[![Build](https://img.shields.io/github/workflow/status/rubyconfig/config/tests)](https://rubygems.org/gems/config)
 [![Tests](https://github.com/rubyconfig/config/workflows/tests/badge.svg)](https://github.com/rubyconfig/config/actions?query=branch%3Amaster)
 [![Financial Contributors on Open Collective](https://opencollective.com/rubyconfig/all/badge.svg?label=backers)](https://opencollective.com/rubyconfig)
 
@@ -273,6 +272,8 @@ After installing `Config` in Rails, you will find automatically generated file t
 
 * `const_name` - name of the object holing you settings. Default: `'Settings'`
 * `evaluate_erb_in_yaml` - evaluate ERB in YAML config files. Set to false if the config file contains ERB that should not be evaluated at load time. Default: `true`
+* `file_name` - name of the file to store general keys accessible in all environments. Default: `'settings'` - located at `config/settings.yml`
+* `dir_name` - name of the directory to store environment-specific files. Default: `'settings'` - located at `config/settings/`
 
 ### Merge customization
 

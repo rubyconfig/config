@@ -1,6 +1,5 @@
-$:.push File.expand_path('../lib', __FILE__)
-
-require 'config/version'
+require_relative 'lib/config/version'
+require_relative 'lib/config/dry_validation_requirements'
 
 Gem::Specification.new do |s|
   s.name             = 'config'
@@ -8,9 +7,9 @@ Gem::Specification.new do |s|
   s.date             = Time.now.strftime '%F'
   s.authors          = ['Piotr Kuczynski', 'Fred Wu', 'Jacques Crocker']
   s.email            = %w[piotr.kuczynski@gmail.com ifredwu@gmail.com railsjedi@gmail.com]
-  s.summary          = 'Effortless multi-environment settings in Rails, Sinatra, Pandrino and others'
+  s.summary          = 'Effortless multi-environment settings in Rails, Sinatra, Padrino and others'
   s.description      = 'Easiest way to manage multi-environment settings in any ruby project or framework: ' +
-                       'Rails, Sinatra, Pandrino and others'
+                       'Rails, Sinatra, Padrino and others'
   s.homepage         = 'https://github.com/rubyconfig/config'
   s.license          = 'MIT'
   s.extra_rdoc_files = %w[README.md CHANGELOG.md CONTRIBUTING.md LICENSE.md]
@@ -20,6 +19,11 @@ Please consider donating to our open collective to help us maintain this project
 \n
 Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
+  s.metadata = {
+    'changelog_uri' => "https://github.com/rubyconfig/config/blob/master/CHANGELOG.md",
+    'source_code_uri' => 'https://github.com/rubyconfig/config',
+    'bug_tracker_uri' => 'https://github.com/rubyconfig/config/issues'
+  }
   s.files = `git ls-files`.split($/)
   s.files.select! { |file| /(^lib\/|^\w+.md$|\.gemspec$)/ =~ file }
 
@@ -27,12 +31,12 @@ Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
   s.required_ruby_version = '>= 2.6.0'
 
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
-  s.add_dependency 'dry-validation', '~> 1.0', '>= 1.0.0'
 
+  s.add_development_dependency 'dry-validation', *Config::DryValidationRequirements::VERSIONS
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
   # Testing
-  s.add_development_dependency 'appraisal', '~> 2.3', '>= 2.3.0'
+  s.add_development_dependency 'appraisal', '~> 2.5', '>= 2.5.0'
   s.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
 
   # Default RSpec run will test against latest Rails app

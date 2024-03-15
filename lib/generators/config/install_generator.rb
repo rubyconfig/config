@@ -12,18 +12,18 @@ module Config
       end
 
       def copy_settings
-        template "settings.yml", "config/settings.yml"
-        template "settings.local.yml", "config/settings.local.yml"
-        directory "settings", "config/settings"
+        template "settings.yml", "config/#{Config.file_name}.yml"
+        template "settings.local.yml", "config/#{Config.file_name}.local.yml"
+        directory "settings", "config/#{Config.dir_name}"
       end
 
       def modify_gitignore
-        create_file '.gitignore' unless File.exists? '.gitignore'
+        create_file '.gitignore' unless File.exist? '.gitignore'
 
         append_to_file '.gitignore' do
-          "\n"                                +
-          "config/settings.local.yml\n"       +
-          "config/settings/*.local.yml\n"     +
+          "\n"                                      +
+          "config/#{Config.file_name}.local.yml\n"  +
+          "config/#{Config.dir_name}/*.local.yml\n" +
           "config/environments/*.local.yml\n"
         end
       end

@@ -1,5 +1,48 @@
 # Changelog
 
+## 5.3.0
+
+* Remove `dry-validation` from dependencies ([#333](https://github.com/rubyconfig/config/pull/333))
+
+## 5.2.0
+
+### New features
+
+* Allow to use custom filename && directory name to store configs ([#341](https://github.com/rubyconfig/config/pull/341))
+
+### Bug fixes
+
+* Prevent name collision with private methods from ancestors ([#351](https://github.com/rubyconfig/config/pull/351))
+
+## 5.1.0
+
+* Fix conflicts with Rails 7 active_support methods ([#347](https://github.com/rubyconfig/config/pull/347))
+
+## 5.0.0
+
+### BREAKING CHANGES
+
+* No longer load `deep_merge`'s monkey patch for `Hash#deep_merge` and `Hash#deep_merge!` ([#342](https://github.com/rubyconfig/config/pull/342)). If you rely on those methods and are not using Rails / Active Support, you can load the monkey patch via `require 'deep_merge/deep_merge_hash'`. This change fixes Rails 7.x support.
+
+## 4.2.1
+
+### Bug fixes
+
+* Address edge case with `table` config param ([#339](https://github.com/rubyconfig/config/pull/339))
+
+## 4.2.0
+
+### Bug fixes
+
+* Remove use of method `File.exists?` to fix use in Ruby 3.0 ([#318](https://github.com/rubyconfig/config/pull/318))
+
+## 4.1.0
+
+### Bug fixes
+
+* Only load `Railtie` integration if `Rails::Railtie` is defined ([#319](https://github.com/rubyconfig/config/pull/319))
+* Fix indentation warning in Ruby 3.1 ([#322](https://github.com/rubyconfig/config/pull/322))
+
 ## 4.0.0
 
 ### BREAKING CHANGES

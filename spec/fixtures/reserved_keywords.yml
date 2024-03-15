@@ -1,3 +1,4 @@
+# OpenStruct reserved keywords
 select: apple
 collect: banana
 count: lemon
@@ -5,3 +6,10 @@ zip: cherry
 max: kumquat
 min: fig
 exit!: taro
+table: strawberry
+lambda: proc
+proc: lambda 
+
+# Rails 7.* reserved keywords
+minimum: 10
+maximum: 20
