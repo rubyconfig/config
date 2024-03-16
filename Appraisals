@@ -1,4 +1,4 @@
-# Rails 5.x, 6.0 requires Ruby < 3
+# Rails 5.x, 6.0 require Ruby < 3
 if RUBY_ENGINE == 'ruby' && RUBY_VERSION <= '3.0'
   appraise 'rails-5.2' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 52.5', platform: :jruby
@@ -17,7 +17,7 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION <= '3.0'
   end
 end
 
-# Test rails 6.1 with psych >= 4
+# Rails 6.1 with psych >= 4
 appraise 'rails-6.1' do
   gem 'activerecord-jdbcsqlite3-adapter', '~> 61.1', platform: :jruby
   gem 'bootsnap', '>= 1.4.4'
@@ -27,10 +27,8 @@ appraise 'rails-6.1' do
   gem 'psych', '>= 4'
 end
 
-# Temporarily exclude Truffleruby and JRuby from testing in Rails 7.x until they fix the issues upstream.
-# See https://github.com/rubyconfig/config/pull/344#issuecomment-1766209753
-# if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
-if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
+# Rails 7.x require Ruby >= 2.7
+if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'sqlite3', '~> 1.6.4', platform: :ruby
