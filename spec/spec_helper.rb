@@ -78,15 +78,16 @@ RSpec.configure do |config|
 
       # Extend Config module with ability to reset configuration to the default values
       def self.reset
-        self.const_name           = 'Settings'
-        self.use_env              = false
-        self.knockout_prefix      = nil
-        self.overwrite_arrays     = true
-        self.schema               = nil
-        self.validation_contract  = nil
-        self.fail_on_missing      = false
-        self.file_name            = 'settings'
-        self.dir_name             = 'settings'
+        self.const_name             = 'Settings'
+        self.use_env                = false
+        self.knockout_prefix        = nil
+        self.overwrite_arrays       = true
+        self.schema                 = nil
+        self.validation_contract    = nil
+        self.fail_on_missing        = false
+        self.use_rails_credentials  = false
+        self.file_name              = 'settings'
+        self.dir_name               = 'settings'
         instance_variable_set(:@_ran_once, false)
       end
     end

@@ -29,8 +29,8 @@ module Config
     merge_hash_arrays: false,
     validation_contract: nil,
     evaluate_erb_in_yaml: true,
+    use_rails_credentials: false,
     environment: nil
-    use_rails_credentials: false
   )
 
   def self.setup
@@ -51,7 +51,11 @@ module Config
     config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
 
     if defined?(::Rails::Railtie) && Config.use_rails_credentials
-      config.add_source!(Rails.application.credentials.to_h.deep_stringify_keys) 
+      if Rails.version < '7.1'
+        config.add_source!(Sources::HashSource.new(secret: Rails.application.secrets.to_h.deep_stringify_keys))
+      else
+        config.add_source!(Sources::HashSource.new(secret: Rails.application.credentials.config))
+      end
     end
 
     config.load!
