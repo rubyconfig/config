@@ -490,8 +490,8 @@ describe Config do
         end
     
         it "shoud have secret_key_base loaded" do
-          expect(config.keys).to contain_exactly(:size, :section, :secret)
-          expect(config.secret.secret_key_base).to_not eq(nil)
+          expect(config.keys).to contain_exactly(:size, :section, :aws)
+          expect(config.aws.secret_access_key).to eq('123456')
         end
         
         context 'use_rails_credentials is false' do
