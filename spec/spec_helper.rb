@@ -59,6 +59,13 @@ when 'sinatra'
   end
 end
 
+module FixturePathHelper
+  def fixture_path
+    # Call fixture_paths.first in Rails >= 7.1 to avoid deprecation warnings
+    respond_to?(:fixture_paths) ? fixture_paths.first : super
+  end
+end
+
 ##
 # Common Rspec configure
 #
@@ -84,6 +91,8 @@ RSpec.configure do |config|
       end
     end
   end
+
+  config.include FixturePathHelper
 end
 
 ##
