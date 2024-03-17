@@ -51,10 +51,10 @@ module Config
     config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
 
     if defined?(::Rails::Railtie) && Config.use_rails_credentials
-      if Gem::Version.new(Rails.version) < Gem::Version.new('6.0.0')
-        config.add_source!(Sources::HashSource.new(Rails.application.secrets.to_h.deep_stringify_keys))
-      else
+      if Rails.application.credentials.respond_to?(:credentials)
         config.add_source!(Sources::HashSource.new(Rails.application.credentials.config.deep_stringify_keys))
+      else
+        config.add_source!(Sources::HashSource.new(Rails.application.secrets.to_h.deep_stringify_keys))
       end
     end
 
