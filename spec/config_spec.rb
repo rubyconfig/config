@@ -481,7 +481,7 @@ describe Config do
 
     end
 
-    context 'rails crendentials' do
+    context 'rails credentials' do
       if defined?(::Rails)
         let(:config) do
           files = ["#{fixture_path}/development.yml"]
@@ -489,8 +489,8 @@ describe Config do
           Config.load_files(files)
         end
     
-        it "shoud have secret_key_base loaded" do
-          expect(config.keys).to contain_exactly(:size, :section, :aws)
+        it "should have secret_key_base loaded" do
+          expect(config.keys).to contain_exactly(:size, :section, :aws, :secret_key_base)
           expect(config.aws.secret_access_key).to eq('123456')
         end
         
@@ -501,7 +501,7 @@ describe Config do
             Config.load_files(files)
           end
 
-          it "shoud not have secret_key_base loaded" do
+          it "should not have secret_key_base loaded" do
             expect(config.keys).to contain_exactly(:size, :section)
           end
         end
@@ -515,7 +515,7 @@ describe Config do
             Config.load_files(files)
           end
 
-          it 'shoud not have secret_key_base loaded' do
+          it 'should not have secret_key_base loaded' do
             expect(config.keys).to contain_exactly(:size, :section)
           end
         end
