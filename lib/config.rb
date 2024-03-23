@@ -18,6 +18,7 @@ module Config
     env_separator: '.',
     env_converter: :downcase,
     env_parse_values: true,
+    env_parse_arrays: false,
     fail_on_missing: false,
     file_name: 'settings',
     dir_name: 'settings',
