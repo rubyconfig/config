@@ -6,17 +6,20 @@ module Config
       attr_reader :separator
       attr_reader :converter
       attr_reader :parse_values
+      attr_reader :parse_arrays
 
       def initialize(env,
                      prefix: Config.env_prefix || Config.const_name,
                      separator: Config.env_separator,
                      converter: Config.env_converter,
-                     parse_values: Config.env_parse_values)
+                     parse_values: Config.env_parse_values,
+                     parse_arrays: Config.env_parse_arrays)
         @env = env
         @prefix = prefix.to_s.split(separator)
         @separator = separator
         @converter = converter
         @parse_values = parse_values
+        @parse_arrays = parse_arrays
       end
 
       def load
@@ -52,7 +55,7 @@ module Config
           leaf[keys.last] = parse_values ? __value(value) : value
         end
 
-        convert_hashes_to_arrays(hash)
+        parse_arrays ? convert_hashes_to_arrays(hash) : hash
       end
 
       private

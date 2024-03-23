@@ -22,6 +22,7 @@ describe Config::Options do
       Config.env_separator        = '.'
       Config.env_converter        = :downcase
       Config.env_parse_values     = true
+      Config.env_parse_arrays     = true
     end
 
     it 'should add new setting from ENV variable' do
@@ -92,6 +93,36 @@ describe Config::Options do
           Config.env_parse_values = false
 
           expect(config.new_var).to eq('123')
+        end
+      end
+    end
+
+    context 'and parsing ENV variables arrays' do
+      context 'is enabled' do
+        before :each do
+          Config.env_parse_arrays = true
+        end
+
+        it 'should recognize ENV variables with subsequent numeric suffixes starting from 0 as array' do
+          ENV['Settings.SomeConfig.0'] = 'first'
+          ENV['Settings.SomeConfig.1'] = 'second'
+
+          expect(config.someconfig).to eq(['first', 'second'])
+        end
+      end
+
+      context 'is disabled' do
+        before :each do
+          Config.env_parse_arrays = false
+        end
+
+        it 'should not recognize ENV variables with subsequent numeric suffixes starting from 0 as array' do
+          ENV['Settings.SomeConfig.0'] = 'first'
+          ENV['Settings.SomeConfig.1'] = 'second'
+
+          expect(config.someconfig).to be_a Config::Options
+          expect(config.someconfig['0']).to eq('first')
+          expect(config.someconfig['1']).to eq('second')
         end
       end
     end

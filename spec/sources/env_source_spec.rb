@@ -45,6 +45,10 @@ module Config::Sources
         end
 
         describe 'arrays' do
+          before(:each) do
+            Config.env_parse_arrays = true
+          end
+
           let(:source) do
             Config.env_converter = nil
             EnvSource.new({
