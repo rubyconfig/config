@@ -62,7 +62,6 @@ module Config::Sources
 
           context 'when loading nested configurations' do
             it 'converts numeric-keyed hashes to arrays' do
-              puts results.inspect
               expect(results['SomeConfig']).to be_an Array
               expect(results['SomeConfig'][0]).to be_an Array
               expect(results['SomeConfig'][0][0]).to eq('value1')
@@ -76,10 +75,10 @@ module Config::Sources
             end
 
             it 'retains hashes for mixed types' do
-              expect(results['MixedConfig'][1]).to be_a Hash
-              expect(results['MixedConfig'][1]['0']).to eq('value5')
-              expect(results['MixedConfig'][1]['1']).to eq('value6')
-              expect(results['MixedConfig'][1]['custom']).to eq('value7')
+              expect(results['MixedConfig']['1']).to be_a Hash
+              expect(results['MixedConfig']['1']['0']).to eq('value5')
+              expect(results['MixedConfig']['1']['1']).to eq('value6')
+              expect(results['MixedConfig']['1']['custom']).to eq('value7')
             end
           end
         end
