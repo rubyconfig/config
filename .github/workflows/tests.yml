@@ -13,6 +13,7 @@ jobs:
     env:
       COVERAGE_RUBY_VERSION: 2.6
       BUNDLE_PATH: vendor/bundle
+      RAILS_MASTER_KEY: 0e29551e5c31acf7c769d64397af54e4 # rails require to decrypt creds
     strategy:
       fail-fast: false
       matrix:
