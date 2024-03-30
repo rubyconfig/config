@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.4.0
+
+### New features
+
+* Add configuration option `environment` to override the use of `Rails.env` ([#356](https://github.com/rubyconfig/config/pull/356))
+
 ## 5.3.0
 
 * Remove `dry-validation` from dependencies ([#333](https://github.com/rubyconfig/config/pull/333))

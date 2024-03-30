@@ -28,7 +28,8 @@ module Config
     overwrite_arrays: true,
     merge_hash_arrays: false,
     validation_contract: nil,
-    evaluate_erb_in_yaml: true
+    evaluate_erb_in_yaml: true,
+    environment: nil
   )
 
   def self.setup
