@@ -192,7 +192,6 @@ describe Config do
   end
 
 
-
   context "Nested Settings" do
     let(:config) do
       Config.load_files("#{fixture_path}/development.yml")
