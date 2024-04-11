@@ -428,7 +428,7 @@ ENV['Settings.section.server'] = 'google.com'
 
 It won't work with arrays, though.
 
-It is considered an error to use environment variables to simutaneously assign a "flat" value and a multi-level value to a key.
+It is considered an error to use environment variables to simultaneously assign a "flat" value and a multi-level value to a key.
 
 ```ruby
 # Raises an error when settings are loaded
