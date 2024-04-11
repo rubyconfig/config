@@ -7,6 +7,6 @@ test:
   database: myapp_test
   pool: *pool           # Psych::BadAlias: Unknown alias
 others:
-  regex: !ruby/regexp '/https?:\/\/.*exmaple\.com/' # Tried to load unspecified class: Regexp (Psych::DisallowedClass)
+  regex: !ruby/regexp '/https?:\/\/.*example\.com/' # Tried to load unspecified class: Regexp (Psych::DisallowedClass)
   date: 2021-08-03                                  # Tried to load unspecified class: Date (Psych::DisallowedClass)
   time: 2001-12-14T21:59:43.10-05:00                # Tried to load unspecified class: Time (Psych::DisallowedClass)
