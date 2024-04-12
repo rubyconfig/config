@@ -70,7 +70,7 @@ describe Config::Options do
       it 'should allow to access them via object member notation' do
         expect(config.select).to be_nil
         expect(config.table).to be_nil
-        expect(config.exit!).to be_nil        
+        expect(config.exit!).to be_nil
       end
 
       it 'should allow to access them using [] operator' do
@@ -167,7 +167,7 @@ describe Config::Options do
         config.reload!
       end
 
-      it 'should be overwriten by the following values' do
+      it 'should be overwritten by the following values' do
         expect(config['tvrage']['service_url']).to eq('http://services.tvrage.com')
       end
 
