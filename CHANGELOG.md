@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.5.0
+
+### New features
+
+* Allow arrays to be passed through env variables ([#354](https://github.com/rubyconfig/config/pull/354))
+
+### Documentation
+
+* Use funding_url rather than post_install_message ([#360](https://github.com/rubyconfig/config/pull/360))
+* Fix typos in the tests and documentation ([#359](https://github.com/rubyconfig/config/pull/359))
+
 ## 5.4.0
 
 ### New features
