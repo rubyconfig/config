@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.4.1
+
+* Use funding_url rather than post_install_message ([#360](https://github.com/rubyconfig/config/pull/360))
+
 ## 5.4.0
 
 ### New features
