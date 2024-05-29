@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.metadata = {
     'changelog_uri' => "https://github.com/rubyconfig/config/blob/master/CHANGELOG.md",
-    'funding_url' => 'https://opencollective.com/rubyconfig/donate',
+    'funding_uri' => 'https://opencollective.com/rubyconfig/donate',
     'source_code_uri' => 'https://github.com/rubyconfig/config',
     'bug_tracker_uri' => 'https://github.com/rubyconfig/config/issues'
   }
