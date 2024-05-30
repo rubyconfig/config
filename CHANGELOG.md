@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.5.1
+
+### Documentation
+
+* Fix funding_url to funding_uri in gemspec ([#361](https://github.com/rubyconfig/config/pull/361))
+
 ## 5.5.0
 
 ### New features
