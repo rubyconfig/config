@@ -274,6 +274,7 @@ After installing `Config` in Rails, you will find automatically generated file t
 * `evaluate_erb_in_yaml` - evaluate ERB in YAML config files. Set to false if the config file contains ERB that should not be evaluated at load time. Default: `true`
 * `file_name` - name of the file to store general keys accessible in all environments. Default: `'settings'` - located at `config/settings.yml`
 * `dir_name` - name of the directory to store environment-specific files. Default: `'settings'` - located at `config/settings/`
+* `use_rails_credentials` - evaluate Rails credentials if loaded with `RAILS_MASTER_KEY` or `config/master.key`. Can be access using `Settings.secret.secret_key_base`. Rails crendetials will override other settings as it will loaded last.
 
 ### Merge customization
 

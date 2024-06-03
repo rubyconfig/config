@@ -29,6 +29,7 @@ module Config
     merge_hash_arrays: false,
     validation_contract: nil,
     evaluate_erb_in_yaml: true,
+    use_rails_credentials: false,
     environment: nil
   )
 
@@ -45,6 +46,15 @@ module Config
     # add settings sources
     [sources].flatten.compact.each do |source|
       config.add_source!(source)
+    end
+
+    # load rails crendentials
+    if defined?(::Rails::Railtie) && Config.use_rails_credentials
+      if Rails.application.credentials.respond_to?(:credentials)
+        config.add_source!(Sources::HashSource.new(Rails.application.credentials.config.deep_stringify_keys))
+      else
+        config.add_source!(Sources::HashSource.new(Rails.application.secrets.to_h.deep_stringify_keys))
+      end
     end
 
     config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
