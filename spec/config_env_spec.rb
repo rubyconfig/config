@@ -10,8 +10,14 @@ describe Config::Options do
       Config.load_files "#{fixture_path}/settings.yml", "#{fixture_path}/multilevel.yml"
     end
 
+    before :all do
+      ENV_BACKUP = ENV.to_hash
+    end
+
     after :all do
       Config.use_env = false
+
+      ENV_BACKUP.each { |k, v| ENV[k] = v }
     end
 
     before :each do
