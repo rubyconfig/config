@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* Fix warning: ostruct was loaded from the standard library ([#363](https://github.com/rubyconfig/config/pull/363))
+
 ## 5.5.1
 
 ### Documentation
