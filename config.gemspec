@@ -14,13 +14,10 @@ Gem::Specification.new do |s|
   s.license          = 'MIT'
   s.extra_rdoc_files = %w[README.md CHANGELOG.md CONTRIBUTING.md LICENSE.md]
   s.rdoc_options     = ['--charset=UTF-8']
-  s.post_install_message = "\n\e[33mThanks for installing Config\e[0m
-Please consider donating to our open collective to help us maintain this project.
-\n
-Donate: \e[34mhttps://opencollective.com/rubyconfig/donate\e[0m\n"
 
   s.metadata = {
     'changelog_uri' => "https://github.com/rubyconfig/config/blob/master/CHANGELOG.md",
+    'funding_uri' => 'https://opencollective.com/rubyconfig/donate',
     'source_code_uri' => 'https://github.com/rubyconfig/config',
     'bug_tracker_uri' => 'https://github.com/rubyconfig/config/issues'
   }
