@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.6.0
+
+### New features
+
+* Add rails credentials support ([#355](https://github.com/rubyconfig/config/pull/355))
+
 ## 5.5.1
 
 ### Documentation
