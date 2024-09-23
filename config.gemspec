@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.6.0'
 
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
+  s.add_dependency 'ostruct'
 
   s.add_development_dependency 'dry-validation', *Config::DryValidationRequirements::VERSIONS
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
