@@ -1,8 +1,8 @@
 # Changelog
 
-## Unreleased
+## 5.5.2
 
-* Fix warning: ostruct was loaded from the standard library ([#363](https://github.com/rubyconfig/config/pull/363))
+* Fix warning: ostruct was loaded from the standard library with Ruby 3.3.5 and 3.4+ ([#363](https://github.com/rubyconfig/config/pull/363))
 
 ## 5.5.1
 
