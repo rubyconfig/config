@@ -164,6 +164,8 @@ Config.setup do |config|
 end
 ```
 
+This will also overwrite the same config entries from the main file.
+
 ### Developer specific config files
 
 If you want to have local settings, specific to your machine or development environment, you can use the following files, which are automatically `.gitignore` :
