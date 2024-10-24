@@ -38,7 +38,7 @@ describe Config do
     expect(config.root['google.com']).to eq(3)
   end
 
-  it "should get load extra_sources files" do
+  it "should load extra_sources files" do
     Config.setup do |config|
       config.extra_sources = ['settings2']
     end
