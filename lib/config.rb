@@ -29,7 +29,8 @@ module Config
     merge_hash_arrays: false,
     validation_contract: nil,
     evaluate_erb_in_yaml: true,
-    environment: nil
+    environment: nil,
+    extra_sources: []
   )
 
   def self.setup
@@ -63,6 +64,7 @@ module Config
   def self.setting_files(config_root, env)
     [
       File.join(config_root, "#{Config.file_name}.yml").to_s,
+      *Config.extra_sources.map { |source| File.join(config_root, "#{source}.yml") },
       File.join(config_root, Config.dir_name, "#{env}.yml").to_s,
       File.join(config_root, 'environments', "#{env}.yml").to_s,
       *local_setting_files(config_root, env)
@@ -72,6 +74,7 @@ module Config
   def self.local_setting_files(config_root, env)
     [
       (File.join(config_root, "#{Config.file_name}.local.yml").to_s if env != 'test'),
+      *Config.extra_sources.map { |source| File.join(config_root, "#{source}.local.yml") },
       File.join(config_root, Config.dir_name, "#{env}.local.yml").to_s,
       File.join(config_root, 'environments', "#{env}.local.yml").to_s
     ].compact

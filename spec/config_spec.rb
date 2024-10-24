@@ -38,6 +38,24 @@ describe Config do
     expect(config.root['google.com']).to eq(3)
   end
 
+  it "should get load extra_sources files" do
+    Config.setup do |config|
+      config.extra_sources = ['settings2']
+    end
+
+    config = Config.setting_files("root/config", "staging")
+    expect(config).to eq([
+                           'root/config/settings.yml',
+                           'root/config/settings2.yml',
+                           'root/config/settings/staging.yml',
+                           'root/config/environments/staging.yml',
+                           'root/config/settings.local.yml',
+                           'root/config/settings2.local.yml',
+                           'root/config/settings/staging.local.yml',
+                           'root/config/environments/staging.local.yml'
+                         ])
+  end
+
   it "should load 2 basic config files" do
     config = Config.load_files("#{fixture_path}/settings.yml", "#{fixture_path}/settings2.yml")
     expect(config.size).to eq(1)

@@ -65,4 +65,9 @@ Config.setup do |config|
   #
   # config.file_name = 'settings'
   # config.dir_name = 'settings'
+
+  # Extra sources to load
+  # Loads extra sources from config folder
+  #
+  # config.extra_sources = ['extra_settings']
 end

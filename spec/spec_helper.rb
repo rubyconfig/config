@@ -87,6 +87,7 @@ RSpec.configure do |config|
         self.fail_on_missing      = false
         self.file_name            = 'settings'
         self.dir_name             = 'settings'
+        self.extra_sources        = []
         instance_variable_set(:@_ran_once, false)
       end
     end
