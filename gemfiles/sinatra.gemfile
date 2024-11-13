@@ -3,5 +3,6 @@
 source "https://rubygems.org"
 
 gem "sinatra", "2.0.8.1"
+gem "deep_merge", "~> 1.2", ">= 1.2.1"
 
 gemspec path: "../"

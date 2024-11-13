@@ -40,15 +40,19 @@ module Config
         if conf.empty?
           conf = source_conf
         else
-          DeepMerge.deep_merge!(
-                                source_conf,
-                                conf,
-                                preserve_unmergeables: false,
-                                knockout_prefix:       Config.knockout_prefix,
-                                overwrite_arrays:      Config.overwrite_arrays,
-                                merge_nil_values:      Config.merge_nil_values,
-                                merge_hash_arrays:     Config.merge_hash_arrays
-                               )
+          if defined?(DeepMerge)
+            DeepMerge.deep_merge!(
+                                  source_conf,
+                                  conf,
+                                  preserve_unmergeables: false,
+                                  knockout_prefix:       Config.knockout_prefix,
+                                  overwrite_arrays:      Config.overwrite_arrays,
+                                  merge_nil_values:      Config.merge_nil_values,
+                                  merge_hash_arrays:     Config.merge_hash_arrays
+                                 )
+          else
+            conf = conf.deep_merge!(source_conf)
+          end
         end
       end
 
@@ -98,15 +102,19 @@ module Config
 
     def merge!(hash)
       current = to_hash
-      DeepMerge.deep_merge!(
-                            hash.dup,
-                            current,
-                            preserve_unmergeables: false,
-                            knockout_prefix:       Config.knockout_prefix,
-                            overwrite_arrays:      Config.overwrite_arrays,
-                            merge_nil_values:      Config.merge_nil_values,
-                            merge_hash_arrays:     Config.merge_hash_arrays
-                           )
+      if defined?(DeepMerge)
+        DeepMerge.deep_merge!(
+                              hash.dup,
+                              current,
+                              preserve_unmergeables: false,
+                              knockout_prefix:       Config.knockout_prefix,
+                              overwrite_arrays:      Config.overwrite_arrays,
+                              merge_nil_values:      Config.merge_nil_values,
+                              merge_hash_arrays:     Config.merge_hash_arrays
+                             )
+      else
+        current.deep_merge!(hash)
+      end
       marshal_load(__convert(current).marshal_dump)
       self
     end

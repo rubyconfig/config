@@ -331,6 +331,11 @@ describe Config do
       end
 
       it 'should not overwrite values with nil' do
+        unless defined?(DeepMerge)
+          skip <<~REASON
+            DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+          REASON
+        end
         old_value = config.inner.something1
         config.merge!(hash_with_nil)
         expect(config.inner.something1).to eq(old_value)
@@ -418,6 +423,11 @@ describe Config do
         end
 
         it 'should remove elements from settings' do
+          unless defined?(DeepMerge)
+            skip <<~REASON
+              DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+            REASON
+          end
           expect(config.array1).to eq(['item4', 'item5', 'item6'])
           expect(config.array2.inner).to eq(['item4', 'item5', 'item6'])
           expect(config.array3).to eq('')
@@ -474,6 +484,11 @@ describe Config do
         end
 
         it 'should merge arrays from multiple configs' do
+          unless defined?(DeepMerge)
+            skip <<~REASON
+              DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+            REASON
+          end
           expect(config.arraylist1.size).to eq(6)
           expect(config.arraylist2.inner.size).to eq(6)
         end
