@@ -48,8 +48,9 @@ module Config
       config.add_source!(source)
     end
 
-    # load rails crendentials
+    # load rails credentials
     if defined?(::Rails::Railtie) && Config.use_rails_credentials
+      # if Rails.application.respond_to?(:credentials)
       if Rails.application.credentials.respond_to?(:credentials)
         config.add_source!(Sources::HashSource.new(Rails.application.credentials.config.deep_stringify_keys))
       else
