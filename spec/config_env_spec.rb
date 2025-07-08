@@ -172,7 +172,7 @@ describe Config::Options do
         expect(config.world.countries.europe).to eq(0)
       end
 
-      it 'should ignore variables wit default separator' do
+      it 'should ignore variables with default separator' do
         ENV['Settings.new_var'] = 'value'
 
         expect(config.new_var).to eq(nil)
