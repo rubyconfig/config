@@ -58,13 +58,15 @@ module Config
   def self.load_and_set_settings(*sources)
     name = Config.const_name
     Object.send(:remove_const, name) if Object.const_defined?(name)
-    Object.const_set(name, Config.load_files(sources))
+
+    # Include extra sources in the loading process
+    all_sources = [sources, Config.extra_sources].flatten.compact
+    Object.const_set(name, Config.load_files(*all_sources))
   end
 
   def self.setting_files(config_root, env)
     [
       File.join(config_root, "#{Config.file_name}.yml").to_s,
-      *Config.extra_sources.map { |source| File.join(config_root, "#{source}.yml") },
       File.join(config_root, Config.dir_name, "#{env}.yml").to_s,
       File.join(config_root, 'environments', "#{env}.yml").to_s,
       *local_setting_files(config_root, env)
@@ -74,7 +76,6 @@ module Config
   def self.local_setting_files(config_root, env)
     [
       (File.join(config_root, "#{Config.file_name}.local.yml").to_s if env != 'test'),
-      *Config.extra_sources.map { |source| File.join(config_root, "#{source}.local.yml") },
       File.join(config_root, Config.dir_name, "#{env}.local.yml").to_s,
       File.join(config_root, 'environments', "#{env}.local.yml").to_s
     ].compact

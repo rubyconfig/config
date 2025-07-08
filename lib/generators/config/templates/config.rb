@@ -66,7 +66,12 @@ Config.setup do |config|
   # config.file_name = 'settings'
   # config.dir_name = 'settings'
 
-  # Load extra sources from config folder
+  # Load extra sources from a path. These can be file paths (strings),
+  # hashes, or custom source objects that respond to 'load'
   #
-  # config.extra_sources = ['extra_settings']
+  # config.extra_sources = [
+  #   'path/to/extra_source.yml',          # String: loads extra_source.yml
+  #   { api_key: ENV['API_KEY'] },         # Hash: direct hash source
+  #   MyCustomSource.new,                  # Custom source object
+  # ]
 end

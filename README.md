@@ -156,11 +156,15 @@ Example production environment config file:
 
 ### Extra sources
 
-You can load extra sources from the config folder during initialization by setting the `extra_sources` configuration option.
+You can load extra sources during initialization by setting the `extra_sources` configuration option.
 
 ```ruby
 Config.setup do |config|
-  config.extra_sources = ['extra_settings']
+  config.extra_sources = [
+    'path/to/extra_source.yml',          # String: loads extra_source.yml
+    { api_key: ENV['API_KEY'] },         # Hash: direct hash source
+    MyCustomSource.new,                  # Object: custom source object that responds to `load`
+  ]
 end
 ```
 
