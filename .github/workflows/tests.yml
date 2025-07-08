@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COVERAGE_RUBY_VERSION: 2.6
-      BUNDLE_PATH: $PWD/vendor/bundle
+      BUNDLE_PATH: ${{ github.workspace }}/vendor/bundle
     strategy:
       fail-fast: false
       matrix:
@@ -28,6 +28,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+#      - name: Setup BUNDLE_PATH
+#        run: |
+#          echo "BUNDLE_PATH=${{ github.workspace }}/vendor/bundle" >> $GITHUB_ENV
 
       - name: paths
         run: |
