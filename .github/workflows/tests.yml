@@ -18,28 +18,16 @@ jobs:
       matrix:
         ruby:
           - 2.6
-#          - 2.7
-#          - '3.0' # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
-#          - 3.1
-#          - 3.2
-#          - 3.3
-#          - jruby
-#          - truffleruby
+          - 2.7
+          - '3.0' # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
+          - 3.1
+          - 3.2
+          - 3.3
+          - jruby
+          - truffleruby
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-#      - name: Setup BUNDLE_PATH
-#        run: |
-#          echo "BUNDLE_PATH=${{ github.workspace }}/vendor/bundle" >> $GITHUB_ENV
-
-      - name: paths
-        run: |
-            echo $BUNDLE_PATH
-            echo $PWD
-            echo $GITHUB_PATH
-            echo $GITHUB_ENV
-            echo $RUNNER_TEMP
 
       - name: Setup ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
