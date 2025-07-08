@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'dry/core' if RUBY_ENGINE == 'jruby'
 require 'dry/validation'
 
 describe Config do
