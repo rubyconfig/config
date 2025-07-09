@@ -14,9 +14,7 @@ module Config
           raise LoadError
         end
       rescue LoadError
-        raise ::Config::Error, 'Could not find a dry-validation version' \
-          ' matching requirements' \
-          " (#{VERSIONS.map(&:inspect) * ','})"
+        raise ::Config::Error, "Could not find a dry-validation version matching requirements (#{VERSIONS.map(&:inspect) * ','})"
       end
 
       require 'dry/validation'
