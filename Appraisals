@@ -76,7 +76,7 @@ if min_ruby_version.call('3.1.0')
 end
 
 # Rails 8.0 requires Ruby > 3.2
-if min_ruby_version.call('3.2.0')
+if min_ruby_version.call('3.2.0') && RUBY_ENGINE != 'jruby'
   appraise 'rails-8.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
