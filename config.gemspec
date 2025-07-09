@@ -40,8 +40,11 @@ Gem::Specification.new do |s|
   # Default RSpec run will test against latest Rails app
   unless ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
     gems_to_install = /gem "(.*?)", "(.*?)"(?!, platform: (?!\[:ruby\]))/
-    File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(gems_to_install) do |name, version|
-      s.add_development_dependency name, version
+
+    if Dir.exist?('gemfiles')
+      File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(gems_to_install) do |name, version|
+        s.add_development_dependency name, version
+      end
     end
   end
 
