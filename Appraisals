@@ -5,7 +5,7 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION <= '3.0'
     gem 'bootsnap', '~> 1.18.6'
     gem 'rails', '5.2.8.1'
     gem 'rspec-rails', '~> 3.7'
-    gem 'sqlite3', '< 2.7.2', platform: :ruby
+    gem 'sqlite3', '< 1.4.0', platform: :ruby
   end
 
   appraise 'rails-6.0' do
@@ -13,7 +13,7 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION <= '3.0'
     gem 'bootsnap', '~> 1.18.6'
     gem 'rails', '6.0.6.1'
     gem 'rspec-rails', '~> 3.7'
-    gem 'sqlite3', '~> 2.7.2', platform: :ruby
+    gem 'sqlite3', '~> 1.4.0', platform: :ruby
   end
 end
 
