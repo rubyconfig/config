@@ -21,7 +21,9 @@ end
 appraise 'rails-6.1' do
   gem 'activerecord-jdbcsqlite3-adapter', '~> 61.1', platform: :jruby
   gem 'bootsnap', '>= 1.4.4'
-  gem 'rails', '6.1.7.6'
+  gem 'drb', '~> 2.2' if RUBY_VERSION >= '3.4'
+  gem 'mutex_m', '~> 0.2.0' if RUBY_VERSION >= '3.4'
+  gem 'rails', '6.1.7.10'
   gem 'rspec-rails', '~> 5.0'
   gem 'sqlite3', '~> 1.4', platform: :ruby
   gem 'psych', '>= 4'
@@ -35,7 +37,9 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'sqlite3', '~> 1.6.4', platform: :ruby
     gem 'bootsnap', '>= 1.4.4'
-    gem 'rails', '7.0.8'
+    gem 'drb', '~> 2.2' if RUBY_VERSION >= '3.4'
+    gem 'mutex_m', '~> 0.2.0' if RUBY_VERSION >= '3.4'
+    gem 'rails', '7.0.8.7'
     gem 'rspec-rails', '~> 6.0.3'
     gem 'sprockets-rails', '~> 3.4.2'
     gem 'psych', '>= 4'
@@ -45,7 +49,7 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'sqlite3', '~> 1.6.6', platform: :ruby
     gem 'bootsnap', '>= 1.16.0'
-    gem 'rails', '7.1.0'
+    gem 'rails', '7.1.5.1'
     gem 'rspec-rails', '~> 6.0.3'
     gem 'sprockets-rails', '~> 3.4.2'
     gem 'psych', '>= 4'
