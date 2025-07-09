@@ -42,10 +42,6 @@ jobs:
           restore-keys: |
             ruby-${{ matrix.ruby }}-gems-
 
-      - name: Prepare environment
-        run: |
-          sudo apt-get -y install libsqlite3-dev libxslt1-dev
-
       - name: Install
         run: |
           bundle install
