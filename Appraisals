@@ -25,7 +25,8 @@ appraise 'rails-6.1' do
   gem 'mutex_m', '~> 0.2.0' if RUBY_VERSION >= '3.4'
   gem 'rails', '6.1.7.10'
   gem 'rspec-rails', '~> 5.0'
-  gem 'sqlite3', '~> 2.7.2', platform: :ruby
+  gem 'sqlite3', '~> 1.4.0', platform: :ruby if RUBY_VERSION < '3'
+  gem 'sqlite3', '~> 2.7.2', platform: :ruby if RUBY_VERSION >= '3'
   gem 'psych', '>= 4'
 end
 
@@ -35,7 +36,6 @@ end
 if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 71.0', platform: :jruby
-    gem 'sqlite3', '~> 2.7.2', platform: :ruby
     gem 'bootsnap', '>= 1.18.6'
     gem 'drb', '~> 2.2' if RUBY_VERSION >= '3.4'
     gem 'mutex_m', '~> 0.2.0' if RUBY_VERSION >= '3.4'
@@ -43,6 +43,8 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
     gem 'rspec-rails', '~> 7.1.1'
     gem 'sprockets-rails', '~> 3.5.2'
     gem 'psych', '>= 4'
+    gem 'sqlite3', '~> 1.4.0', platform: :ruby if RUBY_VERSION < '3'
+    gem 'sqlite3', '~> 2.7.2', platform: :ruby if RUBY_VERSION >= '3'
   end
 
   appraise 'rails-7.1' do
@@ -53,6 +55,8 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
     gem 'rspec-rails', '~> 7.1.1'
     gem 'sprockets-rails', '~> 3.5.2'
     gem 'psych', '>= 4'
+    gem 'sqlite3', '~> 1.4.0', platform: :ruby if RUBY_VERSION < '3'
+    gem 'sqlite3', '~> 2.7.2', platform: :ruby if RUBY_VERSION >= '3'
   end
 
   appraise 'rails-7.2' do
@@ -63,6 +67,8 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
     gem 'rspec-rails', '~> 7.1.1'
     gem 'sprockets-rails', '~> 3.5.2'
     gem 'psych', '>= 4'
+    gem 'sqlite3', '~> 1.4.0', platform: :ruby if RUBY_VERSION < '3'
+    gem 'sqlite3', '~> 2.7.2', platform: :ruby if RUBY_VERSION >= '3'
   end
 
   appraise 'rails-8.0' do
@@ -74,6 +80,8 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
     gem 'rspec-rails', '~> 8.0.1'
     gem 'sprockets-rails', '~> 3.5.2'
     gem 'psych', '>= 4'
+    gem 'sqlite3', '~> 1.4.0', platform: :ruby if RUBY_VERSION < '3'
+    gem 'sqlite3', '~> 2.7.2', platform: :ruby if RUBY_VERSION >= '3'
   end
 end
 
