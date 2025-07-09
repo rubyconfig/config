@@ -70,7 +70,9 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
     gem 'sqlite3', '~> 1.4.0', platform: :ruby if RUBY_VERSION < '3'
     gem 'sqlite3', '~> 2.7.2', platform: :ruby if RUBY_VERSION >= '3'
   end
+end
 
+if (RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2.0') || RUBY_ENGINE != 'ruby'
   appraise 'rails-8.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 71.0', platform: :jruby
     gem 'sqlite3', '~> 1.6.6', platform: :ruby
