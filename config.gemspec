@@ -30,11 +30,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
   s.add_dependency 'ostruct'
 
-  s.add_development_dependency 'dry-validation', *Config::DryValidationRequirements::VERSIONS
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
 
   # Testing
   s.add_development_dependency 'appraisal', '~> 2.5', '>= 2.5.0'
+  s.add_development_dependency 'dry-validation', *Config::DryValidationRequirements::VERSIONS
   s.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
 
   # Default RSpec run will test against latest Rails app

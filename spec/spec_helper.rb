@@ -33,6 +33,7 @@ app_framework = %w{rails sinatra}.find { |f| app_name.to_s.include?(f) }
 case app_framework
 when 'rails'
   # Load Rails
+  require 'logger'
   require_relative "app/#{app_name}/config/environment"
 
   APP_RAKEFILE = File.expand_path("../app/#{app_name}/Rakefile", __FILE__)
