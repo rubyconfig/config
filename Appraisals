@@ -1,3 +1,7 @@
+def min_ruby_version(version)
+  (RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new(version)) || RUBY_ENGINE != 'ruby'
+end
+
 # Rails 5.x, 6.0 requires Ruby < 3
 if RUBY_ENGINE == 'ruby' && RUBY_VERSION <= '3.0'
   appraise 'rails-5.2' do
@@ -21,23 +25,20 @@ end
 appraise 'rails-6.1' do
   gem 'activerecord-jdbcsqlite3-adapter', '~> 61.1', platform: :jruby
   gem 'bootsnap', '>= 1.4.4'
-  gem 'drb', '~> 2.2' if RUBY_VERSION >= '3.4'
-  gem 'mutex_m', '~> 0.2.0' if RUBY_VERSION >= '3.4'
+  gem 'drb', '~> 2.2' if min_ruby_version('3.4')
+  gem 'mutex_m', '~> 0.2.0' if min_ruby_version('3.4')
   gem 'psych', '>= 4'
   gem 'rails', '6.1.7.10'
   gem 'rspec-rails', '~> 5.0'
   gem 'sqlite3', '~> 1.4.0', platform: :ruby
 end
 
-# Temporarily exclude Truffleruby and JRuby from testing in Rails 7.x until they fix the issues upstream.
-# See https://github.com/rubyconfig/config/pull/344#issuecomment-1766209753
-# if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
-if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
+if min_ruby_version('2.7')
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.4.4'
-    gem 'drb', '~> 2.2' if RUBY_VERSION >= '3.4'
-    gem 'mutex_m', '~> 0.2.0' if RUBY_VERSION >= '3.4'
+    gem 'drb', '~> 2.2' if min_ruby_version('3.4')
+    gem 'mutex_m', '~> 0.2.0' if min_ruby_version('3.4')
     gem 'psych', '>= 4'
     gem 'rails', '7.0.8.7'
     gem 'rspec-rails', '~> 7.1.1'
@@ -57,7 +58,7 @@ if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
 
 end
 
-if (RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.1.0')) || RUBY_ENGINE != 'ruby'
+if min_ruby_version('3.1.0')
   appraise 'rails-7.2' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
@@ -69,7 +70,7 @@ if (RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new(
   end
 end
 
-if (RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.2.0')) || RUBY_ENGINE != 'ruby'
+if min_ruby_version('3.2.0')
   appraise 'rails-8.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
