@@ -6,7 +6,18 @@ require 'config/sources/yaml_source'
 require 'config/sources/hash_source'
 require 'config/sources/env_source'
 require 'config/validation/schema'
-require 'deep_merge/core'
+
+begin
+  gem 'deep_merge', '~> 1.2', '>= 1.2.1'
+  require 'deep_merge/core'
+rescue LoadError
+  warn <<~WARNING
+    The `deep_merge` gem is not available. Trying to use ActiveSupport's Hash#deep_merge instead.
+    If you want to continue using 'deep_merge' gem, please add it to your Gemfile:
+      gem 'deep_merge', '~> 1.2', '>= 1.2.1'
+  WARNING
+  require 'active_support/core_ext/hash/deep_merge'
+end
 
 module Config
   extend Config::Validation::Schema

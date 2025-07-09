@@ -112,6 +112,11 @@ describe Config::Options do
       end
 
       it 'should overwrite the previous values' do
+        unless defined?(DeepMerge)
+          skip <<~REASON
+            DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+          REASON
+        end
         expect(config['tvrage']['service_url']).to eq('http://url2')
       end
 
@@ -124,6 +129,11 @@ describe Config::Options do
       end
 
       it 'should overwrite the previous values' do
+        unless defined?(DeepMerge)
+          skip <<~REASON
+            DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+          REASON
+        end
         expect(config['tvrage']['service_url']).to eq('http://url3')
       end
     end
@@ -144,6 +154,11 @@ describe Config::Options do
     end
 
     it 'should add keys from the added file' do
+      unless defined?(DeepMerge)
+        skip <<~REASON
+          DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+        REASON
+      end
       expect(config['tvrage']['service_url']).to eq('http://services.tvrage.com')
     end
 
@@ -154,6 +169,11 @@ describe Config::Options do
       end
 
       it 'should overwrite the previous values' do
+        unless defined?(DeepMerge)
+          skip <<~REASON
+            DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+          REASON
+        end
         expect(config['tvrage']['service_url']).to eq('http://services.tvrage.com')
       end
     end
@@ -168,6 +188,11 @@ describe Config::Options do
       end
 
       it 'should be overwritten by the following values' do
+        unless defined?(DeepMerge)
+          skip <<~REASON
+            DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+          REASON
+        end
         expect(config['tvrage']['service_url']).to eq('http://services.tvrage.com')
       end
 
@@ -246,6 +271,11 @@ describe Config::Options do
       } }
 
       it 'should merge the arrays' do
+        unless defined?(DeepMerge)
+          skip <<~REASON
+            DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+          REASON
+        end
         config = Config.load_files("#{fixture_path}/deep_merge3/config1.yml", "#{fixture_path}/deep_merge3/config2.yml")
 
         expect(config.array.length).to eq(1)
@@ -261,6 +291,11 @@ describe Config::Options do
       } }
 
       it 'should merge the arrays' do
+        unless defined?(DeepMerge)
+          skip <<~REASON
+            DeepMerge is not available in the current context. This test only applies when the `deep_merge` gem is available.
+          REASON
+        end
         config = Config.load_files("#{fixture_path}/deep_merge3/config1.yml", "#{fixture_path}/deep_merge3/config2.yml")
 
         expect(config.array.length).to eq(2)
