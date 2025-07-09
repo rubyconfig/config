@@ -21,8 +21,8 @@ end
 appraise 'rails-6.1' do
   gem 'activerecord-jdbcsqlite3-adapter', '~> 61.1', platform: :jruby
   gem 'bootsnap', '>= 1.4.4'
-  gem 'drb', '~> 2.2' if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.4')
-  gem 'mutex_m', '~> 0.2.0' if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.4')
+  gem 'drb', '~> 2.2' if RUBY_VERSION >= '3.4'
+  gem 'mutex_m', '~> 0.2.0' if RUBY_VERSION >= '3.4'
   gem 'rails', '6.1.7.10'
   gem 'rspec-rails', '~> 5.0'
   gem 'sqlite3', '~> 1.4', platform: :ruby
@@ -32,13 +32,13 @@ end
 # Temporarily exclude Truffleruby and JRuby from testing in Rails 7.x until they fix the issues upstream.
 # See https://github.com/rubyconfig/config/pull/344#issuecomment-1766209753
 # if (RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7') || RUBY_ENGINE != 'ruby'
-if RUBY_ENGINE == 'ruby' && if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.7')
+if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '2.7'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'sqlite3', '~> 1.6.4', platform: :ruby
     gem 'bootsnap', '>= 1.4.4'
-    gem 'drb', '~> 2.2' if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.4')
-    gem 'mutex_m', '~> 0.2.0' if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.4')
+    gem 'drb', '~> 2.2' if RUBY_VERSION >= '3.4'
+    gem 'mutex_m', '~> 0.2.0' if RUBY_VERSION >= '3.4'
     gem 'rails', '7.0.8.7'
     gem 'rspec-rails', '~> 6.0.3'
     gem 'sprockets-rails', '~> 3.4.2'
