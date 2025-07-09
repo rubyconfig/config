@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COVERAGE_RUBY_VERSION: 2.6
-      BUNDLE_PATH: vendor/bundle
+      BUNDLE_PATH: ${{ github.workspace }}/vendor/bundle
     strategy:
       fail-fast: false
       matrix:
@@ -24,7 +24,7 @@ jobs:
           - 3.2
           - 3.3
           - 3.4
-          - jruby
+          - jruby-9
           - truffleruby
     steps:
       - name: Checkout
@@ -43,10 +43,6 @@ jobs:
           restore-keys: |
             ruby-${{ matrix.ruby }}-gems-
 
-      - name: Prepare environment
-        run: |
-          sudo apt-get -y install libsqlite3-dev libxslt1-dev
-
       - name: Install
         run: |
           bundle install
@@ -62,3 +58,11 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: bundle exec appraisal rspec
+
+  all-passed:
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      - test
+    steps:
+      - run: exit ${{ contains(needs.*.result, 'failure') && 1 || 0 }}
