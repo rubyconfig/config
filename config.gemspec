@@ -42,8 +42,11 @@ Gem::Specification.new do |s|
     gems_to_install = /gem "(.*?)", "(.*?)"(?!, platform: (?!\[:ruby\]))/
 
     if Dir.exist?('gemfiles')
-      File.read(Dir['gemfiles/rails*.gemfile'].sort.last).scan(gems_to_install) do |name, version|
-        s.add_development_dependency name, version
+      rails_gemfiles = Dir['gemfiles/rails*.gemfile'].sort
+      unless rails_gemfiles.empty?
+        File.read(rails_gemfiles.last).scan(gems_to_install) do |name, version|
+          s.add_development_dependency name, version
+        end
       end
     end
   end

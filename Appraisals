@@ -84,8 +84,7 @@ if min_ruby_version.call('3.2.0') && RUBY_ENGINE != 'jruby'
     gem 'rails', '~> 8.0.0'
     gem 'rspec-rails', '~> 8.0'
     gem 'psych', '>= 4'
-    gem 'sprockets-rails', '~> 3.5.2'
-    gem 'sqlite3', '~> 1', platform: :ruby
+    gem 'sqlite3', '>= 2.1', platform: :ruby
   end
 end
 
