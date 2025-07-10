@@ -1,9 +1,9 @@
 max_ruby_version = ->(version) {
-  (RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) <= Gem::Version.new(version)) || RUBY_ENGINE != 'ruby'
+  RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) <= Gem::Version.new(version)
 }
 
 min_ruby_version = ->(version) {
-  (RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new(version)) || RUBY_ENGINE != 'ruby'
+  RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new(version)
 }
 
 # Rails 5.x, 6.0 require Ruby < 3
@@ -37,7 +37,7 @@ appraise 'rails-6.1' do
 end
 
 # Rails 7.x require Ruby > 2.7
-if min_ruby_version.call('2.7')
+if min_ruby_version.call('2.7') || RUBY_ENGINE != 'ruby'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.4.4'
@@ -63,7 +63,7 @@ if min_ruby_version.call('2.7')
 end
 
 # Rails 7.2 requires Ruby > 3.1
-if min_ruby_version.call('3.1.0')
+if min_ruby_version.call('3.1.0') || RUBY_ENGINE != 'ruby'
   appraise 'rails-7.2' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
