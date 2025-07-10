@@ -36,7 +36,7 @@ appraise 'rails-6.1' do
   gem 'sqlite3', '~> 1', platform: :ruby
 end
 
-# Rails 7.x require Ruby > 2.7
+# Rails 7.0 require Ruby > 2.7
 if min_ruby_version.call('2.7') || RUBY_ENGINE != 'ruby'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
@@ -49,7 +49,10 @@ if min_ruby_version.call('2.7') || RUBY_ENGINE != 'ruby'
     gem 'sprockets-rails', '~> 3.5.2'
     gem 'sqlite3', '~> 1', platform: :ruby
   end
+end
 
+# Rails 7.1 require Ruby > 2.7
+if min_ruby_version.call('2.7') && RUBY_ENGINE != 'jruby'
   appraise 'rails-7.1' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
@@ -63,7 +66,7 @@ if min_ruby_version.call('2.7') || RUBY_ENGINE != 'ruby'
 end
 
 # Rails 7.2 requires Ruby > 3.1
-if min_ruby_version.call('3.1.0') || RUBY_ENGINE != 'ruby'
+if min_ruby_version.call('3.1.0') && RUBY_ENGINE != 'jruby'
   appraise 'rails-7.2' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
