@@ -1,7 +1,6 @@
 .idea
 .bundle
-gemfiles/*.lock
-gemfiles/bin
+gemfiles
 log
 pkg
 spec/app/**/db/*.sqlite*
