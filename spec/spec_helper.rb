@@ -43,7 +43,12 @@ when 'rails'
 
   # Configure
   RSpec.configure do |config|
-    config.fixture_path = FixtureHelper::FIXTURE_PATH
+    # Use fixture_paths (plural) for newer versions of RSpec
+    if config.respond_to?(:fixture_paths)
+      config.fixture_paths = [FixtureHelper::FIXTURE_PATH]
+    else
+      config.fixture_path = FixtureHelper::FIXTURE_PATH
+    end
   end
 
 when 'sinatra'
