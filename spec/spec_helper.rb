@@ -79,6 +79,18 @@ RSpec.configure do |config|
 
       # Extend Config module with ability to reset configuration to the default values
       def self.reset
+        # Clear any existing Settings constant and its sources to prevent mock leakage
+        current_const_name = self.const_name
+        if Object.const_defined?(current_const_name)
+          settings_instance = Object.const_get(current_const_name)
+          # Clear the config sources to prevent mock doubles from leaking
+          if settings_instance.respond_to?(:instance_variable_set)
+            settings_instance.instance_variable_set(:@config_sources, [])
+          end
+          Object.send(:remove_const, current_const_name)
+        end
+
+        # Reset configuration to defaults
         self.const_name           = 'Settings'
         self.use_env              = false
         self.knockout_prefix      = nil

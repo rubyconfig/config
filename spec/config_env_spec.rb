@@ -7,7 +7,11 @@ describe Config::Options do
 
   context 'when overriding settings via ENV variables is enabled' do
     let(:config) do
-      Config.load_files "#{fixture_path}/settings.yml", "#{fixture_path}/multilevel.yml"
+      config_instance = Config.load_files "#{fixture_path}/settings.yml", "#{fixture_path}/multilevel.yml"
+      # Ensure the Settings constant is set to the same instance for Config.reload! to work
+      Object.send(:remove_const, 'Settings') if Object.const_defined?('Settings')
+      Object.const_set('Settings', config_instance)
+      config_instance
     end
 
     after :all do
