@@ -1,8 +1,12 @@
 # Changelog
 
+## Next
+
+* fix(security): replace IO.read with File.read [#378](https://github.com/rubyconfig/config/pull/378)
+
 ## 5.6.0
 
-* Added `extra_sources` in initializer  ([#366](https://github.com/rubyconfig/config/pull/366))
+* Added `extra_sources` in initializer ([#366](https://github.com/rubyconfig/config/pull/366))
 
 ## 5.5.2
 
