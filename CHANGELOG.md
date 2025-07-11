@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 5.6.1
 
 * fix(security): replace IO.read with File.read [#378](https://github.com/rubyconfig/config/pull/378)
 
