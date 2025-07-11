@@ -52,9 +52,9 @@ if min_ruby_version.call('2.7') || RUBY_ENGINE != 'ruby'
 end
 
 # Rails 7.1 require Ruby > 2.7
-if min_ruby_version.call('2.7') && RUBY_ENGINE != 'jruby'
+if min_ruby_version.call('2.7')
   appraise 'rails-7.1' do
-    gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 71.0', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
     gem 'psych', '>= 4'
     gem 'rails', '~> 7.1.0'
@@ -66,9 +66,9 @@ if min_ruby_version.call('2.7') && RUBY_ENGINE != 'jruby'
 end
 
 # Rails 7.2 requires Ruby > 3.1
-if min_ruby_version.call('3.1.0') && RUBY_ENGINE != 'jruby'
+if min_ruby_version.call('3.1.0')
   appraise 'rails-7.2' do
-    gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 71.0', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
     gem 'psych', '>= 4'
     gem 'rails', '~> 7.2.0'
@@ -79,9 +79,9 @@ if min_ruby_version.call('3.1.0') && RUBY_ENGINE != 'jruby'
 end
 
 # Rails 8.0 requires Ruby > 3.2
-if min_ruby_version.call('3.2.0') && RUBY_ENGINE != 'jruby'
+if min_ruby_version.call('3.2.0')
   appraise 'rails-8.0' do
-    gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 71.0', platform: :jruby
     gem 'bootsnap', '>= 1.16.0'
     gem 'kamal', '~> 2.7.0'
     gem 'rails', '~> 8.0.0'
