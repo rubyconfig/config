@@ -30,7 +30,8 @@ module Config
     validation_contract: nil,
     evaluate_erb_in_yaml: true,
     use_rails_credentials: false,
-    environment: nil
+    environment: nil,
+    extra_sources: []
   )
 
   def self.setup
@@ -68,7 +69,10 @@ module Config
   def self.load_and_set_settings(*sources)
     name = Config.const_name
     Object.send(:remove_const, name) if Object.const_defined?(name)
-    Object.const_set(name, Config.load_files(sources))
+
+    # Include extra sources in the loading process
+    all_sources = [sources, Config.extra_sources].flatten.compact
+    Object.const_set(name, Config.load_files(*all_sources))
   end
 
   def self.setting_files(config_root, env)

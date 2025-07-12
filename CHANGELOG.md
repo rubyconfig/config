@@ -2,9 +2,15 @@
 
 ## Next
 
-### New features
-
 * Add rails credentials support ([#355](https://github.com/rubyconfig/config/pull/355))
+
+## 5.6.1
+
+* fix(security): replace IO.read with File.read [#378](https://github.com/rubyconfig/config/pull/378)
+
+## 5.6.0
+
+* Added `extra_sources` in initializer ([#366](https://github.com/rubyconfig/config/pull/366))
 
 ## 5.5.2
 

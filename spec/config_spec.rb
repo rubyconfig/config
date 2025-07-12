@@ -38,6 +38,30 @@ describe Config do
     expect(config.root['google.com']).to eq(3)
   end
 
+  it "should load extra_sources and support different types" do
+    test_hash = { 'extra_key' => 'extra_value' }
+    object_source = double 'source'
+
+    allow(object_source).to receive(:load) do
+      { 'server' => 'google.com' }
+    end
+
+    Config.setup do |config|
+      config.extra_sources = [
+        "#{fixture_path}/settings2.yml",
+        test_hash,
+        object_source
+      ]
+    end
+
+    Config.load_and_set_settings("#{fixture_path}/settings.yml")
+
+    expect(Settings.size).to eq(1)
+    expect(Settings.extra_key).to eq('extra_value')
+    expect(Settings.another).to eq("something")
+    expect(Settings.server).to eq('google.com')
+  end
+
   it "should load 2 basic config files" do
     config = Config.load_files("#{fixture_path}/settings.yml", "#{fixture_path}/settings2.yml")
     expect(config.size).to eq(1)
@@ -482,7 +506,7 @@ describe Config do
     end
 
     context 'rails credentials' do
-      if defined?(::Rails)
+      if defined?(::Rails::Railtie)
         let(:config) do
           files = ["#{fixture_path}/development.yml"]
           Config.use_rails_credentials = true
