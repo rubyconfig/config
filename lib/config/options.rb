@@ -150,7 +150,7 @@ module Config
     end
 
     def method_missing(method_name, *args)
-      if Config.fail_on_missing && method_name !~ /.*(?==\z)/m
+      if Config.fail_on_missing && !method_name.to_s.end_with?('=')
         raise KeyError, "key not found: #{method_name.inspect}" unless key?(method_name)
       end
       super
