@@ -175,6 +175,45 @@ describe Config do
     expect(Settings.size).to eq(2)
   end
 
+  describe "load_and_set_settings in the Rails context" do
+    if defined?(Rails)
+      let(:config_name) { Rails.root.join("config", "initializers", "config.rb") }
+      let(:default_settings_file_name) { Rails.root.join("config", "settings.yml") }
+      let(:custom_settings_file_name) { Rails.root.join("config", "settings_custom.yml") }
+      let(:spring_file_name_for_rails_6_1) { Rails.root.join("bin", "spring") }
+
+      before do
+        File.write(default_settings_file_name, "default: default_value")
+        File.write(custom_settings_file_name, "custom: custom_value")
+        # workaround for Rails 6.1
+        File.write(spring_file_name_for_rails_6_1, "") if Rails.version == "6.1.7.6"
+      end
+
+      after do
+        File.delete(config_name) if File.exist?(config_name)
+        File.delete(default_settings_file_name) if File.exist?(default_settings_file_name)
+        File.delete(custom_settings_file_name) if File.exist?(custom_settings_file_name)
+        File.delete(spring_file_name_for_rails_6_1) if File.exist?(spring_file_name_for_rails_6_1)
+      end
+
+      it "should read value only from default settings without config.rb" do
+        values = `#{Rails.root.join("bin", "rails")} runner 'print "\#{Settings.default}|\#{Settings.custom}"'`
+        expect(values).to eq("default_value|")
+      end
+
+      it "should read value only from default settings without use of load_and_set_settings" do
+        File.write(config_name, "Config.setup { |config|  }")
+        values = `#{Rails.root.join("bin", "rails")} runner 'print "\#{Settings.default}|\#{Settings.custom}"'`
+        expect(values).to eq("default_value|")
+      end
+
+      it "should read value only from custom settings with use of load_and_set_settings" do
+        File.write(config_name, "Config.setup { |config| config.load_and_set_settings(['#{custom_settings_file_name}']) }")
+        values = `#{Rails.root.join("bin", "rails")} runner 'print "\#{Settings.default}|\#{Settings.custom}"'`
+        expect(values).to eq("|custom_value")
+      end
+    end
+  end
 
 
   context "Nested Settings" do
