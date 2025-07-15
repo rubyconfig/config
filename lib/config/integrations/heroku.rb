@@ -26,7 +26,7 @@ module Config
       end
 
       def environment
-        heroku("run 'echo $RAILS_ENV'").chomp[/(\w+)\z/]
+        heroku("run 'echo $RAILS_ENV'").chomp[/(?>\w+)\z/]
       end
 
       def heroku(command)
