@@ -162,6 +162,22 @@ Example production environment config file:
 #{Rails.root}/config/environments/production.yml
 ```
 
+### Extra sources
+
+You can load extra sources during initialization by setting the `extra_sources` configuration option.
+
+```ruby
+Config.setup do |config|
+  config.extra_sources = [
+    'path/to/extra_source.yml',          # String: loads extra_source.yml
+    { api_key: ENV['API_KEY'] },         # Hash: direct hash source
+    MyCustomSource.new,                  # Object: custom source object that responds to `load`
+  ]
+end
+```
+
+This will also overwrite the same config entries from the main file.
+
 ### Developer specific config files
 
 If you want to have local settings, specific to your machine or development environment, you can use the following files, which are automatically `.gitignore` :

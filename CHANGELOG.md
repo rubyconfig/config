@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.6.1
+
+* fix(security): replace IO.read with File.read [#378](https://github.com/rubyconfig/config/pull/378)
+
+## 5.6.0
+
+* Added `extra_sources` in initializer ([#366](https://github.com/rubyconfig/config/pull/366))
+
 ## 5.5.2
 
 * Fix warning: ostruct was loaded from the standard library with Ruby 3.3.5 and 3.4+ ([#363](https://github.com/rubyconfig/config/pull/363))

@@ -43,7 +43,12 @@ when 'rails'
 
   # Configure
   RSpec.configure do |config|
-    config.fixture_path = FixtureHelper::FIXTURE_PATH
+    # Use fixture_paths (plural) for newer versions of RSpec
+    if config.respond_to?(:fixture_paths)
+      config.fixture_paths = [FixtureHelper::FIXTURE_PATH]
+    else
+      config.fixture_path = FixtureHelper::FIXTURE_PATH
+    end
   end
 
 when 'sinatra'
@@ -79,6 +84,18 @@ RSpec.configure do |config|
 
       # Extend Config module with ability to reset configuration to the default values
       def self.reset
+        # Clear any existing Settings constant and its sources to prevent mock leakage
+        current_const_name = self.const_name
+        if Object.const_defined?(current_const_name)
+          settings_instance = Object.const_get(current_const_name)
+          # Clear the config sources to prevent mock doubles from leaking
+          if settings_instance.respond_to?(:instance_variable_set)
+            settings_instance.instance_variable_set(:@config_sources, [])
+          end
+          Object.send(:remove_const, current_const_name)
+        end
+
+        # Reset configuration to defaults
         self.const_name           = 'Settings'
         self.use_env              = false
         self.knockout_prefix      = nil
@@ -88,6 +105,7 @@ RSpec.configure do |config|
         self.fail_on_missing      = false
         self.file_name            = 'settings'
         self.dir_name             = 'settings'
+        self.extra_sources        = []
         instance_variable_set(:@_ran_once, false)
       end
     end

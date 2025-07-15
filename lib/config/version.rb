@@ -1,3 +1,3 @@
 module Config
-  VERSION = '5.5.2'.freeze
+  VERSION = '5.6.1'.freeze
 end
