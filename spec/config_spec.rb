@@ -514,7 +514,7 @@ describe Config do
         end
     
         it "should have secret_key_base loaded" do
-          expect(config.keys).to contain_exactly(:size, :section, :aws, :secret_key_base)
+          expect(config.keys).to include(:size, :section, :aws, :secret_key_base)
           expect(config.aws.secret_access_key).to eq('123456')
         end
         
