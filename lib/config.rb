@@ -52,11 +52,10 @@ module Config
     # load rails credentials
     if defined?(::Rails::Railtie) && Config.use_rails_credentials
       if Gem::Version.new(Rails.version) < Gem::Version.new('7.2')
-        config.add_source!(Sources::HashSource.new(Rails.application.credentials.config.deep_stringify_keys))
         config.add_source!(Sources::HashSource.new(Rails.application.secrets.to_h.deep_stringify_keys))
-      else
-        config.add_source!(Sources::HashSource.new(Rails.application.credentials.config.deep_stringify_keys))
       end
+
+      config.add_source!(Sources::HashSource.new(Rails.application.credentials.config.deep_stringify_keys))
     end
 
     config.add_source!(Sources::EnvSource.new(ENV)) if Config.use_env
