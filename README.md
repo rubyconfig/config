@@ -23,8 +23,8 @@ Config helps you easily manage environment specific settings in an easy and usab
 Current version supports and is [tested](.github/workflows/tests.yml#L19) for the following interpreters and frameworks:
 
 * Interpreters
-  * [Ruby](https://www.ruby-lang.org) `>= 3.6`
-  * [JRuby](https://www.jruby.org) `>= 9.2`
+  * [Ruby](https://www.ruby-lang.org) `>= 3.2`
+  * [JRuby](https://www.jruby.org) `>= 10.0`
   * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.3`
 * Application frameworks
   * Rails `>= 7.2`
@@ -33,7 +33,7 @@ Current version supports and is [tested](.github/workflows/tests.yml#L19) for th
 
   | Ruby | Rails | Config |
   |---|---|---|
-  | >= 3.2 | >= 7.2 | 6.x |
+  | >= 3.2 | >= 7.2 | > 5.x |
   | < 3.2 | < 7.2 | 5.x |
   | 2.4–2.5 | 4.2–5.1 | 3.x |
   | 2.0–2.3 | 3.0–4.1 | 1.x |
