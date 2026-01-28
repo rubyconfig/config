@@ -25,17 +25,17 @@ Gem::Specification.new do |s|
   s.files.select! { |file| /(^lib\/|^\w+.md$|\.gemspec$)/ =~ file }
 
   s.require_paths         = ['lib']
-  s.required_ruby_version = '>= 2.6.0'
+  s.required_ruby_version = '>= 3.2.0'
 
   s.add_dependency 'deep_merge', '~> 1.2', '>= 1.2.1'
   s.add_dependency 'ostruct'
 
-  s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
+  s.add_development_dependency 'rake', '~> 13.0', '>= 13.0.0'
 
   # Testing
   s.add_development_dependency 'appraisal', '~> 2.5', '>= 2.5.0'
   s.add_development_dependency 'dry-validation', *Config::DryValidationRequirements::VERSIONS
-  s.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
+  s.add_development_dependency 'rspec', '~> 3.13', '>= 3.13.2'
 
   # Default RSpec run will test against latest Rails app
   unless ENV['APPRAISAL_INITIALIZED'] || ENV['GITHUB_ACTIONS']
@@ -53,10 +53,10 @@ Gem::Specification.new do |s|
 
   if ENV['GITHUB_ACTIONS']
     # Code coverage is needed only in CI
-    s.add_development_dependency 'simplecov', '~> 0.18.5' if RUBY_ENGINE == 'ruby'
+    s.add_development_dependency 'simplecov', '~> 0.22' if RUBY_ENGINE == 'ruby'
   else
     # Static code analysis to be used locally
-    s.add_development_dependency 'mdl', '~> 0.9', '>= 0.9.0'
-    s.add_development_dependency 'rubocop', '~> 0.85.0'
+    s.add_development_dependency 'mdl', '~> 0.15', '>= 0.15.0'
+    s.add_development_dependency 'rubocop', '~> 1.84'
   end
 end

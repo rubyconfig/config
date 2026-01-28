@@ -23,17 +23,22 @@ Config helps you easily manage environment specific settings in an easy and usab
 Current version supports and is [tested](.github/workflows/tests.yml#L19) for the following interpreters and frameworks:
 
 * Interpreters
-  * [Ruby](https://www.ruby-lang.org) `>= 2.6`
-  * [JRuby](https://www.jruby.org) `>= 9.2`
+  * [Ruby](https://www.ruby-lang.org) `>= 3.2`
+  * [JRuby](https://www.jruby.org) `>= 10.0`
   * [TruffleRuby](https://github.com/oracle/truffleruby) `>= 19.3`
 * Application frameworks
-  * Rails `>= 5.2`
+  * Rails `>= 7.2`
   * Padrino
-  * Sinatra
+  * Sinatra `>= 4.2.0`
 
-For Ruby `2.0` to `2.3` or Rails `3` to `4.1` use version `1.x` of this gem. For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
+  | Ruby | Rails | Config |
+  |---|---|---|
+  | >= 3.2 | >= 7.2 | > 5.x |
+  | < 3.2 | < 7.2 | 5.x |
+  | 2.4–2.5 | 4.2–5.1 | 3.x |
+  | 2.0–2.3 | 3.0–4.1 | 1.x |
 
-For Ruby `2.4` or `2.5` or Rails `4.2`, `5.0`, or `5.1` use version `3.x` of this gem.
+For older versions of Rails or Ruby use [AppConfig](http://github.com/fredwu/app_config).
 
 ## Installing
 
