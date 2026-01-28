@@ -43,6 +43,19 @@ if min_ruby_version.call('3.3.0')
   end
 end
 
+# Rails 8.1 requires Ruby > 3.3
+if min_ruby_version.call('3.3.0')
+  appraise 'rails-8.1' do
+    gem 'activerecord-jdbcsqlite3-adapter', '~> 71.0', platform: :jruby
+    gem 'bootsnap', '>= 1.16.0'
+    gem 'kamal', '~> 2.7.0'
+    gem 'rails', '~> 8.1.0'
+    gem 'rspec-rails', '~> 8.0'
+    gem 'psych', '>= 4'
+    gem 'sqlite3', '>= 2.1', platform: :ruby
+  end
+end
+
 appraise 'sinatra' do
   gem 'sinatra', '~> 4.2.0'
 end
