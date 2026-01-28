@@ -9,7 +9,8 @@ module Config
 
           # Parse the settings before any of the initializers
           Config.load_and_set_settings(
-            Config.setting_files(::Rails.root.join('config'), Config.environment.nil? ? ::Rails.env : Config.environment.to_sym)
+            Config.setting_files(::Rails.root.join('config'),
+                                 Config.environment.nil? ? ::Rails.env : Config.environment.to_sym)
           )
         end
 

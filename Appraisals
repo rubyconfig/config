@@ -1,8 +1,4 @@
-max_ruby_version = ->(version) {
-  RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) <= Gem::Version.new(version)
-}
-
-min_ruby_version = ->(version) {
+min_ruby_version = lambda { |version|
   RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new(version)
 }
 

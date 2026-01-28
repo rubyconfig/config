@@ -1,3 +1,4 @@
+require 'English'
 require_relative 'lib/config/version'
 require_relative 'lib/config/dry_validation_requirements'
 
@@ -8,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors          = ['Piotr Kuczynski', 'Fred Wu', 'Jacques Crocker']
   s.email            = %w[piotr.kuczynski@gmail.com ifredwu@gmail.com railsjedi@gmail.com]
   s.summary          = 'Effortless multi-environment settings in Rails, Sinatra, Padrino and others'
-  s.description      = 'Easiest way to manage multi-environment settings in any ruby project or framework: ' +
+  s.description      = 'Easiest way to manage multi-environment settings in any ruby project or framework: ' \
                        'Rails, Sinatra, Padrino and others'
   s.homepage         = 'https://github.com/rubyconfig/config'
   s.license          = 'MIT'
@@ -16,12 +17,12 @@ Gem::Specification.new do |s|
   s.rdoc_options     = ['--charset=UTF-8']
 
   s.metadata = {
-    'changelog_uri' => "https://github.com/rubyconfig/config/blob/master/CHANGELOG.md",
+    'changelog_uri' => 'https://github.com/rubyconfig/config/blob/master/CHANGELOG.md',
     'funding_uri' => 'https://opencollective.com/rubyconfig/donate',
     'source_code_uri' => 'https://github.com/rubyconfig/config',
     'bug_tracker_uri' => 'https://github.com/rubyconfig/config/issues'
   }
-  s.files = `git ls-files`.split($/)
+  s.files = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   s.files.select! { |file| /(^lib\/|^\w+.md$|\.gemspec$)/ =~ file }
 
   s.require_paths         = ['lib']

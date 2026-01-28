@@ -114,12 +114,11 @@ describe Config::Options do
       it 'should overwrite the previous values' do
         expect(config['tvrage']['service_url']).to eq('http://url2')
       end
-
     end
 
     context 'overwrite with Hash' do
       before do
-        config.add_source!({tvrage: {service_url: 'http://url3'}})
+        config.add_source!({ tvrage: { service_url: 'http://url3' } })
         config.reload!
       end
 
@@ -159,9 +158,9 @@ describe Config::Options do
     end
 
     context 'source is a hash' do
-      let(:hash_source) {
+      let(:hash_source) do
         { tvrage: { service_url: 'http://url3' }, meaning_of_life: 42 }
-      }
+      end
       before do
         config.prepend_source!(hash_source)
         config.reload!
@@ -213,7 +212,7 @@ describe Config::Options do
   end
 
   context '#key? and #has_key? methods' do
-    let(:config) {
+    let(:config) do
       config = Config.load_files("#{fixture_path}/empty1.yml")
       config.existing = nil
       config.send('complex_value=', nil)
@@ -221,7 +220,7 @@ describe Config::Options do
       config.nested = Config.load_files("#{fixture_path}/empty2.yml")
       config.nested.existing = nil
       config
-    }
+    end
 
     it 'should test if a value exists for a given key' do
       expect(config.key?(:not_existing)).to eq(false)
@@ -240,35 +239,38 @@ describe Config::Options do
 
   context 'when merge_hash_arrays options' do
     context 'is set to true' do
-      before { Config.setup { |cfg|
-        cfg.overwrite_arrays = false
-        cfg.merge_hash_arrays = true
-      } }
+      before do
+        Config.setup do |cfg|
+          cfg.overwrite_arrays = false
+          cfg.merge_hash_arrays = true
+        end
+      end
 
       it 'should merge the arrays' do
         config = Config.load_files("#{fixture_path}/deep_merge3/config1.yml", "#{fixture_path}/deep_merge3/config2.yml")
 
         expect(config.array.length).to eq(1)
-        expect(config.array[0].a).to eq("one")
-        expect(config.array[0].b).to eq("two")
+        expect(config.array[0].a).to eq('one')
+        expect(config.array[0].b).to eq('two')
       end
     end
 
     context 'is set to false' do
-      before { Config.setup { |cfg|
-        cfg.overwrite_arrays = false
-        cfg.merge_hash_arrays = false
-      } }
+      before do
+        Config.setup do |cfg|
+          cfg.overwrite_arrays = false
+          cfg.merge_hash_arrays = false
+        end
+      end
 
       it 'should merge the arrays' do
         config = Config.load_files("#{fixture_path}/deep_merge3/config1.yml", "#{fixture_path}/deep_merge3/config2.yml")
 
         expect(config.array.length).to eq(2)
         expect(config.array[0].b).to eq(nil)
-        expect(config.array[1].b).to eq("two")
+        expect(config.array[1].b).to eq('two')
       end
     end
-
   end
 
   context 'when calling #as_json' do
@@ -297,7 +299,7 @@ describe Config::Options do
     end
 
     it 'should return string when number specified with quotes' do
-      expect(config['number_in_quotes']).to eq("2.56")
+      expect(config['number_in_quotes']).to eq('2.56')
     end
   end
 end

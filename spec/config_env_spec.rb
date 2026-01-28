@@ -58,35 +58,35 @@ describe Config::Options do
           ENV['Settings.new_var'] = 'false'
 
           expect(config.new_var).to eq(false)
-          expect(config.new_var.is_a? FalseClass).to eq(true)
+          expect(config.new_var.is_a?(FalseClass)).to eq(true)
         end
 
         it 'should recognize "true" and expose as Boolean' do
           ENV['Settings.new_var'] = 'true'
 
           expect(config.new_var).to eq(true)
-          expect(config.new_var.is_a? TrueClass).to eq(true)
+          expect(config.new_var.is_a?(TrueClass)).to eq(true)
         end
 
         it 'should recognize numbers and expose them as integers' do
           ENV['Settings.new_var'] = '123'
 
           expect(config.new_var).to eq(123)
-          expect(config.new_var.is_a? Integer).to eq(true)
+          expect(config.new_var.is_a?(Integer)).to eq(true)
         end
 
         it 'should recognize fixed point numbers and expose them as float' do
           ENV['Settings.new_var'] = '1.9'
 
           expect(config.new_var).to eq(1.9)
-          expect(config.new_var.is_a? Float).to eq(true)
+          expect(config.new_var.is_a?(Float)).to eq(true)
         end
 
         it 'should leave strings intact' do
           ENV['Settings.new_var'] = 'foobar'
 
           expect(config.new_var).to eq('foobar')
-          expect(config.new_var.is_a? String).to eq(true)
+          expect(config.new_var.is_a?(String)).to eq(true)
         end
       end
 
@@ -111,7 +111,7 @@ describe Config::Options do
           ENV['Settings.SomeConfig.0'] = 'first'
           ENV['Settings.SomeConfig.1'] = 'second'
 
-          expect(config.someconfig).to eq(['first', 'second'])
+          expect(config.someconfig).to eq(%w[first second])
         end
       end
 

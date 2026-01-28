@@ -26,8 +26,8 @@ describe Config do
         msg += "  youtube.nonexist_field: is missing\n"
         msg += '  youtube.multiple_requirements: must be an integer'
 
-        expect { Config.load_files("#{fixture_path}/validation/config.yml") }.
-          to raise_error(Config::Validation::Error, Regexp.new(msg))
+        expect { Config.load_files("#{fixture_path}/validation/config.yml") }
+          .to raise_error(Config::Validation::Error, Regexp.new(msg))
       end
 
       it 'should work if validation passes' do
@@ -41,8 +41,8 @@ describe Config do
           config.validation_contract = contract.new
         end
 
-        expect { Config.load_files("#{fixture_path}/validation/config.yml") }.
-          to_not raise_error
+        expect { Config.load_files("#{fixture_path}/validation/config.yml") }
+          .to_not raise_error
       end
     end
 
@@ -61,8 +61,8 @@ describe Config do
         msg += "  youtube.nonexist_field: is missing\n"
         msg += '  youtube.multiple_requirements: must be an integer'
 
-        expect { Config.load_files("#{fixture_path}/validation/config.yml") }.
-          to raise_error(Config::Validation::Error, Regexp.new(msg))
+        expect { Config.load_files("#{fixture_path}/validation/config.yml") }
+          .to raise_error(Config::Validation::Error, Regexp.new(msg))
       end
 
       it 'should work if validation passes' do
@@ -74,8 +74,8 @@ describe Config do
           end
         end
 
-        expect { Config.load_files("#{fixture_path}/validation/config.yml") }.
-          to_not raise_error
+        expect { Config.load_files("#{fixture_path}/validation/config.yml") }
+          .to_not raise_error
       end
     end
   end

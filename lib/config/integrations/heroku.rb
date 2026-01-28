@@ -2,7 +2,7 @@ require 'bundler'
 
 module Config
   module Integrations
-    class Heroku < Struct.new(:app)
+    Heroku = Struct.new(:app) do
       def invoke
         puts 'Setting vars...'
         heroku_command = "config:set #{vars}"
@@ -14,14 +14,14 @@ module Config
       def vars
         # Load only local options to Heroku
         Config.load_and_set_settings(
-            Rails.root.join("config", "#{Config.file_name}.local.yml").to_s,
-            Rails.root.join("config", Config.dir_name, "#{environment}.local.yml").to_s,
-            Rails.root.join("config", "environments", "#{environment}.local.yml").to_s
+          Rails.root.join('config', "#{Config.file_name}.local.yml").to_s,
+          Rails.root.join('config', Config.dir_name, "#{environment}.local.yml").to_s,
+          Rails.root.join('config', 'environments', "#{environment}.local.yml").to_s
         )
 
         out = ''
         dotted_hash = to_dotted_hash Kernel.const_get(Config.const_name).to_hash, {}, Config.const_name
-        dotted_hash.each {|key, value| out += " #{key}=#{value} "}
+        dotted_hash.each { |key, value| out += " #{key}=#{value} " }
         out
       end
 
@@ -30,7 +30,7 @@ module Config
       end
 
       def heroku(command)
-        with_app = app ? " --app #{app}" : ""
+        with_app = app ? " --app #{app}" : ''
         `heroku #{command}#{with_app}`
       end
 
@@ -41,16 +41,16 @@ module Config
       def to_dotted_hash(source, target = {}, namespace = nil)
         prefix = "#{namespace}." if namespace
         case source
-          when Hash
-            source.each do |key, value|
-              to_dotted_hash(value, target, "#{prefix}#{key}")
-            end
-          when Array
-            source.each_with_index do |value, index|
-              to_dotted_hash(value, target, "#{prefix}#{index}")
-            end
-          else
-            target[namespace] = source
+        when Hash
+          source.each do |key, value|
+            to_dotted_hash(value, target, "#{prefix}#{key}")
+          end
+        when Array
+          source.each_with_index do |value, index|
+            to_dotted_hash(value, target, "#{prefix}#{index}")
+          end
+        else
+          target[namespace] = source
         end
         target
       end
