@@ -34,6 +34,7 @@ appraise 'rails-6.1' do
   gem 'rails', '~> 6.1.0'
   gem 'rspec-rails', '~> 5.0'
   gem 'sqlite3', '~> 1', platform: :ruby
+  gem 'benchmark'
 end
 
 # Rails 7.0 require Ruby > 2.7
