@@ -25,7 +25,7 @@ jobs:
           - 3.3
           - 3.4
           - 4.0
-          - jruby-9
+          - jruby-10
           - truffleruby
     steps:
       - name: Checkout
