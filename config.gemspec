@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'ostruct'
 
   s.add_development_dependency 'rake', '~> 13.0', '>= 13.0.0'
+  s.add_development_dependency 'rubocop', '~> 1.84'
 
   # Testing
   s.add_development_dependency 'appraisal', '~> 2.5', '>= 2.5.0'
@@ -58,6 +59,5 @@ Gem::Specification.new do |s|
   else
     # Static code analysis to be used locally
     s.add_development_dependency 'mdl', '~> 0.15', '>= 0.15.0'
-    s.add_development_dependency 'rubocop', '~> 1.84'
   end
 end
