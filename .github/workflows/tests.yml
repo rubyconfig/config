@@ -60,10 +60,26 @@ jobs:
         with:
           coverageCommand: bundle exec appraisal rspec
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 4.0.1
+          bundler-cache: true
+
+      - name: Lint code for consistent style
+        run: bundle exec rubocop -f github
+
   all-passed:
     runs-on: ubuntu-latest
     if: always()
     needs:
       - test
+      - lint
     steps:
       - run: exit ${{ contains(needs.*.result, 'failure') && 1 || 0 }}

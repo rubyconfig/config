@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Config
   module DryValidationRequirements
     VERSIONS = ['~> 1.0', '>= 1.0.0'].freeze
@@ -10,11 +8,10 @@ module Config
       begin
         require 'dry/validation/version'
         version = Gem::Version.new(Dry::Validation::VERSION)
-        unless VERSIONS.all? { |req| Gem::Requirement.new(req).satisfied_by?(version) }
-          raise LoadError
-        end
+        raise LoadError unless VERSIONS.all? { |req| Gem::Requirement.new(req).satisfied_by?(version) }
       rescue LoadError
-        raise ::Config::Error, "Could not find a dry-validation version matching requirements (#{VERSIONS.map(&:inspect) * ','})"
+        raise ::Config::Error,
+              "Could not find a dry-validation version matching requirements (#{VERSIONS.map(&:inspect) * ','})"
       end
 
       require 'dry/validation'

@@ -4,7 +4,7 @@ module Config
     # Accepts configuration options,
     # initializing a module that can be used to extend
     # the necessary class with the provided config methods
-    def initialize(**attributes)
+    def initialize(**attributes) # rubocop:disable Lint/MissingSuper
       attributes.each do |name, default|
         define_reader(name, default)
         define_writer(name)

@@ -16,16 +16,16 @@ module Config
 
     def add_source!(source)
       # handle yaml file paths
-      source = (Sources::YAMLSource.new(source)) if source.is_a?(String) || source.is_a?(Pathname)
-      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
+      source = Sources::YAMLSource.new(source) if source.is_a?(String) || source.is_a?(Pathname)
+      source = Sources::HashSource.new(source) if source.is_a?(Hash)
 
       @config_sources ||= []
       @config_sources << source
     end
 
     def prepend_source!(source)
-      source = (Sources::YAMLSource.new(source)) if source.is_a?(String) || source.is_a?(Pathname)
-      source = (Sources::HashSource.new(source)) if source.is_a?(Hash)
+      source = Sources::YAMLSource.new(source) if source.is_a?(String) || source.is_a?(Pathname)
+      source = Sources::HashSource.new(source) if source.is_a?(Hash)
 
       @config_sources ||= []
       @config_sources.unshift(source)
@@ -41,14 +41,14 @@ module Config
           conf = source_conf
         else
           DeepMerge.deep_merge!(
-                                source_conf,
-                                conf,
-                                preserve_unmergeables: false,
-                                knockout_prefix:       Config.knockout_prefix,
-                                overwrite_arrays:      Config.overwrite_arrays,
-                                merge_nil_values:      Config.merge_nil_values,
-                                merge_hash_arrays:     Config.merge_hash_arrays
-                               )
+            source_conf,
+            conf,
+            preserve_unmergeables: false,
+            knockout_prefix: Config.knockout_prefix,
+            overwrite_arrays: Config.overwrite_arrays,
+            merge_nil_values: Config.merge_nil_values,
+            merge_hash_arrays: Config.merge_hash_arrays
+          )
         end
       end
 
@@ -60,7 +60,7 @@ module Config
       self
     end
 
-    alias :load! :reload!
+    alias load! reload!
 
     def reload_from_files(*files)
       Config.load_and_set_settings(files)
@@ -70,25 +70,29 @@ module Config
     def to_hash
       result = {}
       marshal_dump.each do |k, v|
-        if v.instance_of? Config::Options
-          result[k] = v.to_hash
-        elsif v.instance_of? Array
-          result[k] = descend_array(v)
-        else
-          result[k] = v
-        end
+        result[k] = if v.instance_of? Config::Options
+                      v.to_hash
+                    elsif v.instance_of? Array
+                      descend_array(v)
+                    else
+                      v
+                    end
       end
       result
     end
 
-    alias :to_h :to_hash
+    alias to_h to_hash
 
     def each(*args, &block)
       marshal_dump.each(*args, &block)
     end
 
+    def each_key(*args, &block)
+      marshal_dump.each_key(*args, &block)
+    end
+
     def to_json(*args)
-      require "json" unless defined?(JSON)
+      require 'json' unless defined?(JSON)
       to_hash.to_json(*args)
     end
 
@@ -99,14 +103,14 @@ module Config
     def merge!(hash)
       current = to_hash
       DeepMerge.deep_merge!(
-                            hash.dup,
-                            current,
-                            preserve_unmergeables: false,
-                            knockout_prefix:       Config.knockout_prefix,
-                            overwrite_arrays:      Config.overwrite_arrays,
-                            merge_nil_values:      Config.merge_nil_values,
-                            merge_hash_arrays:     Config.merge_hash_arrays
-                           )
+        hash.dup,
+        current,
+        preserve_unmergeables: false,
+        knockout_prefix: Config.knockout_prefix,
+        overwrite_arrays: Config.overwrite_arrays,
+        merge_nil_values: Config.merge_nil_values,
+        merge_hash_arrays: Config.merge_hash_arrays
+      )
       marshal_load(__convert(current).marshal_dump)
       self
     end
@@ -122,7 +126,8 @@ module Config
     def [](param)
       return super if SETTINGS_RESERVED_NAMES.include?(param)
       return super if RAILS_RESERVED_NAMES.include?(param)
-      public_send("#{param}")
+
+      public_send(param.to_s)
     end
 
     def []=(param, value)
@@ -145,14 +150,15 @@ module Config
       @table.key?(key)
     end
 
-    def has_key?(key)
-      @table.has_key?(key)
+    def has_key?(key) # rubocop:disable Naming/PredicatePrefix
+      @table.has_key?(key) # rubocop:disable Style/PreferredHashMethods
     end
 
     def method_missing(method_name, *args)
-      if Config.fail_on_missing && !method_name.to_s.end_with?('=')
-        raise KeyError, "key not found: #{method_name.inspect}" unless key?(method_name)
+      if Config.fail_on_missing && !method_name.to_s.end_with?('=') && !key?(method_name)
+        raise KeyError, "key not found: #{method_name.inspect}"
       end
+
       super
     end
 
@@ -175,14 +181,14 @@ module Config
     end
 
     # Recursively converts Hashes to Options (including Hashes inside Arrays)
-    def __convert(h) #:nodoc:
+    def __convert(hash) # :nodoc:
       s = self.class.new
 
-      h.each do |k, v|
+      hash.each do |k, v|
         k = k.to_s if !k.respond_to?(:to_sym) && k.respond_to?(:to_s)
 
         if v.is_a?(Hash)
-          v = v["type"] == "hash" ? v["contents"] : __convert(v)
+          v = v['type'] == 'hash' ? v['contents'] : __convert(v)
         elsif v.is_a?(Array)
           v = v.collect { |e| e.instance_of?(Hash) ? __convert(e) : e }
         end

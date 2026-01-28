@@ -4,7 +4,6 @@ begin
   require 'bundler/setup'
 
   Bundler::GemHelper.install_tasks
-
 rescue LoadError
   puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
 end
@@ -12,18 +11,18 @@ end
 ##
 # Testing
 #
-require "rspec"
-require "rspec/core/rake_task"
+require 'rspec'
+require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
 
 # Test for multiple Rails scenarios
 if !ENV['APPRAISAL_INITIALIZED'] && !ENV['GITHUB_ACTIONS']
-  require "appraisal"
+  require 'appraisal'
 
-  task :default => :appraisal
+  task default: :appraisal
 else
-  task :default => :spec
+  task default: :spec
 end
 
 ##

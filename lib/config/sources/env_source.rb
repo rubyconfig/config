@@ -2,11 +2,7 @@ module Config
   module Sources
     # Allows settings to be loaded from a "flat" hash with string keys, like ENV.
     class EnvSource
-      attr_reader :prefix
-      attr_reader :separator
-      attr_reader :converter
-      attr_reader :parse_values
-      attr_reader :parse_arrays
+      attr_reader :prefix, :separator, :converter, :parse_values, :parse_arrays
 
       def initialize(env,
                      prefix: Config.env_prefix || Config.const_name,
@@ -25,27 +21,27 @@ module Config
       def load
         return {} if @env.nil? || @env.empty?
 
-        hash = Hash.new
+        hash = {}
 
         @env.each do |variable, value|
           keys = variable.to_s.split(separator)
 
           next if keys.shift(prefix.size) != prefix
 
-          keys.map! { |key|
+          keys.map! do |key|
             case converter
-              when :downcase then
-                key.downcase
-              when nil then
-                key
-              else
-                raise "Invalid ENV variables name converter: #{converter}"
+            when :downcase
+              key.downcase
+            when nil
+              key
+            else
+              raise "Invalid ENV variables name converter: #{converter}"
             end
-          }
+          end
 
-          leaf = keys[0...-1].inject(hash) { |h, key|
+          leaf = keys[0...-1].inject(hash) do |h, key|
             h[key] ||= {}
-          }
+          end
 
           unless leaf.is_a?(Hash)
             conflicting_key = (prefix + keys[0...-1]).join(separator)
@@ -59,15 +55,16 @@ module Config
       end
 
       private
+
       def convert_hashes_to_arrays(hash)
         hash.each_with_object({}) do |(key, value), new_hash|
           if value.is_a?(Hash)
             value = convert_hashes_to_arrays(value)
-            if consecutive_numeric_keys?(value.keys)
-              new_hash[key] = value.keys.sort_by(&:to_i).map { |k| value[k] }
-            else
-              new_hash[key] = value
-            end
+            new_hash[key] = if consecutive_numeric_keys?(value.keys)
+                              value.keys.sort_by(&:to_i).map { |k| value[k] }
+                            else
+                              value
+                            end
           else
             new_hash[key] = value
           end
@@ -79,14 +76,22 @@ module Config
       end
 
       # Try to convert string to a correct type
-      def __value(v)
-        case v
+      def __value(string)
+        case string
         when 'false'
           false
         when 'true'
           true
         else
-          Integer(v) rescue Float(v) rescue v
+          begin
+            begin
+              Integer(string)
+            rescue StandardError
+              Float(string)
+            end
+          rescue StandardError
+            string
+          end
         end
       end
     end

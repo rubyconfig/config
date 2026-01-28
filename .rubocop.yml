@@ -1,3 +1,15 @@
+AllCops:
+  NewCops: disable
+  Exclude:
+    - 'spec/app/**/*'
+    - 'gemfiles/**/*'
+
+Metrics:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
 Layout/LineLength:
   Max: 120
 

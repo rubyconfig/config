@@ -1,4 +1,4 @@
-require "config/rack/reloader"
+require 'config/rack/reloader'
 
 module Config
   # provide helper to register within your Sinatra app
@@ -8,8 +8,7 @@ module Config
   #
   def self.registered(app)
     app.configure do |inner_app|
-
-      env = inner_app.environment || ENV["RACK_ENV"]
+      env = inner_app.environment || ENV['RACK_ENV']
       root = inner_app.root
 
       # use Padrino settings if applicable
