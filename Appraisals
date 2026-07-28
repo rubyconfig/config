@@ -6,6 +6,10 @@ min_ruby_version = ->(version) {
   RUBY_ENGINE == 'ruby' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new(version)
 }
 
+min_ruby_language_version = ->(version) {
+  Gem::Version.new(RUBY_VERSION) >= Gem::Version.new(version)
+}
+
 # Rails 5.x, 6.0 require Ruby < 3
 if max_ruby_version.call('3.0')
   appraise 'rails-5.2' do
@@ -28,8 +32,8 @@ end
 appraise 'rails-6.1' do
   gem 'activerecord-jdbcsqlite3-adapter', '~> 61.1', platform: :jruby
   gem 'bootsnap', '>= 1.4.4'
-  gem 'drb', '~> 2.2' if min_ruby_version.call('3.4')
-  gem 'mutex_m', '~> 0.2.0' if min_ruby_version.call('3.4')
+  gem 'drb', '~> 2.2' if min_ruby_language_version.call('3.4')
+  gem 'mutex_m', '~> 0.2.0' if min_ruby_language_version.call('3.4')
   gem 'psych', '>= 4'
   gem 'rails', '~> 6.1.0'
   gem 'rspec-rails', '~> 5.0'
@@ -42,8 +46,8 @@ if min_ruby_version.call('2.7') || RUBY_ENGINE != 'ruby'
   appraise 'rails-7.0' do
     gem 'activerecord-jdbcsqlite3-adapter', '~> 70.1', platform: :jruby
     gem 'bootsnap', '>= 1.4.4'
-    gem 'drb', '~> 2.2' if min_ruby_version.call('3.4')
-    gem 'mutex_m', '~> 0.2.0' if min_ruby_version.call('3.4')
+    gem 'drb', '~> 2.2' if min_ruby_language_version.call('3.4')
+    gem 'mutex_m', '~> 0.2.0' if min_ruby_language_version.call('3.4')
     gem 'psych', '>= 4'
     gem 'rails', '~> 7.0.0'
     gem 'rspec-rails', '~> 7.0'
