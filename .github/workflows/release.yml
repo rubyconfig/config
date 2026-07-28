@@ -1,0 +1,140 @@
+name: release
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'lib/config/version.rb'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Check for a new version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.resolve.outputs.version }}
+      release: ${{ steps.resolve.outputs.release }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve version
+        id: resolve
+        run: |
+          version=$(sed -nE "s/.*VERSION = '([^']+)'.*/\1/p" lib/config/version.rb)
+          if [ -z "$version" ]; then
+            echo "::error::Could not read VERSION from lib/config/version.rb"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          # version.rb can be touched without the version actually changing
+          # (a comment, a revert, a re-run). An existing tag means there is
+          # nothing to release.
+          if git rev-parse -q --verify "refs/tags/$version" >/dev/null; then
+            echo "::notice::Tag $version already exists, nothing to release"
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Releasing $version"
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  release:
+    name: Release ${{ needs.check.outputs.version }}
+    runs-on: ubuntu-latest
+    needs: check
+    if: needs.check.outputs.release == 'true'
+    permissions:
+      # Push the tag and create the GitHub release.
+      contents: write
+      # Mint the OIDC token that RubyGems trusted publishing exchanges for a
+      # short-lived, push-scoped API key.
+      id-token: write
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+
+      - name: Verify version
+        run: |
+          actual=$(ruby -Ilib -e "require 'config/version'; print Config::VERSION")
+          if [ "$actual" != "$VERSION" ]; then
+            echo "::error::Expected $VERSION but lib/config/version.rb reports '$actual'"
+            exit 1
+          fi
+
+          if ! grep -qE "^## ${VERSION//./\\.}\$" CHANGELOG.md; then
+            echo "::warning::No '## $VERSION' section in CHANGELOG.md, release notes will be auto-generated"
+          fi
+
+      - name: Build gem
+        run: gem build config.gemspec --output "config-$VERSION.gem"
+
+      - name: Check if already published
+        id: published
+        run: |
+          code=$(curl -sS -o /dev/null -w '%{http_code}' \
+            "https://rubygems.org/api/v2/rubygems/config/versions/$VERSION.json")
+          case "$code" in
+            200)
+              echo "::notice::config $VERSION is already on RubyGems, skipping push"
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              ;;
+            404)
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "::error::Unexpected HTTP $code from the RubyGems API"
+              exit 1
+              ;;
+          esac
+
+      - name: Configure trusted publishing credentials
+        if: steps.published.outputs.skip == 'false'
+        uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
+
+      - name: Push gem to RubyGems
+        if: steps.published.outputs.skip == 'false'
+        run: gem push "config-$VERSION.gem"
+
+      - name: Wait for release to propagate
+        if: steps.published.outputs.skip == 'false'
+        run: gem exec rubygems-await "config-$VERSION.gem"
+
+      - name: Push tag
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git tag -a "$VERSION" -m "Version $VERSION"
+          git push origin "refs/tags/$VERSION"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          awk -v version="$VERSION" '
+            $0 == "## " version { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > release-notes.md
+
+          if [ -s release-notes.md ]; then
+            gh release create "$VERSION" --title "$VERSION" --verify-tag --notes-file release-notes.md
+          else
+            gh release create "$VERSION" --title "$VERSION" --verify-tag --generate-notes
+          fi
