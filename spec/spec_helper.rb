@@ -96,16 +96,17 @@ RSpec.configure do |config|
         end
 
         # Reset configuration to defaults
-        self.const_name           = 'Settings'
-        self.use_env              = false
-        self.knockout_prefix      = nil
-        self.overwrite_arrays     = true
-        self.schema               = nil
-        self.validation_contract  = nil
-        self.fail_on_missing      = false
-        self.file_name            = 'settings'
-        self.dir_name             = 'settings'
-        self.extra_sources        = []
+        self.const_name             = 'Settings'
+        self.use_env                = false
+        self.knockout_prefix        = nil
+        self.overwrite_arrays       = true
+        self.schema                 = nil
+        self.validation_contract    = nil
+        self.fail_on_missing        = false
+        self.use_rails_credentials  = false
+        self.file_name              = 'settings'
+        self.dir_name               = 'settings'
+        self.extra_sources          = []
         instance_variable_set(:@_ran_once, false)
       end
     end

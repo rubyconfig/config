@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+* Add rails credentials support ([#355](https://github.com/rubyconfig/config/pull/355))
+
 ## 5.6.1
 
 * fix(security): replace IO.read with File.read [#378](https://github.com/rubyconfig/config/pull/378)
