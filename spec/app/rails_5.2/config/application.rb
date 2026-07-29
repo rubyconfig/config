@@ -19,6 +19,6 @@ module Rails52
     ##
     # Config
     #
-    config_available?
+    # config_available? # This is only available in test context
   end
 end
