@@ -91,3 +91,7 @@ require('config/integrations/rails/railtie') if defined?(::Rails::Railtie)
 
 # Sinatra integration
 require('config/integrations/sinatra') if defined?(::Sinatra)
+
+# Hanami integration and generator
+require('generators/config/hanami_install_generator') if defined?(::Hanami)
+require('config/integrations/hanami') if defined?(::Hanami)
